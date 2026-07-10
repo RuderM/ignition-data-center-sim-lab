@@ -1,0 +1,252 @@
+{
+  "custom": {},
+  "params": {
+    "label": "Metric",
+    "value": "Unavailable",
+    "unit": "",
+    "status": "Good",
+    "helperText": "",
+    "progress": 0
+  },
+  "propConfig": {
+    "params.label": {
+      "paramDirection": "input"
+    },
+    "params.value": {
+      "paramDirection": "input"
+    },
+    "params.unit": {
+      "paramDirection": "input"
+    },
+    "params.status": {
+      "paramDirection": "input"
+    },
+    "params.helperText": {
+      "paramDirection": "input"
+    },
+    "params.progress": {
+      "paramDirection": "input"
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "width": 320,
+      "height": 190
+    }
+  },
+  "root": {
+    "version": 0,
+    "type": "ia.container.flex",
+    "props": {
+      "direction": "column",
+      "wrap": "nowrap",
+      "justify": "space-between",
+      "alignItems": "stretch",
+      "alignContent": "stretch",
+      "style": {
+        "classes": "sg/metricCard",
+        "gap": "14px",
+        "height": "100%",
+        "overflow": "hidden"
+      }
+    },
+    "meta": {
+      "name": "metricCard"
+    },
+    "children": [
+      {
+        "version": 0,
+        "type": "ia.container.flex",
+        "props": {
+          "direction": "row",
+          "wrap": "nowrap",
+          "justify": "space-between",
+          "alignItems": "center",
+          "alignContent": "stretch",
+          "style": {
+            "gap": "12px",
+            "overflow": "visible"
+          }
+        },
+        "meta": {
+          "name": "cardHeader"
+        },
+        "position": {
+          "grow": 0,
+          "shrink": 0,
+          "basis": "auto"
+        },
+        "children": [
+          {
+            "version": 0,
+            "type": "ia.display.label",
+            "props": {
+              "text": "Metric",
+              "style": {
+                "classes": "sg/eyebrow",
+                "overflow": "hidden",
+                "textOverflow": "ellipsis",
+                "whiteSpace": "nowrap"
+              }
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "{view.params.label}"
+                  }
+                }
+              }
+            },
+            "meta": {
+              "name": "label"
+            },
+            "position": {
+              "grow": 1,
+              "shrink": 1,
+              "basis": "auto"
+            }
+          },
+          {
+            "version": 0,
+            "type": "ia.display.label",
+            "props": {
+              "text": "Good",
+              "style": {
+                "classes": "sg/statusGood",
+                "whiteSpace": "nowrap"
+              }
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "{view.params.status}"
+                  }
+                }
+              },
+              "props.style.classes": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "if({view.params.status} = \"Danger\", \"sg/statusDanger\", if({view.params.status} = \"Warning\", \"sg/statusWarning\", \"sg/statusGood\"))"
+                  }
+                }
+              }
+            },
+            "meta": {
+              "name": "status"
+            },
+            "position": {
+              "grow": 0,
+              "shrink": 0,
+              "basis": "auto"
+            }
+          }
+        ]
+      },
+      {
+        "version": 0,
+        "type": "ia.display.label",
+        "props": {
+          "text": "Unavailable",
+          "style": {
+            "classes": "sg/metricValue",
+            "overflow": "hidden",
+            "textOverflow": "ellipsis",
+            "whiteSpace": "nowrap"
+          }
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "toStr({view.params.value}) + toStr({view.params.unit})"
+              }
+            }
+          }
+        },
+        "meta": {
+          "name": "value"
+        },
+        "position": {
+          "grow": 0,
+          "shrink": 0,
+          "basis": "auto"
+        }
+      },
+      {
+        "version": 0,
+        "type": "ia.display.progress",
+        "props": {
+          "min": 0,
+          "max": 100,
+          "value": 0,
+          "mode": "determinate",
+          "bar": {
+            "color": "#2f80ed"
+          },
+          "track": {
+            "color": "#d9e2ef"
+          },
+          "style": {
+            "height": "10px"
+          }
+        },
+        "propConfig": {
+          "props.value": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{view.params.progress}"
+              }
+            }
+          }
+        },
+        "meta": {
+          "name": "progress"
+        },
+        "position": {
+          "grow": 0,
+          "shrink": 0,
+          "basis": "10px"
+        }
+      },
+      {
+        "version": 0,
+        "type": "ia.display.label",
+        "props": {
+          "text": "",
+          "style": {
+            "classes": "sg/muted",
+            "fontSize": "0.9rem",
+            "overflow": "hidden",
+            "textOverflow": "ellipsis",
+            "whiteSpace": "nowrap"
+          }
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "type": "expr",
+              "config": {
+                "expression": "{view.params.helperText}"
+              }
+            }
+          }
+        },
+        "meta": {
+          "name": "helperText"
+        },
+        "position": {
+          "grow": 0,
+          "shrink": 0,
+          "basis": "auto"
+        }
+      }
+    ]
+  }
+}

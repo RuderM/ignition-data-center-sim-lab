@@ -1,0 +1,50 @@
+services:
+  ignition:
+    image: inductiveautomation/ignition:8.3.6
+    container_name: ignition-env1-gateway
+    restart: unless-stopped
+    ports:
+      - "${IGNITION_HTTP_PORT:-8088}:8088"
+      - "${IGNITION_HTTPS_PORT:-8043}:8043"
+    volumes:
+      - ignition-data:/usr/local/bin/ignition/data
+      - ./data/projects:/usr/local/bin/ignition/data/projects
+    environment:
+      ACCEPT_IGNITION_EULA: "Y"
+      GATEWAY_ADMIN_PASSWORD: "${GATEWAY_ADMIN_PASSWORD:-password}"
+      IGNITION_EDITION: "${IGNITION_EDITION:-standard}"
+      TZ: "${TZ:-Etc/UTC}"
+    command:
+      - -n
+      - "${IGNITION_GATEWAY_NAME:-ignition-env1}"
+      - -a
+      - "${IGNITION_PUBLIC_ADDRESS:-localhost}"
+      - -h
+      - "${IGNITION_HTTP_PORT:-8088}"
+      - -s
+      - "${IGNITION_HTTPS_PORT:-8043}"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  postgres:
+    image: postgres:16
+    container_name: ignition-env1-postgres
+    restart: unless-stopped
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: "${POSTGRES_DB:-ignition}"
+      POSTGRES_USER: "${POSTGRES_USER:-ignition}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:-ignition}"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  ignition-data:
+  postgres-data:

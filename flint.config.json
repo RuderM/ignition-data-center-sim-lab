@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "0.2",
+  "project-paths": [
+    "/home/ubuntu/projects/ignition-env1/data/projects"
+  ],
+  "gateways": {
+    "local-dev": {
+      "description": "Local Development Gateway",
+      "projects": ["env1-project"],
+      "environments": {
+        "dev": {
+          "host": "localhost",
+          "port": 8088,
+          "ssl": false
+        }
+      }
+    }
+  }
+}

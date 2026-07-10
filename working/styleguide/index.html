@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Example Project Style Guide</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="nav" aria-label="Main navigation">
+        <a class="brand" href="#top" aria-label="Example Project home">
+          <span class="brand-mark" aria-hidden="true">H</span>
+          <span>Hello Style</span>
+        </a>
+        <div class="nav-links">
+          <a href="#colors">Colors</a>
+          <a href="#type">Type</a>
+          <a href="#components">Components</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="hero-art" aria-hidden="true">
+          <div class="shape shape-large"></div>
+          <div class="shape shape-small"></div>
+          <div class="shape shape-line"></div>
+        </div>
+        <div class="hero-copy">
+          <p class="eyebrow">Project style guide</p>
+          <h1>Hello world, meet your design system.</h1>
+          <p>
+            A compact starter guide with practical colors, type rules, buttons,
+            form fields, alerts, cards, and navigation patterns.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#components">View examples</a>
+            <a class="button button-secondary" href="#usage">Copy tokens</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="principles">
+        <div class="section-heading">
+          <p class="eyebrow">Principles</p>
+          <h2>Plain, useful, and calm.</h2>
+        </div>
+        <div class="principles">
+          <article>
+            <h3>Readable first</h3>
+            <p>Use generous spacing, high contrast, and type sizes that survive real content.</p>
+          </article>
+          <article>
+            <h3>Clear hierarchy</h3>
+            <p>Make primary actions obvious, secondary actions quiet, and labels unambiguous.</p>
+          </article>
+          <article>
+            <h3>Reusable pieces</h3>
+            <p>Prefer small components with predictable variants over one-off page styling.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="colors">
+        <div class="section-heading">
+          <p class="eyebrow">Foundations</p>
+          <h2>Color Tokens</h2>
+        </div>
+        <div class="swatch-grid">
+          <article class="swatch">
+            <div class="swatch-color color-ink"></div>
+            <h3>Ink</h3>
+            <p>#16213E</p>
+          </article>
+          <article class="swatch">
+            <div class="swatch-color color-surface"></div>
+            <h3>Surface</h3>
+            <p>#F7F9FC</p>
+          </article>
+          <article class="swatch">
+            <div class="swatch-color color-primary"></div>
+            <h3>Primary</h3>
+            <p>#2F80ED</p>
+          </article>
+          <article class="swatch">
+            <div class="swatch-color color-accent"></div>
+            <h3>Accent</h3>
+            <p>#18A999</p>
+          </article>
+          <article class="swatch">
+            <div class="swatch-color color-warning"></div>
+            <h3>Warning</h3>
+            <p>#F2A541</p>
+          </article>
+          <article class="swatch">
+            <div class="swatch-color color-danger"></div>
+            <h3>Danger</h3>
+            <p>#D64550</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section split" id="type">
+        <div class="section-heading">
+          <p class="eyebrow">Foundations</p>
+          <h2>Typography</h2>
+          <p>
+            System fonts keep this guide dependency-free. Use short headings,
+            direct labels, and body text around 16-18px.
+          </p>
+        </div>
+        <div class="type-sample">
+          <p class="eyebrow">Sample</p>
+          <h1>Heading One</h1>
+          <h2>Heading Two</h2>
+          <h3>Heading Three</h3>
+          <p>
+            Body text should be comfortable to scan and long enough to test
+            wrapping, rhythm, and line height across screen sizes.
+          </p>
+          <a href="#components">Text link example</a>
+        </div>
+      </section>
+
+      <section class="section" id="components">
+        <div class="section-heading">
+          <p class="eyebrow">Interface</p>
+          <h2>Components</h2>
+        </div>
+
+        <div class="component-grid">
+          <article class="demo-panel">
+            <h3>Buttons</h3>
+            <div class="button-row">
+              <button class="button button-primary" type="button">Primary</button>
+              <button class="button button-secondary" type="button">Secondary</button>
+              <button class="button button-ghost" type="button">Ghost</button>
+            </div>
+          </article>
+
+          <article class="demo-panel">
+            <h3>Form Fields</h3>
+            <form class="form-example">
+              <label for="email">Email address</label>
+              <input id="email" type="email" placeholder="hello@example.com" />
+              <label for="role">Project role</label>
+              <select id="role">
+                <option>Designer</option>
+                <option>Developer</option>
+                <option>Product manager</option>
+              </select>
+              <label class="checkbox">
+                <input type="checkbox" checked />
+                <span>Send me product updates</span>
+              </label>
+            </form>
+          </article>
+
+          <article class="demo-panel">
+            <h3>Alert</h3>
+            <div class="alert" role="status">
+              <strong>Heads up.</strong>
+              This guide is intentionally small so it is easy to adapt.
+            </div>
+          </article>
+
+          <article class="demo-panel">
+            <h3>Content Card</h3>
+            <div class="profile-card">
+              <div class="avatar" aria-hidden="true">JS</div>
+              <div>
+                <h4>Jordan Smith</h4>
+                <p>Design systems lead</p>
+              </div>
+              <span class="badge">Active</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="usage">
+        <div class="section-heading">
+          <p class="eyebrow">Starter CSS</p>
+          <h2>Design Tokens</h2>
+        </div>
+        <pre><code>:root {
+  --color-ink: #16213e;
+  --color-muted: #5e6b85;
+  --color-surface: #f7f9fc;
+  --color-primary: #2f80ed;
+  --color-accent: #18a999;
+  --radius: 8px;
+  --shadow: 0 18px 45px rgba(22, 33, 62, 0.12);
+}</code></pre>
+      </section>
+    </main>
+  </body>
+</html>

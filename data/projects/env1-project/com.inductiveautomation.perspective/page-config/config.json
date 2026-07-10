@@ -1,0 +1,11 @@
+{
+  "pages": {
+    "/gateway-status": {
+      "viewPath": "Gateway/Status",
+      "title": "Gateway Status"
+    }
+  },
+  "sharedDocks": {
+    "cornerPriority": "top-bottom"
+  }
+}
