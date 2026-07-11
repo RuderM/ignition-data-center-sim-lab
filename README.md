@@ -21,6 +21,12 @@ Start the environment:
 docker compose up -d
 ```
 
+After editing project files through the bind mount, trigger a Flint project scan:
+
+```sh
+./scripts/flint-project-scan.sh
+```
+
 Open Ignition:
 
 ```text

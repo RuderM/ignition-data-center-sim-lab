@@ -3,7 +3,7 @@
     "style": {
       "backgroundColor": "#ffffff",
       "borderColor": "#d9e2ef",
-      "borderRadius": "8px",
+      "borderRadius": "4px",
       "borderStyle": "solid",
       "borderWidth": "1px",
       "boxShadow": "0 10px 28px rgba(22, 33, 62, 0.06)",

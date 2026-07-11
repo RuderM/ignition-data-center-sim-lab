@@ -1,8 +1,8 @@
 {
   "pages": {
     "/gateway-status": {
-      "viewPath": "Gateway/Status",
-      "title": "Gateway Status"
+      "title": "Gateway Status",
+      "viewPath": "Gateway/Status"
     }
   },
   "sharedDocks": {
