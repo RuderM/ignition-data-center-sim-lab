@@ -1,0 +1,291 @@
+{
+  "tags": [
+    {
+      "name": "UtilitySource_GridSim_Industries_GS-13K8-01-SIM",
+      "tagType": "UdtType",
+      "parameters": {
+        "Manufacturer": {
+          "dataType": "String",
+          "value": "GridSim Industries"
+        },
+        "Model": {
+          "dataType": "String",
+          "value": "GS-13K8-01-SIM"
+        },
+        "DeviceName": {
+          "dataType": "String",
+          "value": ""
+        },
+        "DevicePath": {
+          "dataType": "String",
+          "value": ""
+        },
+        "ParentDevicePath": {
+          "dataType": "String",
+          "value": ""
+        }
+      },
+      "tags": [
+        {
+          "name": "Status",
+          "tagType": "Folder",
+          "tags": [
+            {
+              "name": "Available",
+              "tagType": "AtomicTag",
+              "valueSource": "memory",
+              "dataType": "Boolean",
+              "defaultValue": true,
+              "value": true,
+              "readOnly": false,
+              "documentation": "True when utility power is available. Point role: Status.",
+              "historyEnabled": true,
+              "historicalDeadband": 0,
+              "historicalDeadbandMode": "Absolute",
+              "alarms": [
+                {
+                  "name": "UtilityUnavailable",
+                  "mode": "Equality",
+                  "setpointA": false
+                }
+              ]
+            },
+            {
+              "name": "CommGood",
+              "tagType": "AtomicTag",
+              "valueSource": "memory",
+              "dataType": "Boolean",
+              "defaultValue": true,
+              "value": true,
+              "readOnly": false,
+              "documentation": "True when utility monitoring data is healthy. Point role: Status.",
+              "historyEnabled": true,
+              "historicalDeadband": 0,
+              "historicalDeadbandMode": "Absolute",
+              "alarms": [
+                {
+                  "name": "UtilityCommLoss",
+                  "mode": "Equality",
+                  "setpointA": false
+                }
+              ]
+            },
+            {
+              "name": "Faulted",
+              "tagType": "AtomicTag",
+              "valueSource": "memory",
+              "dataType": "Boolean",
+              "defaultValue": false,
+              "value": false,
+              "readOnly": false,
+              "documentation": "General utility source fault indication. Point role: Alarm.",
+              "historyEnabled": true,
+              "historicalDeadband": 0,
+              "historicalDeadbandMode": "Absolute",
+              "alarms": [
+                {
+                  "name": "UtilityFault",
+                  "mode": "Equality",
+                  "setpointA": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Electrical",
+          "tagType": "Folder",
+          "tags": [
+            {
+              "name": "VoltageLLAvg",
+              "tagType": "AtomicTag",
+              "valueSource": "memory",
+              "dataType": "Float8",
+              "defaultValue": 13800,
+              "value": 13800,
+              "readOnly": false,
+              "engUnit": "V",
+              "engLow": 0,
+              "engHigh": 15000,
+              "documentation": "Average incoming line-to-line voltage. Point role: Measurement.",
+              "historyEnabled": true,
+              "historicalDeadband": 5,
+              "historicalDeadbandMode": "Absolute",
+              "alarms": [
+                {
+                  "name": "UtilityVoltageLow",
+                  "mode": "BelowValue",
+                  "setpointA": 12420
+                }
+              ]
+            },
+            {
+              "name": "CurrentAvg",
+              "tagType": "AtomicTag",
+              "valueSource": "memory",
+              "dataType": "Float8",
+              "defaultValue": 0,
+              "value": 0,
+              "readOnly": false,
+              "engUnit": "A",
+              "engLow": 0,
+              "engHigh": 2000,
+              "documentation": "Average utility current. Point role: Measurement.",
+              "historyEnabled": true,
+              "historicalDeadband": 2,
+              "historicalDeadbandMode": "Absolute"
+            },
+            {
+              "name": "Frequency",
+              "tagType": "AtomicTag",
+              "valueSource": "memory",
+              "dataType": "Float8",
+              "defaultValue": 60,
+              "value": 60,
+              "readOnly": false,
+              "engUnit": "Hz",
+              "engLow": 55,
+              "engHigh": 65,
+              "documentation": "Incoming utility frequency. Point role: Measurement.",
+              "historyEnabled": true,
+              "historicalDeadband": 0.05,
+              "historicalDeadbandMode": "Absolute",
+              "alarms": [
+                {
+                  "name": "UtilityFrequencyOutOfRange",
+                  "mode": "OutsideValues",
+                  "setpointA": 59.5,
+                  "setpointB": 60.5
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Power",
+          "tagType": "Folder",
+          "tags": [
+            {
+              "name": "RealPower",
+              "tagType": "AtomicTag",
+              "valueSource": "memory",
+              "dataType": "Float8",
+              "defaultValue": 0,
+              "value": 0,
+              "readOnly": false,
+              "engUnit": "kW",
+              "engLow": 0,
+              "engHigh": 2000,
+              "documentation": "Total real power supplied by the utility. Point role: Calculation.",
+              "historyEnabled": true,
+              "historicalDeadband": 2,
+              "historicalDeadbandMode": "Absolute"
+            },
+            {
+              "name": "ApparentPower",
+              "tagType": "AtomicTag",
+              "valueSource": "memory",
+              "dataType": "Float8",
+              "defaultValue": 0,
+              "value": 0,
+              "readOnly": false,
+              "engUnit": "kVA",
+              "engLow": 0,
+              "engHigh": 2200,
+              "documentation": "Total apparent power supplied by the utility. Point role: Calculation.",
+              "historyEnabled": true,
+              "historicalDeadband": 2,
+              "historicalDeadbandMode": "Absolute"
+            },
+            {
+              "name": "PowerFactor",
+              "tagType": "AtomicTag",
+              "valueSource": "memory",
+              "dataType": "Float8",
+              "defaultValue": 0.97,
+              "value": 0.97,
+              "readOnly": false,
+              "engLow": 0,
+              "engHigh": 1,
+              "documentation": "Utility power factor. Point role: Calculation.",
+              "historyEnabled": true,
+              "historicalDeadband": 0.005,
+              "historicalDeadbandMode": "Absolute",
+              "alarms": [
+                {
+                  "name": "UtilityPowerFactorLow",
+                  "mode": "BelowValue",
+                  "setpointA": 0.9
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Energy",
+          "tagType": "Folder",
+          "tags": [
+            {
+              "name": "TotalEnergy",
+              "tagType": "AtomicTag",
+              "valueSource": "memory",
+              "dataType": "Float8",
+              "defaultValue": 0,
+              "value": 0,
+              "readOnly": false,
+              "engUnit": "kWh",
+              "engLow": 0,
+              "documentation": "Accumulated utility energy consumption. Point role: Accumulator.",
+              "historyEnabled": true,
+              "historicalDeadband": 0.1,
+              "historicalDeadbandMode": "Absolute"
+            }
+          ]
+        },
+        {
+          "name": "Capacity",
+          "tagType": "Folder",
+          "tags": [
+            {
+              "name": "RatedPower",
+              "tagType": "AtomicTag",
+              "valueSource": "memory",
+              "dataType": "Float8",
+              "defaultValue": 2000,
+              "value": 2000,
+              "readOnly": false,
+              "engUnit": "kVA",
+              "engLow": 0,
+              "engHigh": 5000,
+              "documentation": "Configured utility service capacity. Point role: Configuration.",
+              "historyEnabled": false
+            },
+            {
+              "name": "LoadPct",
+              "tagType": "AtomicTag",
+              "valueSource": "memory",
+              "dataType": "Float8",
+              "defaultValue": 0,
+              "value": 0,
+              "readOnly": false,
+              "engUnit": "%",
+              "engLow": 0,
+              "engHigh": 120,
+              "documentation": "Utility apparent power as a percentage of rated power. Point role: Calculation.",
+              "historyEnabled": true,
+              "historicalDeadband": 0.5,
+              "historicalDeadbandMode": "Absolute",
+              "alarms": [
+                {
+                  "name": "UtilityOverload",
+                  "mode": "AboveValue",
+                  "setpointA": 100
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+ Longer term, this bind mount will probably keep producing UID 2003 files when
+  Ignition writes project resources. A cleaner setup is to create a local group for
+  GID 2003, add ubuntu to it, and make project files group-writable. That prevents
+  this from coming back every time Designer/Flint touches files.
