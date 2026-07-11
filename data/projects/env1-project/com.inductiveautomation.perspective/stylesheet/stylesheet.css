@@ -1,0 +1,268 @@
+:root {
+	--nav-open-width: 300px;
+	--nav-closed-width: 50px;
+	--nav-width: 0px;
+	--topbar-height: 50px;
+	--nav-link-height: 40px;
+
+	--nav--bgColor: var(--neutral-10);
+	--nav--color: var(--label);
+	--nav-section-open--bgColor: var(--neutral-30);
+	--nav-link-active--bgColor: var(--callToAction--active);
+	--nav-link-active--color: var(--white);
+	--nav-link-hover--bgColor: var(--callToAction--hover);
+	--nav-link-hover--color: var(--nav-link-active--color);
+	--nav-button--bgColor: transparent;
+	--nav-button--color: var(--white);
+	--topbar--bgColor: #2b2a2a;
+	--topbar--color: var(--white);
+	--nav-padding-width: 5px;
+
+	--breakpoint-small: 450;
+	--breakpoint-medium: 800;
+}
+
+/* DOCKS */
+.docked-view-left {
+	width: auto !important;
+	height: calc(100% - var(--topbar-height)) !important;
+}
+
+/* NAV */
+.psc-nav {
+	width: var(--nav-width);
+	border-right: 1px solid var(--border);
+	background-color: var(--nav--bgColor);
+	color: var(--nav--color);
+	padding: 10px 0px;
+	transition: all 0.2s ease-in-out;
+}
+
+.psc-nav-open {
+	width: var(--nav-open-width);
+	transition: all 0.2s ease-in-out;
+}
+
+.psc-nav-button {
+	background-color: var(--nav-button--bgColor);
+	color: var(--nav-button--color);
+}
+
+/* NAV LOGO */
+.psc-nav-logo-1 {
+	transition: all 0.2s ease-in-out 0.5s;
+}
+
+.psc-nav-logo-2 {
+	max-width: 0;
+	opacity: 0;
+}
+
+.psc-nav-open .psc-nav-logo-1 {
+	max-width: 0;
+	opacity: 0;
+	transition: all 0.2s ease-in-out 0.3s;
+}
+
+.psc-nav-open .psc-nav-logo-2 {
+	max-width: 256px;
+	opacity: 1;
+	transition-delay: 0.2s;
+}
+
+/* NAV SECTION */
+.psc-nav-section {
+	max-height: var(--nav-link-height);
+	gap: 5px;
+}
+
+.psc-nav-open .psc-nav-section-open {
+	max-height: 1000px;
+	transition: max-height 0.4s ease-in-out;
+	color: var(--label);
+	border-radius: var(--borderRadius);
+	background-color: var(--nav-section-open--bgColor);
+}
+
+.psc-nav-open .psc-nav-section .psc-nav-repeater {
+	gap: 5px;
+}
+
+.psc-nav:not(.psc-nav-open) .psc-nav-section .psc-nav-repeater .psc-nav-link>svg:nth-child(1) {
+	transition: visibility 0.2s ease-in-out 0.2s;
+}
+
+.psc-nav-open .psc-nav-section .psc-nav-repeater .psc-nav-link>svg:nth-child(1) {
+	visibility: hidden;
+}
+
+/* NAV LINK */
+.psc-nav-link {
+	height: var(--nav-link-height);
+	border-radius: var(--borderRadius);
+	gap: 5px;
+}
+
+.psc-nav-link .ia_labelComponent,
+.psc-nav-link>svg:nth-child(3) {
+	opacity: 0;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	transition: all 0.1s ease-in-out;
+}
+
+.psc-nav-open .psc-nav-section-open .psc-nav-link .ia_labelComponent,
+.psc-nav-open .psc-nav-link .ia_labelComponent {
+	opacity: 1;
+	transition: opacity 0.2s ease-in-out 0.2s;
+}
+
+.psc-nav-section-open .psc-nav-link>svg:nth-child(3),
+.psc-nav-section-open .psc-nav-link>svg:nth-child(3) {
+	opacity: 1;
+	transform: rotate(90deg);
+	transition: transform 0.2s ease-in-out;
+}
+
+.psc-nav-open .psc-nav-section svg {
+	opacity: 1;
+}
+
+.psc-nav-link:hover,
+.psc-nav-link.psc-selected:hover {
+	color: var(--nav-link-hover--color);
+	background-color: var(--nav-link-hover--bgColor);
+	cursor: pointer;
+	transition: all 0.2s ease-in-out;
+}
+
+.psc-nav-link.psc-selected {
+	background-color: var(--nav-link-active--bgColor);
+	color: var(--nav-link-active--color);
+	transition: all 0.2s ease-in-out;
+}
+
+.psc-nav:not(.psc-nav-open) .psc-nav-section .psc-nav-link.psc-selected-parent {
+	color: var(--nav-link-active--color);
+	background-color: var(--nav-link-active--bgColor);
+}
+.psc-nav .psc-nav-section:not(.psc-nav-section-open) .psc-nav-link.psc-selected-parent {
+	color: var(--nav-link-active--color);
+	background-color: var(--nav-link-active--bgColor);
+}
+
+.psc-nav:not(.psc-nav-open) .psc-not-a-link {
+	max-height: 0;
+}
+
+.psc-nav:not(.psc-nav-open) .psc-not-a-link .ia_labelComponent {
+	opacity: 0;
+}
+
+.psc-nav-open .psc-nav-link .ia_labelComponent {
+	opacity: 1;
+	transition: opacity 0.2s ease-in-out 0.2s;
+}
+
+.psc-not-a-link:hover {
+	color: var(--label);
+	background-color: transparent !important;
+	cursor: default !important;
+	transition: all 0.2s ease-in-out;
+}
+
+/* NAV TREE */
+.psc-nav .tree {
+	overflow: hidden;
+	opacity: 0;
+	transition: opacity 0.2s ease-in-out 0.2s;
+}
+
+.psc-nav .tree .node-wrapper {
+	display: block;
+}
+
+.psc-nav-open .psc-nav-section-open .tree {
+	opacity: 1;
+	transition: opacity 0.2s ease-in-out 0.2s;
+}
+
+.psc-nav .ia_treeComponent__node {
+	border-radius: var(--borderRadius);
+	cursor: pointer;
+	font-size: 16px;
+}
+
+.psc-nav .tree-row {
+	margin-bottom: 5px;
+}
+
+.psc-nav .ia_treeComponent__node:hover {
+	color: var(--nav-link-active--color);
+	background-color: var(--nav-link-hover--bgColor);
+	cursor: pointer;
+	transition: all 0.2s ease-in-out;
+}
+
+.psc-nav .ia_treeComponent__node--selected {
+	background-color: var(--nav-link-active--bgColor);
+	color: var(--nav-link-active--color);
+	transition: all 0.2s ease-in-out;
+}
+
+.psc-nav .ia_treeComponent__node .tree-item {
+	height: var(--nav-link-height) !important;
+}
+
+.psc-nav .ia_treeComponent__node .tree-item-label {
+	font-weight: normal;
+}
+
+.psc-nav .ia_treeComponent__alignmentGuide,
+.psc-nav .terminal-node .ia_treeComponent__node__icon {
+	display: none;
+}
+
+.psc-nav .ia_treeComponent__node .node-icon,
+.psc-nav .ia_treeComponent__node .expand-icon {
+	fill: var(--label);
+}
+
+.psc-nav .ia_treeComponent__node:hover .node-icon,
+.psc-nav .ia_treeComponent__node:hover .expand-icon {
+	fill: var(--nav-link-active--color);
+}
+
+.psc-nav .ia_treeComponent__node--selected .node-icon,
+.psc-nav .ia_treeComponent__node--selected .expand-icon {
+	fill: var(--nav-link-active--color);
+}
+
+/* Overrides the default scrollbar styles */
+.psc-nav::-webkit-scrollbar {
+	width: 3px;
+	scrollbar-width: thin;
+	scrollbar-color: var(--neutral-20) var(--neutral-90);
+}
+
+.psc-nav::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+.psc-nav::-webkit-scrollbar-thumb {
+	background: var(--neutral-50);
+	border-radius: 1px;
+}
+
+.psc-nav::-webkit-scrollbar-thumb:hover {
+	background: var(--neutral-70);
+}
+
+/* Override the rules governing the dock mode (push or cover) */
+.center.view-parent {
+	max-height: calc(100% - var(--topbar-height)) !important;
+	max-width: calc(100% - var(--nav-width)) !important;
+	margin: var(--topbar-height) 0px 0px var(--nav-width) !important;
+	transition: all 0.2s ease-in-out !important;
+}

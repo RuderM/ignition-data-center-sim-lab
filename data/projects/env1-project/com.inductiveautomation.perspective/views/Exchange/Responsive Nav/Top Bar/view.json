@@ -1,0 +1,109 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {
+    "defaultSize": {
+      "height": 60,
+      "width": 400
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "domId": "navButtonClosed",
+          "name": "Nav Button Closed"
+        },
+        "position": {
+          "basis": "40px",
+          "shrink": 0
+        },
+        "props": {
+          "path": "material/menu",
+          "style": {
+            "classes": "nav-button",
+            "cursor": "pointer",
+            "display": "flex"
+          }
+        },
+        "type": "ia.display.icon"
+      },
+      {
+        "meta": {
+          "domId": "navButtonOpen",
+          "name": "Nav Button Open"
+        },
+        "position": {
+          "basis": "40px",
+          "shrink": 0
+        },
+        "props": {
+          "path": "material/menu_open",
+          "style": {
+            "classes": "nav-button",
+            "cursor": "pointer",
+            "display": "none"
+          }
+        },
+        "type": "ia.display.icon"
+      },
+      {
+        "meta": {
+          "name": "FlexRepeater"
+        },
+        "position": {
+          "grow": 1
+        },
+        "propConfig": {
+          "props.instances": {
+            "binding": {
+              "config": {
+                "struct": {
+                  "path": "{page.props.path}",
+                  "viewportWidth": "{page.props.dimensions.viewport.width}"
+                },
+                "waitOnAll": true
+              },
+              "transforms": [
+                {
+                  "code": "\tinstances \u003d []\n\tpath \u003d \"\"\n\tallPages \u003d [i[\u0027url\u0027] for i in system.perspective.getProjectInfo()[\"pageConfigs\"]]\n\tpages \u003d self.page.props.path.split(\"/\")[1:]\n\tfor i, label in enumerate(pages):\n\t\tif label !\u003d \"\":\n\t\t\tpath \u003d path + \"/\" + label\n\t\t\tif self.page.props.dimensions.viewport.width \u003c\u003d 450:\n\t\t\t\tinstances \u003d [{\n\t\t\t\t  \"instanceStyle\": {\n\t\t\t\t    \"classes\": \"\"\n\t\t\t\t  },\n\t\t\t\t  \"instancePosition\": {},\n\t\t\t\t  \"icon\": \"material/arrow_right\",\n#\t\t\t\t  \"index\": 1,\n\t\t\t\t  \"isLink\": path in allPages,\n\t\t\t\t  \"label\": label,\n\t\t\t\t  \"parentIndex\": 0,\n\t\t\t\t  \"showArrow\": False,\n\t\t\t\t  \"target\": path\n\t\t\t\t}]\n\t\t\telse:\n\t\t\t\tinstances.append({\n\t\t\t\t  \"instanceStyle\": {\n\t\t\t\t    \"classes\": \"\"\n\t\t\t\t  },\n\t\t\t\t  \"instancePosition\": {},\n\t\t\t\t  \"icon\": \"material/arrow_right\",\n#\t\t\t\t  \"index\": 1,\n\t\t\t\t  \"isLink\": path in allPages,\n\t\t\t\t  \"label\": label,\n\t\t\t\t  \"parentIndex\": 0,\n\t\t\t\t  \"showArrow\": False,\n\t\t\t\t  \"target\": path\n\t\t\t\t})\t\n\t\t\t\n\treturn instances",
+                  "type": "script"
+                }
+              ],
+              "type": "expr-struct"
+            }
+          }
+        },
+        "props": {
+          "elementPosition": {
+            "basis": "auto",
+            "grow": 0,
+            "shrink": 0
+          },
+          "path": "Exchange/Responsive Nav/Nav Breadcrumb",
+          "style": {
+            "gap": "10px",
+            "overflow": "hidden"
+          },
+          "useDefaultViewHeight": false,
+          "useDefaultViewWidth": false
+        },
+        "type": "ia.display.flex-repeater"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "alignItems": "center",
+      "style": {
+        "backgroundColor": "var(--topbar--bgColor)",
+        "color": "var(--topbar--color)",
+        "gap": "5px",
+        "overflow": "visible",
+        "padding": "0 5px"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

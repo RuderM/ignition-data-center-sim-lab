@@ -1,11 +1,81 @@
 {
   "pages": {
-    "/gateway-status": {
-      "title": "Gateway Status",
-      "viewPath": "Gateway/Status"
+    "/": {
+      "title": "",
+      "viewPath": "Exchange/Responsive Nav/Overview"
+    },
+    "/nav-link-2": {
+      "title": "",
+      "viewPath": "Exchange/Responsive Nav/Overview"
+    },
+    "/nav-link-3": {
+      "title": "",
+      "viewPath": "Exchange/Responsive Nav/Overview"
+    },
+    "/nav-section-repeater/nav-link-1": {
+      "title": "",
+      "viewPath": "Exchange/Responsive Nav/Overview"
+    },
+    "/nav-section-repeater/nav-link-2": {
+      "title": "",
+      "viewPath": "Exchange/Responsive Nav/Overview"
+    },
+    "/nav-section-repeater/nav-link-3": {
+      "title": "",
+      "viewPath": "Exchange/Responsive Nav/Overview"
+    },
+    "/nav-section-tree/folder-1/child-1": {
+      "title": "",
+      "viewPath": "Exchange/Responsive Nav/Overview"
+    },
+    "/nav-section-tree/folder-1/child-1/grandchild-1": {
+      "title": "",
+      "viewPath": "Exchange/Responsive Nav/Overview"
+    },
+    "/nav-section-tree/folder-1/child-2": {
+      "title": "",
+      "viewPath": "Exchange/Responsive Nav/Overview"
+    },
+    "/nav-section-tree/folder-2": {
+      "title": "",
+      "viewPath": "Exchange/Responsive Nav/Overview"
     }
   },
   "sharedDocks": {
-    "cornerPriority": "top-bottom"
+    "cornerPriority": "top-bottom",
+    "left": [
+      {
+        "anchor": "fixed",
+        "autoBreakpoint": 480,
+        "content": "auto",
+        "handle": "hide",
+        "iconUrl": "",
+        "id": "nav",
+        "modal": false,
+        "resizable": false,
+        "show": "visible",
+        "size": 50,
+        "viewParams": {
+          "openByDefault": true
+        },
+        "viewPath": "Exchange/Responsive Nav/Nav"
+      }
+    ],
+    "top": [
+      {
+        "anchor": "fixed",
+        "autoBreakpoint": 480,
+        "content": "push",
+        "handle": "hide",
+        "iconUrl": "",
+        "id": "top",
+        "modal": false,
+        "resizable": false,
+        "show": "visible",
+        "size": 50,
+        "viewParams": {},
+        "viewPath": "Exchange/Responsive Nav/Top Bar"
+      }
+    ]
   }
 }

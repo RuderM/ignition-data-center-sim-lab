@@ -4,10 +4,10 @@
   "restricted": false,
   "overridable": true,
   "files": [
-    "config.json"
+    "stylesheet.css"
   ],
   "attributes": {
-    "lastModificationSignature": "60993571875d38ea7e87359937bcd7b24e383cbe4b02ffe8cda155343d211e28",
+    "lastModificationSignature": "2146e3a1eb12ebeb1f426b4baf803dbfd30bfb07e16234593260d22148209661",
     "lastModification": {
       "actor": "admin",
       "timestamp": "2026-07-11T14:07:54Z"

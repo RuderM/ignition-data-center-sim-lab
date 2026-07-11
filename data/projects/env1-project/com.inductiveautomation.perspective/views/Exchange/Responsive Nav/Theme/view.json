@@ -1,0 +1,121 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {
+    "defaultSize": {
+      "height": 40,
+      "width": 250
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "Icon"
+            },
+            "position": {
+              "basis": "40px",
+              "shrink": 0
+            },
+            "propConfig": {
+              "props.path": {
+                "binding": {
+                  "config": {
+                    "path": "session.props.theme"
+                  },
+                  "transforms": [
+                    {
+                      "code": "\tif \"light\" in value:\n\t\treturn \"material/wb_sunny\"\n\telse:\n\t\treturn \"material/nights_stay\"",
+                      "type": "script"
+                    }
+                  ],
+                  "type": "property"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "padding": "8px"
+              }
+            },
+            "type": "ia.display.icon"
+          },
+          {
+            "meta": {
+              "name": "Label"
+            },
+            "position": {
+              "basis": "50px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "concat(\r\n    upper(left({session.props.theme}, 1)),\r\n    lower(substring({session.props.theme}, 1)), \r\n    \" Theme\"\r\n)\r\n"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "overflow": "hidden"
+              },
+              "textStyle": {
+                "whiteSpace": "pre-wrap"
+              }
+            },
+            "type": "ia.display.label"
+          }
+        ],
+        "events": {
+          "dom": {
+            "onClick": {
+              "config": {
+                "script": "\ttheme \u003d self.session.props.theme\n\t\n\tif \"light\" in theme:\n\t\tself.session.props.theme \u003d theme.replace(\"light\", \"dark\")\n\telse:\n\t\tself.session.props.theme \u003d theme.replace(\"dark\", \"light\")"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
+        "meta": {
+          "name": "FlexContainer"
+        },
+        "position": {
+          "grow": 1
+        },
+        "props": {
+          "style": {
+            "gap": "10px",
+            "overflow": "hidden"
+          }
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "meta": {
+      "domId": "nav-theme",
+      "name": "root"
+    },
+    "propConfig": {
+      "props.style.classes": {
+        "binding": {
+          "config": {
+            "expression": "concat(\"nav-link \",\r\n{view.custom.key}\r\n)"
+          },
+          "type": "expr"
+        }
+      }
+    },
+    "props": {
+      "style": {
+        "overflow": "hidden"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}
