@@ -4,6 +4,10 @@
       "title": "",
       "viewPath": "Exchange/Responsive Nav/Overview"
     },
+    "/Trends": {
+      "title": "",
+      "viewPath": "DataCenter/Trends"
+    },
     "/Utility": {
       "title": "",
       "viewPath": "DataCenter/Utility"
