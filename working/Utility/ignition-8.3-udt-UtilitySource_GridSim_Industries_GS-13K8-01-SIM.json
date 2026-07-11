@@ -48,7 +48,8 @@
                   "mode": "Equality",
                   "setpointA": false
                 }
-              ]
+              ],
+              "historyProvider": "Ignition"
             },
             {
               "name": "CommGood",
@@ -68,7 +69,8 @@
                   "mode": "Equality",
                   "setpointA": false
                 }
-              ]
+              ],
+              "historyProvider": "Ignition"
             },
             {
               "name": "Faulted",
@@ -88,7 +90,8 @@
                   "mode": "Equality",
                   "setpointA": true
                 }
-              ]
+              ],
+              "historyProvider": "Ignition"
             }
           ]
         },
@@ -117,7 +120,8 @@
                   "mode": "BelowValue",
                   "setpointA": 12420
                 }
-              ]
+              ],
+              "historyProvider": "Ignition"
             },
             {
               "name": "CurrentAvg",
@@ -133,7 +137,8 @@
               "documentation": "Average utility current. Point role: Measurement.",
               "historyEnabled": true,
               "historicalDeadband": 2,
-              "historicalDeadbandMode": "Absolute"
+              "historicalDeadbandMode": "Absolute",
+              "historyProvider": "Ignition"
             },
             {
               "name": "Frequency",
@@ -157,7 +162,8 @@
                   "setpointA": 59.5,
                   "setpointB": 60.5
                 }
-              ]
+              ],
+              "historyProvider": "Ignition"
             }
           ]
         },
@@ -179,7 +185,8 @@
               "documentation": "Total real power supplied by the utility. Point role: Calculation.",
               "historyEnabled": true,
               "historicalDeadband": 2,
-              "historicalDeadbandMode": "Absolute"
+              "historicalDeadbandMode": "Absolute",
+              "historyProvider": "Ignition"
             },
             {
               "name": "ApparentPower",
@@ -195,7 +202,8 @@
               "documentation": "Total apparent power supplied by the utility. Point role: Calculation.",
               "historyEnabled": true,
               "historicalDeadband": 2,
-              "historicalDeadbandMode": "Absolute"
+              "historicalDeadbandMode": "Absolute",
+              "historyProvider": "Ignition"
             },
             {
               "name": "PowerFactor",
@@ -217,7 +225,8 @@
                   "mode": "BelowValue",
                   "setpointA": 0.9
                 }
-              ]
+              ],
+              "historyProvider": "Ignition"
             }
           ]
         },
@@ -238,7 +247,8 @@
               "documentation": "Accumulated utility energy consumption. Point role: Accumulator.",
               "historyEnabled": true,
               "historicalDeadband": 0.1,
-              "historicalDeadbandMode": "Absolute"
+              "historicalDeadbandMode": "Absolute",
+              "historyProvider": "Ignition"
             }
           ]
         },
@@ -281,7 +291,8 @@
                   "mode": "AboveValue",
                   "setpointA": 100
                 }
-              ]
+              ],
+              "historyProvider": "Ignition"
             }
           ]
         }
