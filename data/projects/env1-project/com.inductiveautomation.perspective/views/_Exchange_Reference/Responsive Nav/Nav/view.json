@@ -1,0 +1,420 @@
+{
+  "custom": {},
+  "params": {
+    "openByDefault": true
+  },
+  "propConfig": {
+    "params.openByDefault": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 965,
+      "width": 301
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Markdown"
+        },
+        "position": {
+          "basis": "0px",
+          "shrink": 0
+        },
+        "propConfig": {
+          "props.source": {
+            "binding": {
+              "config": {
+                "expression": "\"\""
+              },
+              "transforms": [
+                {
+                  "code": "\t\"\"\"\n\tReturns an html image element with embedded javascript for adding event listeners to navigation elements\n\t\"\"\"\n\tjs \u003d \"\"\"\n\t\u003cimg style\u003d\u0027display:none\u0027 src\u003d\u0027data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw\u003d\u003d\u0027 onload\u003d\\\"\n\nconst view \u003d [...window.__client.page.views._data.values()].find(view \u003d\u003e view.value.mountPath \u003d\u003d this.parentNode.parentNode.parentNode.getAttributeNode(\u0027data-component-path\u0027).value.split(\u0027.\u0027)[0]).value; \nconst openByDefault \u003d view.params.read(\u0027openByDefault\u0027);\nvar breakpointSmall \u003d parseInt(getComputedStyle(document.documentElement).getPropertyValue(\u0027--breakpoint-small\u0027));\nvar breakpointMedium \u003d parseInt(getComputedStyle(document.documentElement).getPropertyValue(\u0027--breakpoint-medium\u0027));\nvar nav \u003d document.querySelector(\u0027#nav\u0027);\nvar navButtonOpen \u003d document.querySelector(\u0027#navButtonOpen\u0027);\nvar navButtonClosed \u003d document.querySelector(\u0027#navButtonClosed\u0027);\nvar navSections \u003d nav.querySelectorAll(\u0027.psc-nav-section\u0027);\nfunction updateNavWidth() {\n    var viewportWidth \u003d window.innerWidth;\n    var root \u003d document.documentElement;\n    var computedStyle \u003d getComputedStyle(root);\n    var navWidthClosed \u003d computedStyle.getPropertyValue(\u0027--nav-closed-width\u0027);\n    var navWidthOpen \u003d computedStyle.getPropertyValue(\u0027--nav-open-width\u0027);\n    var isNavOpen \u003d nav.classList.contains(\u0027psc-nav-open\u0027);\n    if (viewportWidth \u003e breakpointSmall) {\n        root.style.setProperty(\u0027--nav-width\u0027, isNavOpen ? navWidthOpen : navWidthClosed);\n    }\n}\nfunction closeNav() {\n    nav.classList.remove(\u0027psc-nav-open\u0027);\n    nav.classList.remove(\u0027psc-nav-open-locked\u0027);\n    navButtonClosed.style.display \u003d \u0027flex\u0027;\n    navButtonOpen.style.display \u003d \u0027none\u0027;\n    updateNavWidth();\n}\nfunction openNav(locked \u003d false) {\n    nav.classList.add(\u0027psc-nav-open\u0027);\n    if (locked) nav.classList.add(\u0027psc-nav-open-locked\u0027);\n    navButtonClosed.style.display \u003d \u0027none\u0027;\n    navButtonOpen.style.display \u003d \u0027flex\u0027;\n    updateNavWidth();\n}\nfunction initializeNavHandlers() {\n    navSections.forEach(section \u003d\u003e {\n        var navLink \u003d section.querySelector(\u0027div.view-parent \u003e div \u003e div\u0027);\n        if (!section.dataset.handlerInitialized) {\n            navLink.addEventListener(\u0027click\u0027, () \u003d\u003e {\n                navSections.forEach(s \u003d\u003e {\n                    if (s !\u003d\u003d section) s.classList.remove(\u0027psc-nav-section-open\u0027);\n                });\n                if (section.classList.contains(\u0027psc-nav-section-open\u0027)) {\n                \tif (nav.classList.contains(\u0027psc-nav-open\u0027)) section.classList.remove(\u0027psc-nav-section-open\u0027);\n                } else {\n                \tsection.classList.add(\u0027psc-nav-section-open\u0027);\n                }\n                if (!nav.classList.contains(\u0027psc-nav-open\u0027)) openNav(false);\n            });\n            section.dataset.handlerInitialized \u003d \u0027true\u0027;\n        }\n    });\n}\nfunction applyMediaQueries() {\n    const styleSheet \u003d document.createElement(\u0027style\u0027);\n    styleSheet.type \u003d \u0027text/css\u0027;\n    const styles \u003d `\n        @media (max-width: ${breakpointSmall}px) {\n            .psc-nav:not(.psc-nav-open) {\n                width: 0;\n                border: none;\n                box-shadow: none;\n            }\n            :root {\n                --nav-width: 0px !important;\n                --nav-closed-width: 0px !important;\n                transition: all 0.2s ease-in-out !important;\n            }\n        }\n        @media (max-width: ${breakpointMedium}px) {\n            .center.view-parent {\n                transition: all 0.2s ease-in-out !important;\n                max-width: calc(100% - var(--nav-closed-width)) !important;\n                margin: var(--topbar-height) 0px 0px var(--nav-closed-width) !important;\n            }\n        }\n    `;\n    styleSheet.innerText \u003d styles;\n    document.head.appendChild(styleSheet);\n}\nfunction reinitializeView() {\n    applyMediaQueries();\n    initializeNavHandlers();\n}\nconst observer \u003d new MutationObserver(() \u003d\u003e {\n    navSections \u003d nav.querySelectorAll(\u0027.psc-nav-section\u0027);\n    initializeNavHandlers();\n});\nobserver.observe(nav, { childList: true, subtree: true });\ndocument.addEventListener(\u0027click\u0027, event \u003d\u003e {\n    var navSectionOpen \u003d document.querySelector(\u0027.psc-nav-section-open\u0027);\n    if (navButtonOpen.contains(event.target) || navButtonClosed.contains(event.target)) return;\n    if (!nav.contains(event.target) \u0026\u0026 nav.classList.contains(\u0027psc-nav-open\u0027) \u0026\u0026 !nav.classList.contains(\u0027psc-nav-open-locked\u0027)) closeNav();\n\tif (\n\t    navSectionOpen \u0026\u0026\n\t    !navSectionOpen.contains(event.target) \u0026\u0026\n\t    (event.target.closest(\u0027.psc-nav-section\u0027) || event.target.closest(\u0027.psc-nav-link\u0027)) \u0026\u0026\n\t    !event.target.closest(\u0027.psc-nav-section-open\u0027)\n\t) {\n\t    navSections.forEach(section \u003d\u003e {\n\t        if (section !\u003d\u003d navSectionOpen) {\n\t            section.classList.remove(\u0027psc-nav-section-open\u0027);\n\t        }\n\t    });\n\t}\n});\nnavButtonOpen.addEventListener(\u0027click\u0027, () \u003d\u003e closeNav());\nnavButtonClosed.addEventListener(\u0027click\u0027, () \u003d\u003e openNav(window.innerWidth \u003e breakpointMedium));\nwindow.addEventListener(\u0027resize\u0027, updateNavWidth);\nif (openByDefault \u0026\u0026 window.innerWidth \u003e breakpointMedium) openNav(true);\n\nreinitializeView();\nupdateNavWidth();\n\t\n\t\\\"\u003e\u003c/img\u003e\"\"\".replace(\"\\n\", \"\").replace(\"\\t\", \"\")\n\treturn js",
+                  "type": "script"
+                }
+              ],
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "markdown": {
+            "escapeHtml": false
+          },
+          "style": {
+            "overflow": "hidden",
+            "visibility": "hidden"
+          }
+        },
+        "type": "ia.display.markdown"
+      },
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "Nav Large BP"
+                },
+                "props": {
+                  "fit": {
+                    "height": 28,
+                    "mode": "contain",
+                    "width": 72
+                  },
+                  "source": "data:image/png;base64,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",
+                  "style": {
+                    "classes": "nav-logo-2",
+                    "height": "40px"
+                  }
+                },
+                "type": "ia.display.image"
+              },
+              {
+                "meta": {
+                  "name": "Nav Small BP"
+                },
+                "position": {
+                  "basis": "24px",
+                  "shrink": 0
+                },
+                "props": {
+                  "fit": {
+                    "mode": "contain"
+                  },
+                  "source": "data:image/png;base64,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\u003d\u003d",
+                  "style": {
+                    "classes": "nav-logo-1",
+                    "overflow": "hidden"
+                  }
+                },
+                "type": "ia.display.image"
+              }
+            ],
+            "meta": {
+              "name": "Top Logo"
+            },
+            "position": {
+              "basis": "80px",
+              "shrink": 0
+            },
+            "props": {
+              "alignItems": "center",
+              "justify": "center",
+              "style": {
+                "overflow": "hidden"
+              }
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "meta": {
+              "name": "Nav Link"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "props": {
+              "loading": {
+                "order": "with-parent"
+              },
+              "params": {
+                "icon": "material/home",
+                "isLink": true,
+                "label": "Nav Link",
+                "showArrow": false,
+                "target": "/"
+              },
+              "path": "Exchange/Responsive Nav/Nav Link"
+            },
+            "type": "ia.display.view"
+          },
+          {
+            "meta": {
+              "name": "Nav Link_0"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "props": {
+              "loading": {
+                "order": "with-parent"
+              },
+              "params": {
+                "icon": "material/trending_up",
+                "isLink": true,
+                "label": "Nav Link 2",
+                "showArrow": false,
+                "target": "/nav-link-2"
+              },
+              "path": "Exchange/Responsive Nav/Nav Link"
+            },
+            "type": "ia.display.view"
+          },
+          {
+            "meta": {
+              "name": "Nav Link_1"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "props": {
+              "loading": {
+                "order": "with-parent"
+              },
+              "params": {
+                "icon": "material/notifications",
+                "isLink": true,
+                "label": "Nav Link 3",
+                "showArrow": false,
+                "target": "/nav-link-3"
+              },
+              "path": "Exchange/Responsive Nav/Nav Link"
+            },
+            "type": "ia.display.view"
+          },
+          {
+            "meta": {
+              "name": "Nav Section Tree"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "props": {
+              "loading": {
+                "order": "with-parent"
+              },
+              "params": {
+                "icon": "material/account_tree",
+                "items": [
+                  {
+                    "data": {
+                      "target": ""
+                    },
+                    "expanded": false,
+                    "items": [
+                      {
+                        "data": {
+                          "target": "/nav-section-tree/folder-1/child-1"
+                        },
+                        "expanded": false,
+                        "items": [
+                          {
+                            "data": {
+                              "target": "/nav-section-tree/folder-1/child-1/grandchild-1"
+                            },
+                            "expanded": false,
+                            "items": [],
+                            "label": "Grandchild 1"
+                          }
+                        ],
+                        "label": "Child 1"
+                      },
+                      {
+                        "data": {
+                          "target": "/nav-section-tree/folder-1/child-2"
+                        },
+                        "expanded": false,
+                        "items": [],
+                        "label": "Child 2"
+                      }
+                    ],
+                    "label": "Folder 1"
+                  },
+                  {
+                    "data": {
+                      "target": "/nav-section-tree/folder-2"
+                    },
+                    "expanded": false,
+                    "items": [],
+                    "label": "Folder 2"
+                  }
+                ],
+                "label": "Nav Section Tree",
+                "target": ""
+              },
+              "path": "Exchange/Responsive Nav/Nav Section Tree",
+              "style": {
+                "overflow": "visible"
+              }
+            },
+            "type": "ia.display.view"
+          },
+          {
+            "meta": {
+              "name": "Nav Section FlexRepeater"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "props": {
+              "loading": {
+                "order": "with-parent"
+              },
+              "params": {
+                "icon": "material/repeat",
+                "items": [
+                  {
+                    "icon": "",
+                    "instancePosition": {},
+                    "instanceStyle": {
+                      "classes": "",
+                      "color": ""
+                    },
+                    "label": "Nav Link 1",
+                    "showArrow": false,
+                    "target": "/nav-section-repeater/nav-link-1"
+                  },
+                  {
+                    "icon": "",
+                    "instancePosition": {},
+                    "instanceStyle": {
+                      "classes": "",
+                      "color": ""
+                    },
+                    "label": "Nav Link 2",
+                    "showArrow": false,
+                    "target": "/nav-section-repeater/nav-link-2"
+                  },
+                  {
+                    "icon": "",
+                    "instancePosition": {},
+                    "instanceStyle": {
+                      "classes": "",
+                      "color": ""
+                    },
+                    "label": "Nav Link 3",
+                    "showArrow": false,
+                    "target": "/nav-section-repeater/nav-link-3"
+                  }
+                ],
+                "label": "Nav Section Repeater",
+                "target": ""
+              },
+              "path": "Exchange/Responsive Nav/Nav Section FlexRepeater",
+              "style": {
+                "overflow": "visible"
+              }
+            },
+            "type": "ia.display.view"
+          },
+          {
+            "meta": {
+              "name": "Nav Section User"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "props": {
+              "loading": {
+                "order": "with-parent"
+              },
+              "path": "Exchange/Responsive Nav/Nav Section User",
+              "style": {
+                "marginTop": "auto"
+              }
+            },
+            "type": "ia.display.view"
+          },
+          {
+            "meta": {
+              "name": "Time"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "propConfig": {
+              "props.params.label": {
+                "binding": {
+                  "config": {
+                    "expression": "dateFormat(now(30000),\"M/d/yy h:mm a\")"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "loading": {
+                "order": "with-parent"
+              },
+              "params": {
+                "icon": "material/access_time",
+                "isLink": false,
+                "showArrow": false,
+                "target": ""
+              },
+              "path": "Exchange/Responsive Nav/Nav Link"
+            },
+            "type": "ia.display.view"
+          },
+          {
+            "meta": {
+              "name": "Theme"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "propConfig": {
+              "position.display": {
+                "binding": {
+                  "config": {
+                    "expression": "hasRole(\u0027Administrator\u0027,{session.props.auth.user.userName},\u0027default\u0027)"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "loading": {
+                "order": "with-parent"
+              },
+              "params": {
+                "isLink": true
+              },
+              "path": "Exchange/Responsive Nav/Theme"
+            },
+            "type": "ia.display.view"
+          }
+        ],
+        "meta": {
+          "name": "Nav"
+        },
+        "position": {
+          "grow": 1,
+          "shrink": 0
+        },
+        "props": {
+          "direction": "column",
+          "style": {
+            "gap": "5px",
+            "padding": "0 5px"
+          }
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "meta": {
+      "domId": "nav",
+      "name": "root"
+    },
+    "propConfig": {
+      "props.style.classes": {
+        "binding": {
+          "config": {
+            "expression": "if({session.props.device.type}\u003d\u0027designer\u0027,\r\n\u0027nav nav-open \u0027,\r\n\u0027nav \u0027)"
+          },
+          "type": "expr"
+        }
+      }
+    },
+    "props": {
+      "direction": "column",
+      "style": {}
+    },
+    "type": "ia.container.flex"
+  }
+}

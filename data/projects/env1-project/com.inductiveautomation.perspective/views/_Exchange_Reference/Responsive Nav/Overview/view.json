@@ -1,0 +1,118 @@
+{
+  "custom": {},
+  "params": {
+    "backgroundColor": "white"
+  },
+  "propConfig": {
+    "params.backgroundColor": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 1093,
+      "width": 1279
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "Label"
+                },
+                "position": {
+                  "basis": "50px",
+                  "shrink": 0
+                },
+                "props": {
+                  "text": "Label",
+                  "textStyle": {
+                    "fontFamily": "monospace",
+                    "fontSize": "2em",
+                    "fontWeight": "500"
+                  }
+                },
+                "type": "ia.display.label"
+              },
+              {
+                "meta": {
+                  "name": "Markdown"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "props": {
+                  "source": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Orci eu lobortis elementum nibh tellus molestie nunc. Velit sed ullamcorper morbi tincidunt ornare massa. Enim sed faucibus turpis in eu mi bibendum neque egestas. Pellentesque dignissim enim sit amet venenatis urna cursus eget. Quis auctor elit sed vulputate. Viverra accumsan in nisl nisi scelerisque eu. Pellentesque adipiscing commodo elit at imperdiet dui accumsan sit amet. Ultrices sagittis orci a scelerisque purus semper. Amet est placerat in egestas erat imperdiet sed euismod nisi. Sed blandit libero volutpat sed cras. Enim neque volutpat ac tincidunt vitae. Diam ut venenatis tellus in. Mauris ultrices eros in cursus turpis massa tincidunt dui ut. Libero id faucibus nisl tincidunt. Massa sed elementum tempus egestas sed sed risus pretium quam. Turpis massa tincidunt dui ut. Amet consectetur adipiscing elit pellentesque habitant morbi tristique senectus. Sed odio morbi quis commodo.\n\n\n\n\u0026nbsp;\n\n\n\nDui nunc mattis enim ut. Aliquet eget sit amet tellus cras adipiscing enim eu turpis. Nulla facilisi cras fermentum odio. Placerat vestibulum lectus mauris ultrices eros. Suspendisse faucibus interdum posuere lorem ipsum dolor sit amet consectetur. Sed sed risus pretium quam vulputate dignissim suspendisse in. Lobortis mattis aliquam faucibus purus in massa tempor. Aliquam ultrices sagittis orci a scelerisque purus. Mauris sit amet massa vitae tortor condimentum lacinia. Id donec ultrices tincidunt arcu non. Arcu bibendum at varius vel pharetra vel. Eu volutpat odio facilisis mauris sit amet. Facilisis leo vel fringilla est ullamcorper eget. Adipiscing elit duis tristique sollicitudin nibh. Sit amet dictum sit amet. Cursus turpis massa tincidunt dui ut ornare lectus sit amet. Ipsum dolor sit amet consectetur adipiscing elit pellentesque habitant. Leo vel orci porta non pulvinar neque laoreet. Sodales neque sodales ut etiam sit amet nisl purus in.",
+                  "style": {
+                    "fontFamily": "monospace",
+                    "fontSize": "1.2em"
+                  }
+                },
+                "type": "ia.display.markdown"
+              }
+            ],
+            "meta": {
+              "name": "FlexContainer"
+            },
+            "position": {
+              "grow": 1
+            },
+            "propConfig": {
+              "props.style.background": {
+                "binding": {
+                  "config": {
+                    "path": "page.props.path"
+                  },
+                  "transforms": [
+                    {
+                      "code": "\timport random\n\t\n\tdef generate_random_rgba():\n\t    r \u003d random.randint(0, 255)\n\t    g \u003d random.randint(0, 255)\n\t    b \u003d random.randint(0, 255)\n\t    a \u003d round(random.uniform(0, 1), 2)\n\t    return \"rgba({}, {}, {}, {})\".format(r, g, b, a)\n\t    \n\trandomColor \u003d generate_random_rgba()\n\tcss \u003d \"linear-gradient(to bottom, {} 60%, transparent 100%)\".format(randomColor)\n\t\n\treturn css",
+                      "type": "script"
+                    }
+                  ],
+                  "type": "property"
+                }
+              }
+            },
+            "props": {
+              "direction": "column",
+              "style": {
+                "padding": "20px"
+              }
+            },
+            "type": "ia.container.flex"
+          }
+        ],
+        "meta": {
+          "name": "FlexContainer"
+        },
+        "position": {
+          "grow": 1
+        },
+        "props": {
+          "justify": "center",
+          "style": {
+            "borderRadius": "0.5em",
+            "margin": "0 auto",
+            "max-width": "1680px",
+            "padding": "20px"
+          }
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "style": {
+        "height": "100%"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

@@ -1,0 +1,297 @@
+{
+  "custom": {
+    "key": "nav-section-open",
+    "page": "/",
+    "path": ""
+  },
+  "params": {
+    "icon": "material/face",
+    "items": [
+      {
+        "data": {
+          "target": ""
+        },
+        "expanded": false,
+        "items": [
+          {
+            "data": {
+              "target": "/nav-section-tree/folder-1/child-1"
+            },
+            "expanded": false,
+            "items": [
+              {
+                "data": {
+                  "target": "/nav-section-tree/folder-1/child-1/grandchild-1"
+                },
+                "expanded": false,
+                "items": [],
+                "label": "Grandchild 1"
+              }
+            ],
+            "label": "Child 1"
+          },
+          {
+            "data": {
+              "target": "/nav-section-tree/folder-1/child-2"
+            },
+            "expanded": false,
+            "items": [],
+            "label": "Child 2"
+          }
+        ],
+        "label": "Folder 1"
+      },
+      {
+        "data": {
+          "target": "/nav-section-tree/folder-2"
+        },
+        "expanded": false,
+        "items": [],
+        "label": "Folder 2"
+      }
+    ],
+    "label": "",
+    "target": ""
+  },
+  "propConfig": {
+    "custom.key": {
+      "binding": {
+        "config": {
+          "expression": "{view.custom.page}"
+        },
+        "transforms": [
+          {
+            "code": "\tif value.split(\"/\")[1] \u003d\u003d self.view.params.label.lower().replace(\" \",\"-\"):\n\t\treturn \"nav-section-open\"\n\telse:\n\t\treturn \"\"",
+            "type": "script"
+          }
+        ],
+        "type": "expr"
+      },
+      "persistent": true
+    },
+    "custom.page": {
+      "binding": {
+        "config": {
+          "path": "page.props.path"
+        },
+        "transforms": [
+          {
+            "code": "\ttree \u003d self.getChild(\"root\").getChild(\"Tree\")\n\t\n\titems, selection, selectionData \u003d tree.updateTreeSelection(self.view.params.items, value)\n\ttree.props.items \u003d items\n\ttree.props.selection \u003d selection\n\ttree.props.selectionData \u003d selectionData\n\treturn value",
+            "type": "script"
+          }
+        ],
+        "type": "property"
+      },
+      "persistent": true
+    },
+    "custom.path": {
+      "persistent": true
+    },
+    "params.icon": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.items": {
+      "paramDirection": "inout",
+      "persistent": true
+    },
+    "params.label": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.target": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 40,
+      "width": 200
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Nav Link"
+        },
+        "position": {
+          "basis": "40px",
+          "shrink": 0
+        },
+        "propConfig": {
+          "props.params.icon": {
+            "binding": {
+              "config": {
+                "path": "view.params.icon"
+              },
+              "type": "property"
+            }
+          },
+          "props.params.label": {
+            "binding": {
+              "config": {
+                "path": "view.params.label"
+              },
+              "type": "property"
+            }
+          },
+          "props.params.showArrow": {
+            "binding": {
+              "config": {
+                "expression": "len({view.params.items}) \u003e 0"
+              },
+              "type": "expr"
+            }
+          },
+          "props.params.target": {
+            "binding": {
+              "config": {
+                "path": "view.params.target"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "params": {
+            "isLink": true
+          },
+          "path": "Exchange/Responsive Nav/Nav Link"
+        },
+        "type": "ia.display.view"
+      },
+      {
+        "custom": {
+          "empty": [],
+          "lastSelection": []
+        },
+        "events": {
+          "component": {
+            "onItemClicked": {
+              "config": {
+                "script": "\titemPath \u003d [int(x) for x in list(event.itemPath)]\n\titems \u003d self.props.items\n\ttarget \u003d self.props.selectionData[0].value.target\n\tlastSelection \u003d [int(x) for x in list(self.custom.lastSelection)]\n\titemsCopy \u003d system.util.jsonDecode(system.util.jsonEncode(items))\n\tdef toggleItemsByPath(items, path):\n\t\tcurrent_level \u003d items\n\t\t# Traverse down the levels to find the target node by following the path\n\t\tfor i, index in enumerate(path):\n\t\t\tif i \u003d\u003d len(path)-1:\n\t\t\t\tcurrent_level \u003d current_level[index]\n\t\t\telse:\n\t\t\t\tcurrent_level \u003d current_level[index][\u0027items\u0027]\n\t\t# Recursively collapse all children within this node\n\t\tdef recursiveCollapse(node):\n\t\t\tif \u0027items\u0027 in node:\n\t\t\t\tnode[\u0027expanded\u0027] \u003d False\n\t\t\t\tfor child in node[\u0027items\u0027]:\n\t\t\t\t\trecursiveCollapse(child)\n\t\t\n\t\texpand \u003d not current_level[\u0027expanded\u0027]\n\t\tif not expand and itemPath !\u003d lastSelection and target !\u003d \"\":\n\t\t\tpass\n\t\telse:\n\t\t\tcurrent_level[\u0027expanded\u0027] \u003d expand\n\t\t\n\t\tif not expand:\n\t\t\tfor child in current_level[\u0027items\u0027]:\n\t\t\t\trecursiveCollapse(child)\n\tif target !\u003d \"\":\n\t\tsystem.perspective.navigate(target)\n\ttoggleItemsByPath(itemsCopy, itemPath)\n\tself.props.items \u003d itemsCopy\n\tself.custom.lastSelection \u003d itemPath"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
+        "meta": {
+          "name": "Tree"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "propConfig": {
+          "props.items": {
+            "binding": {
+              "config": {
+                "path": "view.params.items"
+              },
+              "transforms": [
+                {
+                  "code": "\titems, selection, selectionData \u003d self.updateTreeSelection(value, self.view.custom.page)\n\tself.props.selection \u003d selection\n\tself.props.selectionData \u003d selectionData\n\treturn items",
+                  "type": "script"
+                }
+              ],
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "appearance": {
+            "defaultNodeIcons": {
+              "collapsed": {
+                "path": "material/folder"
+              },
+              "empty": {
+                "path": "material/stop"
+              },
+              "expanded": {
+                "path": "material/folder_open"
+              }
+            },
+            "expandIcons": {
+              "collapsed": {
+                "path": "material/arrow_right",
+                "style": {
+                  "overflow": "hidden"
+                }
+              },
+              "empty": {
+                "style": {
+                  "overflow": "hidden"
+                }
+              },
+              "expanded": {
+                "path": "material/arrow_drop_down",
+                "style": {
+                  "overflow": "hidden"
+                }
+              }
+            },
+            "rowHeight": 40,
+            "selectedStyle": {
+              "overflow": "hidden"
+            },
+            "textOverflow": "truncate",
+            "unselectedStyle": {
+              "overflow": "hidden"
+            }
+          },
+          "selection": [
+            ""
+          ],
+          "selectionData": [
+            {
+              "itemPath": "",
+              "value": {
+                "target": ""
+              }
+            }
+          ],
+          "style": {
+            "overflow": "hidden"
+          }
+        },
+        "scripts": {
+          "customMethods": [
+            {
+              "name": "updateTreeSelection",
+              "params": [
+                "items",
+                "current_page_path"
+              ],
+              "script": "\tdef findAndExpandItem(items, targetPath, path\u003d[]):\n\t    \"\"\"\n\t    Recursively search for the item with the given targetPath, expanding parents as needed.\n\t    \n\t    :param items: The current level of items in the tree.\n\t    :param targetPath: The target path to find in the tree.\n\t    :param path: The current path to the item (used internally for recursion).\n\t    :return: A tuple (found, path) where \u0027found\u0027 is a boolean indicating if the target was found, and \u0027path\u0027 is the path to the target item.\n\t    \"\"\"\n\t    for i, item in enumerate(items):\n\t        # Check if this item is the target\n\t        if item.get(\u0027data\u0027, {}).get(\u0027target\u0027, \u0027\u0027) \u003d\u003d targetPath:\n\t\t\t\titem[\u0027expanded\u0027] \u003d True\n\t\t\t\treturn True, path + [i]\n\t        # Otherwise, recurse into children if they exist\n\t        if \u0027items\u0027 in item and item[\u0027items\u0027]:\n\t            found, childPath \u003d findAndExpandItem(item[\u0027items\u0027], targetPath, path + [i])\n\t            if found:\n\t                # Mark this item as expanded since it\u0027s a parent of the target\n\t                item[\u0027expanded\u0027] \u003d True\n\t                return True, childPath\n\t    return False, []\n\t\n\titemsCopy \u003d system.util.jsonDecode(system.util.jsonEncode(items))\n\t\n\t# Find the item and expand its parents\n\tfound, itemPath \u003d findAndExpandItem(itemsCopy, current_page_path)\n\t\n\tif found:\n\t\tsystem.perspective.print(repr([\u0027itemPath\u0027, itemPath]))\n\t\tnewSelection \u003d [\"/\".join(map(str, itemPath))]\n\t\tnewSelectionData \u003d [{\"itemPath\":\"/\".join(map(str, itemPath)), \"value\":{\"target\":current_page_path}}]\n\t\treturn itemsCopy, newSelection, newSelectionData\n\telse:\n\t\treturn items, [\"\"], [{\"itemPath\":\"\", \"value\":{\"target\":\"\"}}]"
+            }
+          ],
+          "extensionFunctions": null,
+          "messageHandlers": []
+        },
+        "type": "ia.display.tree"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "propConfig": {
+      "props.style.classes": {
+        "binding": {
+          "config": {
+            "expression": "concat(\"nav-section nav-section-tree \",\r\n{view.custom.key}\r\n)"
+          },
+          "type": "expr"
+        }
+      }
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "overflow": "hidden"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}
