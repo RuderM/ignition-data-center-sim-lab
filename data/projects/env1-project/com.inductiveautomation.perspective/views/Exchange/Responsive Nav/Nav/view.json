@@ -125,9 +125,9 @@
               "params": {
                 "icon": "material/home",
                 "isLink": true,
-                "label": "Nav Link",
+                "label": "Gateway Status",
                 "showArrow": false,
-                "target": "/"
+                "target": "/GWHealth"
               },
               "path": "Exchange/Responsive Nav/Nav Link"
             },

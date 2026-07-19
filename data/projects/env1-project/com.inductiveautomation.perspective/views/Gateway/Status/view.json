@@ -3,77 +3,47 @@
   "params": {},
   "props": {
     "defaultSize": {
-      "width": 1440,
-      "height": 960
+      "height": 960,
+      "width": 1440
     }
   },
   "root": {
-    "version": 0,
-    "type": "ia.container.flex",
-    "props": {
-      "direction": "column",
-      "wrap": "nowrap",
-      "justify": "flex-start",
-      "alignItems": "stretch",
-      "alignContent": "stretch",
-      "style": {
-        "classes": "sg/page",
-        "gap": "24px",
-        "minHeight": "100vh",
-        "overflow": "auto"
-      }
-    },
-    "meta": {
-      "name": "gatewayStatusPage"
-    },
     "children": [
       {
-        "version": 0,
-        "type": "ia.container.flex",
-        "props": {
-          "direction": "column",
-          "wrap": "nowrap",
-          "justify": "flex-start",
-          "alignItems": "stretch",
-          "alignContent": "stretch",
-          "style": {
-            "classes": "sg/hero",
-            "gap": "22px",
-            "overflow": "visible"
-          }
-        },
-        "meta": {
-          "name": "hero"
-        },
-        "position": {
-          "grow": 0,
-          "shrink": 0,
-          "basis": "auto"
-        },
         "children": [
           {
-            "version": 0,
-            "type": "ia.display.label",
-            "props": {
-              "text": "Gateway status",
-              "style": {
-                "classes": "sg/eyebrow"
-              }
-            },
             "meta": {
               "name": "eyebrow"
             },
             "position": {
-              "grow": 0,
-              "shrink": 0,
-              "basis": "auto"
-            }
+              "shrink": 0
+            },
+            "props": {
+              "style": {
+                "classes": "sg/eyebrow"
+              },
+              "text": "Gateway status"
+            },
+            "type": "ia.display.label"
           },
           {
-            "version": 0,
-            "type": "ia.display.label",
+            "meta": {
+              "name": "gatewayName"
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "fallbackDelay": 2.5,
+                    "mode": "direct",
+                    "publishInitial": true,
+                    "tagPath": "[System]Gateway/SystemName"
+                  },
+                  "type": "tag"
+                }
+              }
+            },
             "props": {
-              "text": "Ignition Gateway",
               "style": {
                 "classes": "sg/heading",
                 "fontSize": "3.2rem",
@@ -82,459 +52,397 @@
                 "whiteSpace": "normal"
               }
             },
-            "propConfig": {
-              "props.text": {
-                "binding": {
-                  "type": "tag",
-                  "config": {
-                    "mode": "direct",
-                    "tagPath": "[System]Gateway/SystemName",
-                    "fallbackDelay": 2.5,
-                    "publishInitial": true
-                  }
-                }
-              }
-            },
-            "meta": {
-              "name": "gatewayName"
-            },
-            "position": {
-              "grow": 0,
-              "shrink": 1,
-              "basis": "auto"
-            }
+            "type": "ia.display.label"
           },
           {
-            "version": 0,
-            "type": "ia.container.flex",
-            "props": {
-              "direction": "row",
-              "wrap": "wrap",
-              "justify": "flex-start",
-              "alignItems": "center",
-              "alignContent": "stretch",
-              "style": {
-                "gap": "12px",
-                "overflow": "visible"
-              }
-            },
-            "meta": {
-              "name": "heroFacts"
-            },
-            "position": {
-              "grow": 0,
-              "shrink": 0,
-              "basis": "auto"
-            },
             "children": [
               {
-                "version": 0,
-                "type": "ia.display.label",
-                "props": {
-                  "text": "License",
-                  "style": {
-                    "classes": "sg/statusGood"
-                  }
-                },
-                "propConfig": {
-                  "props.text": {
-                    "binding": {
-                      "type": "expr",
-                      "config": {
-                        "expression": "\"License: \" + {[System]Gateway/LicenseState}"
-                      }
-                    }
-                  }
-                },
                 "meta": {
                   "name": "licenseState"
                 },
                 "position": {
-                  "grow": 0,
-                  "shrink": 0,
-                  "basis": "auto"
-                }
-              },
-              {
-                "version": 0,
-                "type": "ia.display.label",
-                "props": {
-                  "text": "Role",
-                  "style": {
-                    "classes": "sg/statusGood"
-                  }
+                  "shrink": 0
                 },
                 "propConfig": {
                   "props.text": {
                     "binding": {
-                      "type": "expr",
                       "config": {
-                        "expression": "\"Role: \" + {[System]Gateway/Redundancy/Role}"
-                      }
+                        "expression": "\"License: \" + {[System]Gateway/LicenseState}"
+                      },
+                      "type": "expr"
                     }
                   }
                 },
+                "props": {
+                  "style": {
+                    "classes": "sg/statusGood"
+                  }
+                },
+                "type": "ia.display.label"
+              },
+              {
                 "meta": {
                   "name": "redundancyRole"
                 },
                 "position": {
-                  "grow": 0,
-                  "shrink": 0,
-                  "basis": "auto"
-                }
-              },
-              {
-                "version": 0,
-                "type": "ia.display.label",
-                "props": {
-                  "text": "Uptime",
-                  "style": {
-                    "classes": "sg/statusGood"
-                  }
+                  "shrink": 0
                 },
                 "propConfig": {
                   "props.text": {
                     "binding": {
-                      "type": "expr",
                       "config": {
-                        "expression": "\"Uptime: \" + toStr(floor({[System]Gateway/UptimeSeconds} / 86400)) + \"d \" + toStr(floor(({[System]Gateway/UptimeSeconds} - (floor({[System]Gateway/UptimeSeconds} / 86400) * 86400)) / 3600)) + \"h\""
-                      }
+                        "expression": "\"Role: \" + {[System]Gateway/Redundancy/Role}"
+                      },
+                      "type": "expr"
                     }
                   }
                 },
+                "props": {
+                  "style": {
+                    "classes": "sg/statusGood"
+                  }
+                },
+                "type": "ia.display.label"
+              },
+              {
                 "meta": {
                   "name": "uptime"
                 },
                 "position": {
-                  "grow": 0,
-                  "shrink": 0,
-                  "basis": "auto"
-                }
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "config": {
+                        "expression": "\"Uptime: \" + toStr(floor({[System]Gateway/UptimeSeconds} / 86400)) + \"d \" + toStr(floor(({[System]Gateway/UptimeSeconds} - (floor({[System]Gateway/UptimeSeconds} / 86400) * 86400)) / 3600)) + \"h\""
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "style": {
+                    "classes": "sg/statusGood"
+                  }
+                },
+                "type": "ia.display.label"
               }
-            ]
-          },
-          {
-            "version": 0,
-            "type": "ia.display.label",
-            "props": {
-              "text": "Live gateway health metrics from the System tag provider. These cards are intentionally reusable so future Perspective pages can use the same visual language.",
-              "style": {
-                "classes": "sg/muted",
-                "fontSize": "1.05rem",
-                "maxWidth": "760px"
-              }
-            },
+            ],
             "meta": {
-              "name": "heroCopy"
+              "name": "heroFacts"
             },
             "position": {
-              "grow": 0,
-              "shrink": 0,
-              "basis": "auto"
-            }
+              "shrink": 0
+            },
+            "props": {
+              "alignItems": "center",
+              "style": {
+                "gap": "12px",
+                "overflow": "visible"
+              },
+              "wrap": "wrap"
+            },
+            "type": "ia.container.flex"
           }
-        ]
-      },
-      {
-        "version": 0,
-        "type": "ia.container.flex",
+        ],
+        "meta": {
+          "name": "hero"
+        },
+        "position": {
+          "shrink": 0
+        },
         "props": {
-          "direction": "row",
-          "wrap": "wrap",
-          "justify": "flex-start",
-          "alignItems": "stretch",
-          "alignContent": "stretch",
+          "direction": "column",
           "style": {
-            "gap": "18px",
+            "classes": "sg/hero",
+            "gap": "22px",
             "overflow": "visible"
           }
         },
-        "meta": {
-          "name": "metricGrid"
-        },
-        "position": {
-          "grow": 1,
-          "shrink": 1,
-          "basis": "auto"
-        },
+        "type": "ia.container.flex"
+      },
+      {
         "children": [
           {
-            "version": 0,
-            "type": "ia.display.view",
-            "props": {
-              "path": "Shared/MetricCard",
-              "params": {
-                "label": "CPU usage",
-                "value": "Unavailable",
-                "unit": "%",
-                "status": "Good",
-                "helperText": "JVM-reported gateway CPU utilization",
-                "progress": 0
-              },
-              "style": {
-                "height": "190px"
-              }
-            },
-            "propConfig": {
-              "props.params.value": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "numberFormat({[System]Gateway/Performance/CPU Usage}, \"0.0\")"
-                  }
-                }
-              },
-              "props.params.progress": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "{[System]Gateway/Performance/CPU Usage}"
-                  }
-                }
-              },
-              "props.params.status": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "if({[System]Gateway/Performance/CPU Usage} >= 90, \"Danger\", if({[System]Gateway/Performance/CPU Usage} >= 70, \"Warning\", \"Good\"))"
-                  }
-                }
-              }
-            },
             "meta": {
               "name": "cpuCard"
             },
             "position": {
-              "grow": 1,
-              "shrink": 1,
-              "basis": "320px"
-            }
-          },
-          {
-            "version": 0,
-            "type": "ia.display.view",
-            "props": {
-              "path": "Shared/MetricCard",
-              "params": {
-                "label": "Memory utilization",
-                "value": "Unavailable",
-                "unit": "%",
-                "status": "Good",
-                "helperText": "Current memory usage divided by max memory",
-                "progress": 0
-              },
-              "style": {
-                "height": "190px"
-              }
+              "basis": "320px",
+              "grow": 1
             },
             "propConfig": {
-              "props.params.value": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "numberFormat({[System]Gateway/Performance/Memory Utilization}, \"0.0\")"
-                  }
-                }
-              },
               "props.params.progress": {
                 "binding": {
-                  "type": "expr",
                   "config": {
-                    "expression": "{[System]Gateway/Performance/Memory Utilization}"
-                  }
+                    "expression": "{[System]Gateway/Performance/CPU Usage}"
+                  },
+                  "type": "expr"
                 }
               },
               "props.params.status": {
                 "binding": {
-                  "type": "expr",
                   "config": {
-                    "expression": "if({[System]Gateway/Performance/Memory Utilization} >= 90, \"Danger\", if({[System]Gateway/Performance/Memory Utilization} >= 70, \"Warning\", \"Good\"))"
-                  }
+                    "expression": "if({[System]Gateway/Performance/CPU Usage} \u003e\u003d 90, \"Danger\", if({[System]Gateway/Performance/CPU Usage} \u003e\u003d 70, \"Warning\", \"Good\"))"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.value": {
+                "binding": {
+                  "config": {
+                    "expression": "numberFormat({[System]Gateway/Performance/CPU Usage}, \"0.0\")"
+                  },
+                  "type": "expr"
                 }
               }
             },
+            "props": {
+              "params": {
+                "helperText": "JVM-reported gateway CPU utilization",
+                "label": "CPU usage",
+                "unit": "%"
+              },
+              "path": "Shared/MetricCard",
+              "style": {
+                "height": "190px"
+              }
+            },
+            "type": "ia.display.view"
+          },
+          {
             "meta": {
               "name": "memoryUtilizationCard"
             },
             "position": {
-              "grow": 1,
-              "shrink": 1,
-              "basis": "320px"
-            }
-          },
-          {
-            "version": 0,
-            "type": "ia.display.view",
-            "props": {
-              "path": "Shared/MetricCard",
-              "params": {
-                "label": "Memory used",
-                "value": "Unavailable",
-                "unit": " MB",
-                "status": "Good",
-                "helperText": "Gateway memory currently in use",
-                "progress": 0
-              },
-              "style": {
-                "height": "190px"
-              }
+              "basis": "320px",
+              "grow": 1
             },
             "propConfig": {
-              "props.params.value": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "numberFormat({[System]Gateway/Performance/Memory Usage} / 1048576, \"0\")"
-                  }
-                }
-              },
               "props.params.progress": {
                 "binding": {
-                  "type": "expr",
                   "config": {
                     "expression": "{[System]Gateway/Performance/Memory Utilization}"
-                  }
-                }
-              }
-            },
-            "meta": {
-              "name": "memoryUsedCard"
-            },
-            "position": {
-              "grow": 1,
-              "shrink": 1,
-              "basis": "320px"
-            }
-          },
-          {
-            "version": 0,
-            "type": "ia.display.view",
-            "props": {
-              "path": "Shared/MetricCard",
-              "params": {
-                "label": "Max memory",
-                "value": "Unavailable",
-                "unit": " MB",
-                "status": "Good",
-                "helperText": "Configured JVM maximum memory",
-                "progress": 100
-              },
-              "style": {
-                "height": "190px"
-              }
-            },
-            "propConfig": {
-              "props.params.value": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "numberFormat({[System]Gateway/Performance/Max Memory} / 1048576, \"0\")"
-                  }
-                }
-              }
-            },
-            "meta": {
-              "name": "maxMemoryCard"
-            },
-            "position": {
-              "grow": 1,
-              "shrink": 1,
-              "basis": "320px"
-            }
-          },
-          {
-            "version": 0,
-            "type": "ia.display.view",
-            "props": {
-              "path": "Shared/MetricCard",
-              "params": {
-                "label": "Disk utilization",
-                "value": "Unavailable",
-                "unit": "%",
-                "status": "Good",
-                "helperText": "Percentage of hard disk currently in use",
-                "progress": 0
-              },
-              "style": {
-                "height": "190px"
-              }
-            },
-            "propConfig": {
-              "props.params.value": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "numberFormat({[System]Gateway/Performance/Disk Utilization}, \"0.0\")"
-                  }
-                }
-              },
-              "props.params.progress": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "{[System]Gateway/Performance/Disk Utilization}"
-                  }
+                  },
+                  "type": "expr"
                 }
               },
               "props.params.status": {
                 "binding": {
-                  "type": "expr",
                   "config": {
-                    "expression": "if({[System]Gateway/Performance/Disk Utilization} >= 90, \"Danger\", if({[System]Gateway/Performance/Disk Utilization} >= 70, \"Warning\", \"Good\"))"
-                  }
+                    "expression": "if({[System]Gateway/Performance/Memory Utilization} \u003e\u003d 90, \"Danger\", if({[System]Gateway/Performance/Memory Utilization} \u003e\u003d 70, \"Warning\", \"Good\"))"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.value": {
+                "binding": {
+                  "config": {
+                    "expression": "numberFormat({[System]Gateway/Performance/Memory Utilization}, \"0.0\")"
+                  },
+                  "type": "expr"
                 }
               }
             },
-            "meta": {
-              "name": "diskCard"
-            },
-            "position": {
-              "grow": 1,
-              "shrink": 1,
-              "basis": "320px"
-            }
-          },
-          {
-            "version": 0,
-            "type": "ia.display.view",
             "props": {
-              "path": "Shared/MetricCard",
               "params": {
-                "label": "Gateway sessions",
-                "value": "Unavailable",
-                "unit": "",
-                "status": "Good",
-                "helperText": "Active sessions on this gateway",
-                "progress": 0
+                "helperText": "Current memory usage divided by max memory",
+                "label": "Memory utilization",
+                "unit": "%"
               },
+              "path": "Shared/MetricCard",
               "style": {
                 "height": "190px"
               }
             },
+            "type": "ia.display.view"
+          },
+          {
+            "meta": {
+              "name": "memoryUsedCard"
+            },
+            "position": {
+              "basis": "320px",
+              "grow": 1
+            },
             "propConfig": {
+              "props.params.progress": {
+                "binding": {
+                  "config": {
+                    "expression": "{[System]Gateway/Performance/Memory Utilization}"
+                  },
+                  "type": "expr"
+                }
+              },
               "props.params.value": {
                 "binding": {
-                  "type": "tag",
                   "config": {
-                    "mode": "direct",
-                    "tagPath": "[System]Gateway/Sessions/SessionCount",
-                    "fallbackDelay": 2.5,
-                    "publishInitial": true
-                  }
+                    "expression": "numberFormat({[System]Gateway/Performance/Memory Usage} / 1048576, \"0\")"
+                  },
+                  "type": "expr"
                 }
               }
             },
+            "props": {
+              "params": {
+                "helperText": "Gateway memory currently in use",
+                "label": "Memory used",
+                "status": "Good",
+                "unit": " MB"
+              },
+              "path": "Shared/MetricCard",
+              "style": {
+                "height": "190px"
+              }
+            },
+            "type": "ia.display.view"
+          },
+          {
+            "meta": {
+              "name": "maxMemoryCard"
+            },
+            "position": {
+              "basis": "320px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.params.value": {
+                "binding": {
+                  "config": {
+                    "expression": "numberFormat({[System]Gateway/Performance/Max Memory} / 1048576, \"0\")"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "params": {
+                "helperText": "Configured JVM maximum memory",
+                "label": "Max memory",
+                "progress": 100,
+                "status": "Good",
+                "unit": " MB"
+              },
+              "path": "Shared/MetricCard",
+              "style": {
+                "height": "190px"
+              }
+            },
+            "type": "ia.display.view"
+          },
+          {
+            "meta": {
+              "name": "diskCard"
+            },
+            "position": {
+              "basis": "320px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.params.progress": {
+                "binding": {
+                  "config": {
+                    "expression": "{[System]Gateway/Performance/Disk Utilization}"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.status": {
+                "binding": {
+                  "config": {
+                    "expression": "if({[System]Gateway/Performance/Disk Utilization} \u003e\u003d 90, \"Danger\", if({[System]Gateway/Performance/Disk Utilization} \u003e\u003d 70, \"Warning\", \"Good\"))"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.value": {
+                "binding": {
+                  "config": {
+                    "expression": "numberFormat({[System]Gateway/Performance/Disk Utilization}, \"0.0\")"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "params": {
+                "helperText": "Percentage of hard disk currently in use",
+                "label": "Disk utilization",
+                "unit": "%"
+              },
+              "path": "Shared/MetricCard",
+              "style": {
+                "height": "190px"
+              }
+            },
+            "type": "ia.display.view"
+          },
+          {
             "meta": {
               "name": "sessionsCard"
             },
             "position": {
-              "grow": 1,
-              "shrink": 1,
-              "basis": "320px"
-            }
+              "basis": "320px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.params.value": {
+                "binding": {
+                  "config": {
+                    "fallbackDelay": 2.5,
+                    "mode": "direct",
+                    "publishInitial": true,
+                    "tagPath": "[System]Gateway/Sessions/SessionCount"
+                  },
+                  "type": "tag"
+                }
+              }
+            },
+            "props": {
+              "params": {
+                "helperText": "Active sessions on this gateway",
+                "label": "Gateway sessions",
+                "progress": 0,
+                "status": "Good",
+                "unit": ""
+              },
+              "path": "Shared/MetricCard",
+              "style": {
+                "height": "190px"
+              }
+            },
+            "type": "ia.display.view"
           }
-        ]
+        ],
+        "meta": {
+          "name": "metricGrid"
+        },
+        "position": {
+          "grow": 1
+        },
+        "props": {
+          "alignContent": "flex-start",
+          "style": {
+            "gap": "18px",
+            "overflow": "visible"
+          },
+          "wrap": "wrap"
+        },
+        "type": "ia.container.flex"
       }
-    ]
+    ],
+    "meta": {
+      "name": "gatewayStatusPage"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "classes": "sg/page",
+        "gap": "24px",
+        "minHeight": "100vh"
+      }
+    },
+    "type": "ia.container.flex"
   }
 }

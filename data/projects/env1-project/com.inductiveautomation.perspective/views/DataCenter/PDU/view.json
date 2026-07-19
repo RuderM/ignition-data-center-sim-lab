@@ -30,15 +30,12 @@
                     "fontSize": "3.2rem",
                     "overflow": "hidden",
                     "overflowWrap": "break-word",
-                    "whiteSpace": "normal",
-                    "textOverflow": "ellipsis"
+                    "textOverflow": "ellipsis",
+                    "whiteSpace": "normal"
                   },
                   "text": "Power Distribution Unit"
                 },
-                "type": "ia.display.label",
-                "position": {
-                  "grow": 1
-                }
+                "type": "ia.display.label"
               },
               {
                 "meta": {
@@ -69,7 +66,6 @@
             },
             "props": {
               "alignItems": "center",
-              "justify": "space-between",
               "style": {
                 "gap": "18px",
                 "overflow": "hidden",
@@ -141,7 +137,7 @@
                   "props.style.classes": {
                     "binding": {
                       "config": {
-                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/CommGood\") = false, \"sg/statusDanger\", if(tag({view.params.baseTagPath} + \"/Status/Faulted\") = true, \"sg/statusDanger\", if(tag({view.params.baseTagPath} + \"/Status/Available\") = false, \"sg/statusWarning\", \"sg/statusGood\")))"
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/CommGood\") \u003d false, \"sg/statusDanger\", if(tag({view.params.baseTagPath} + \"/Status/Faulted\") \u003d true, \"sg/statusDanger\", if(tag({view.params.baseTagPath} + \"/Status/Available\") \u003d false, \"sg/statusWarning\", \"sg/statusGood\")))"
                       },
                       "type": "expr"
                     }
@@ -149,7 +145,7 @@
                   "props.text": {
                     "binding": {
                       "config": {
-                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/CommGood\") = false, \"Overall: COMM LOSS\", if(tag({view.params.baseTagPath} + \"/Status/Faulted\") = true, \"Overall: FAULTED\", if(tag({view.params.baseTagPath} + \"/Status/Available\") = false, \"Overall: UNAVAILABLE\", \"Overall: NORMAL\")))"
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/CommGood\") \u003d false, \"Overall: COMM LOSS\", if(tag({view.params.baseTagPath} + \"/Status/Faulted\") \u003d true, \"Overall: FAULTED\", if(tag({view.params.baseTagPath} + \"/Status/Available\") \u003d false, \"Overall: UNAVAILABLE\", \"Overall: NORMAL\")))"
                       },
                       "type": "expr"
                     }
@@ -173,7 +169,7 @@
                   "props.style.classes": {
                     "binding": {
                       "config": {
-                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/Available\") = true, \"sg/statusGood\", \"sg/statusWarning\")"
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/Available\") \u003d true, \"sg/statusGood\", \"sg/statusWarning\")"
                       },
                       "type": "expr"
                     }
@@ -181,7 +177,7 @@
                   "props.text": {
                     "binding": {
                       "config": {
-                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/Available\") = true, \"Available: YES\", \"Available: NO\")"
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/Available\") \u003d true, \"Available: YES\", \"Available: NO\")"
                       },
                       "type": "expr"
                     }
@@ -205,7 +201,7 @@
                   "props.style.classes": {
                     "binding": {
                       "config": {
-                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/CommGood\") = true, \"sg/statusGood\", \"sg/statusDanger\")"
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/CommGood\") \u003d true, \"sg/statusGood\", \"sg/statusDanger\")"
                       },
                       "type": "expr"
                     }
@@ -213,7 +209,7 @@
                   "props.text": {
                     "binding": {
                       "config": {
-                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/CommGood\") = true, \"Communication: GOOD\", \"Communication: LOSS\")"
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/CommGood\") \u003d true, \"Communication: GOOD\", \"Communication: LOSS\")"
                       },
                       "type": "expr"
                     }
@@ -237,7 +233,7 @@
                   "props.style.classes": {
                     "binding": {
                       "config": {
-                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/Faulted\") = true, \"sg/statusDanger\", \"sg/statusGood\")"
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/Faulted\") \u003d true, \"sg/statusDanger\", \"sg/statusGood\")"
                       },
                       "type": "expr"
                     }
@@ -245,7 +241,7 @@
                   "props.text": {
                     "binding": {
                       "config": {
-                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/Faulted\") = true, \"Fault State: ACTIVE\", \"Fault State: NONE\")"
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/Faulted\") \u003d true, \"Fault State: ACTIVE\", \"Fault State: NONE\")"
                       },
                       "type": "expr"
                     }
@@ -269,7 +265,7 @@
                   "props.style.classes": {
                     "binding": {
                       "config": {
-                        "expression": "if(tag({view.params.baseTagPath} + \"/Breaker/InputClosed\") = true, \"sg/statusGood\", \"sg/statusWarning\")"
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Breaker/InputClosed\") \u003d true, \"sg/statusGood\", \"sg/statusWarning\")"
                       },
                       "type": "expr"
                     }
@@ -277,7 +273,7 @@
                   "props.text": {
                     "binding": {
                       "config": {
-                        "expression": "if(tag({view.params.baseTagPath} + \"/Breaker/InputClosed\") = true, \"Input Breaker: CLOSED\", \"Input Breaker: OPEN\")"
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Breaker/InputClosed\") \u003d true, \"Input Breaker: CLOSED\", \"Input Breaker: OPEN\")"
                       },
                       "type": "expr"
                     }
@@ -301,7 +297,7 @@
                   "props.style.classes": {
                     "binding": {
                       "config": {
-                        "expression": "if(tag({view.params.baseTagPath} + \"/Breaker/InputTripped\") = true, \"sg/statusDanger\", \"sg/statusGood\")"
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Breaker/InputTripped\") \u003d true, \"sg/statusDanger\", \"sg/statusGood\")"
                       },
                       "type": "expr"
                     }
@@ -309,7 +305,7 @@
                   "props.text": {
                     "binding": {
                       "config": {
-                        "expression": "if(tag({view.params.baseTagPath} + \"/Breaker/InputTripped\") = true, \"Input Trip: ACTIVE\", \"Input Trip: CLEAR\")"
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Breaker/InputTripped\") \u003d true, \"Input Trip: ACTIVE\", \"Input Trip: CLEAR\")"
                       },
                       "type": "expr"
                     }
@@ -333,7 +329,7 @@
                   "props.style.classes": {
                     "binding": {
                       "config": {
-                        "expression": "if(tag({view.params.baseTagPath} + \"/Alarms/Overload\") = true, \"sg/statusDanger\", \"sg/statusGood\")"
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Alarms/Overload\") \u003d true, \"sg/statusDanger\", \"sg/statusGood\")"
                       },
                       "type": "expr"
                     }
@@ -341,7 +337,7 @@
                   "props.text": {
                     "binding": {
                       "config": {
-                        "expression": "if(tag({view.params.baseTagPath} + \"/Alarms/Overload\") = true, \"Overload: ACTIVE\", \"Overload: CLEAR\")"
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Alarms/Overload\") \u003d true, \"Overload: ACTIVE\", \"Overload: CLEAR\")"
                       },
                       "type": "expr"
                     }
@@ -554,7 +550,7 @@
               "props.params.status": {
                 "binding": {
                   "config": {
-                    "expression": "if(tag({view.params.baseTagPath} + \"/Electrical/OutputVoltageLLAvg\") < 187, \"Warning\", \"Good\")"
+                    "expression": "if(tag({view.params.baseTagPath} + \"/Electrical/OutputVoltageLLAvg\") \u003c 187, \"Warning\", \"Good\")"
                   },
                   "type": "expr"
                 }
@@ -661,7 +657,7 @@
               "props.params.status": {
                 "binding": {
                   "config": {
-                    "expression": "if(tag({view.params.baseTagPath} + \"/Temperature/EnclosureTemp\") >= 50, \"Danger\", if(tag({view.params.baseTagPath} + \"/Temperature/EnclosureTemp\") >= 45, \"Warning\", \"Good\"))"
+                    "expression": "if(tag({view.params.baseTagPath} + \"/Temperature/EnclosureTemp\") \u003e\u003d 50, \"Danger\", if(tag({view.params.baseTagPath} + \"/Temperature/EnclosureTemp\") \u003e\u003d 45, \"Warning\", \"Good\"))"
                   },
                   "type": "expr"
                 }
@@ -818,7 +814,7 @@
               "props.params.status": {
                 "binding": {
                   "config": {
-                    "expression": "if(tag({view.params.baseTagPath} + \"/Power/PowerFactor\") < 0.9, \"Warning\", \"Good\")"
+                    "expression": "if(tag({view.params.baseTagPath} + \"/Power/PowerFactor\") \u003c 0.9, \"Warning\", \"Good\")"
                   },
                   "type": "expr"
                 }
@@ -951,7 +947,7 @@
               "props.params.status": {
                 "binding": {
                   "config": {
-                    "expression": "if(tag({view.params.baseTagPath} + \"/Capacity/LoadPct\") >= 100, \"Danger\", if(tag({view.params.baseTagPath} + \"/Capacity/LoadPct\") >= 85, \"Warning\", \"Good\"))"
+                    "expression": "if(tag({view.params.baseTagPath} + \"/Capacity/LoadPct\") \u003e\u003d 100, \"Danger\", if(tag({view.params.baseTagPath} + \"/Capacity/LoadPct\") \u003e\u003d 85, \"Warning\", \"Good\"))"
                   },
                   "type": "expr"
                 }

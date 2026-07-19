@@ -4,6 +4,10 @@
       "title": "",
       "viewPath": "Exchange/Responsive Nav/Overview"
     },
+    "/GWHealth": {
+      "title": "",
+      "viewPath": "Gateway/Status"
+    },
     "/MSG": {
       "title": "",
       "viewPath": "DataCenter/MSG"
