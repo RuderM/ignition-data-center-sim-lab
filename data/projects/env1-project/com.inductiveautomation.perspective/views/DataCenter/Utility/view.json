@@ -1,7 +1,7 @@
 {
   "custom": {},
   "params": {
-    "baseTagPath": "[T1]MBT1/UTL1"
+    "baseTagPath": "[T1]MBT1/Utility1/UtilitySource"
   },
   "propConfig": {
     "params.baseTagPath": {

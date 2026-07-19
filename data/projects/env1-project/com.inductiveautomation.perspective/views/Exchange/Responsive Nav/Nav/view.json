@@ -135,9 +135,10 @@
           },
           {
             "meta": {
-              "name": "Nav Link_0"
+              "name": "_Nav Link_0"
             },
             "position": {
+              "display": false,
               "shrink": 0
             },
             "props": {
@@ -157,9 +158,10 @@
           },
           {
             "meta": {
-              "name": "Nav Link_1"
+              "name": "_Nav Link_1"
             },
             "position": {
+              "display": false,
               "shrink": 0
             },
             "props": {
@@ -179,9 +181,10 @@
           },
           {
             "meta": {
-              "name": "Nav Section Tree"
+              "name": "_Nav Section Tree"
             },
             "position": {
+              "display": false,
               "shrink": 0
             },
             "props": {
@@ -265,9 +268,9 @@
                       "classes": "",
                       "color": ""
                     },
-                    "label": "Nav Link 1",
+                    "label": "Utility",
                     "showArrow": false,
-                    "target": "/nav-section-repeater/nav-link-1"
+                    "target": "/Utility"
                   },
                   {
                     "icon": "",
