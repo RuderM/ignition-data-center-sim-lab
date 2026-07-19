@@ -19,32 +19,64 @@
       {
         "children": [
           {
-            "meta": {
-              "name": "screenEyebrow"
-            },
-            "props": {
-              "style": {
-                "classes": "sg/eyebrow"
+            "children": [
+              {
+                "meta": {
+                  "name": "screenTitle"
+                },
+                "props": {
+                  "style": {
+                    "classes": "sg/heading",
+                    "fontSize": "3.2rem",
+                    "overflow": "hidden",
+                    "overflowWrap": "break-word",
+                    "whiteSpace": "normal",
+                    "textOverflow": "ellipsis"
+                  },
+                  "text": "Main Switchgear"
+                },
+                "type": "ia.display.label",
+                "position": {
+                  "grow": 1
+                }
               },
-              "text": "MAIN DISTRIBUTION"
-            },
-            "type": "ia.display.label"
-          },
-          {
+              {
+                "meta": {
+                  "name": "pageIcon"
+                },
+                "position": {
+                  "basis": "72px",
+                  "shrink": 0
+                },
+                "props": {
+                  "fit": {
+                    "mode": "contain"
+                  },
+                  "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5NiIgaGVpZ2h0PSI5NiIgdmlld0JveD0iMCAwIDk2IDk2IiByb2xlPSJpbWciIGFyaWEtbGFiZWxsZWRieT0idGl0bGUgZGVzYyI+CiAgPHRpdGxlIGlkPSJ0aXRsZSI+TWFpbiBzd2l0Y2hnZWFyIG9uZS1saW5lIGljb248L3RpdGxlPgogIDxkZXNjIGlkPSJkZXNjIj5PbmUtbGluZSBzdHlsZSBzd2l0Y2hnZWFyIGJ1cyBhbmQgYnJlYWtlciBzeW1ib2wgd2l0aCBzdWJ0bGUgVUkgZ2xvdy48L2Rlc2M+CiAgPGRlZnM+CiAgICA8ZmlsdGVyIGlkPSJzb2Z0R2xvdyIgeD0iLTM1JSIgeT0iLTM1JSIgd2lkdGg9IjE3MCUiIGhlaWdodD0iMTcwJSI+CiAgICAgIDxmZUdhdXNzaWFuQmx1ciBzdGREZXZpYXRpb249IjIuMiIgcmVzdWx0PSJibHVyIi8+CiAgICAgIDxmZUNvbG9yTWF0cml4IGluPSJibHVyIiB0eXBlPSJtYXRyaXgiIHZhbHVlcz0iMCAwIDAgMCAwLjE4IDAgMCAwIDAgMC41MCAwIDAgMCAwIDAuOTMgMCAwIDAgLjQ1IDAiLz4KICAgICAgPGZlTWVyZ2U+CiAgICAgICAgPGZlTWVyZ2VOb2RlLz4KICAgICAgICA8ZmVNZXJnZU5vZGUgaW49IlNvdXJjZUdyYXBoaWMiLz4KICAgICAgPC9mZU1lcmdlPgogICAgPC9maWx0ZXI+CiAgPC9kZWZzPgogIDxyZWN0IHg9IjUiIHk9IjUiIHdpZHRoPSI4NiIgaGVpZ2h0PSI4NiIgcng9IjEyIiBmaWxsPSIjZmZmZmZmIiBzdHJva2U9IiNkOWUyZWYiIHN0cm9rZS13aWR0aD0iMiIvPgogIDxwYXRoIGQ9Ik0yMiAyNkg3NCIgc3Ryb2tlPSIjMTYyMTNlIiBzdHJva2Utd2lkdGg9IjYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxwYXRoIGQ9Ik00OCAxOFYyNiIgc3Ryb2tlPSIjMTYyMTNlIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxwYXRoIGQ9Ik00OCAyNlY0MCIgc3Ryb2tlPSIjMmY4MGVkIiBzdHJva2Utd2lkdGg9IjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgZmlsdGVyPSJ1cmwoI3NvZnRHbG93KSIvPgogIDxwYXRoIGQ9Ik0yOCAyNlY2OE00OCAyNlY2OE02OCAyNlY2OCIgc3Ryb2tlPSIjMTYyMTNlIiBzdHJva2Utd2lkdGg9IjQuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTIyIDQ5TDM0IDQzTTQyIDQ5TDU0IDQzTTYyIDQ5TDc0IDQzIiBzdHJva2U9IiMxOGE5OTkiIHN0cm9rZS13aWR0aD0iNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPGNpcmNsZSBjeD0iMjgiIGN5PSI3MiIgcj0iNSIgZmlsbD0iIzJmODBlZCIvPgogIDxjaXJjbGUgY3g9IjQ4IiBjeT0iNzIiIHI9IjUiIGZpbGw9IiMyZjgwZWQiLz4KICA8Y2lyY2xlIGN4PSI2OCIgY3k9IjcyIiByPSI1IiBmaWxsPSIjMmY4MGVkIi8+CiAgPHBhdGggZD0iTTc4IDE5TDcyIDMySDc5TDY4IDUxTDcyIDM2SDY2TDcyIDE5WiIgZmlsbD0iI2Y1Yjg0YiIvPgo8L3N2Zz4K",
+                  "style": {
+                    "height": "72px",
+                    "width": "72px"
+                  }
+                },
+                "type": "ia.display.image"
+              }
+            ],
             "meta": {
-              "name": "screenTitle"
+              "name": "titleRow"
+            },
+            "position": {
+              "shrink": 0
             },
             "props": {
+              "alignItems": "center",
+              "justify": "space-between",
               "style": {
-                "classes": "sg/heading",
-                "fontSize": "3.2rem",
+                "gap": "18px",
                 "overflow": "hidden",
-                "overflowWrap": "break-word",
-                "whiteSpace": "normal"
-              },
-              "text": "Main Switchgear"
+                "width": "100%"
+              }
             },
-            "type": "ia.display.label"
+            "type": "ia.container.flex"
           },
           {
             "children": [
@@ -109,7 +141,7 @@
                   "props.style.classes": {
                     "binding": {
                       "config": {
-                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/CommGood\") \u003d false, \"sg/statusDanger\", if(tag({view.params.baseTagPath} + \"/Status/Faulted\") \u003d true, \"sg/statusDanger\", if(tag({view.params.baseTagPath} + \"/Status/Available\") \u003d false, \"sg/statusWarning\", \"sg/statusGood\")))"
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/CommGood\") = false, \"sg/statusDanger\", if(tag({view.params.baseTagPath} + \"/Status/Faulted\") = true, \"sg/statusDanger\", if(tag({view.params.baseTagPath} + \"/Status/Available\") = false, \"sg/statusWarning\", \"sg/statusGood\")))"
                       },
                       "type": "expr"
                     }
@@ -117,7 +149,7 @@
                   "props.text": {
                     "binding": {
                       "config": {
-                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/CommGood\") \u003d false, \"Overall: COMM LOSS\", if(tag({view.params.baseTagPath} + \"/Status/Faulted\") \u003d true, \"Overall: FAULTED\", if(tag({view.params.baseTagPath} + \"/Status/Available\") \u003d false, \"Overall: UNAVAILABLE\", \"Overall: NORMAL\")))"
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/CommGood\") = false, \"Overall: COMM LOSS\", if(tag({view.params.baseTagPath} + \"/Status/Faulted\") = true, \"Overall: FAULTED\", if(tag({view.params.baseTagPath} + \"/Status/Available\") = false, \"Overall: UNAVAILABLE\", \"Overall: NORMAL\")))"
                       },
                       "type": "expr"
                     }
@@ -141,7 +173,7 @@
                   "props.style.classes": {
                     "binding": {
                       "config": {
-                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/Available\") \u003d true, \"sg/statusGood\", \"sg/statusWarning\")"
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/Available\") = true, \"sg/statusGood\", \"sg/statusWarning\")"
                       },
                       "type": "expr"
                     }
@@ -149,7 +181,7 @@
                   "props.text": {
                     "binding": {
                       "config": {
-                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/Available\") \u003d true, \"Available: YES\", \"Available: NO\")"
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/Available\") = true, \"Available: YES\", \"Available: NO\")"
                       },
                       "type": "expr"
                     }
@@ -173,7 +205,7 @@
                   "props.style.classes": {
                     "binding": {
                       "config": {
-                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/CommGood\") \u003d true, \"sg/statusGood\", \"sg/statusDanger\")"
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/CommGood\") = true, \"sg/statusGood\", \"sg/statusDanger\")"
                       },
                       "type": "expr"
                     }
@@ -181,7 +213,7 @@
                   "props.text": {
                     "binding": {
                       "config": {
-                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/CommGood\") \u003d true, \"Communication: GOOD\", \"Communication: LOSS\")"
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/CommGood\") = true, \"Communication: GOOD\", \"Communication: LOSS\")"
                       },
                       "type": "expr"
                     }
@@ -205,7 +237,7 @@
                   "props.style.classes": {
                     "binding": {
                       "config": {
-                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/Faulted\") \u003d true, \"sg/statusDanger\", \"sg/statusGood\")"
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/Faulted\") = true, \"sg/statusDanger\", \"sg/statusGood\")"
                       },
                       "type": "expr"
                     }
@@ -213,7 +245,7 @@
                   "props.text": {
                     "binding": {
                       "config": {
-                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/Faulted\") \u003d true, \"Fault State: ACTIVE\", \"Fault State: NONE\")"
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/Faulted\") = true, \"Fault State: ACTIVE\", \"Fault State: NONE\")"
                       },
                       "type": "expr"
                     }
@@ -237,7 +269,7 @@
                   "props.style.classes": {
                     "binding": {
                       "config": {
-                        "expression": "if(tag({view.params.baseTagPath} + \"/Breaker/MainClosed\") \u003d true, \"sg/statusGood\", \"sg/statusWarning\")"
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Breaker/MainClosed\") = true, \"sg/statusGood\", \"sg/statusWarning\")"
                       },
                       "type": "expr"
                     }
@@ -245,7 +277,7 @@
                   "props.text": {
                     "binding": {
                       "config": {
-                        "expression": "if(tag({view.params.baseTagPath} + \"/Breaker/MainClosed\") \u003d true, \"Main Breaker: CLOSED\", \"Main Breaker: OPEN\")"
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Breaker/MainClosed\") = true, \"Main Breaker: CLOSED\", \"Main Breaker: OPEN\")"
                       },
                       "type": "expr"
                     }
@@ -269,7 +301,7 @@
                   "props.style.classes": {
                     "binding": {
                       "config": {
-                        "expression": "if(tag({view.params.baseTagPath} + \"/Breaker/MainTripped\") \u003d true, \"sg/statusDanger\", \"sg/statusGood\")"
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Breaker/MainTripped\") = true, \"sg/statusDanger\", \"sg/statusGood\")"
                       },
                       "type": "expr"
                     }
@@ -277,7 +309,7 @@
                   "props.text": {
                     "binding": {
                       "config": {
-                        "expression": "if(tag({view.params.baseTagPath} + \"/Breaker/MainTripped\") \u003d true, \"Main Trip: ACTIVE\", \"Main Trip: CLEAR\")"
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Breaker/MainTripped\") = true, \"Main Trip: ACTIVE\", \"Main Trip: CLEAR\")"
                       },
                       "type": "expr"
                     }
@@ -301,7 +333,7 @@
                   "props.style.classes": {
                     "binding": {
                       "config": {
-                        "expression": "if(tag({view.params.baseTagPath} + \"/Alarms/GroundFault\") \u003d true, \"sg/statusDanger\", \"sg/statusGood\")"
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Alarms/GroundFault\") = true, \"sg/statusDanger\", \"sg/statusGood\")"
                       },
                       "type": "expr"
                     }
@@ -309,7 +341,7 @@
                   "props.text": {
                     "binding": {
                       "config": {
-                        "expression": "if(tag({view.params.baseTagPath} + \"/Alarms/GroundFault\") \u003d true, \"Ground Fault: ACTIVE\", \"Ground Fault: CLEAR\")"
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Alarms/GroundFault\") = true, \"Ground Fault: ACTIVE\", \"Ground Fault: CLEAR\")"
                       },
                       "type": "expr"
                     }
@@ -472,7 +504,15 @@
               "props.params.status": {
                 "binding": {
                   "config": {
-                    "expression": "if(tag({view.params.baseTagPath} + \"/Electrical/BusVoltageLLAvg\") \u003c 432, \"Warning\", \"Good\")"
+                    "expression": "if(tag({view.params.baseTagPath} + \"/Electrical/BusVoltageLLAvg\") < 432, \"Warning\", \"Good\")"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.trendTagPath": {
+                "binding": {
+                  "config": {
+                    "expression": "{view.params.baseTagPath} + \"/Electrical/BusVoltageLLAvg\""
                   },
                   "type": "expr"
                 }
@@ -490,6 +530,8 @@
               "params": {
                 "helperText": "Average bus line-to-line voltage",
                 "label": "Bus Voltage",
+                "trendLabel": "Bus Voltage",
+                "trendUnit": "V",
                 "unit": " V"
               },
               "path": "Shared/MetricCard",
@@ -516,6 +558,14 @@
                   "type": "expr"
                 }
               },
+              "props.params.trendTagPath": {
+                "binding": {
+                  "config": {
+                    "expression": "{view.params.baseTagPath} + \"/Electrical/BusCurrentAvg\""
+                  },
+                  "type": "expr"
+                }
+              },
               "props.params.value": {
                 "binding": {
                   "config": {
@@ -530,6 +580,8 @@
                 "helperText": "Average main switchgear bus current",
                 "label": "Bus Current",
                 "status": "Good",
+                "trendLabel": "Bus Current",
+                "trendUnit": "A",
                 "unit": " A"
               },
               "path": "Shared/MetricCard",
@@ -559,7 +611,15 @@
               "props.params.status": {
                 "binding": {
                   "config": {
-                    "expression": "if(tag({view.params.baseTagPath} + \"/Electrical/Frequency\") \u003c 59.5, \"Warning\", if(tag({view.params.baseTagPath} + \"/Electrical/Frequency\") \u003e 60.5, \"Warning\", \"Good\"))"
+                    "expression": "if(tag({view.params.baseTagPath} + \"/Electrical/Frequency\") < 59.5, \"Warning\", if(tag({view.params.baseTagPath} + \"/Electrical/Frequency\") > 60.5, \"Warning\", \"Good\"))"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.trendTagPath": {
+                "binding": {
+                  "config": {
+                    "expression": "{view.params.baseTagPath} + \"/Electrical/Frequency\""
                   },
                   "type": "expr"
                 }
@@ -577,6 +637,8 @@
               "params": {
                 "helperText": "Main switchgear bus frequency",
                 "label": "Frequency",
+                "trendLabel": "Frequency",
+                "trendUnit": "Hz",
                 "unit": " Hz"
               },
               "path": "Shared/MetricCard",
@@ -603,6 +665,14 @@
                   "type": "expr"
                 }
               },
+              "props.params.trendTagPath": {
+                "binding": {
+                  "config": {
+                    "expression": "{view.params.baseTagPath} + \"/Power/RealPower\""
+                  },
+                  "type": "expr"
+                }
+              },
               "props.params.value": {
                 "binding": {
                   "config": {
@@ -617,6 +687,8 @@
                 "helperText": "Total real power through the switchgear",
                 "label": "Real Power",
                 "status": "Good",
+                "trendLabel": "Real Power",
+                "trendUnit": "kW",
                 "unit": " kW"
               },
               "path": "Shared/MetricCard",
@@ -643,6 +715,14 @@
                   "type": "expr"
                 }
               },
+              "props.params.trendTagPath": {
+                "binding": {
+                  "config": {
+                    "expression": "{view.params.baseTagPath} + \"/Power/ApparentPower\""
+                  },
+                  "type": "expr"
+                }
+              },
               "props.params.value": {
                 "binding": {
                   "config": {
@@ -657,6 +737,8 @@
                 "helperText": "Total apparent power through the switchgear",
                 "label": "Apparent Power",
                 "status": "Good",
+                "trendLabel": "Apparent Power",
+                "trendUnit": "kVA",
                 "unit": " kVA"
               },
               "path": "Shared/MetricCard",
@@ -686,7 +768,15 @@
               "props.params.status": {
                 "binding": {
                   "config": {
-                    "expression": "if(tag({view.params.baseTagPath} + \"/Power/PowerFactor\") \u003c 0.9, \"Warning\", \"Good\")"
+                    "expression": "if(tag({view.params.baseTagPath} + \"/Power/PowerFactor\") < 0.9, \"Warning\", \"Good\")"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.trendTagPath": {
+                "binding": {
+                  "config": {
+                    "expression": "{view.params.baseTagPath} + \"/Power/PowerFactor\""
                   },
                   "type": "expr"
                 }
@@ -704,6 +794,8 @@
               "params": {
                 "helperText": "Main switchgear power factor",
                 "label": "Power Factor",
+                "trendLabel": "Power Factor",
+                "trendUnit": "",
                 "unit": ""
               },
               "path": "Shared/MetricCard",
@@ -722,6 +814,14 @@
               "grow": 1
             },
             "propConfig": {
+              "props.params.trendTagPath": {
+                "binding": {
+                  "config": {
+                    "expression": "{view.params.baseTagPath} + \"/Energy/TotalEnergy\""
+                  },
+                  "type": "expr"
+                }
+              },
               "props.params.value": {
                 "binding": {
                   "config": {
@@ -737,6 +837,8 @@
                 "label": "Total Energy",
                 "progress": 0,
                 "status": "Good",
+                "trendLabel": "Total Energy",
+                "trendUnit": "kWh",
                 "unit": " kWh"
               },
               "path": "Shared/MetricCard",
@@ -799,7 +901,15 @@
               "props.params.status": {
                 "binding": {
                   "config": {
-                    "expression": "if(tag({view.params.baseTagPath} + \"/Capacity/LoadPct\") \u003e\u003d 100, \"Danger\", if(tag({view.params.baseTagPath} + \"/Capacity/LoadPct\") \u003e\u003d 85, \"Warning\", \"Good\"))"
+                    "expression": "if(tag({view.params.baseTagPath} + \"/Capacity/LoadPct\") >= 100, \"Danger\", if(tag({view.params.baseTagPath} + \"/Capacity/LoadPct\") >= 85, \"Warning\", \"Good\"))"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.trendTagPath": {
+                "binding": {
+                  "config": {
+                    "expression": "{view.params.baseTagPath} + \"/Capacity/LoadPct\""
                   },
                   "type": "expr"
                 }
@@ -817,6 +927,8 @@
               "params": {
                 "helperText": "Bus current as a percentage of rated current",
                 "label": "Switchgear Load",
+                "trendLabel": "Switchgear Load",
+                "trendUnit": "%",
                 "unit": "%"
               },
               "path": "Shared/MetricCard",

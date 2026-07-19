@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="212" height="186" viewBox="0 0 212 186" role="img" aria-labelledby="title desc">
+  <title id="title">MBT1 Data Center logo</title>
+  <desc id="desc">Compact EPMS themed logo with a data-center building mark, power line, and MBT1 text.</desc>
+  <rect width="212" height="186" rx="18" fill="#f7f9fc"/>
+  <rect x="10" y="10" width="192" height="166" rx="16" fill="#ffffff" stroke="#d9e2ef" stroke-width="2"/>
+  <path d="M34 56h96l20 24v56H34z" fill="#16213e"/>
+  <path d="M130 56v24h20" fill="none" stroke="#18a999" stroke-width="6" stroke-linejoin="round"/>
+  <rect x="48" y="74" width="18" height="12" rx="2" fill="#2f80ed"/>
+  <rect x="76" y="74" width="18" height="12" rx="2" fill="#2f80ed"/>
+  <rect x="104" y="74" width="18" height="12" rx="2" fill="#2f80ed"/>
+  <rect x="48" y="98" width="18" height="12" rx="2" fill="#18a999"/>
+  <rect x="76" y="98" width="18" height="12" rx="2" fill="#18a999"/>
+  <rect x="104" y="98" width="18" height="12" rx="2" fill="#18a999"/>
+  <path d="M152 60l-14 32h18l-10 34 32-46h-20l14-20z" fill="#f5b84b"/>
+  <path d="M50 144h110" stroke="#2f80ed" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="50" cy="144" r="7" fill="#18a999"/>
+  <circle cx="160" cy="144" r="7" fill="#18a999"/>
+  <text x="106" y="36" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="900" fill="#16213e">MBT1</text>
+  <text x="106" y="165" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="800" fill="#5e6b85">DATA CENTER</text>
+</svg>

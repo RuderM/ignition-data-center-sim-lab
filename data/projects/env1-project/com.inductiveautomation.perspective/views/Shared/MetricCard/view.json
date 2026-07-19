@@ -6,7 +6,10 @@
     "progress": 0,
     "status": "Good",
     "unit": "",
-    "value": "Unavailable"
+    "value": "Unavailable",
+    "trendTagPath": "",
+    "trendLabel": "",
+    "trendUnit": ""
   },
   "propConfig": {
     "params.helperText": {
@@ -25,6 +28,15 @@
       "paramDirection": "input"
     },
     "params.value": {
+      "paramDirection": "input"
+    },
+    "params.trendTagPath": {
+      "paramDirection": "input"
+    },
+    "params.trendLabel": {
+      "paramDirection": "input"
+    },
+    "params.trendUnit": {
       "paramDirection": "input"
     }
   },
@@ -77,7 +89,7 @@
               "props.style.classes": {
                 "binding": {
                   "config": {
-                    "expression": "if({view.params.status} \u003d \"Danger\", \"sg/statusDanger\", if({view.params.status} \u003d \"Warning\", \"sg/statusWarning\", \"sg/statusGood\"))"
+                    "expression": "if({view.params.status} = \"Danger\", \"sg/statusDanger\", if({view.params.status} = \"Warning\", \"sg/statusWarning\", \"sg/statusGood\"))"
                   },
                   "type": "expr"
                 }
@@ -97,6 +109,50 @@
               }
             },
             "type": "ia.display.label"
+          },
+          {
+            "events": {
+              "dom": {
+                "onClick": {
+                  "config": {
+                    "script": "\ttag_path = self.view.params.trendTagPath\n\tif not tag_path:\n\t\treturn\n\n\tlabel = self.view.params.trendLabel or self.view.params.label\n\tunit = (self.view.params.trendUnit or self.view.params.unit or \"\").strip()\n\tpopup_id = \"metricTrend_\" + tag_path.replace(\"[\", \"\").replace(\"]\", \"\").replace(\"/\", \"_\").replace(\" \", \"_\")\n\n\tsystem.perspective.openPopup(\n\t\tpopup_id,\n\t\t\"Shared/MetricTrendPopup\",\n\t\tparams={\"tagPath\": tag_path, \"label\": label, \"unit\": unit},\n\t\ttitle=label,\n\t\tposition={\"right\": 24, \"top\": 120},\n\t\tshowCloseIcon=True,\n\t\tdraggable=True,\n\t\tresizable=True,\n\t\tmodal=False,\n\t\toverlayDismiss=True,\n\t\tviewportBound=True\n\t)"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                }
+              }
+            },
+            "meta": {
+              "name": "trendIcon"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "propConfig": {
+              "position.display": {
+                "binding": {
+                  "config": {
+                    "expression": "{view.params.trendTagPath} != \"\""
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "path": "material/insert_chart_outlined",
+              "style": {
+                "color": "#6f7d8c",
+                "cursor": "pointer",
+                "opacity": 0.42,
+                "padding": "2px",
+                "width": "24px"
+              },
+              "tooltip": {
+                "enabled": true,
+                "text": "Open trend"
+              }
+            },
+            "type": "ia.display.icon"
           }
         ],
         "meta": {

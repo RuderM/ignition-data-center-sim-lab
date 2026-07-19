@@ -1,0 +1,349 @@
+{
+  "custom": {
+    "hours": 1
+  },
+  "params": {
+    "label": "Trend",
+    "tagPath": "[T1]MBT1/Utility1/UtilitySource/Power/ApparentPower",
+    "unit": "kVa"
+  },
+  "propConfig": {
+    "params.label": {
+      "paramDirection": "input"
+    },
+    "params.tagPath": {
+      "paramDirection": "input"
+    },
+    "params.unit": {
+      "paramDirection": "input"
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 340,
+      "width": 520
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "title"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "config": {
+                        "expression": "{view.params.label}"
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "style": {
+                    "classes": "sg/heading",
+                    "fontSize": "1.05rem",
+                    "overflow": "hidden",
+                    "textOverflow": "ellipsis",
+                    "whiteSpace": "nowrap"
+                  }
+                },
+                "type": "ia.display.label"
+              },
+              {
+                "meta": {
+                  "name": "subtitle"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "config": {
+                        "expression": "\"Last \" + toStr({view.custom.hours}) + if({view.custom.hours} \u003d 1, \" hour\", \" hours\")"
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "style": {
+                    "classes": "sg/muted",
+                    "fontSize": "0.82rem",
+                    "overflow": "hidden",
+                    "textOverflow": "ellipsis",
+                    "whiteSpace": "nowrap"
+                  }
+                },
+                "type": "ia.display.label"
+              }
+            ],
+            "meta": {
+              "name": "heading"
+            },
+            "position": {
+              "grow": 1
+            },
+            "props": {
+              "direction": "column",
+              "style": {
+                "gap": "3px",
+                "overflow": "hidden"
+              }
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "children": [
+              {
+                "events": {
+                  "dom": {
+                    "onClick": {
+                      "config": {
+                        "script": "\tself.view.custom.hours \u003d 1"
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                },
+                "meta": {
+                  "name": "oneHourButton"
+                },
+                "position": {
+                  "basis": "52px",
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.style.backgroundColor": {
+                    "binding": {
+                      "config": {
+                        "expression": "if({view.custom.hours} \u003d 1, \"#2f80ed\", \"#ffffff\")"
+                      },
+                      "type": "expr"
+                    }
+                  },
+                  "props.style.color": {
+                    "binding": {
+                      "config": {
+                        "expression": "if({view.custom.hours} \u003d 1, \"#ffffff\", \"#16213e\")"
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "style": {
+                    "borderColor": "#d9e2ef",
+                    "borderRadius": "4px",
+                    "fontWeight": "800",
+                    "height": "32px"
+                  },
+                  "text": "1h"
+                },
+                "type": "ia.input.button"
+              },
+              {
+                "events": {
+                  "dom": {
+                    "onClick": {
+                      "config": {
+                        "script": "\tself.view.custom.hours \u003d 8"
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                },
+                "meta": {
+                  "name": "eightHourButton"
+                },
+                "position": {
+                  "basis": "52px",
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.style.backgroundColor": {
+                    "binding": {
+                      "config": {
+                        "expression": "if({view.custom.hours} \u003d 8, \"#2f80ed\", \"#ffffff\")"
+                      },
+                      "type": "expr"
+                    }
+                  },
+                  "props.style.color": {
+                    "binding": {
+                      "config": {
+                        "expression": "if({view.custom.hours} \u003d 8, \"#ffffff\", \"#16213e\")"
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "style": {
+                    "borderColor": "#d9e2ef",
+                    "borderRadius": "4px",
+                    "fontWeight": "800",
+                    "height": "32px"
+                  },
+                  "text": "8h"
+                },
+                "type": "ia.input.button"
+              }
+            ],
+            "meta": {
+              "name": "rangeButtons"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "props": {
+              "alignItems": "center",
+              "style": {
+                "gap": "6px",
+                "overflow": "visible"
+              }
+            },
+            "type": "ia.container.flex"
+          }
+        ],
+        "meta": {
+          "name": "header"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "props": {
+          "alignItems": "center",
+          "justify": "space-between",
+          "style": {
+            "gap": "16px",
+            "overflow": "hidden"
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "meta": {
+          "name": "trendChart"
+        },
+        "position": {
+          "basis": "230px",
+          "grow": 1
+        },
+        "propConfig": {
+          "props.options.yaxis.title.text": {
+            "binding": {
+              "config": {
+                "expression": "{view.params.unit}"
+              },
+              "type": "expr"
+            }
+          },
+          "props.series": {
+            "binding": {
+              "config": {
+                "expression": "runScript(\"util.trends.get_apex_line_series\", 60000, {view.params.tagPath}, {view.custom.hours}, {view.params.label})"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "options": {
+            "chart": {
+              "animations": {
+                "enabled": false
+              },
+              "toolbar": {
+                "show": false
+              },
+              "zoom": {
+                "enabled": false
+              }
+            },
+            "colors": [
+              "#2f80ed"
+            ],
+            "dataLabels": {
+              "enabled": false
+            },
+            "grid": {
+              "borderColor": "#edf2f7",
+              "strokeDashArray": 4
+            },
+            "legend": {
+              "show": false
+            },
+            "markers": {
+              "size": 0
+            },
+            "stroke": {
+              "curve": "smooth",
+              "width": 3
+            },
+            "tooltip": {
+              "theme": "light",
+              "x": {
+                "format": "HH:mm"
+              }
+            },
+            "xaxis": {
+              "labels": {
+                "style": {
+                  "colors": "#5e6b85",
+                  "fontSize": "11px"
+                }
+              },
+              "type": "datetime"
+            },
+            "yaxis": {
+              "decimalsInFloat": 1,
+              "labels": {
+                "style": {
+                  "colors": "#5e6b85",
+                  "fontSize": "11px"
+                }
+              },
+              "title": {
+                "style": {
+                  "color": "#5e6b85",
+                  "fontSize": "11px",
+                  "fontWeight": 700
+                }
+              }
+            }
+          },
+          "style": {
+            "height": "100%",
+            "width": "100%"
+          }
+        },
+        "type": "embr.chart.apex-charts"
+      }
+    ],
+    "meta": {
+      "name": "metricTrendPopup"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "classes": "sg/panel",
+        "gap": "14px",
+        "height": "100%",
+        "overflow": "hidden"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

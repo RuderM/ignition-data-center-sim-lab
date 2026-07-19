@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 96 96" role="img" aria-labelledby="title desc">
+  <title id="title">PDU one-line icon</title>
+  <desc id="desc">One-line style PDU transformer and branch distribution symbol with subtle UI glow.</desc>
+  <defs>
+    <filter id="softGlow" x="-35%" y="-35%" width="170%" height="170%">
+      <feGaussianBlur stdDeviation="2.2" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0.18 0 0 0 0 0.50 0 0 0 0 0.93 0 0 0 .45 0"/>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect x="5" y="5" width="86" height="86" rx="12" fill="#ffffff" stroke="#d9e2ef" stroke-width="2"/>
+  <path d="M20 26H34" stroke="#16213e" stroke-width="5" stroke-linecap="round"/>
+  <path d="M34 26C39 16 45 16 50 26C45 36 39 36 34 26Z" fill="none" stroke="#16213e" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M50 26C55 16 61 16 66 26C61 36 55 36 50 26Z" fill="none" stroke="#16213e" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M66 26H77V68" stroke="#16213e" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M77 44H57M77 58H57M77 72H57" stroke="#16213e" stroke-width="4" stroke-linecap="round"/>
+  <path d="M57 44H45M57 58H45M57 72H45" stroke="#2f80ed" stroke-width="4" stroke-linecap="round" filter="url(#softGlow)"/>
+  <circle cx="45" cy="44" r="4.5" fill="#18a999"/>
+  <circle cx="45" cy="58" r="4.5" fill="#18a999"/>
+  <circle cx="45" cy="72" r="4.5" fill="#18a999"/>
+  <path d="M29 47L23 61H30L20 78L24 65H18L24 47Z" fill="#f5b84b"/>
+</svg>

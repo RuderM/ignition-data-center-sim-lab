@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 96 96" role="img" aria-labelledby="title desc">
+  <title id="title">Main switchgear icon</title>
+  <desc id="desc">Abstract main switchgear icon showing a bus section and outgoing protected feeders.</desc>
+  <rect x="4" y="4" width="88" height="88" rx="12" fill="#ffffff" stroke="#d9e2ef" stroke-width="2"/>
+  <rect x="20" y="20" width="56" height="20" rx="4" fill="#16213e"/>
+  <path d="M28 31H68" stroke="#18a999" stroke-width="5" stroke-linecap="round"/>
+  <path d="M30 40V66M48 40V66M66 40V66" stroke="#16213e" stroke-width="5" stroke-linecap="round"/>
+  <rect x="22" y="62" width="16" height="16" rx="3" fill="#2f80ed"/>
+  <rect x="40" y="62" width="16" height="16" rx="3" fill="#2f80ed"/>
+  <rect x="58" y="62" width="16" height="16" rx="3" fill="#2f80ed"/>
+  <circle cx="30" cy="31" r="4" fill="#ffffff"/>
+  <circle cx="48" cy="31" r="4" fill="#ffffff"/>
+  <circle cx="66" cy="31" r="4" fill="#ffffff"/>
+  <path d="M79 23L72 38H80L68 58L72 43H65L72 23Z" fill="#f5b84b"/>
+</svg>

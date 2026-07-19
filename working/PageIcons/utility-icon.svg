@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 96 96" role="img" aria-labelledby="title desc">
+  <title id="title">Utility source icon</title>
+  <desc id="desc">Abstract utility source icon showing an incoming grid tower feeding the site.</desc>
+  <rect x="4" y="4" width="88" height="88" rx="12" fill="#ffffff" stroke="#d9e2ef" stroke-width="2"/>
+  <path d="M48 16L30 78M48 16L66 78M38 50H58M34 64H62M24 31H72M31 31L48 16L65 31" fill="none" stroke="#16213e" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M18 31C24 24 31 24 37 31C43 38 50 38 56 31C62 24 69 24 78 31" fill="none" stroke="#2f80ed" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="48" cy="18" r="6" fill="#18a999"/>
+  <path d="M55 38L47 54H56L42 76L47 59H39L47 38Z" fill="#f5b84b"/>
+</svg>
