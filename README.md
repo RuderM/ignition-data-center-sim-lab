@@ -1,4 +1,4 @@
-# ignition-env1
+# MBT1 Ignition EPMS Simulator
 
 Docker Compose development environment and source-controlled Ignition project for
 a simplified single-site EPMS built on Inductive Automation Ignition 8.3.6.
