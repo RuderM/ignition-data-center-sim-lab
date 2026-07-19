@@ -25,6 +25,22 @@ The goal is to produce working Perspective project files that match the existing
 
 When asked to create a new Perspective screen, create or edit repo files directly.
 
+## Filesystem Ownership Policy
+
+This project is edited from VS Code as host user `ubuntu`, while the Ignition
+container runs as UID/GID `2003`. New Ignition project resources must be handed
+back to Ignition ownership before completion.
+
+For any new file or directory created under `data/projects/env1-project`, set
+ownership to UID/GID `2003:2003` after creation:
+
+```sh
+sudo chown -R 2003:2003 "data/projects/env1-project/path/to/new/resource"
+```
+
+Do not change ownership of unrelated project files. The project tree uses ACLs
+to allow both `ubuntu` and UID/GID `2003` to write; preserve those ACLs.
+
 For each new screen:
 
 - Create a Perspective view folder under:
