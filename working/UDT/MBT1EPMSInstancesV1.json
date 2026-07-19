@@ -1,0 +1,233 @@
+{
+  "tags": [
+    {
+      "name": "MBT1",
+      "tagType": "Folder",
+      "documentation": "MBT1 simulated data center EPMS instance hierarchy.",
+      "tags": [
+        {
+          "name": "Utility1",
+          "tagType": "Folder",
+          "tags": [
+            {
+              "name": "UtilitySource",
+              "tagType": "UdtInstance",
+              "typeId": "UtilitySource_GridSim_Industries_GS-13K8-01-SIM",
+              "parameters": {
+                "Manufacturer": "GridSim Industries",
+                "Model": "GS-13K8-01-SIM",
+                "DeviceName": "Utility1",
+                "DevicePath": "MBT1/Utility1",
+                "ParentDevicePath": ""
+              }
+            },
+            {
+              "name": "MSG1",
+              "tagType": "Folder",
+              "tags": [
+                {
+                  "name": "MainSwitchgear",
+                  "tagType": "UdtInstance",
+                  "typeId": "MainSwitchgear_Siemens_SIVACON-MSG-480-4W-SIM",
+                  "parameters": {
+                    "Manufacturer": "Siemens",
+                    "Model": "SIVACON-MSG-480-4W-SIM",
+                    "DeviceName": "MSG1",
+                    "DevicePath": "MBT1/Utility1/MSG1",
+                    "ParentDevicePath": "MBT1/Utility1"
+                  }
+                },
+                {
+                  "name": "PDU1",
+                  "tagType": "Folder",
+                  "tags": [
+                    {
+                      "name": "PDU",
+                      "tagType": "UdtInstance",
+                      "typeId": "PDU_Vertiv_PowerBoard-PDU-480-4W-SIM",
+                      "parameters": {
+                        "Manufacturer": "Vertiv",
+                        "Model": "PowerBoard-PDU-480-4W-SIM",
+                        "DeviceName": "PDU1",
+                        "DevicePath": "MBT1/Utility1/MSG1/PDU1",
+                        "ParentDevicePath": "MBT1/Utility1/MSG1"
+                      }
+                    },
+                    {
+                      "name": "Transformer1",
+                      "tagType": "Folder",
+                      "tags": [
+                        {
+                          "name": "Transformer",
+                          "tagType": "UdtInstance",
+                          "typeId": "Transformer_Eaton_PowerDry-TX-480208-150-SIM",
+                          "parameters": {
+                            "Manufacturer": "Eaton",
+                            "Model": "PowerDry-TX-480208-150-SIM",
+                            "DeviceName": "Transformer1",
+                            "DevicePath": "MBT1/Utility1/MSG1/PDU1/Transformer1",
+                            "ParentDevicePath": "MBT1/Utility1/MSG1/PDU1"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "name": "PDUOutputBus",
+                      "tagType": "Folder",
+                      "tags": [
+                        {
+                          "name": "Way1",
+                          "tagType": "Folder",
+                          "tags": [
+                            {
+                              "name": "Way",
+                              "tagType": "UdtInstance",
+                              "typeId": "Way_Schneider_Electric_MasterPact-WAY-225-SIM",
+                              "parameters": {
+                                "Manufacturer": "Schneider Electric",
+                                "Model": "MasterPact-WAY-225-SIM",
+                                "DeviceName": "Way1",
+                                "DevicePath": "MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way1",
+                                "ParentDevicePath": "MBT1/Utility1/MSG1/PDU1/PDUOutputBus"
+                              }
+                            },
+                            {
+                              "name": "PowerMeter1",
+                              "tagType": "Folder",
+                              "tags": [
+                                {
+                                  "name": "PowerMeter",
+                                  "tagType": "UdtInstance",
+                                  "typeId": "PowerMeter_Siemens_SENTRON-PMX-480-SIM",
+                                  "parameters": {
+                                    "Manufacturer": "Siemens",
+                                    "Model": "SENTRON-PMX-480-SIM",
+                                    "DeviceName": "PowerMeter1",
+                                    "DevicePath": "MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way1/PowerMeter1",
+                                    "ParentDevicePath": "MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way1"
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "name": "Way2",
+                          "tagType": "Folder",
+                          "tags": [
+                            {
+                              "name": "Way",
+                              "tagType": "UdtInstance",
+                              "typeId": "Way_Schneider_Electric_MasterPact-WAY-225-SIM",
+                              "parameters": {
+                                "Manufacturer": "Schneider Electric",
+                                "Model": "MasterPact-WAY-225-SIM",
+                                "DeviceName": "Way2",
+                                "DevicePath": "MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way2",
+                                "ParentDevicePath": "MBT1/Utility1/MSG1/PDU1/PDUOutputBus"
+                              }
+                            },
+                            {
+                              "name": "PowerMeter2",
+                              "tagType": "Folder",
+                              "tags": [
+                                {
+                                  "name": "PowerMeter",
+                                  "tagType": "UdtInstance",
+                                  "typeId": "PowerMeter_Siemens_SENTRON-PMX-480-SIM",
+                                  "parameters": {
+                                    "Manufacturer": "Siemens",
+                                    "Model": "SENTRON-PMX-480-SIM",
+                                    "DeviceName": "PowerMeter2",
+                                    "DevicePath": "MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way2/PowerMeter2",
+                                    "ParentDevicePath": "MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way2"
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "name": "Way3",
+                          "tagType": "Folder",
+                          "tags": [
+                            {
+                              "name": "Way",
+                              "tagType": "UdtInstance",
+                              "typeId": "Way_Schneider_Electric_MasterPact-WAY-225-SIM",
+                              "parameters": {
+                                "Manufacturer": "Schneider Electric",
+                                "Model": "MasterPact-WAY-225-SIM",
+                                "DeviceName": "Way3",
+                                "DevicePath": "MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way3",
+                                "ParentDevicePath": "MBT1/Utility1/MSG1/PDU1/PDUOutputBus"
+                              }
+                            },
+                            {
+                              "name": "PowerMeter3",
+                              "tagType": "Folder",
+                              "tags": [
+                                {
+                                  "name": "PowerMeter",
+                                  "tagType": "UdtInstance",
+                                  "typeId": "PowerMeter_Siemens_SENTRON-PMX-480-SIM",
+                                  "parameters": {
+                                    "Manufacturer": "Siemens",
+                                    "Model": "SENTRON-PMX-480-SIM",
+                                    "DeviceName": "PowerMeter3",
+                                    "DevicePath": "MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way3/PowerMeter3",
+                                    "ParentDevicePath": "MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way3"
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "name": "Way4",
+                          "tagType": "Folder",
+                          "tags": [
+                            {
+                              "name": "Way",
+                              "tagType": "UdtInstance",
+                              "typeId": "Way_Schneider_Electric_MasterPact-WAY-225-SIM",
+                              "parameters": {
+                                "Manufacturer": "Schneider Electric",
+                                "Model": "MasterPact-WAY-225-SIM",
+                                "DeviceName": "Way4",
+                                "DevicePath": "MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way4",
+                                "ParentDevicePath": "MBT1/Utility1/MSG1/PDU1/PDUOutputBus"
+                              }
+                            },
+                            {
+                              "name": "PowerMeter4",
+                              "tagType": "Folder",
+                              "tags": [
+                                {
+                                  "name": "PowerMeter",
+                                  "tagType": "UdtInstance",
+                                  "typeId": "PowerMeter_Siemens_SENTRON-PMX-480-SIM",
+                                  "parameters": {
+                                    "Manufacturer": "Siemens",
+                                    "Model": "SENTRON-PMX-480-SIM",
+                                    "DeviceName": "PowerMeter4",
+                                    "DevicePath": "MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way4/PowerMeter4",
+                                    "ParentDevicePath": "MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way4"
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
