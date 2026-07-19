@@ -4,6 +4,14 @@
       "title": "",
       "viewPath": "Exchange/Responsive Nav/Overview"
     },
+    "/MSG": {
+      "title": "",
+      "viewPath": "DataCenter/MSG"
+    },
+    "/PDU": {
+      "title": "",
+      "viewPath": "DataCenter/PDU"
+    },
     "/Trends": {
       "title": "",
       "viewPath": "DataCenter/Trends"

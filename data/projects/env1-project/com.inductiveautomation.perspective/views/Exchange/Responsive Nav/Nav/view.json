@@ -279,9 +279,9 @@
                       "classes": "",
                       "color": ""
                     },
-                    "label": "Nav Link 2",
+                    "label": "MSG",
                     "showArrow": false,
-                    "target": "/nav-section-repeater/nav-link-2"
+                    "target": "/MSG"
                   },
                   {
                     "icon": "",
@@ -290,9 +290,9 @@
                       "classes": "",
                       "color": ""
                     },
-                    "label": "Nav Link 3",
+                    "label": "PDU",
                     "showArrow": false,
-                    "target": "/nav-section-repeater/nav-link-3"
+                    "target": "/PDU"
                   }
                 ],
                 "label": "Nav Section Repeater",

@@ -1,0 +1,90 @@
+Project Objective
+Design and build a simplified, single-site Electrical Power Monitoring System (EPMS) for a simulated data center. The project will demonstrate a complete industrial automation stack, including simulated electrical equipment, MQTT-based data transport, an Ignition scale-out architecture, reusable equipment models, historical data storage, alarming, visualization, scripting, containerized infrastructure, and source control.
+
+The system is intended as a focused hobby and learning project rather than a detailed electrical-engineering model. Its purpose is to represent the essential operation and monitoring of a data center power-distribution system while remaining small enough to complete and polish.
+
+Simulated Electrical System
+The initial system will contain the following major equipment:
+
+One utility or switchyard source
+One main switchgear lineup
+One standby generator
+One UPS system
+Two or three power distribution units
+Several remote switchboards, or RSBs
+A small number of feeders or ways beneath each distribution device
+Each equipment type will expose only its most important operating and power-monitoring tags. Typical values will include:
+
+Device availability and communication status
+Breaker or operating state
+Voltage, current, frequency and power factor
+Real power in kW and apparent power in kVA
+Energy consumption in kWh
+Capacity and load percentage
+Alarm and fault status
+Generator fuel, runtime and start status
+UPS load, battery charge, runtime and bypass status
+The simulator will maintain realistic relationships between devices. Downstream feeder loads will roll up into their parent RSBs, PDUs, UPS and switchgear rather than behaving as unrelated random values.
+
+Technical Architecture
+The project will use a containerized, scale-out architecture managed with Docker Compose.
+
+Equipment Simulator
+	↓
+MQTT Broker
+	↓
+Ignition Backend / Tag Provider
+	↓
+Ignition Perspective Frontend
+	↓
+SQL Historian Database
+Ignition UDTs will represent the reusable equipment models. MQTT topics and tag paths will follow the same equipment hierarchy so that additional devices can be added with minimal configuration.
+
+The system will include:
+
+Ignition Perspective
+Ignition UDTs and tag event scripting
+MQTT broker and structured topic namespace
+SQL database for tag history and application data
+Alarm configuration and alarm history
+Docker Compose infrastructure
+Git and GitHub source control
+Configuration files and project documentation stored with the code
+User Interface
+The Perspective application will contain no more than five primary screens:
+
+Facility Overview
+Simplified electrical one-line, total demand, source status, active alarms and major equipment health.
+Alarm Status
+Active alarms, acknowledged alarms, alarm history, severity and equipment filters.
+Distribution Detail
+Switchgear, UPS and major distribution measurements, breaker states, capacity and phase conditions.
+PDU / RSB Detail
+Reusable drill-down screen showing the selected device, its feeders, utilization and recent trends.
+Generator or Energy History
+Generator operating details or facility-level historical demand, energy consumption and peak-load trends.
+Popups may provide additional detail without increasing the primary screen count.
+
+Simulation Strategy
+The recommended first phase is an Ignition-native simulator using memory tags and gateway scripts. This will minimize dependencies and allow the UDTs, MQTT structure, alarms, historian and Perspective application to be developed quickly.
+
+The simulation should be implemented as a separate logical layer rather than embedding random-value expressions throughout the UDTs. A central simulation script should calculate device states, load profiles, rollups and fault scenarios.
+
+A second-phase enhancement may replace the internal simulator with a standalone C# Modbus TCP simulator. This would create a more realistic external-device boundary and provide additional experience with protocol mapping, communication failures and independent service deployment. It should remain an optional extension rather than a requirement for the initial release.
+
+Initial Success Criteria
+The first complete version will be considered successful when it can:
+
+Start the full infrastructure through Docker Compose
+Simulate normal data center electrical operation
+Publish or transport equipment data through MQTT
+Instantiate reusable UDTs for each equipment class
+Display live equipment status through Perspective
+Generate and acknowledge realistic alarms
+Store and trend historical power data
+Simulate at least three operating scenarios, including normal load, utility failure and feeder overload
+Rebuild the project from documented source-controlled configuration
+Scope Guidance
+Prioritize a small, complete and reusable system over a large device count. Begin with approximately five equipment classes, two or three PDUs or RSBs and three to five feeders per distribution device. Avoid detailed protection logic, advanced load-flow calculations, complex redundancy and predictive analytics until the core architecture is stable.
+
+The final result should demonstrate a compact but complete industrial application: infrastructure, simulation, communications, equipment modeling, backend logic, historian, alarming and a polished operator interface.

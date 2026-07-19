@@ -1,0 +1,965 @@
+{
+  "custom": {},
+  "params": {
+    "baseTagPath": "[T1]MBT1/Utility1/MSG1/MainSwitchgear"
+  },
+  "propConfig": {
+    "params.baseTagPath": {
+      "paramDirection": "input"
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 920,
+      "width": 1600
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "screenEyebrow"
+            },
+            "props": {
+              "style": {
+                "classes": "sg/eyebrow"
+              },
+              "text": "MAIN DISTRIBUTION"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "screenTitle"
+            },
+            "props": {
+              "style": {
+                "classes": "sg/heading",
+                "fontSize": "3.2rem",
+                "overflow": "hidden",
+                "overflowWrap": "break-word",
+                "whiteSpace": "normal"
+              },
+              "text": "Main Switchgear"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "boundDevice"
+                },
+                "position": {
+                  "basis": "340px",
+                  "grow": 1
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "config": {
+                        "expression": "\"Bound Device: \" + {view.params.baseTagPath}"
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "style": {
+                    "classes": "sg/muted",
+                    "fontSize": "0.9rem",
+                    "fontWeight": "700",
+                    "overflow": "hidden",
+                    "textOverflow": "ellipsis",
+                    "whiteSpace": "nowrap"
+                  }
+                },
+                "type": "ia.display.label"
+              }
+            ],
+            "meta": {
+              "name": "headerDetails"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "props": {
+              "alignItems": "center",
+              "justify": "space-between",
+              "style": {
+                "gap": "12px",
+                "overflow": "visible"
+              },
+              "wrap": "wrap"
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "overallStatus"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.style.classes": {
+                    "binding": {
+                      "config": {
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/CommGood\") \u003d false, \"sg/statusDanger\", if(tag({view.params.baseTagPath} + \"/Status/Faulted\") \u003d true, \"sg/statusDanger\", if(tag({view.params.baseTagPath} + \"/Status/Available\") \u003d false, \"sg/statusWarning\", \"sg/statusGood\")))"
+                      },
+                      "type": "expr"
+                    }
+                  },
+                  "props.text": {
+                    "binding": {
+                      "config": {
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/CommGood\") \u003d false, \"Overall: COMM LOSS\", if(tag({view.params.baseTagPath} + \"/Status/Faulted\") \u003d true, \"Overall: FAULTED\", if(tag({view.params.baseTagPath} + \"/Status/Available\") \u003d false, \"Overall: UNAVAILABLE\", \"Overall: NORMAL\")))"
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "style": {
+                    "whiteSpace": "nowrap"
+                  }
+                },
+                "type": "ia.display.label"
+              },
+              {
+                "meta": {
+                  "name": "availableStatus"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.style.classes": {
+                    "binding": {
+                      "config": {
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/Available\") \u003d true, \"sg/statusGood\", \"sg/statusWarning\")"
+                      },
+                      "type": "expr"
+                    }
+                  },
+                  "props.text": {
+                    "binding": {
+                      "config": {
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/Available\") \u003d true, \"Available: YES\", \"Available: NO\")"
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "style": {
+                    "whiteSpace": "nowrap"
+                  }
+                },
+                "type": "ia.display.label"
+              },
+              {
+                "meta": {
+                  "name": "communicationStatus"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.style.classes": {
+                    "binding": {
+                      "config": {
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/CommGood\") \u003d true, \"sg/statusGood\", \"sg/statusDanger\")"
+                      },
+                      "type": "expr"
+                    }
+                  },
+                  "props.text": {
+                    "binding": {
+                      "config": {
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/CommGood\") \u003d true, \"Communication: GOOD\", \"Communication: LOSS\")"
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "style": {
+                    "whiteSpace": "nowrap"
+                  }
+                },
+                "type": "ia.display.label"
+              },
+              {
+                "meta": {
+                  "name": "faultStatus"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.style.classes": {
+                    "binding": {
+                      "config": {
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/Faulted\") \u003d true, \"sg/statusDanger\", \"sg/statusGood\")"
+                      },
+                      "type": "expr"
+                    }
+                  },
+                  "props.text": {
+                    "binding": {
+                      "config": {
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/Faulted\") \u003d true, \"Fault State: ACTIVE\", \"Fault State: NONE\")"
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "style": {
+                    "whiteSpace": "nowrap"
+                  }
+                },
+                "type": "ia.display.label"
+              },
+              {
+                "meta": {
+                  "name": "mainBreakerStatus"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.style.classes": {
+                    "binding": {
+                      "config": {
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Breaker/MainClosed\") \u003d true, \"sg/statusGood\", \"sg/statusWarning\")"
+                      },
+                      "type": "expr"
+                    }
+                  },
+                  "props.text": {
+                    "binding": {
+                      "config": {
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Breaker/MainClosed\") \u003d true, \"Main Breaker: CLOSED\", \"Main Breaker: OPEN\")"
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "style": {
+                    "whiteSpace": "nowrap"
+                  }
+                },
+                "type": "ia.display.label"
+              },
+              {
+                "meta": {
+                  "name": "mainTripStatus"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.style.classes": {
+                    "binding": {
+                      "config": {
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Breaker/MainTripped\") \u003d true, \"sg/statusDanger\", \"sg/statusGood\")"
+                      },
+                      "type": "expr"
+                    }
+                  },
+                  "props.text": {
+                    "binding": {
+                      "config": {
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Breaker/MainTripped\") \u003d true, \"Main Trip: ACTIVE\", \"Main Trip: CLEAR\")"
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "style": {
+                    "whiteSpace": "nowrap"
+                  }
+                },
+                "type": "ia.display.label"
+              },
+              {
+                "meta": {
+                  "name": "groundFaultStatus"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.style.classes": {
+                    "binding": {
+                      "config": {
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Alarms/GroundFault\") \u003d true, \"sg/statusDanger\", \"sg/statusGood\")"
+                      },
+                      "type": "expr"
+                    }
+                  },
+                  "props.text": {
+                    "binding": {
+                      "config": {
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Alarms/GroundFault\") \u003d true, \"Ground Fault: ACTIVE\", \"Ground Fault: CLEAR\")"
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "style": {
+                    "whiteSpace": "nowrap"
+                  }
+                },
+                "type": "ia.display.label"
+              }
+            ],
+            "meta": {
+              "name": "statusPills"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "props": {
+              "alignItems": "center",
+              "style": {
+                "gap": "12px",
+                "overflow": "visible"
+              },
+              "wrap": "wrap"
+            },
+            "type": "ia.container.flex"
+          }
+        ],
+        "meta": {
+          "name": "header"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "props": {
+          "direction": "column",
+          "style": {
+            "classes": "sg/hero",
+            "gap": "18px",
+            "overflow": "visible"
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "summaryEyebrow"
+            },
+            "position": {
+              "basis": "190px",
+              "shrink": 0
+            },
+            "props": {
+              "style": {
+                "classes": "sg/eyebrow"
+              },
+              "text": "SWITCHGEAR SUMMARY"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "summaryStatement"
+            },
+            "position": {
+              "basis": "520px",
+              "grow": 1
+            },
+            "props": {
+              "style": {
+                "color": "#16213e",
+                "fontSize": "1.1rem",
+                "fontWeight": "600",
+                "overflowWrap": "break-word",
+                "whiteSpace": "normal"
+              },
+              "text": "MSG1 receives utility power from Utility1 and distributes 480 V power to downstream PDU equipment."
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "deviceMetadata"
+            },
+            "position": {
+              "basis": "430px",
+              "grow": 1
+            },
+            "props": {
+              "style": {
+                "classes": "sg/muted",
+                "fontSize": "0.95rem",
+                "fontWeight": "700",
+                "overflow": "hidden",
+                "textOverflow": "ellipsis",
+                "whiteSpace": "nowrap"
+              },
+              "text": "Manufacturer: Siemens   Model: SIVACON-MSG-480-4W-SIM"
+            },
+            "type": "ia.display.label"
+          }
+        ],
+        "meta": {
+          "name": "equipmentSummary"
+        },
+        "position": {
+          "display": false,
+          "shrink": 0
+        },
+        "props": {
+          "alignItems": "center",
+          "justify": "space-between",
+          "style": {
+            "classes": "sg/panel",
+            "gap": "18px",
+            "overflow": "hidden"
+          },
+          "wrap": "wrap"
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "meta": {
+          "name": "liveElectricalHeading"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "props": {
+          "style": {
+            "classes": "sg/eyebrow"
+          },
+          "text": "Live Electrical Metrics"
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "busVoltageCard"
+            },
+            "position": {
+              "basis": "260px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.params.progress": {
+                "binding": {
+                  "config": {
+                    "expression": "tag({view.params.baseTagPath} + \"/Electrical/BusVoltageLLAvg\") / 480 * 100"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.status": {
+                "binding": {
+                  "config": {
+                    "expression": "if(tag({view.params.baseTagPath} + \"/Electrical/BusVoltageLLAvg\") \u003c 432, \"Warning\", \"Good\")"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.value": {
+                "binding": {
+                  "config": {
+                    "expression": "numberFormat(tag({view.params.baseTagPath} + \"/Electrical/BusVoltageLLAvg\"), \"#,##0\")"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "params": {
+                "helperText": "Average bus line-to-line voltage",
+                "label": "Bus Voltage",
+                "unit": " V"
+              },
+              "path": "Shared/MetricCard",
+              "style": {
+                "height": "190px"
+              }
+            },
+            "type": "ia.display.view"
+          },
+          {
+            "meta": {
+              "name": "busCurrentCard"
+            },
+            "position": {
+              "basis": "260px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.params.progress": {
+                "binding": {
+                  "config": {
+                    "expression": "tag({view.params.baseTagPath} + \"/Electrical/BusCurrentAvg\") / tag({view.params.baseTagPath} + \"/Capacity/RatedCurrent\") * 100"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.value": {
+                "binding": {
+                  "config": {
+                    "expression": "numberFormat(tag({view.params.baseTagPath} + \"/Electrical/BusCurrentAvg\"), \"#,##0\")"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "params": {
+                "helperText": "Average main switchgear bus current",
+                "label": "Bus Current",
+                "status": "Good",
+                "unit": " A"
+              },
+              "path": "Shared/MetricCard",
+              "style": {
+                "height": "190px"
+              }
+            },
+            "type": "ia.display.view"
+          },
+          {
+            "meta": {
+              "name": "frequencyCard"
+            },
+            "position": {
+              "basis": "260px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.params.progress": {
+                "binding": {
+                  "config": {
+                    "expression": "(tag({view.params.baseTagPath} + \"/Electrical/Frequency\") - 55) / 10 * 100"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.status": {
+                "binding": {
+                  "config": {
+                    "expression": "if(tag({view.params.baseTagPath} + \"/Electrical/Frequency\") \u003c 59.5, \"Warning\", if(tag({view.params.baseTagPath} + \"/Electrical/Frequency\") \u003e 60.5, \"Warning\", \"Good\"))"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.value": {
+                "binding": {
+                  "config": {
+                    "expression": "numberFormat(tag({view.params.baseTagPath} + \"/Electrical/Frequency\"), \"0.0\")"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "params": {
+                "helperText": "Main switchgear bus frequency",
+                "label": "Frequency",
+                "unit": " Hz"
+              },
+              "path": "Shared/MetricCard",
+              "style": {
+                "height": "190px"
+              }
+            },
+            "type": "ia.display.view"
+          },
+          {
+            "meta": {
+              "name": "realPowerCard"
+            },
+            "position": {
+              "basis": "260px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.params.progress": {
+                "binding": {
+                  "config": {
+                    "expression": "tag({view.params.baseTagPath} + \"/Power/RealPower\") / 2000 * 100"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.value": {
+                "binding": {
+                  "config": {
+                    "expression": "numberFormat(tag({view.params.baseTagPath} + \"/Power/RealPower\"), \"#,##0\")"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "params": {
+                "helperText": "Total real power through the switchgear",
+                "label": "Real Power",
+                "status": "Good",
+                "unit": " kW"
+              },
+              "path": "Shared/MetricCard",
+              "style": {
+                "height": "190px"
+              }
+            },
+            "type": "ia.display.view"
+          },
+          {
+            "meta": {
+              "name": "apparentPowerCard"
+            },
+            "position": {
+              "basis": "260px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.params.progress": {
+                "binding": {
+                  "config": {
+                    "expression": "tag({view.params.baseTagPath} + \"/Power/ApparentPower\") / 2200 * 100"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.value": {
+                "binding": {
+                  "config": {
+                    "expression": "numberFormat(tag({view.params.baseTagPath} + \"/Power/ApparentPower\"), \"#,##0\")"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "params": {
+                "helperText": "Total apparent power through the switchgear",
+                "label": "Apparent Power",
+                "status": "Good",
+                "unit": " kVA"
+              },
+              "path": "Shared/MetricCard",
+              "style": {
+                "height": "190px"
+              }
+            },
+            "type": "ia.display.view"
+          },
+          {
+            "meta": {
+              "name": "powerFactorCard"
+            },
+            "position": {
+              "basis": "260px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.params.progress": {
+                "binding": {
+                  "config": {
+                    "expression": "tag({view.params.baseTagPath} + \"/Power/PowerFactor\") * 100"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.status": {
+                "binding": {
+                  "config": {
+                    "expression": "if(tag({view.params.baseTagPath} + \"/Power/PowerFactor\") \u003c 0.9, \"Warning\", \"Good\")"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.value": {
+                "binding": {
+                  "config": {
+                    "expression": "numberFormat(tag({view.params.baseTagPath} + \"/Power/PowerFactor\"), \"0.00\")"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "params": {
+                "helperText": "Main switchgear power factor",
+                "label": "Power Factor",
+                "unit": ""
+              },
+              "path": "Shared/MetricCard",
+              "style": {
+                "height": "190px"
+              }
+            },
+            "type": "ia.display.view"
+          },
+          {
+            "meta": {
+              "name": "totalEnergyCard"
+            },
+            "position": {
+              "basis": "260px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.params.value": {
+                "binding": {
+                  "config": {
+                    "expression": "numberFormat(tag({view.params.baseTagPath} + \"/Energy/TotalEnergy\"), \"#,##0\")"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "params": {
+                "helperText": "Accumulated energy through the switchgear",
+                "label": "Total Energy",
+                "progress": 0,
+                "status": "Good",
+                "unit": " kWh"
+              },
+              "path": "Shared/MetricCard",
+              "style": {
+                "height": "190px"
+              }
+            },
+            "type": "ia.display.view"
+          },
+          {
+            "meta": {
+              "name": "ratedCurrentCard"
+            },
+            "position": {
+              "basis": "260px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.params.value": {
+                "binding": {
+                  "config": {
+                    "expression": "numberFormat(tag({view.params.baseTagPath} + \"/Capacity/RatedCurrent\"), \"#,##0\")"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "params": {
+                "helperText": "Configured main switchgear current rating",
+                "label": "Rated Current",
+                "progress": 0,
+                "status": "Good",
+                "unit": " A"
+              },
+              "path": "Shared/MetricCard",
+              "style": {
+                "height": "190px"
+              }
+            },
+            "type": "ia.display.view"
+          },
+          {
+            "meta": {
+              "name": "loadPctCard"
+            },
+            "position": {
+              "basis": "260px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.params.progress": {
+                "binding": {
+                  "config": {
+                    "expression": "tag({view.params.baseTagPath} + \"/Capacity/LoadPct\")"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.status": {
+                "binding": {
+                  "config": {
+                    "expression": "if(tag({view.params.baseTagPath} + \"/Capacity/LoadPct\") \u003e\u003d 100, \"Danger\", if(tag({view.params.baseTagPath} + \"/Capacity/LoadPct\") \u003e\u003d 85, \"Warning\", \"Good\"))"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.value": {
+                "binding": {
+                  "config": {
+                    "expression": "numberFormat(tag({view.params.baseTagPath} + \"/Capacity/LoadPct\"), \"0\")"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "params": {
+                "helperText": "Bus current as a percentage of rated current",
+                "label": "Switchgear Load",
+                "unit": "%"
+              },
+              "path": "Shared/MetricCard",
+              "style": {
+                "height": "190px"
+              }
+            },
+            "type": "ia.display.view"
+          }
+        ],
+        "meta": {
+          "name": "metricGrid"
+        },
+        "props": {
+          "alignContent": "flex-start",
+          "style": {
+            "gap": "18px",
+            "overflow": "visible"
+          },
+          "wrap": "wrap"
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "trendHeading"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "props": {
+              "style": {
+                "classes": "sg/heading",
+                "fontSize": "1.35rem"
+              },
+              "text": "Switchgear Load"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "trendSubheading"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "props": {
+              "style": {
+                "classes": "sg/muted",
+                "fontSize": "0.95rem"
+              },
+              "text": "Current demand and bus utilization from live UDT values."
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "currentLoad"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"Current real power: \" + numberFormat(tag({view.params.baseTagPath} + \"/Power/RealPower\"), \"#,##0\") + \" kW\""
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "color": "#16213e",
+                "fontSize": "1.1rem",
+                "fontWeight": "700"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "loadProgress"
+            },
+            "position": {
+              "basis": "14px",
+              "shrink": 0
+            },
+            "propConfig": {
+              "props.value": {
+                "binding": {
+                  "config": {
+                    "expression": "tag({view.params.baseTagPath} + \"/Capacity/LoadPct\")"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "bar": {
+                "color": "#2f80ed"
+              },
+              "style": {
+                "height": "14px"
+              },
+              "track": {
+                "color": "#d9e2ef"
+              }
+            },
+            "type": "ia.display.progress"
+          }
+        ],
+        "meta": {
+          "name": "loadTrendPanel"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "props": {
+          "direction": "column",
+          "style": {
+            "classes": "sg/panel",
+            "gap": "14px",
+            "overflow": "hidden"
+          }
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "meta": {
+      "name": "msgPage"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "classes": "sg/page",
+        "gap": "24px",
+        "minHeight": "100vh"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

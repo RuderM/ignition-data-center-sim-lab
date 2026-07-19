@@ -1,0 +1,1005 @@
+{
+  "custom": {},
+  "params": {
+    "baseTagPath": "[T1]MBT1/Utility1/MSG1/PDU1/PDU"
+  },
+  "propConfig": {
+    "params.baseTagPath": {
+      "paramDirection": "input"
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 920,
+      "width": 1600
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "screenEyebrow"
+            },
+            "props": {
+              "style": {
+                "classes": "sg/eyebrow"
+              },
+              "text": "DISTRIBUTION DETAIL"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "screenTitle"
+            },
+            "props": {
+              "style": {
+                "classes": "sg/heading",
+                "fontSize": "3.2rem",
+                "overflow": "hidden",
+                "overflowWrap": "break-word",
+                "whiteSpace": "normal"
+              },
+              "text": "Power Distribution Unit"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "boundDevice"
+                },
+                "position": {
+                  "basis": "340px",
+                  "grow": 1
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "config": {
+                        "expression": "\"Bound Device: \" + {view.params.baseTagPath}"
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "style": {
+                    "classes": "sg/muted",
+                    "fontSize": "0.9rem",
+                    "fontWeight": "700",
+                    "overflow": "hidden",
+                    "textOverflow": "ellipsis",
+                    "whiteSpace": "nowrap"
+                  }
+                },
+                "type": "ia.display.label"
+              }
+            ],
+            "meta": {
+              "name": "headerDetails"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "props": {
+              "alignItems": "center",
+              "justify": "space-between",
+              "style": {
+                "gap": "12px",
+                "overflow": "visible"
+              },
+              "wrap": "wrap"
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "overallStatus"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.style.classes": {
+                    "binding": {
+                      "config": {
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/CommGood\") \u003d false, \"sg/statusDanger\", if(tag({view.params.baseTagPath} + \"/Status/Faulted\") \u003d true, \"sg/statusDanger\", if(tag({view.params.baseTagPath} + \"/Status/Available\") \u003d false, \"sg/statusWarning\", \"sg/statusGood\")))"
+                      },
+                      "type": "expr"
+                    }
+                  },
+                  "props.text": {
+                    "binding": {
+                      "config": {
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/CommGood\") \u003d false, \"Overall: COMM LOSS\", if(tag({view.params.baseTagPath} + \"/Status/Faulted\") \u003d true, \"Overall: FAULTED\", if(tag({view.params.baseTagPath} + \"/Status/Available\") \u003d false, \"Overall: UNAVAILABLE\", \"Overall: NORMAL\")))"
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "style": {
+                    "whiteSpace": "nowrap"
+                  }
+                },
+                "type": "ia.display.label"
+              },
+              {
+                "meta": {
+                  "name": "availableStatus"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.style.classes": {
+                    "binding": {
+                      "config": {
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/Available\") \u003d true, \"sg/statusGood\", \"sg/statusWarning\")"
+                      },
+                      "type": "expr"
+                    }
+                  },
+                  "props.text": {
+                    "binding": {
+                      "config": {
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/Available\") \u003d true, \"Available: YES\", \"Available: NO\")"
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "style": {
+                    "whiteSpace": "nowrap"
+                  }
+                },
+                "type": "ia.display.label"
+              },
+              {
+                "meta": {
+                  "name": "communicationStatus"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.style.classes": {
+                    "binding": {
+                      "config": {
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/CommGood\") \u003d true, \"sg/statusGood\", \"sg/statusDanger\")"
+                      },
+                      "type": "expr"
+                    }
+                  },
+                  "props.text": {
+                    "binding": {
+                      "config": {
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/CommGood\") \u003d true, \"Communication: GOOD\", \"Communication: LOSS\")"
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "style": {
+                    "whiteSpace": "nowrap"
+                  }
+                },
+                "type": "ia.display.label"
+              },
+              {
+                "meta": {
+                  "name": "faultStatus"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.style.classes": {
+                    "binding": {
+                      "config": {
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/Faulted\") \u003d true, \"sg/statusDanger\", \"sg/statusGood\")"
+                      },
+                      "type": "expr"
+                    }
+                  },
+                  "props.text": {
+                    "binding": {
+                      "config": {
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/Faulted\") \u003d true, \"Fault State: ACTIVE\", \"Fault State: NONE\")"
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "style": {
+                    "whiteSpace": "nowrap"
+                  }
+                },
+                "type": "ia.display.label"
+              },
+              {
+                "meta": {
+                  "name": "inputBreakerStatus"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.style.classes": {
+                    "binding": {
+                      "config": {
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Breaker/InputClosed\") \u003d true, \"sg/statusGood\", \"sg/statusWarning\")"
+                      },
+                      "type": "expr"
+                    }
+                  },
+                  "props.text": {
+                    "binding": {
+                      "config": {
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Breaker/InputClosed\") \u003d true, \"Input Breaker: CLOSED\", \"Input Breaker: OPEN\")"
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "style": {
+                    "whiteSpace": "nowrap"
+                  }
+                },
+                "type": "ia.display.label"
+              },
+              {
+                "meta": {
+                  "name": "inputTripStatus"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.style.classes": {
+                    "binding": {
+                      "config": {
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Breaker/InputTripped\") \u003d true, \"sg/statusDanger\", \"sg/statusGood\")"
+                      },
+                      "type": "expr"
+                    }
+                  },
+                  "props.text": {
+                    "binding": {
+                      "config": {
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Breaker/InputTripped\") \u003d true, \"Input Trip: ACTIVE\", \"Input Trip: CLEAR\")"
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "style": {
+                    "whiteSpace": "nowrap"
+                  }
+                },
+                "type": "ia.display.label"
+              },
+              {
+                "meta": {
+                  "name": "overloadStatus"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.style.classes": {
+                    "binding": {
+                      "config": {
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Alarms/Overload\") \u003d true, \"sg/statusDanger\", \"sg/statusGood\")"
+                      },
+                      "type": "expr"
+                    }
+                  },
+                  "props.text": {
+                    "binding": {
+                      "config": {
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Alarms/Overload\") \u003d true, \"Overload: ACTIVE\", \"Overload: CLEAR\")"
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "style": {
+                    "whiteSpace": "nowrap"
+                  }
+                },
+                "type": "ia.display.label"
+              }
+            ],
+            "meta": {
+              "name": "statusPills"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "props": {
+              "alignItems": "center",
+              "style": {
+                "gap": "12px",
+                "overflow": "visible"
+              },
+              "wrap": "wrap"
+            },
+            "type": "ia.container.flex"
+          }
+        ],
+        "meta": {
+          "name": "header"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "props": {
+          "direction": "column",
+          "style": {
+            "classes": "sg/hero",
+            "gap": "18px",
+            "overflow": "visible"
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "summaryEyebrow"
+            },
+            "position": {
+              "basis": "190px",
+              "shrink": 0
+            },
+            "props": {
+              "style": {
+                "classes": "sg/eyebrow"
+              },
+              "text": "PDU SUMMARY"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "summaryStatement"
+            },
+            "position": {
+              "basis": "520px",
+              "grow": 1
+            },
+            "props": {
+              "style": {
+                "color": "#16213e",
+                "fontSize": "1.1rem",
+                "fontWeight": "600",
+                "overflowWrap": "break-word",
+                "whiteSpace": "normal"
+              },
+              "text": "PDU1 is fed from MSG1 and supplies transformed downstream output bus ways for remote load distribution."
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "deviceMetadata"
+            },
+            "position": {
+              "basis": "430px",
+              "grow": 1
+            },
+            "props": {
+              "style": {
+                "classes": "sg/muted",
+                "fontSize": "0.95rem",
+                "fontWeight": "700",
+                "overflow": "hidden",
+                "textOverflow": "ellipsis",
+                "whiteSpace": "nowrap"
+              },
+              "text": "Manufacturer: Vertiv   Model: PowerBoard-PDU-480-4W-SIM"
+            },
+            "type": "ia.display.label"
+          }
+        ],
+        "meta": {
+          "name": "equipmentSummary"
+        },
+        "position": {
+          "display": false,
+          "shrink": 0
+        },
+        "props": {
+          "alignItems": "center",
+          "justify": "space-between",
+          "style": {
+            "classes": "sg/panel",
+            "gap": "18px",
+            "overflow": "hidden"
+          },
+          "wrap": "wrap"
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "meta": {
+          "name": "liveElectricalHeading"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "props": {
+          "style": {
+            "classes": "sg/eyebrow"
+          },
+          "text": "Live Electrical Metrics"
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "inputVoltageCard"
+            },
+            "position": {
+              "basis": "260px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.params.progress": {
+                "binding": {
+                  "config": {
+                    "expression": "tag({view.params.baseTagPath} + \"/Electrical/InputVoltageLLAvg\") / 480 * 100"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.value": {
+                "binding": {
+                  "config": {
+                    "expression": "numberFormat(tag({view.params.baseTagPath} + \"/Electrical/InputVoltageLLAvg\"), \"#,##0\")"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "params": {
+                "helperText": "Average PDU input line-to-line voltage",
+                "label": "Input Voltage",
+                "status": "Good",
+                "unit": " V"
+              },
+              "path": "Shared/MetricCard",
+              "style": {
+                "height": "190px"
+              }
+            },
+            "type": "ia.display.view"
+          },
+          {
+            "meta": {
+              "name": "outputVoltageCard"
+            },
+            "position": {
+              "basis": "260px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.params.progress": {
+                "binding": {
+                  "config": {
+                    "expression": "tag({view.params.baseTagPath} + \"/Electrical/OutputVoltageLLAvg\") / 208 * 100"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.status": {
+                "binding": {
+                  "config": {
+                    "expression": "if(tag({view.params.baseTagPath} + \"/Electrical/OutputVoltageLLAvg\") \u003c 187, \"Warning\", \"Good\")"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.value": {
+                "binding": {
+                  "config": {
+                    "expression": "numberFormat(tag({view.params.baseTagPath} + \"/Electrical/OutputVoltageLLAvg\"), \"#,##0\")"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "params": {
+                "helperText": "Average output line-to-line voltage after transformation",
+                "label": "Output Voltage",
+                "unit": " V"
+              },
+              "path": "Shared/MetricCard",
+              "style": {
+                "height": "190px"
+              }
+            },
+            "type": "ia.display.view"
+          },
+          {
+            "meta": {
+              "name": "outputCurrentCard"
+            },
+            "position": {
+              "basis": "260px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.params.progress": {
+                "binding": {
+                  "config": {
+                    "expression": "tag({view.params.baseTagPath} + \"/Electrical/OutputCurrentAvg\") / 700 * 100"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.value": {
+                "binding": {
+                  "config": {
+                    "expression": "numberFormat(tag({view.params.baseTagPath} + \"/Electrical/OutputCurrentAvg\"), \"#,##0\")"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "params": {
+                "helperText": "Average PDU output current from active ways",
+                "label": "Output Current",
+                "status": "Good",
+                "unit": " A"
+              },
+              "path": "Shared/MetricCard",
+              "style": {
+                "height": "190px"
+              }
+            },
+            "type": "ia.display.view"
+          },
+          {
+            "meta": {
+              "name": "temperatureCard"
+            },
+            "position": {
+              "basis": "260px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.params.progress": {
+                "binding": {
+                  "config": {
+                    "expression": "(tag({view.params.baseTagPath} + \"/Temperature/EnclosureTemp\") + 20) / 120 * 100"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.status": {
+                "binding": {
+                  "config": {
+                    "expression": "if(tag({view.params.baseTagPath} + \"/Temperature/EnclosureTemp\") \u003e\u003d 50, \"Danger\", if(tag({view.params.baseTagPath} + \"/Temperature/EnclosureTemp\") \u003e\u003d 45, \"Warning\", \"Good\"))"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.value": {
+                "binding": {
+                  "config": {
+                    "expression": "numberFormat(tag({view.params.baseTagPath} + \"/Temperature/EnclosureTemp\"), \"0.0\")"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "params": {
+                "helperText": "PDU enclosure temperature",
+                "label": "Enclosure Temp",
+                "unit": " degC"
+              },
+              "path": "Shared/MetricCard",
+              "style": {
+                "height": "190px"
+              }
+            },
+            "type": "ia.display.view"
+          },
+          {
+            "meta": {
+              "name": "realPowerCard"
+            },
+            "position": {
+              "basis": "260px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.params.progress": {
+                "binding": {
+                  "config": {
+                    "expression": "tag({view.params.baseTagPath} + \"/Power/RealPower\") / tag({view.params.baseTagPath} + \"/Capacity/RatedPower\") * 100"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.value": {
+                "binding": {
+                  "config": {
+                    "expression": "numberFormat(tag({view.params.baseTagPath} + \"/Power/RealPower\"), \"#,##0\")"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "params": {
+                "helperText": "Total real power from active PDU ways",
+                "label": "Real Power",
+                "status": "Good",
+                "unit": " kW"
+              },
+              "path": "Shared/MetricCard",
+              "style": {
+                "height": "190px"
+              }
+            },
+            "type": "ia.display.view"
+          },
+          {
+            "meta": {
+              "name": "apparentPowerCard"
+            },
+            "position": {
+              "basis": "260px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.params.progress": {
+                "binding": {
+                  "config": {
+                    "expression": "tag({view.params.baseTagPath} + \"/Power/ApparentPower\") / tag({view.params.baseTagPath} + \"/Capacity/RatedPower\") * 100"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.value": {
+                "binding": {
+                  "config": {
+                    "expression": "numberFormat(tag({view.params.baseTagPath} + \"/Power/ApparentPower\"), \"#,##0\")"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "params": {
+                "helperText": "Total apparent power from active PDU ways",
+                "label": "Apparent Power",
+                "status": "Good",
+                "unit": " kVA"
+              },
+              "path": "Shared/MetricCard",
+              "style": {
+                "height": "190px"
+              }
+            },
+            "type": "ia.display.view"
+          },
+          {
+            "meta": {
+              "name": "powerFactorCard"
+            },
+            "position": {
+              "basis": "260px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.params.progress": {
+                "binding": {
+                  "config": {
+                    "expression": "tag({view.params.baseTagPath} + \"/Power/PowerFactor\") * 100"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.status": {
+                "binding": {
+                  "config": {
+                    "expression": "if(tag({view.params.baseTagPath} + \"/Power/PowerFactor\") \u003c 0.9, \"Warning\", \"Good\")"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.value": {
+                "binding": {
+                  "config": {
+                    "expression": "numberFormat(tag({view.params.baseTagPath} + \"/Power/PowerFactor\"), \"0.00\")"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "params": {
+                "helperText": "PDU aggregate power factor",
+                "label": "Power Factor",
+                "unit": ""
+              },
+              "path": "Shared/MetricCard",
+              "style": {
+                "height": "190px"
+              }
+            },
+            "type": "ia.display.view"
+          },
+          {
+            "meta": {
+              "name": "totalEnergyCard"
+            },
+            "position": {
+              "basis": "260px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.params.value": {
+                "binding": {
+                  "config": {
+                    "expression": "numberFormat(tag({view.params.baseTagPath} + \"/Energy/TotalEnergy\"), \"#,##0\")"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "params": {
+                "helperText": "Accumulated PDU output energy",
+                "label": "Total Energy",
+                "progress": 0,
+                "status": "Good",
+                "unit": " kWh"
+              },
+              "path": "Shared/MetricCard",
+              "style": {
+                "height": "190px"
+              }
+            },
+            "type": "ia.display.view"
+          },
+          {
+            "meta": {
+              "name": "ratedPowerCard"
+            },
+            "position": {
+              "basis": "260px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.params.value": {
+                "binding": {
+                  "config": {
+                    "expression": "numberFormat(tag({view.params.baseTagPath} + \"/Capacity/RatedPower\"), \"#,##0\")"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "params": {
+                "helperText": "Configured PDU output capacity",
+                "label": "Rated Power",
+                "progress": 0,
+                "status": "Good",
+                "unit": " kVA"
+              },
+              "path": "Shared/MetricCard",
+              "style": {
+                "height": "190px"
+              }
+            },
+            "type": "ia.display.view"
+          },
+          {
+            "meta": {
+              "name": "loadPctCard"
+            },
+            "position": {
+              "basis": "260px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.params.progress": {
+                "binding": {
+                  "config": {
+                    "expression": "tag({view.params.baseTagPath} + \"/Capacity/LoadPct\")"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.status": {
+                "binding": {
+                  "config": {
+                    "expression": "if(tag({view.params.baseTagPath} + \"/Capacity/LoadPct\") \u003e\u003d 100, \"Danger\", if(tag({view.params.baseTagPath} + \"/Capacity/LoadPct\") \u003e\u003d 85, \"Warning\", \"Good\"))"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.value": {
+                "binding": {
+                  "config": {
+                    "expression": "numberFormat(tag({view.params.baseTagPath} + \"/Capacity/LoadPct\"), \"0\")"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "params": {
+                "helperText": "Apparent power as a percentage of rated capacity",
+                "label": "PDU Load",
+                "unit": "%"
+              },
+              "path": "Shared/MetricCard",
+              "style": {
+                "height": "190px"
+              }
+            },
+            "type": "ia.display.view"
+          }
+        ],
+        "meta": {
+          "name": "metricGrid"
+        },
+        "props": {
+          "alignContent": "flex-start",
+          "style": {
+            "gap": "18px",
+            "overflow": "visible"
+          },
+          "wrap": "wrap"
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "trendHeading"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "props": {
+              "style": {
+                "classes": "sg/heading",
+                "fontSize": "1.35rem"
+              },
+              "text": "PDU Load"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "trendSubheading"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "props": {
+              "style": {
+                "classes": "sg/muted",
+                "fontSize": "0.95rem"
+              },
+              "text": "Current apparent power and utilization from live UDT values."
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "currentLoad"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"Current apparent power: \" + numberFormat(tag({view.params.baseTagPath} + \"/Power/ApparentPower\"), \"#,##0\") + \" kVA\""
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "color": "#16213e",
+                "fontSize": "1.1rem",
+                "fontWeight": "700"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "loadProgress"
+            },
+            "position": {
+              "basis": "14px",
+              "shrink": 0
+            },
+            "propConfig": {
+              "props.value": {
+                "binding": {
+                  "config": {
+                    "expression": "tag({view.params.baseTagPath} + \"/Capacity/LoadPct\")"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "bar": {
+                "color": "#2f80ed"
+              },
+              "style": {
+                "height": "14px"
+              },
+              "track": {
+                "color": "#d9e2ef"
+              }
+            },
+            "type": "ia.display.progress"
+          }
+        ],
+        "meta": {
+          "name": "loadTrendPanel"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "props": {
+          "direction": "column",
+          "style": {
+            "classes": "sg/panel",
+            "gap": "14px",
+            "overflow": "hidden"
+          }
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "meta": {
+      "name": "pduPage"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "classes": "sg/page",
+        "gap": "24px",
+        "minHeight": "100vh"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}
