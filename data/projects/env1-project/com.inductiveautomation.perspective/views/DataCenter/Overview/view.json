@@ -1,0 +1,849 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {
+    "defaultSize": {
+      "height": 1150,
+      "width": 1400
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "pageTitle"
+        },
+        "position": {
+          "height": 48,
+          "width": 800,
+          "x": 48,
+          "y": 24
+        },
+        "props": {
+          "style": {
+            "classes": "sg/heading",
+            "fontSize": "2.5rem"
+          },
+          "text": "MBT1 Electrical Overview"
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "pageSubtitle"
+        },
+        "position": {
+          "height": 24,
+          "width": 900,
+          "x": 50,
+          "y": 72
+        },
+        "props": {
+          "style": {
+            "classes": "sg/muted",
+            "fontWeight": "700"
+          },
+          "text": "Live power flow from utility source through branch ways"
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "title"
+            },
+            "props": {
+              "style": {
+                "classes": "sg/eyebrow"
+              },
+              "text": "UTILITY SOURCE"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "voltage"
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"Voltage  \" + numberFormat(tag(\"[T1]MBT1/Utility1/UtilitySource/Electrical/VoltageLLAvg\") / 1000, \"0.0\") + \" kV\""
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "fontWeight": "700"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "power"
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"Real Power  \" + numberFormat(tag(\"[T1]MBT1/Utility1/UtilitySource/Power/RealPower\"), \"#,##0\") + \" kW\""
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "frequency"
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"Frequency  \" + numberFormat(tag(\"[T1]MBT1/Utility1/UtilitySource/Electrical/Frequency\"), \"0.0\") + \" Hz\""
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "type": "ia.display.label"
+          }
+        ],
+        "meta": {
+          "name": "utilitySource"
+        },
+        "position": {
+          "height": 145,
+          "width": 360,
+          "x": 520,
+          "y": 125
+        },
+        "props": {
+          "direction": "column",
+          "style": {
+            "border": "2px solid #2f80ed",
+            "classes": "sg/panel",
+            "gap": "9px"
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "meta": {
+          "name": "utilityToMsg"
+        },
+        "position": {
+          "height": 75,
+          "width": 3,
+          "x": 699,
+          "y": 270
+        },
+        "props": {
+          "style": {
+            "background": "#2f80ed"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "title"
+            },
+            "props": {
+              "style": {
+                "classes": "sg/eyebrow"
+              },
+              "text": "MAIN SWITCHGEAR"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "voltage"
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"Bus Voltage  \" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/MainSwitchgear/Electrical/BusVoltageLLAvg\"), \"#,##0\") + \" V\""
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "fontWeight": "700"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "current"
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"Bus Current  \" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/MainSwitchgear/Electrical/BusCurrentAvg\"), \"#,##0\") + \" A\""
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "power"
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"Real Power  \" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/MainSwitchgear/Power/RealPower\"), \"#,##0\") + \" kW\""
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "type": "ia.display.label"
+          }
+        ],
+        "meta": {
+          "name": "mainSwitchgear"
+        },
+        "position": {
+          "height": 145,
+          "width": 360,
+          "x": 520,
+          "y": 345
+        },
+        "props": {
+          "direction": "column",
+          "style": {
+            "border": "2px solid #2f80ed",
+            "classes": "sg/panel",
+            "gap": "9px"
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "meta": {
+          "name": "msgToPdu"
+        },
+        "position": {
+          "height": 75,
+          "width": 3,
+          "x": 699,
+          "y": 490
+        },
+        "props": {
+          "style": {
+            "background": "#2f80ed"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "title"
+            },
+            "props": {
+              "style": {
+                "classes": "sg/eyebrow"
+              },
+              "text": "POWER DISTRIBUTION UNIT"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "inputVoltage"
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"Input  \" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDU/Electrical/InputVoltageLLAvg\"), \"#,##0\") + \" V\""
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "fontWeight": "700"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "outputVoltage"
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"Output  \" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDU/Electrical/OutputVoltageLLAvg\"), \"#,##0\") + \" V\""
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "power"
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"Real Power  \" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDU/Power/RealPower\"), \"#,##0\") + \" kW\""
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "type": "ia.display.label"
+          }
+        ],
+        "meta": {
+          "name": "powerDistributionUnit"
+        },
+        "position": {
+          "height": 145,
+          "width": 360,
+          "x": 520,
+          "y": 565
+        },
+        "props": {
+          "direction": "column",
+          "style": {
+            "border": "2px solid #2f80ed",
+            "classes": "sg/panel",
+            "gap": "9px"
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "meta": {
+          "name": "pduToTransformer"
+        },
+        "position": {
+          "height": 75,
+          "width": 3,
+          "x": 699,
+          "y": 710
+        },
+        "props": {
+          "style": {
+            "background": "#2f80ed"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "title"
+            },
+            "props": {
+              "style": {
+                "classes": "sg/eyebrow"
+              },
+              "text": "PDU TRANSFORMER"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "primaryVoltage"
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"Primary  \" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/Transformer1/Transformer/Electrical/PrimaryVoltageLLAvg\"), \"#,##0\") + \" V\""
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "fontWeight": "700"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "secondaryVoltage"
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"Secondary  \" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/Transformer1/Transformer/Electrical/SecondaryVoltageLLAvg\"), \"#,##0\") + \" V\""
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "load"
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"Load  \" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/Transformer1/Transformer/Capacity/LoadPct\"), \"0\") + \" %\""
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "type": "ia.display.label"
+          }
+        ],
+        "meta": {
+          "name": "transformer"
+        },
+        "position": {
+          "height": 145,
+          "width": 360,
+          "x": 520,
+          "y": 785
+        },
+        "props": {
+          "direction": "column",
+          "style": {
+            "border": "2px solid #2f80ed",
+            "classes": "sg/panel",
+            "gap": "9px"
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "meta": {
+          "name": "branchBus"
+        },
+        "position": {
+          "height": 3,
+          "width": 945,
+          "x": 190,
+          "y": 955
+        },
+        "props": {
+          "style": {
+            "background": "#2f80ed"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "transformerToWays"
+        },
+        "position": {
+          "height": 25,
+          "width": 3,
+          "x": 699,
+          "y": 930
+        },
+        "props": {
+          "style": {
+            "background": "#2f80ed"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "way1Branch"
+        },
+        "position": {
+          "height": 35,
+          "width": 3,
+          "x": 189,
+          "y": 955
+        },
+        "props": {
+          "style": {
+            "background": "#2f80ed"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "way2Branch"
+        },
+        "position": {
+          "height": 35,
+          "width": 3,
+          "x": 504,
+          "y": 955
+        },
+        "props": {
+          "style": {
+            "background": "#2f80ed"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "way3Branch"
+        },
+        "position": {
+          "height": 35,
+          "width": 3,
+          "x": 819,
+          "y": 955
+        },
+        "props": {
+          "style": {
+            "background": "#2f80ed"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "way4Branch"
+        },
+        "position": {
+          "height": 35,
+          "width": 3,
+          "x": 1134,
+          "y": 955
+        },
+        "props": {
+          "style": {
+            "background": "#2f80ed"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "title"
+            },
+            "props": {
+              "style": {
+                "classes": "sg/eyebrow"
+              },
+              "text": "WAY 1"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "power"
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way1/Way/Power/RealPower\"), \"#,##0.0\") + \" kW\""
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "fontWeight": "700"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "load"
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"Load  \" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way1/Way/Capacity/LoadPct\"), \"0\") + \" %\""
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "type": "ia.display.label"
+          }
+        ],
+        "meta": {
+          "name": "way1"
+        },
+        "position": {
+          "height": 120,
+          "width": 280,
+          "x": 50,
+          "y": 990
+        },
+        "props": {
+          "direction": "column",
+          "style": {
+            "border": "2px solid #2f80ed",
+            "classes": "sg/panel",
+            "gap": "8px"
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "title"
+            },
+            "props": {
+              "style": {
+                "classes": "sg/eyebrow"
+              },
+              "text": "WAY 2"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "power"
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way2/Way/Power/RealPower\"), \"#,##0.0\") + \" kW\""
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "fontWeight": "700"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "load"
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"Load  \" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way2/Way/Capacity/LoadPct\"), \"0\") + \" %\""
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "type": "ia.display.label"
+          }
+        ],
+        "meta": {
+          "name": "way2"
+        },
+        "position": {
+          "height": 120,
+          "width": 280,
+          "x": 365,
+          "y": 990
+        },
+        "props": {
+          "direction": "column",
+          "style": {
+            "border": "2px solid #2f80ed",
+            "classes": "sg/panel",
+            "gap": "8px"
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "title"
+            },
+            "props": {
+              "style": {
+                "classes": "sg/eyebrow"
+              },
+              "text": "WAY 3"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "power"
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way3/Way/Power/RealPower\"), \"#,##0.0\") + \" kW\""
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "fontWeight": "700"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "load"
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"Load  \" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way3/Way/Capacity/LoadPct\"), \"0\") + \" %\""
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "type": "ia.display.label"
+          }
+        ],
+        "meta": {
+          "name": "way3"
+        },
+        "position": {
+          "height": 120,
+          "width": 280,
+          "x": 680,
+          "y": 990
+        },
+        "props": {
+          "direction": "column",
+          "style": {
+            "border": "2px solid #2f80ed",
+            "classes": "sg/panel",
+            "gap": "8px"
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "title"
+            },
+            "props": {
+              "style": {
+                "classes": "sg/eyebrow"
+              },
+              "text": "WAY 4"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "power"
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way4/Way/Power/RealPower\"), \"#,##0.0\") + \" kW\""
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "fontWeight": "700"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "load"
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"Load  \" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way4/Way/Capacity/LoadPct\"), \"0\") + \" %\""
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "type": "ia.display.label"
+          }
+        ],
+        "meta": {
+          "name": "way4"
+        },
+        "position": {
+          "height": 120,
+          "width": 280,
+          "x": 995,
+          "y": 990
+        },
+        "props": {
+          "direction": "column",
+          "style": {
+            "border": "2px solid #2f80ed",
+            "classes": "sg/panel",
+            "gap": "8px"
+          }
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "style": {
+        "classes": "sg/page",
+        "minHeight": "1150px",
+        "minWidth": "1325px",
+        "overflow": "auto"
+      }
+    },
+    "type": "ia.container.coord"
+  }
+}

@@ -181,10 +181,9 @@
           },
           {
             "meta": {
-              "name": "_Nav Section Tree"
+              "name": "EPMS Tree"
             },
             "position": {
-              "display": false,
               "shrink": 0
             },
             "props": {
@@ -196,48 +195,87 @@
                 "items": [
                   {
                     "data": {
-                      "target": ""
-                    },
-                    "expanded": false,
-                    "items": [
-                      {
-                        "data": {
-                          "target": "/nav-section-tree/folder-1/child-1"
-                        },
-                        "expanded": false,
-                        "items": [
-                          {
-                            "data": {
-                              "target": "/nav-section-tree/folder-1/child-1/grandchild-1"
-                            },
-                            "expanded": false,
-                            "items": [],
-                            "label": "Grandchild 1"
-                          }
-                        ],
-                        "label": "Child 1"
-                      },
-                      {
-                        "data": {
-                          "target": "/nav-section-tree/folder-1/child-2"
-                        },
-                        "expanded": false,
-                        "items": [],
-                        "label": "Child 2"
-                      }
-                    ],
-                    "label": "Folder 1"
-                  },
-                  {
-                    "data": {
-                      "target": "/nav-section-tree/folder-2"
+                      "target": "/"
                     },
                     "expanded": false,
                     "items": [],
-                    "label": "Folder 2"
+                    "label": "Overview"
+                  },
+                  {
+                    "data": {
+                      "target": "/Utility"
+                    },
+                    "expanded": false,
+                    "items": [],
+                    "label": "Utility"
+                  },
+                  {
+                    "data": {
+                      "target": "/MSG"
+                    },
+                    "expanded": false,
+                    "items": [],
+                    "label": "MSG"
+                  },
+                  {
+                    "data": {
+                      "target": "/PDU"
+                    },
+                    "expanded": false,
+                    "items": [],
+                    "label": "PDU"
+                  },
+                  {
+                    "data": {
+                      "target": "/Transformer"
+                    },
+                    "expanded": false,
+                    "items": [],
+                    "label": "Transformer"
+                  },
+                  {
+                    "data": {
+                      "target": ""
+                    },
+                    "expanded": true,
+                    "items": [
+                      {
+                        "data": {
+                          "target": "/ways/way1"
+                        },
+                        "expanded": false,
+                        "items": [],
+                        "label": "Way 1"
+                      },
+                      {
+                        "data": {
+                          "target": "/ways/way2"
+                        },
+                        "expanded": false,
+                        "items": [],
+                        "label": "Way 2"
+                      },
+                      {
+                        "data": {
+                          "target": "/ways/way3"
+                        },
+                        "expanded": false,
+                        "items": [],
+                        "label": "Way 3"
+                      },
+                      {
+                        "data": {
+                          "target": "/ways/way4"
+                        },
+                        "expanded": false,
+                        "items": [],
+                        "label": "Way 4"
+                      }
+                    ],
+                    "label": "WAYs"
                   }
                 ],
-                "label": "Nav Section Tree",
+                "label": "EPMS",
                 "target": ""
               },
               "path": "Exchange/Responsive Nav/Nav Section Tree",
@@ -252,6 +290,7 @@
               "name": "Nav Section FlexRepeater"
             },
             "position": {
+              "display": false,
               "shrink": 0
             },
             "props": {
@@ -306,7 +345,7 @@
                     "target": "/Transformer"
                   }
                 ],
-                "label": "Nav Section Repeater",
+                "label": "EPMS",
                 "target": ""
               },
               "path": "Exchange/Responsive Nav/Nav Section FlexRepeater",

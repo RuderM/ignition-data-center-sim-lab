@@ -1,0 +1,628 @@
+{
+  "custom": {},
+  "params": {},
+  "propConfig": {
+    "params.powerMeterTagPath": {
+      "binding": {
+        "config": {
+          "path": "page.props.path"
+        },
+        "transforms": [
+          {
+            "code": "\tway \u003d value.lower().rsplit(\"/\", 1)[-1]\n\tif way in (\"way1\", \"way2\", \"way3\", \"way4\"):\n\t\tway_number \u003d way[-1]\n\t\treturn \"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way\" + way_number + \"/PowerMeter\" + way_number + \"/PowerMeter\"\n\treturn self.view.params.powerMeterTagPath",
+            "type": "script"
+          }
+        ],
+        "type": "property"
+      },
+      "paramDirection": "input"
+    },
+    "params.tagPath": {
+      "binding": {
+        "config": {
+          "path": "page.props.path"
+        },
+        "transforms": [
+          {
+            "code": "\tway \u003d value.lower().rsplit(\"/\", 1)[-1]\n\tif way in (\"way1\", \"way2\", \"way3\", \"way4\"):\n\t\treturn \"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way\" + way[-1]\n\treturn self.view.params.tagPath",
+            "type": "script"
+          }
+        ],
+        "type": "property"
+      },
+      "paramDirection": "input"
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 920,
+      "width": 1600
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "screenTitle"
+            },
+            "props": {
+              "style": {
+                "classes": "sg/heading",
+                "fontSize": "3.2rem"
+              },
+              "text": "WAY \u0026 Power Meter"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "boundDevice"
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"Bound WAY: \" + {view.params.tagPath}"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "classes": "sg/muted",
+                "fontSize": "0.95rem",
+                "fontWeight": "700"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "wayStatus"
+                },
+                "propConfig": {
+                  "props.style.classes": {
+                    "binding": {
+                      "config": {
+                        "expression": "if(tag({view.params.tagPath} + \"/Way/Status/Faulted\"), \"sg/statusDanger\", if(tag({view.params.tagPath} + \"/Way/Status/Available\"), \"sg/statusGood\", \"sg/statusWarning\"))"
+                      },
+                      "type": "expr"
+                    }
+                  },
+                  "props.text": {
+                    "binding": {
+                      "config": {
+                        "expression": "if(tag({view.params.tagPath} + \"/Way/Status/Faulted\"), \"WAY: FAULTED\", if(tag({view.params.tagPath} + \"/Way/Status/Available\"), \"WAY: AVAILABLE\", \"WAY: UNAVAILABLE\"))"
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "style": {
+                    "whiteSpace": "nowrap"
+                  }
+                },
+                "type": "ia.display.label"
+              },
+              {
+                "meta": {
+                  "name": "breakerStatus"
+                },
+                "propConfig": {
+                  "props.style.classes": {
+                    "binding": {
+                      "config": {
+                        "expression": "if(tag({view.params.tagPath} + \"/Way/Breaker/Tripped\"), \"sg/statusDanger\", if(tag({view.params.tagPath} + \"/Way/Breaker/Closed\"), \"sg/statusGood\", \"sg/statusWarning\"))"
+                      },
+                      "type": "expr"
+                    }
+                  },
+                  "props.text": {
+                    "binding": {
+                      "config": {
+                        "expression": "if(tag({view.params.tagPath} + \"/Way/Breaker/Tripped\"), \"Breaker: TRIPPED\", if(tag({view.params.tagPath} + \"/Way/Breaker/Closed\"), \"Breaker: CLOSED\", \"Breaker: OPEN\"))"
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "style": {
+                    "whiteSpace": "nowrap"
+                  }
+                },
+                "type": "ia.display.label"
+              },
+              {
+                "meta": {
+                  "name": "meterStatus"
+                },
+                "propConfig": {
+                  "props.style.classes": {
+                    "binding": {
+                      "config": {
+                        "expression": "if(tag({view.params.powerMeterTagPath} + \"/Status/CommGood\"), \"sg/statusGood\", \"sg/statusDanger\")"
+                      },
+                      "type": "expr"
+                    }
+                  },
+                  "props.text": {
+                    "binding": {
+                      "config": {
+                        "expression": "if(tag({view.params.powerMeterTagPath} + \"/Status/CommGood\"), \"Meter: COMM GOOD\", \"Meter: COMM LOSS\")"
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "style": {
+                    "whiteSpace": "nowrap"
+                  }
+                },
+                "type": "ia.display.label"
+              }
+            ],
+            "meta": {
+              "name": "statusPills"
+            },
+            "props": {
+              "alignItems": "center",
+              "style": {
+                "gap": "10px"
+              },
+              "wrap": "wrap"
+            },
+            "type": "ia.container.flex"
+          }
+        ],
+        "meta": {
+          "name": "header"
+        },
+        "props": {
+          "direction": "column",
+          "style": {
+            "classes": "sg/hero",
+            "gap": "14px"
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "meta": {
+          "name": "wayMetricsHeading"
+        },
+        "props": {
+          "style": {
+            "classes": "sg/eyebrow"
+          },
+          "text": "WAY PROTECTION \u0026 LOAD"
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "wayLoadCard"
+            },
+            "position": {
+              "basis": "260px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.params.progress": {
+                "binding": {
+                  "config": {
+                    "expression": "tag({view.params.tagPath} + \"/Way/Capacity/LoadPct\")"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.status": {
+                "binding": {
+                  "config": {
+                    "expression": "if(tag({view.params.tagPath} + \"/Way/Capacity/LoadPct\") \u003e 100, \"Danger\", if(tag({view.params.tagPath} + \"/Way/Capacity/LoadPct\") \u003e 85, \"Warning\", \"Good\"))"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.value": {
+                "binding": {
+                  "config": {
+                    "expression": "numberFormat(tag({view.params.tagPath} + \"/Way/Capacity/LoadPct\"), \"0.0\")"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "params": {
+                "helperText": "Outgoing way current against breaker rating",
+                "label": "WAY Load",
+                "unit": " %"
+              },
+              "path": "Shared/MetricCard",
+              "style": {
+                "height": "190px"
+              }
+            },
+            "type": "ia.display.view"
+          },
+          {
+            "meta": {
+              "name": "ratedCurrentCard"
+            },
+            "position": {
+              "basis": "260px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.params.value": {
+                "binding": {
+                  "config": {
+                    "expression": "numberFormat(tag({view.params.tagPath} + \"/Way/Config/RatedCurrent\"), \"#,##0\")"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "params": {
+                "helperText": "MasterPact outgoing breaker rating",
+                "label": "Breaker Rating",
+                "status": "Good",
+                "unit": " A"
+              },
+              "path": "Shared/MetricCard",
+              "style": {
+                "height": "190px"
+              }
+            },
+            "type": "ia.display.view"
+          },
+          {
+            "meta": {
+              "name": "wayPowerCard"
+            },
+            "position": {
+              "basis": "260px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.params.trendTagPath": {
+                "binding": {
+                  "config": {
+                    "expression": "{view.params.tagPath} + \"/Way/Power/RealPower\""
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.value": {
+                "binding": {
+                  "config": {
+                    "expression": "numberFormat(tag({view.params.tagPath} + \"/Way/Power/RealPower\"), \"#,##0.0\")"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "params": {
+                "helperText": "Real power supplied through this WAY",
+                "label": "WAY Real Power",
+                "status": "Good",
+                "trendLabel": "WAY Real Power",
+                "trendUnit": "kW",
+                "unit": " kW"
+              },
+              "path": "Shared/MetricCard",
+              "style": {
+                "height": "190px"
+              }
+            },
+            "type": "ia.display.view"
+          }
+        ],
+        "meta": {
+          "name": "wayMetrics"
+        },
+        "props": {
+          "style": {
+            "gap": "14px"
+          },
+          "wrap": "wrap"
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "meta": {
+          "name": "meterMetricsHeading"
+        },
+        "props": {
+          "style": {
+            "classes": "sg/eyebrow"
+          },
+          "text": "BRANCH POWER METER"
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "voltageCard"
+            },
+            "position": {
+              "basis": "260px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.params.progress": {
+                "binding": {
+                  "config": {
+                    "expression": "tag({view.params.powerMeterTagPath} + \"/Voltage/LLAvg\") / 208 * 100"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.status": {
+                "binding": {
+                  "config": {
+                    "expression": "if(tag({view.params.powerMeterTagPath} + \"/Voltage/LLAvg\") \u003c 187, \"Warning\", \"Good\")"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.trendTagPath": {
+                "binding": {
+                  "config": {
+                    "expression": "{view.params.powerMeterTagPath} + \"/Voltage/LLAvg\""
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.value": {
+                "binding": {
+                  "config": {
+                    "expression": "numberFormat(tag({view.params.powerMeterTagPath} + \"/Voltage/LLAvg\"), \"#,##0\")"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "params": {
+                "helperText": "Average branch line-to-line voltage",
+                "label": "Voltage",
+                "trendLabel": "Branch Voltage",
+                "trendUnit": "V",
+                "unit": " V"
+              },
+              "path": "Shared/MetricCard",
+              "style": {
+                "height": "190px"
+              }
+            },
+            "type": "ia.display.view"
+          },
+          {
+            "meta": {
+              "name": "currentCard"
+            },
+            "position": {
+              "basis": "260px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.params.progress": {
+                "binding": {
+                  "config": {
+                    "expression": "tag({view.params.powerMeterTagPath} + \"/Current/Avg\") / tag({view.params.tagPath} + \"/Way/Config/RatedCurrent\") * 100"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.trendTagPath": {
+                "binding": {
+                  "config": {
+                    "expression": "{view.params.powerMeterTagPath} + \"/Current/Avg\""
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.value": {
+                "binding": {
+                  "config": {
+                    "expression": "numberFormat(tag({view.params.powerMeterTagPath} + \"/Current/Avg\"), \"#,##0.0\")"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "params": {
+                "helperText": "Average three-phase branch current",
+                "label": "Current",
+                "status": "Good",
+                "trendLabel": "Branch Current",
+                "trendUnit": "A",
+                "unit": " A"
+              },
+              "path": "Shared/MetricCard",
+              "style": {
+                "height": "190px"
+              }
+            },
+            "type": "ia.display.view"
+          },
+          {
+            "meta": {
+              "name": "frequencyCard"
+            },
+            "position": {
+              "basis": "260px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.params.status": {
+                "binding": {
+                  "config": {
+                    "expression": "if(tag({view.params.powerMeterTagPath} + \"/Frequency\") \u003c 59.5 || tag({view.params.powerMeterTagPath} + \"/Frequency\") \u003e 60.5, \"Warning\", \"Good\")"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.trendTagPath": {
+                "binding": {
+                  "config": {
+                    "expression": "{view.params.powerMeterTagPath} + \"/Frequency\""
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.value": {
+                "binding": {
+                  "config": {
+                    "expression": "numberFormat(tag({view.params.powerMeterTagPath} + \"/Frequency\"), \"0.00\")"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "params": {
+                "helperText": "Measured branch frequency",
+                "label": "Frequency",
+                "trendLabel": "Branch Frequency",
+                "trendUnit": "Hz",
+                "unit": " Hz"
+              },
+              "path": "Shared/MetricCard",
+              "style": {
+                "height": "190px"
+              }
+            },
+            "type": "ia.display.view"
+          },
+          {
+            "meta": {
+              "name": "meterPowerFactorCard"
+            },
+            "position": {
+              "basis": "260px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.params.progress": {
+                "binding": {
+                  "config": {
+                    "expression": "tag({view.params.powerMeterTagPath} + \"/Power/PowerFactor\") * 100"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.status": {
+                "binding": {
+                  "config": {
+                    "expression": "if(tag({view.params.powerMeterTagPath} + \"/Power/PowerFactor\") \u003c 0.90, \"Warning\", \"Good\")"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.value": {
+                "binding": {
+                  "config": {
+                    "expression": "numberFormat(tag({view.params.powerMeterTagPath} + \"/Power/PowerFactor\"), \"0.000\")"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "params": {
+                "helperText": "Branch power factor",
+                "label": "Power Factor",
+                "unit": " PF"
+              },
+              "path": "Shared/MetricCard",
+              "style": {
+                "height": "190px"
+              }
+            },
+            "type": "ia.display.view"
+          },
+          {
+            "meta": {
+              "name": "energyCard"
+            },
+            "position": {
+              "basis": "260px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.params.trendTagPath": {
+                "binding": {
+                  "config": {
+                    "expression": "{view.params.powerMeterTagPath} + \"/Energy/TotalEnergy\""
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.value": {
+                "binding": {
+                  "config": {
+                    "expression": "numberFormat(tag({view.params.powerMeterTagPath} + \"/Energy/TotalEnergy\"), \"#,##0.0\")"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "params": {
+                "helperText": "Accumulated branch energy",
+                "label": "Total Energy",
+                "status": "Good",
+                "trendLabel": "Branch Energy",
+                "trendUnit": "kWh",
+                "unit": " kWh"
+              },
+              "path": "Shared/MetricCard",
+              "style": {
+                "height": "190px"
+              }
+            },
+            "type": "ia.display.view"
+          }
+        ],
+        "meta": {
+          "name": "meterMetrics"
+        },
+        "props": {
+          "style": {
+            "gap": "14px"
+          },
+          "wrap": "wrap"
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "classes": "sg/page",
+        "gap": "20px"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

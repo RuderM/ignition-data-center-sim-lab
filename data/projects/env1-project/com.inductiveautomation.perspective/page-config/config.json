@@ -2,7 +2,7 @@
   "pages": {
     "/": {
       "title": "",
-      "viewPath": "Exchange/Responsive Nav/Overview"
+      "viewPath": "DataCenter/Overview"
     },
     "/GWHealth": {
       "title": "",
@@ -63,6 +63,22 @@
     "/nav-section-tree/folder-2": {
       "title": "",
       "viewPath": "Exchange/Responsive Nav/Overview"
+    },
+    "/ways/way1": {
+      "title": "",
+      "viewPath": "DataCenter/WAY"
+    },
+    "/ways/way2": {
+      "title": "",
+      "viewPath": "DataCenter/WAY"
+    },
+    "/ways/way3": {
+      "title": "",
+      "viewPath": "DataCenter/WAY"
+    },
+    "/ways/way4": {
+      "title": "",
+      "viewPath": "DataCenter/WAY"
     }
   },
   "sharedDocks": {
