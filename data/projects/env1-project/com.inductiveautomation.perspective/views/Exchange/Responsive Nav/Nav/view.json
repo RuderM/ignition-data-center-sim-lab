@@ -293,6 +293,17 @@
                     "label": "PDU",
                     "showArrow": false,
                     "target": "/PDU"
+                  },
+                  {
+                    "icon": "",
+                    "instancePosition": {},
+                    "instanceStyle": {
+                      "classes": "",
+                      "color": ""
+                    },
+                    "label": "Transformer",
+                    "showArrow": false,
+                    "target": "/Transformer"
                   }
                 ],
                 "label": "Nav Section Repeater",

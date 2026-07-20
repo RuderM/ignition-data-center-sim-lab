@@ -16,6 +16,10 @@
       "title": "",
       "viewPath": "DataCenter/PDU"
     },
+    "/Transformer": {
+      "title": "",
+      "viewPath": "DataCenter/Transformer"
+    },
     "/Trends": {
       "title": "",
       "viewPath": "DataCenter/Trends"

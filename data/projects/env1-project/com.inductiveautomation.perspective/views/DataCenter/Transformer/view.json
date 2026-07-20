@@ -1,0 +1,1109 @@
+{
+  "custom": {},
+  "params": {
+    "baseTagPath": "[T1]MBT1/Utility1/MSG1/PDU1/Transformer1/Transformer"
+  },
+  "propConfig": {
+    "params.baseTagPath": {
+      "paramDirection": "input"
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 1100,
+      "width": 1600
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "screenTitle"
+                },
+                "props": {
+                  "style": {
+                    "classes": "sg/heading",
+                    "fontSize": "3.2rem",
+                    "overflow": "hidden",
+                    "overflowWrap": "break-word",
+                    "textOverflow": "ellipsis",
+                    "whiteSpace": "normal"
+                  },
+                  "text": "Transformer"
+                },
+                "type": "ia.display.label"
+              },
+              {
+                "meta": {
+                  "name": "pageIcon"
+                },
+                "position": {
+                  "basis": "72px",
+                  "shrink": 0
+                },
+                "props": {
+                  "fit": {
+                    "mode": "contain"
+                  },
+                  "source": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5NiIgaGVpZ2h0PSI5NiIgdmlld0JveD0iMCAwIDk2IDk2IiByb2xlPSJpbWciIGFyaWEtbGFiZWw9IlRyYW5zZm9ybWVyIG9uZS1saW5lIGljb24iPjxyZWN0IHg9IjQiIHk9IjQiIHdpZHRoPSI4OCIgaGVpZ2h0PSI4OCIgcng9IjEyIiBmaWxsPSIjZmZmIiBzdHJva2U9IiNkOWUyZWYiIHN0cm9rZS13aWR0aD0iMiIvPjxwYXRoIGQ9Ik00OCAxMnYxNk00OCA2OHYxNk0zMCAyMmgzNk0zMCA3NGgzNiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMTYyMTNlIiBzdHJva2Utd2lkdGg9IjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxjaXJjbGUgY3g9IjM4IiBjeT0iNDgiIHI9IjE1IiBmaWxsPSJub25lIiBzdHJva2U9IiMyZjgwZWQiIHN0cm9rZS13aWR0aD0iNSIvPjxjaXJjbGUgY3g9IjU4IiBjeT0iNDgiIHI9IjE1IiBmaWxsPSJub25lIiBzdHJva2U9IiMxOGE5OTkiIHN0cm9rZS13aWR0aD0iNSIvPjxwYXRoIGQ9Ik0zOCAzM3YzME01OCAzM3YzMCIgc3Ryb2tlPSIjZjViODRiIiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjwvc3ZnPg==",
+                  "style": {
+                    "height": "72px",
+                    "width": "72px"
+                  }
+                },
+                "type": "ia.display.image"
+              }
+            ],
+            "meta": {
+              "name": "titleRow"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "props": {
+              "alignItems": "center",
+              "style": {
+                "gap": "18px",
+                "overflow": "hidden",
+                "width": "100%"
+              }
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "boundDevice"
+                },
+                "position": {
+                  "basis": "340px",
+                  "grow": 1
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "config": {
+                        "expression": "\"Bound Device: \" + {view.params.baseTagPath}"
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "style": {
+                    "classes": "sg/muted",
+                    "fontSize": "0.9rem",
+                    "fontWeight": "700",
+                    "overflow": "hidden",
+                    "textOverflow": "ellipsis",
+                    "whiteSpace": "nowrap"
+                  }
+                },
+                "type": "ia.display.label"
+              }
+            ],
+            "meta": {
+              "name": "headerDetails"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "props": {
+              "alignItems": "center",
+              "justify": "space-between",
+              "style": {
+                "gap": "12px",
+                "overflow": "visible"
+              },
+              "wrap": "wrap"
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "overallStatus"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.style.classes": {
+                    "binding": {
+                      "config": {
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/CommGood\") = false, \"sg/statusDanger\", if(tag({view.params.baseTagPath} + \"/Status/Faulted\") = true, \"sg/statusDanger\", if(tag({view.params.baseTagPath} + \"/Status/Available\") = false, \"sg/statusWarning\", if(tag({view.params.baseTagPath} + \"/Alarms/Overtemperature\") = true || tag({view.params.baseTagPath} + \"/Alarms/Overload\") = true, \"sg/statusWarning\", \"sg/statusGood\"))))"
+                      },
+                      "type": "expr"
+                    }
+                  },
+                  "props.text": {
+                    "binding": {
+                      "config": {
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/CommGood\") = false, \"Overall: COMM LOSS\", if(tag({view.params.baseTagPath} + \"/Status/Faulted\") = true, \"Overall: FAULTED\", if(tag({view.params.baseTagPath} + \"/Status/Available\") = false, \"Overall: UNAVAILABLE\", if(tag({view.params.baseTagPath} + \"/Alarms/Overtemperature\") = true || tag({view.params.baseTagPath} + \"/Alarms/Overload\") = true, \"Overall: ALARM\", \"Overall: NORMAL\"))))"
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "style": {
+                    "whiteSpace": "nowrap"
+                  }
+                },
+                "type": "ia.display.label"
+              },
+              {
+                "meta": {
+                  "name": "availableStatus"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.style.classes": {
+                    "binding": {
+                      "config": {
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/Available\") = true, \"sg/statusGood\", \"sg/statusWarning\")"
+                      },
+                      "type": "expr"
+                    }
+                  },
+                  "props.text": {
+                    "binding": {
+                      "config": {
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/Available\") = true, \"Available: YES\", \"Available: NO\")"
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "style": {
+                    "whiteSpace": "nowrap"
+                  }
+                },
+                "type": "ia.display.label"
+              },
+              {
+                "meta": {
+                  "name": "communicationStatus"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.style.classes": {
+                    "binding": {
+                      "config": {
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/CommGood\") = true, \"sg/statusGood\", \"sg/statusDanger\")"
+                      },
+                      "type": "expr"
+                    }
+                  },
+                  "props.text": {
+                    "binding": {
+                      "config": {
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/CommGood\") = true, \"Communication: GOOD\", \"Communication: LOSS\")"
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "style": {
+                    "whiteSpace": "nowrap"
+                  }
+                },
+                "type": "ia.display.label"
+              },
+              {
+                "meta": {
+                  "name": "faultStatus"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.style.classes": {
+                    "binding": {
+                      "config": {
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/Faulted\") = true, \"sg/statusDanger\", \"sg/statusGood\")"
+                      },
+                      "type": "expr"
+                    }
+                  },
+                  "props.text": {
+                    "binding": {
+                      "config": {
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/Faulted\") = true, \"Fault State: ACTIVE\", \"Fault State: NONE\")"
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "style": {
+                    "whiteSpace": "nowrap"
+                  }
+                },
+                "type": "ia.display.label"
+              },
+              {
+                "meta": {
+                  "name": "overtemperatureStatus"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.style.classes": {
+                    "binding": {
+                      "config": {
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Alarms/Overtemperature\") = true, \"sg/statusDanger\", \"sg/statusGood\")"
+                      },
+                      "type": "expr"
+                    }
+                  },
+                  "props.text": {
+                    "binding": {
+                      "config": {
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Alarms/Overtemperature\") = true, \"Overtemperature: ACTIVE\", \"Overtemperature: CLEAR\")"
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "style": {
+                    "whiteSpace": "nowrap"
+                  }
+                },
+                "type": "ia.display.label"
+              },
+              {
+                "meta": {
+                  "name": "overloadStatus"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.style.classes": {
+                    "binding": {
+                      "config": {
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Alarms/Overload\") = true, \"sg/statusDanger\", \"sg/statusGood\")"
+                      },
+                      "type": "expr"
+                    }
+                  },
+                  "props.text": {
+                    "binding": {
+                      "config": {
+                        "expression": "if(tag({view.params.baseTagPath} + \"/Alarms/Overload\") = true, \"Overload: ACTIVE\", \"Overload: CLEAR\")"
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "style": {
+                    "whiteSpace": "nowrap"
+                  }
+                },
+                "type": "ia.display.label"
+              }
+            ],
+            "meta": {
+              "name": "statusPills"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "props": {
+              "alignItems": "center",
+              "style": {
+                "gap": "12px",
+                "overflow": "visible"
+              },
+              "wrap": "wrap"
+            },
+            "type": "ia.container.flex"
+          }
+        ],
+        "meta": {
+          "name": "header"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "props": {
+          "direction": "column",
+          "style": {
+            "classes": "sg/hero",
+            "gap": "18px",
+            "overflow": "visible"
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "summaryEyebrow"
+            },
+            "position": {
+              "basis": "190px",
+              "shrink": 0
+            },
+            "props": {
+              "style": {
+                "classes": "sg/eyebrow"
+              },
+              "text": "TRANSFORMER SUMMARY"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "summaryStatement"
+            },
+            "position": {
+              "basis": "520px",
+              "grow": 1
+            },
+            "props": {
+              "style": {
+                "color": "#16213e",
+                "fontSize": "1.1rem",
+                "fontWeight": "600",
+                "overflowWrap": "break-word",
+                "whiteSpace": "normal"
+              },
+              "text": "Transformer1 steps down the PDU input supply to the secondary distribution voltage for downstream output bus ways."
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "deviceMetadata"
+            },
+            "position": {
+              "basis": "430px",
+              "grow": 1
+            },
+            "props": {
+              "style": {
+                "classes": "sg/muted",
+                "fontSize": "0.95rem",
+                "fontWeight": "700",
+                "overflow": "hidden",
+                "textOverflow": "ellipsis",
+                "whiteSpace": "nowrap"
+              },
+              "text": "Manufacturer: Eaton   Model: PowerDry-TX-480208-150-SIM"
+            },
+            "type": "ia.display.label"
+          }
+        ],
+        "meta": {
+          "name": "equipmentSummary"
+        },
+        "position": {
+          "display": false,
+          "shrink": 0
+        },
+        "props": {
+          "alignItems": "center",
+          "justify": "space-between",
+          "style": {
+            "classes": "sg/panel",
+            "gap": "18px",
+            "overflow": "hidden"
+          },
+          "wrap": "wrap"
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "meta": {
+          "name": "liveElectricalHeading"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "props": {
+          "style": {
+            "classes": "sg/eyebrow"
+          },
+          "text": "Live Electrical Metrics"
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "primaryVoltageCard"
+            },
+            "position": {
+              "basis": "260px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.params.value": {
+                "binding": {
+                  "config": {
+                    "expression": "numberFormat(tag({view.params.baseTagPath} + \"/Electrical/PrimaryVoltageLLAvg\"), \"#,##0\")"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.progress": {
+                "binding": {
+                  "config": {
+                    "expression": "tag({view.params.baseTagPath} + \"/Electrical/PrimaryVoltageLLAvg\") / 480 * 100"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.trendTagPath": {
+                "binding": {
+                  "config": {
+                    "expression": "{view.params.baseTagPath} + \"/Electrical/PrimaryVoltageLLAvg\""
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "params": {
+                "helperText": "Average transformer primary line-to-line voltage",
+                "label": "Primary Voltage",
+                "status": "Good",
+                "unit": " V",
+                "trendLabel": "Primary Voltage",
+                "trendUnit": "V"
+              },
+              "path": "Shared/MetricCard",
+              "style": {
+                "height": "190px"
+              }
+            },
+            "type": "ia.display.view"
+          },
+          {
+            "meta": {
+              "name": "secondaryVoltageCard"
+            },
+            "position": {
+              "basis": "260px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.params.value": {
+                "binding": {
+                  "config": {
+                    "expression": "numberFormat(tag({view.params.baseTagPath} + \"/Electrical/SecondaryVoltageLLAvg\"), \"#,##0\")"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.progress": {
+                "binding": {
+                  "config": {
+                    "expression": "tag({view.params.baseTagPath} + \"/Electrical/SecondaryVoltageLLAvg\") / 208 * 100"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.status": {
+                "binding": {
+                  "config": {
+                    "expression": "if(tag({view.params.baseTagPath} + \"/Electrical/SecondaryVoltageLLAvg\") < 187, \"Warning\", \"Good\")"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.trendTagPath": {
+                "binding": {
+                  "config": {
+                    "expression": "{view.params.baseTagPath} + \"/Electrical/SecondaryVoltageLLAvg\""
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "params": {
+                "helperText": "Average transformer secondary line-to-line voltage",
+                "label": "Secondary Voltage",
+                "status": "Good",
+                "unit": " V",
+                "trendLabel": "Secondary Voltage",
+                "trendUnit": "V"
+              },
+              "path": "Shared/MetricCard",
+              "style": {
+                "height": "190px"
+              }
+            },
+            "type": "ia.display.view"
+          },
+          {
+            "meta": {
+              "name": "secondaryCurrentCard"
+            },
+            "position": {
+              "basis": "260px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.params.value": {
+                "binding": {
+                  "config": {
+                    "expression": "numberFormat(tag({view.params.baseTagPath} + \"/Electrical/SecondaryCurrentAvg\"), \"#,##0\")"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.progress": {
+                "binding": {
+                  "config": {
+                    "expression": "tag({view.params.baseTagPath} + \"/Electrical/SecondaryCurrentAvg\") / 1000 * 100"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.trendTagPath": {
+                "binding": {
+                  "config": {
+                    "expression": "{view.params.baseTagPath} + \"/Electrical/SecondaryCurrentAvg\""
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "params": {
+                "helperText": "Average transformer secondary current",
+                "label": "Secondary Current",
+                "status": "Good",
+                "unit": " A",
+                "trendLabel": "Secondary Current",
+                "trendUnit": "A"
+              },
+              "path": "Shared/MetricCard",
+              "style": {
+                "height": "190px"
+              }
+            },
+            "type": "ia.display.view"
+          },
+          {
+            "meta": {
+              "name": "enclosureTemperatureCard"
+            },
+            "position": {
+              "basis": "260px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.params.value": {
+                "binding": {
+                  "config": {
+                    "expression": "numberFormat(tag({view.params.baseTagPath} + \"/Temperature/EnclosureTemp\"), \"0.0\")"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.progress": {
+                "binding": {
+                  "config": {
+                    "expression": "(tag({view.params.baseTagPath} + \"/Temperature/EnclosureTemp\") + 20) / 120 * 100"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.status": {
+                "binding": {
+                  "config": {
+                    "expression": "if(tag({view.params.baseTagPath} + \"/Temperature/EnclosureTemp\") >= 60, \"Danger\", if(tag({view.params.baseTagPath} + \"/Temperature/EnclosureTemp\") >= 50, \"Warning\", \"Good\"))"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.trendTagPath": {
+                "binding": {
+                  "config": {
+                    "expression": "{view.params.baseTagPath} + \"/Temperature/EnclosureTemp\""
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "params": {
+                "helperText": "Transformer enclosure temperature",
+                "label": "Enclosure Temp",
+                "status": "Good",
+                "unit": " degC",
+                "trendLabel": "Enclosure Temp",
+                "trendUnit": "degC"
+              },
+              "path": "Shared/MetricCard",
+              "style": {
+                "height": "190px"
+              }
+            },
+            "type": "ia.display.view"
+          },
+          {
+            "meta": {
+              "name": "windingTemperatureCard"
+            },
+            "position": {
+              "basis": "260px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.params.value": {
+                "binding": {
+                  "config": {
+                    "expression": "numberFormat(tag({view.params.baseTagPath} + \"/Temperature/WindingTemp\"), \"0.0\")"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.progress": {
+                "binding": {
+                  "config": {
+                    "expression": "(tag({view.params.baseTagPath} + \"/Temperature/WindingTemp\") + 20) / 220 * 100"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.status": {
+                "binding": {
+                  "config": {
+                    "expression": "if(tag({view.params.baseTagPath} + \"/Temperature/WindingTemp\") >= 120, \"Danger\", if(tag({view.params.baseTagPath} + \"/Temperature/WindingTemp\") >= 100, \"Warning\", \"Good\"))"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.trendTagPath": {
+                "binding": {
+                  "config": {
+                    "expression": "{view.params.baseTagPath} + \"/Temperature/WindingTemp\""
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "params": {
+                "helperText": "Estimated transformer winding temperature",
+                "label": "Winding Temp",
+                "status": "Good",
+                "unit": " degC",
+                "trendLabel": "Winding Temp",
+                "trendUnit": "degC"
+              },
+              "path": "Shared/MetricCard",
+              "style": {
+                "height": "190px"
+              }
+            },
+            "type": "ia.display.view"
+          },
+          {
+            "meta": {
+              "name": "realPowerCard"
+            },
+            "position": {
+              "basis": "260px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.params.value": {
+                "binding": {
+                  "config": {
+                    "expression": "numberFormat(tag({view.params.baseTagPath} + \"/Power/RealPower\"), \"#,##0\")"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.progress": {
+                "binding": {
+                  "config": {
+                    "expression": "tag({view.params.baseTagPath} + \"/Power/RealPower\") / tag({view.params.baseTagPath} + \"/Capacity/RatedPower\") * 100"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.trendTagPath": {
+                "binding": {
+                  "config": {
+                    "expression": "{view.params.baseTagPath} + \"/Power/RealPower\""
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "params": {
+                "helperText": "Transformer real power output",
+                "label": "Real Power",
+                "status": "Good",
+                "unit": " kW",
+                "trendLabel": "Real Power",
+                "trendUnit": "kW"
+              },
+              "path": "Shared/MetricCard",
+              "style": {
+                "height": "190px"
+              }
+            },
+            "type": "ia.display.view"
+          },
+          {
+            "meta": {
+              "name": "apparentPowerCard"
+            },
+            "position": {
+              "basis": "260px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.params.value": {
+                "binding": {
+                  "config": {
+                    "expression": "numberFormat(tag({view.params.baseTagPath} + \"/Power/ApparentPower\"), \"#,##0\")"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.progress": {
+                "binding": {
+                  "config": {
+                    "expression": "tag({view.params.baseTagPath} + \"/Power/ApparentPower\") / tag({view.params.baseTagPath} + \"/Capacity/RatedPower\") * 100"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.trendTagPath": {
+                "binding": {
+                  "config": {
+                    "expression": "{view.params.baseTagPath} + \"/Power/ApparentPower\""
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "params": {
+                "helperText": "Transformer apparent power output",
+                "label": "Apparent Power",
+                "status": "Good",
+                "unit": " kVA",
+                "trendLabel": "Apparent Power",
+                "trendUnit": "kVA"
+              },
+              "path": "Shared/MetricCard",
+              "style": {
+                "height": "190px"
+              }
+            },
+            "type": "ia.display.view"
+          },
+          {
+            "meta": {
+              "name": "efficiencyCard"
+            },
+            "position": {
+              "basis": "260px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.params.value": {
+                "binding": {
+                  "config": {
+                    "expression": "numberFormat(tag({view.params.baseTagPath} + \"/Efficiency/Pct\"), \"0.0\")"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.progress": {
+                "binding": {
+                  "config": {
+                    "expression": "tag({view.params.baseTagPath} + \"/Efficiency/Pct\")"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.status": {
+                "binding": {
+                  "config": {
+                    "expression": "if(tag({view.params.baseTagPath} + \"/Efficiency/Pct\") < 90, \"Warning\", \"Good\")"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.trendTagPath": {
+                "binding": {
+                  "config": {
+                    "expression": "{view.params.baseTagPath} + \"/Efficiency/Pct\""
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "params": {
+                "helperText": "Calculated transformer efficiency",
+                "label": "Efficiency",
+                "status": "Good",
+                "unit": "%",
+                "trendLabel": "Efficiency",
+                "trendUnit": "%"
+              },
+              "path": "Shared/MetricCard",
+              "style": {
+                "height": "190px"
+              }
+            },
+            "type": "ia.display.view"
+          },
+          {
+            "meta": {
+              "name": "ratedPowerCard"
+            },
+            "position": {
+              "basis": "260px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.params.value": {
+                "binding": {
+                  "config": {
+                    "expression": "numberFormat(tag({view.params.baseTagPath} + \"/Capacity/RatedPower\"), \"#,##0\")"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "params": {
+                "helperText": "Configured transformer nameplate capacity",
+                "label": "Rated Power",
+                "status": "Good",
+                "unit": " kVA"
+              },
+              "path": "Shared/MetricCard",
+              "style": {
+                "height": "190px"
+              }
+            },
+            "type": "ia.display.view"
+          },
+          {
+            "meta": {
+              "name": "loadPctCard"
+            },
+            "position": {
+              "basis": "260px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.params.value": {
+                "binding": {
+                  "config": {
+                    "expression": "numberFormat(tag({view.params.baseTagPath} + \"/Capacity/LoadPct\"), \"0\")"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.progress": {
+                "binding": {
+                  "config": {
+                    "expression": "tag({view.params.baseTagPath} + \"/Capacity/LoadPct\")"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.status": {
+                "binding": {
+                  "config": {
+                    "expression": "if(tag({view.params.baseTagPath} + \"/Capacity/LoadPct\") >= 100, \"Danger\", if(tag({view.params.baseTagPath} + \"/Capacity/LoadPct\") >= 85, \"Warning\", \"Good\"))"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.params.trendTagPath": {
+                "binding": {
+                  "config": {
+                    "expression": "{view.params.baseTagPath} + \"/Capacity/LoadPct\""
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "params": {
+                "helperText": "Apparent power as a percentage of rated capacity",
+                "label": "Transformer Load",
+                "status": "Good",
+                "unit": "%",
+                "trendLabel": "Transformer Load",
+                "trendUnit": "%"
+              },
+              "path": "Shared/MetricCard",
+              "style": {
+                "height": "190px"
+              }
+            },
+            "type": "ia.display.view"
+          }
+        ],
+        "meta": {
+          "name": "metricGrid"
+        },
+        "props": {
+          "alignContent": "flex-start",
+          "style": {
+            "gap": "18px",
+            "overflow": "visible"
+          },
+          "wrap": "wrap"
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "trendHeading"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "props": {
+              "style": {
+                "classes": "sg/heading",
+                "fontSize": "1.35rem"
+              },
+              "text": "Transformer Load"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "trendSubheading"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "props": {
+              "style": {
+                "classes": "sg/muted",
+                "fontSize": "0.95rem"
+              },
+              "text": "Current apparent power and utilization from live transformer UDT values."
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "currentLoad"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"Current apparent power: \" + numberFormat(tag({view.params.baseTagPath} + \"/Power/ApparentPower\"), \"#,##0\") + \" kVA\""
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "color": "#16213e",
+                "fontSize": "1.1rem",
+                "fontWeight": "700"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "loadProgress"
+            },
+            "position": {
+              "basis": "14px",
+              "shrink": 0
+            },
+            "propConfig": {
+              "props.value": {
+                "binding": {
+                  "config": {
+                    "expression": "tag({view.params.baseTagPath} + \"/Capacity/LoadPct\")"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "bar": {
+                "color": "#2f80ed"
+              },
+              "style": {
+                "height": "14px"
+              },
+              "track": {
+                "color": "#d9e2ef"
+              }
+            },
+            "type": "ia.display.progress"
+          }
+        ],
+        "meta": {
+          "name": "loadTrendPanel"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "props": {
+          "direction": "column",
+          "style": {
+            "classes": "sg/panel",
+            "gap": "14px",
+            "overflow": "hidden"
+          }
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "meta": {
+      "name": "transformerPage"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "classes": "sg/page",
+        "gap": "24px",
+        "minHeight": "100vh"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}
