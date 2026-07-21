@@ -1,6 +1,13 @@
 {
   "custom": {},
-  "params": {},
+  "params": {
+    "scopeKey": ""
+  },
+  "propConfig": {
+    "params.scopeKey": {
+      "paramDirection": "input"
+    }
+  },
   "props": {
     "defaultSize": {
       "height": 1920,
@@ -10,11 +17,129 @@
   "root": {
     "children": [
       {
+        "children": [
+          {
+            "meta": {
+              "name": "pageTitle"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "props": {
+              "style": {
+                "classes": "sg/heading",
+                "fontSize": "2rem"
+              },
+              "text": "Alarm Status"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "scopeIndicator"
+            },
+            "position": {
+              "grow": 1
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"Equipment scope: \" + runScript(\"gateway.alarm_rollup.get_scope_details\", 60000, {view.params.scopeKey})[\"label\"]"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "classes": "sg/muted",
+                "fontSize": "0.9rem",
+                "fontWeight": "700"
+              },
+              "text": "Equipment scope: All equipment"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "events": {
+              "dom": {
+                "onClick": {
+                  "config": {
+                    "script": "\tsystem.perspective.navigate(page=\"/Alarms\")"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                }
+              }
+            },
+            "meta": {
+              "name": "clearScopeButton"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "propConfig": {
+              "position.display": {
+                "binding": {
+                  "config": {
+                    "expression": "{view.params.scopeKey} != \"\""
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "backgroundColor": "#ffffff",
+                "borderColor": "#94a3b8",
+                "borderRadius": "4px",
+                "color": "#1f2937",
+                "fontWeight": "700",
+                "height": "32px"
+              },
+              "text": "Clear scope"
+            },
+            "type": "ia.input.button"
+          }
+        ],
         "meta": {
-          "name": "AlarmStatusTable"
+          "name": "header"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "props": {
+          "alignItems": "center",
+          "style": {
+            "classes": "sg/hero",
+            "gap": "16px"
+          },
+          "wrap": "wrap"
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "meta": {
+          "name": "alarmStatusTable"
         },
         "position": {
           "grow": 1
+        },
+        "propConfig": {
+          "props.filters.source": {
+            "binding": {
+              "config": {
+                "expression": "runScript(\"gateway.alarm_rollup.get_alarm_source_filter\", 60000, {view.params.scopeKey})"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "filters": {
+            "source": ""
+          }
         },
         "type": "ia.display.alarmstatustable"
       }
@@ -23,7 +148,11 @@
       "name": "root"
     },
     "props": {
-      "direction": "column"
+      "direction": "column",
+      "style": {
+        "classes": "sg/page",
+        "gap": "18px"
+      }
     },
     "type": "ia.container.flex"
   }

@@ -125,215 +125,43 @@
             "type": "ia.container.flex"
           },
           {
-            "children": [
-              {
-                "meta": {
-                  "name": "overallStatus"
-                },
-                "position": {
-                  "shrink": 0
-                },
-                "propConfig": {
-                  "props.style.classes": {
-                    "binding": {
-                      "config": {
-                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/CommGood\") = false, \"sg/statusDanger\", if(tag({view.params.baseTagPath} + \"/Status/Faulted\") = true, \"sg/statusDanger\", if(tag({view.params.baseTagPath} + \"/Status/Available\") = false, \"sg/statusWarning\", if(tag({view.params.baseTagPath} + \"/Alarms/Overtemperature\") = true || tag({view.params.baseTagPath} + \"/Alarms/Overload\") = true, \"sg/statusWarning\", \"sg/statusGood\"))))"
-                      },
-                      "type": "expr"
-                    }
-                  },
-                  "props.text": {
-                    "binding": {
-                      "config": {
-                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/CommGood\") = false, \"Overall: COMM LOSS\", if(tag({view.params.baseTagPath} + \"/Status/Faulted\") = true, \"Overall: FAULTED\", if(tag({view.params.baseTagPath} + \"/Status/Available\") = false, \"Overall: UNAVAILABLE\", if(tag({view.params.baseTagPath} + \"/Alarms/Overtemperature\") = true || tag({view.params.baseTagPath} + \"/Alarms/Overload\") = true, \"Overall: ALARM\", \"Overall: NORMAL\"))))"
-                      },
-                      "type": "expr"
-                    }
-                  }
-                },
-                "props": {
-                  "style": {
-                    "whiteSpace": "nowrap"
-                  }
-                },
-                "type": "ia.display.label"
-              },
-              {
-                "meta": {
-                  "name": "availableStatus"
-                },
-                "position": {
-                  "shrink": 0
-                },
-                "propConfig": {
-                  "props.style.classes": {
-                    "binding": {
-                      "config": {
-                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/Available\") = true, \"sg/statusGood\", \"sg/statusWarning\")"
-                      },
-                      "type": "expr"
-                    }
-                  },
-                  "props.text": {
-                    "binding": {
-                      "config": {
-                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/Available\") = true, \"Available: YES\", \"Available: NO\")"
-                      },
-                      "type": "expr"
-                    }
-                  }
-                },
-                "props": {
-                  "style": {
-                    "whiteSpace": "nowrap"
-                  }
-                },
-                "type": "ia.display.label"
-              },
-              {
-                "meta": {
-                  "name": "communicationStatus"
-                },
-                "position": {
-                  "shrink": 0
-                },
-                "propConfig": {
-                  "props.style.classes": {
-                    "binding": {
-                      "config": {
-                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/CommGood\") = true, \"sg/statusGood\", \"sg/statusDanger\")"
-                      },
-                      "type": "expr"
-                    }
-                  },
-                  "props.text": {
-                    "binding": {
-                      "config": {
-                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/CommGood\") = true, \"Communication: GOOD\", \"Communication: LOSS\")"
-                      },
-                      "type": "expr"
-                    }
-                  }
-                },
-                "props": {
-                  "style": {
-                    "whiteSpace": "nowrap"
-                  }
-                },
-                "type": "ia.display.label"
-              },
-              {
-                "meta": {
-                  "name": "faultStatus"
-                },
-                "position": {
-                  "shrink": 0
-                },
-                "propConfig": {
-                  "props.style.classes": {
-                    "binding": {
-                      "config": {
-                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/Faulted\") = true, \"sg/statusDanger\", \"sg/statusGood\")"
-                      },
-                      "type": "expr"
-                    }
-                  },
-                  "props.text": {
-                    "binding": {
-                      "config": {
-                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/Faulted\") = true, \"Fault State: ACTIVE\", \"Fault State: NONE\")"
-                      },
-                      "type": "expr"
-                    }
-                  }
-                },
-                "props": {
-                  "style": {
-                    "whiteSpace": "nowrap"
-                  }
-                },
-                "type": "ia.display.label"
-              },
-              {
-                "meta": {
-                  "name": "overtemperatureStatus"
-                },
-                "position": {
-                  "shrink": 0
-                },
-                "propConfig": {
-                  "props.style.classes": {
-                    "binding": {
-                      "config": {
-                        "expression": "if(tag({view.params.baseTagPath} + \"/Alarms/Overtemperature\") = true, \"sg/statusDanger\", \"sg/statusGood\")"
-                      },
-                      "type": "expr"
-                    }
-                  },
-                  "props.text": {
-                    "binding": {
-                      "config": {
-                        "expression": "if(tag({view.params.baseTagPath} + \"/Alarms/Overtemperature\") = true, \"Overtemperature: ACTIVE\", \"Overtemperature: CLEAR\")"
-                      },
-                      "type": "expr"
-                    }
-                  }
-                },
-                "props": {
-                  "style": {
-                    "whiteSpace": "nowrap"
-                  }
-                },
-                "type": "ia.display.label"
-              },
-              {
-                "meta": {
-                  "name": "overloadStatus"
-                },
-                "position": {
-                  "shrink": 0
-                },
-                "propConfig": {
-                  "props.style.classes": {
-                    "binding": {
-                      "config": {
-                        "expression": "if(tag({view.params.baseTagPath} + \"/Alarms/Overload\") = true, \"sg/statusDanger\", \"sg/statusGood\")"
-                      },
-                      "type": "expr"
-                    }
-                  },
-                  "props.text": {
-                    "binding": {
-                      "config": {
-                        "expression": "if(tag({view.params.baseTagPath} + \"/Alarms/Overload\") = true, \"Overload: ACTIVE\", \"Overload: CLEAR\")"
-                      },
-                      "type": "expr"
-                    }
-                  }
-                },
-                "props": {
-                  "style": {
-                    "whiteSpace": "nowrap"
-                  }
-                },
-                "type": "ia.display.label"
-              }
-            ],
             "meta": {
-              "name": "statusPills"
+              "name": "alarmRollup"
             },
             "position": {
+              "grow": 1,
               "shrink": 0
             },
-            "props": {
-              "alignItems": "center",
-              "style": {
-                "gap": "12px",
-                "overflow": "visible"
-              },
-              "wrap": "wrap"
+            "propConfig": {
+              "props.params.scopePaths": {
+                "binding": {
+                  "config": {
+                    "expression": "{view.params.baseTagPath}"
+                  },
+                  "transforms": [
+                    {
+                      "code": "\treturn [value.value if hasattr(value, \"value\") else value]",
+                      "type": "script"
+                    }
+                  ],
+                  "type": "expr"
+                }
+              }
             },
-            "type": "ia.container.flex"
+            "props": {
+              "params": {
+                "scopePaths": [
+                  "[T1]MBT1/Utility1/MSG1/PDU1/Transformer1/Transformer"
+                ]
+              },
+              "path": "Shared/AlarmRollup",
+              "style": {
+                "height": "auto",
+                "minHeight": "42px",
+                "width": "100%"
+              }
+            },
+            "type": "ia.display.view"
           }
         ],
         "meta": {

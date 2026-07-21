@@ -4,6 +4,14 @@
       "title": "",
       "viewPath": "DataCenter/Overview"
     },
+    "/Alarms": {
+      "title": "",
+      "viewPath": "DataCenter/AlarmStatus"
+    },
+    "/Alarms/:scopeKey": {
+      "title": "",
+      "viewPath": "DataCenter/AlarmStatus"
+    },
     "/GWHealth": {
       "title": "",
       "viewPath": "Gateway/Status"
@@ -28,14 +36,6 @@
       "title": "",
       "viewPath": "DataCenter/Utility"
     },
-    "/nav-link-2": {
-      "title": "",
-      "viewPath": "Exchange/Responsive Nav/Overview"
-    },
-    "/nav-link-3": {
-      "title": "",
-      "viewPath": "Exchange/Responsive Nav/Overview"
-    },
     "/nav-section-repeater/nav-link-1": {
       "title": "",
       "viewPath": "Exchange/Responsive Nav/Overview"
@@ -45,22 +45,6 @@
       "viewPath": "Exchange/Responsive Nav/Overview"
     },
     "/nav-section-repeater/nav-link-3": {
-      "title": "",
-      "viewPath": "Exchange/Responsive Nav/Overview"
-    },
-    "/nav-section-tree/folder-1/child-1": {
-      "title": "",
-      "viewPath": "Exchange/Responsive Nav/Overview"
-    },
-    "/nav-section-tree/folder-1/child-1/grandchild-1": {
-      "title": "",
-      "viewPath": "Exchange/Responsive Nav/Overview"
-    },
-    "/nav-section-tree/folder-1/child-2": {
-      "title": "",
-      "viewPath": "Exchange/Responsive Nav/Overview"
-    },
-    "/nav-section-tree/folder-2": {
       "title": "",
       "viewPath": "Exchange/Responsive Nav/Overview"
     },

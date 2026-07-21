@@ -80,106 +80,44 @@
             "type": "ia.display.label"
           },
           {
-            "children": [
-              {
-                "meta": {
-                  "name": "wayStatus"
-                },
-                "propConfig": {
-                  "props.style.classes": {
-                    "binding": {
-                      "config": {
-                        "expression": "if(tag({view.params.tagPath} + \"/Way/Status/Faulted\"), \"sg/statusDanger\", if(tag({view.params.tagPath} + \"/Way/Status/Available\"), \"sg/statusGood\", \"sg/statusWarning\"))"
-                      },
-                      "type": "expr"
-                    }
-                  },
-                  "props.text": {
-                    "binding": {
-                      "config": {
-                        "expression": "if(tag({view.params.tagPath} + \"/Way/Status/Faulted\"), \"WAY: FAULTED\", if(tag({view.params.tagPath} + \"/Way/Status/Available\"), \"WAY: AVAILABLE\", \"WAY: UNAVAILABLE\"))"
-                      },
-                      "type": "expr"
-                    }
-                  }
-                },
-                "props": {
-                  "style": {
-                    "whiteSpace": "nowrap"
-                  }
-                },
-                "type": "ia.display.label"
-              },
-              {
-                "meta": {
-                  "name": "breakerStatus"
-                },
-                "propConfig": {
-                  "props.style.classes": {
-                    "binding": {
-                      "config": {
-                        "expression": "if(tag({view.params.tagPath} + \"/Way/Breaker/Tripped\"), \"sg/statusDanger\", if(tag({view.params.tagPath} + \"/Way/Breaker/Closed\"), \"sg/statusGood\", \"sg/statusWarning\"))"
-                      },
-                      "type": "expr"
-                    }
-                  },
-                  "props.text": {
-                    "binding": {
-                      "config": {
-                        "expression": "if(tag({view.params.tagPath} + \"/Way/Breaker/Tripped\"), \"Breaker: TRIPPED\", if(tag({view.params.tagPath} + \"/Way/Breaker/Closed\"), \"Breaker: CLOSED\", \"Breaker: OPEN\"))"
-                      },
-                      "type": "expr"
-                    }
-                  }
-                },
-                "props": {
-                  "style": {
-                    "whiteSpace": "nowrap"
-                  }
-                },
-                "type": "ia.display.label"
-              },
-              {
-                "meta": {
-                  "name": "meterStatus"
-                },
-                "propConfig": {
-                  "props.style.classes": {
-                    "binding": {
-                      "config": {
-                        "expression": "if(tag({view.params.powerMeterTagPath} + \"/Status/CommGood\"), \"sg/statusGood\", \"sg/statusDanger\")"
-                      },
-                      "type": "expr"
-                    }
-                  },
-                  "props.text": {
-                    "binding": {
-                      "config": {
-                        "expression": "if(tag({view.params.powerMeterTagPath} + \"/Status/CommGood\"), \"Meter: COMM GOOD\", \"Meter: COMM LOSS\")"
-                      },
-                      "type": "expr"
-                    }
-                  }
-                },
-                "props": {
-                  "style": {
-                    "whiteSpace": "nowrap"
-                  }
-                },
-                "type": "ia.display.label"
-              }
-            ],
             "meta": {
-              "name": "statusPills"
+              "name": "alarmRollup"
+            },
+            "propConfig": {
+              "props.params.scopePaths": {
+                "binding": {
+                  "config": {
+                    "struct": {
+                      "powerMeterPath": "{view.params.powerMeterTagPath}",
+                      "wayPath": "{view.params.tagPath} + \"/Way\""
+                    },
+                    "waitOnAll": true
+                  },
+                  "transforms": [
+                    {
+                      "code": "\treturn [value[\"wayPath\"], value[\"powerMeterPath\"]]",
+                      "type": "script"
+                    }
+                  ],
+                  "type": "expr-struct"
+                }
+              }
             },
             "props": {
-              "alignItems": "center",
-              "style": {
-                "gap": "10px"
+              "params": {
+                "scopePaths": [
+                  "[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way1/Way",
+                  "[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way1/PowerMeter1/PowerMeter"
+                ]
               },
-              "wrap": "wrap"
+              "path": "Shared/AlarmRollup",
+              "style": {
+                "height": "auto",
+                "minHeight": "42px",
+                "width": "100%"
+              }
             },
-            "type": "ia.container.flex"
+            "type": "ia.display.view"
           }
         ],
         "meta": {

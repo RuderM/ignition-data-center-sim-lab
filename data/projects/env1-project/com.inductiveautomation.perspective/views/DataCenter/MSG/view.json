@@ -125,247 +125,43 @@
             "type": "ia.container.flex"
           },
           {
-            "children": [
-              {
-                "meta": {
-                  "name": "overallStatus"
-                },
-                "position": {
-                  "shrink": 0
-                },
-                "propConfig": {
-                  "props.style.classes": {
-                    "binding": {
-                      "config": {
-                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/CommGood\") \u003d false, \"sg/statusDanger\", if(tag({view.params.baseTagPath} + \"/Status/Faulted\") \u003d true, \"sg/statusDanger\", if(tag({view.params.baseTagPath} + \"/Status/Available\") \u003d false, \"sg/statusWarning\", \"sg/statusGood\")))"
-                      },
-                      "type": "expr"
-                    }
-                  },
-                  "props.text": {
-                    "binding": {
-                      "config": {
-                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/CommGood\") \u003d false, \"Overall: COMM LOSS\", if(tag({view.params.baseTagPath} + \"/Status/Faulted\") \u003d true, \"Overall: FAULTED\", if(tag({view.params.baseTagPath} + \"/Status/Available\") \u003d false, \"Overall: UNAVAILABLE\", \"Overall: NORMAL\")))"
-                      },
-                      "type": "expr"
-                    }
-                  }
-                },
-                "props": {
-                  "style": {
-                    "whiteSpace": "nowrap"
-                  }
-                },
-                "type": "ia.display.label"
-              },
-              {
-                "meta": {
-                  "name": "availableStatus"
-                },
-                "position": {
-                  "shrink": 0
-                },
-                "propConfig": {
-                  "props.style.classes": {
-                    "binding": {
-                      "config": {
-                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/Available\") \u003d true, \"sg/statusGood\", \"sg/statusWarning\")"
-                      },
-                      "type": "expr"
-                    }
-                  },
-                  "props.text": {
-                    "binding": {
-                      "config": {
-                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/Available\") \u003d true, \"Available: YES\", \"Available: NO\")"
-                      },
-                      "type": "expr"
-                    }
-                  }
-                },
-                "props": {
-                  "style": {
-                    "whiteSpace": "nowrap"
-                  }
-                },
-                "type": "ia.display.label"
-              },
-              {
-                "meta": {
-                  "name": "communicationStatus"
-                },
-                "position": {
-                  "shrink": 0
-                },
-                "propConfig": {
-                  "props.style.classes": {
-                    "binding": {
-                      "config": {
-                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/CommGood\") \u003d true, \"sg/statusGood\", \"sg/statusDanger\")"
-                      },
-                      "type": "expr"
-                    }
-                  },
-                  "props.text": {
-                    "binding": {
-                      "config": {
-                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/CommGood\") \u003d true, \"Communication: GOOD\", \"Communication: LOSS\")"
-                      },
-                      "type": "expr"
-                    }
-                  }
-                },
-                "props": {
-                  "style": {
-                    "whiteSpace": "nowrap"
-                  }
-                },
-                "type": "ia.display.label"
-              },
-              {
-                "meta": {
-                  "name": "faultStatus"
-                },
-                "position": {
-                  "shrink": 0
-                },
-                "propConfig": {
-                  "props.style.classes": {
-                    "binding": {
-                      "config": {
-                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/Faulted\") \u003d true, \"sg/statusDanger\", \"sg/statusGood\")"
-                      },
-                      "type": "expr"
-                    }
-                  },
-                  "props.text": {
-                    "binding": {
-                      "config": {
-                        "expression": "if(tag({view.params.baseTagPath} + \"/Status/Faulted\") \u003d true, \"Fault State: ACTIVE\", \"Fault State: NONE\")"
-                      },
-                      "type": "expr"
-                    }
-                  }
-                },
-                "props": {
-                  "style": {
-                    "whiteSpace": "nowrap"
-                  }
-                },
-                "type": "ia.display.label"
-              },
-              {
-                "meta": {
-                  "name": "mainBreakerStatus"
-                },
-                "position": {
-                  "shrink": 0
-                },
-                "propConfig": {
-                  "props.style.classes": {
-                    "binding": {
-                      "config": {
-                        "expression": "if(tag({view.params.baseTagPath} + \"/Breaker/MainClosed\") \u003d true, \"sg/statusGood\", \"sg/statusWarning\")"
-                      },
-                      "type": "expr"
-                    }
-                  },
-                  "props.text": {
-                    "binding": {
-                      "config": {
-                        "expression": "if(tag({view.params.baseTagPath} + \"/Breaker/MainClosed\") \u003d true, \"Main Breaker: CLOSED\", \"Main Breaker: OPEN\")"
-                      },
-                      "type": "expr"
-                    }
-                  }
-                },
-                "props": {
-                  "style": {
-                    "whiteSpace": "nowrap"
-                  }
-                },
-                "type": "ia.display.label"
-              },
-              {
-                "meta": {
-                  "name": "mainTripStatus"
-                },
-                "position": {
-                  "shrink": 0
-                },
-                "propConfig": {
-                  "props.style.classes": {
-                    "binding": {
-                      "config": {
-                        "expression": "if(tag({view.params.baseTagPath} + \"/Breaker/MainTripped\") \u003d true, \"sg/statusDanger\", \"sg/statusGood\")"
-                      },
-                      "type": "expr"
-                    }
-                  },
-                  "props.text": {
-                    "binding": {
-                      "config": {
-                        "expression": "if(tag({view.params.baseTagPath} + \"/Breaker/MainTripped\") \u003d true, \"Main Trip: ACTIVE\", \"Main Trip: CLEAR\")"
-                      },
-                      "type": "expr"
-                    }
-                  }
-                },
-                "props": {
-                  "style": {
-                    "whiteSpace": "nowrap"
-                  }
-                },
-                "type": "ia.display.label"
-              },
-              {
-                "meta": {
-                  "name": "groundFaultStatus"
-                },
-                "position": {
-                  "shrink": 0
-                },
-                "propConfig": {
-                  "props.style.classes": {
-                    "binding": {
-                      "config": {
-                        "expression": "if(tag({view.params.baseTagPath} + \"/Alarms/GroundFault\") \u003d true, \"sg/statusDanger\", \"sg/statusGood\")"
-                      },
-                      "type": "expr"
-                    }
-                  },
-                  "props.text": {
-                    "binding": {
-                      "config": {
-                        "expression": "if(tag({view.params.baseTagPath} + \"/Alarms/GroundFault\") \u003d true, \"Ground Fault: ACTIVE\", \"Ground Fault: CLEAR\")"
-                      },
-                      "type": "expr"
-                    }
-                  }
-                },
-                "props": {
-                  "style": {
-                    "whiteSpace": "nowrap"
-                  }
-                },
-                "type": "ia.display.label"
-              }
-            ],
             "meta": {
-              "name": "statusPills"
+              "name": "alarmRollup"
             },
             "position": {
+              "grow": 1,
               "shrink": 0
             },
-            "props": {
-              "alignItems": "center",
-              "style": {
-                "gap": "12px",
-                "overflow": "visible"
-              },
-              "wrap": "wrap"
+            "propConfig": {
+              "props.params.scopePaths": {
+                "binding": {
+                  "config": {
+                    "expression": "{view.params.baseTagPath}"
+                  },
+                  "transforms": [
+                    {
+                      "code": "\treturn [value.value if hasattr(value, \"value\") else value]",
+                      "type": "script"
+                    }
+                  ],
+                  "type": "expr"
+                }
+              }
             },
-            "type": "ia.container.flex"
+            "props": {
+              "params": {
+                "scopePaths": [
+                  "[T1]MBT1/Utility1/MSG1/MainSwitchgear"
+                ]
+              },
+              "path": "Shared/AlarmRollup",
+              "style": {
+                "height": "auto",
+                "minHeight": "42px",
+                "width": "100%"
+              }
+            },
+            "type": "ia.display.view"
           }
         ],
         "meta": {

@@ -1,0 +1,244 @@
+{
+  "custom": {},
+  "params": {
+    "scopePaths": [
+      "[T1]MBT1/Utility1/UtilitySource"
+    ]
+  },
+  "propConfig": {
+    "custom.alarmRollup": {
+      "binding": {
+        "config": {
+          "expression": "runScript(\"gateway.alarm_rollup.get_rollup\", 5000, {view.params.scopePaths})"
+        },
+        "type": "expr"
+      }
+    },
+    "params.scopePaths": {
+      "paramDirection": "input"
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 48,
+      "width": 1200
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "normalAlarmControl"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "propConfig": {
+          "position.display": {
+            "binding": {
+              "config": {
+                "expression": "{view.custom.alarmRollup.activeTotal} \u003d 0"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "backgroundColor": "transparent",
+            "borderColor": "transparent",
+            "borderRadius": "0px",
+            "color": "#1f2937",
+            "fontSize": "0.9rem",
+            "fontWeight": "700",
+            "height": "24px",
+            "padding": "0px",
+            "textAlign": "left"
+          },
+          "text": "Normal — No active alarms"
+        },
+        "type": "ia.input.button"
+      },
+      {
+        "meta": {
+          "name": "activeAlarmControl"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "propConfig": {
+          "position.display": {
+            "binding": {
+              "config": {
+                "expression": "{view.custom.alarmRollup.activeTotal} \u003e 0"
+              },
+              "type": "expr"
+            }
+          },
+          "props.style.color": {
+            "binding": {
+              "config": {
+                "expression": "{view.custom.alarmRollup.priorityColor}"
+              },
+              "type": "expr"
+            }
+          },
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "toString({view.custom.alarmRollup.activeTotal}) + \" Active alarms\""
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "backgroundColor": "transparent",
+            "borderColor": "transparent",
+            "borderRadius": "0px",
+            "fontSize": "0.9rem",
+            "fontWeight": "800",
+            "height": "24px",
+            "padding": "0px",
+            "textAlign": "left"
+          }
+        },
+        "type": "ia.input.button"
+      },
+      {
+        "meta": {
+          "name": "activePrioritiesLabel"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "propConfig": {
+          "position.display": {
+            "binding": {
+              "config": {
+                "expression": "{view.custom.alarmRollup.activeTotal} \u003e 0"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "color": "#475569",
+            "fontSize": "0.78rem",
+            "fontWeight": "700",
+            "whiteSpace": "nowrap"
+          },
+          "text": "Active priorities"
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "activePrioritiesControl"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "propConfig": {
+          "position.display": {
+            "binding": {
+              "config": {
+                "expression": "{view.custom.alarmRollup.activeTotal} \u003e 0"
+              },
+              "type": "expr"
+            }
+          },
+          "props.style.color": {
+            "binding": {
+              "config": {
+                "expression": "{view.custom.alarmRollup.priorityColor}"
+              },
+              "type": "expr"
+            }
+          },
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "{view.custom.alarmRollup.prioritySummary}"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "backgroundColor": "transparent",
+            "borderColor": "transparent",
+            "borderRadius": "0px",
+            "fontSize": "0.85rem",
+            "fontWeight": "700",
+            "height": "24px",
+            "padding": "0px",
+            "textAlign": "left"
+          }
+        },
+        "type": "ia.input.button"
+      },
+      {
+        "meta": {
+          "name": "monitoredAlarmTotal"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "toString({view.custom.alarmRollup.monitoredTotal}) + \" alarms monitored\""
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "color": "#64748b",
+            "fontSize": "0.8rem",
+            "fontWeight": "600",
+            "whiteSpace": "nowrap"
+          }
+        },
+        "type": "ia.display.label"
+      }
+    ],
+    "events": {
+      "dom": {
+        "onClick": {
+          "config": {
+            "script": "\tscope_key = self.view.custom.alarmRollup.scopeKey\n\tif scope_key:\n\t\tsystem.perspective.navigate(page=\"/Alarms/\" + scope_key)"
+          },
+          "scope": "G",
+          "type": "script"
+        }
+      }
+    },
+    "meta": {
+      "name": "alarmRollup"
+    },
+    "props": {
+      "alignItems": "center",
+      "style": {
+        "backgroundColor": "#f3f4f6",
+        "borderColor": "#d9e2ef",
+        "borderRadius": "6px",
+        "borderStyle": "solid",
+        "borderWidth": "1px",
+        "gap": "10px",
+        "minHeight": "42px",
+        "overflow": "visible",
+        "padding": "8px 12px",
+        "width": "100%"
+      },
+      "wrap": "wrap"
+    },
+    "type": "ia.container.flex"
+  }
+}

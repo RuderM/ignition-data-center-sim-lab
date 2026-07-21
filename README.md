@@ -192,6 +192,42 @@ runScript("util.trends.get_apex_line_series", 60000, {view.params.tagPath}, {vie
 Do not change this to `project.util.trends...`; that form causes Perspective
 binding errors in this project.
 
+### Alarm roll-up
+
+The Utility pilot is the reference implementation:
+
+```text
+ignition/script-python/gateway/alarm_rollup
+views/Shared/AlarmRollup
+views/DataCenter/Utility
+views/DataCenter/AlarmStatus
+```
+
+Use one gateway-side projection per equipment header. It should query only
+`"ActiveAcked"` and `"ActiveUnacked"` states, filter by alarm-source patterns
+such as `prov:T1:/tag:MBT1/Utility1/UtilitySource/*`, and return all display
+fields in one plain result object. In particular, format priority text and
+choose its color in that projection; do not pass Perspective property-tree
+values into nested `runScript()` calls.
+
+Ignition 8.3's scripting namespace does not expose
+`system.alarm.AlarmState`; pass the active-state names above to
+`system.alarm.queryStatus()`. To count configured alarms on a UDT instance,
+read its `typeId`, then inspect the UDT definition at
+`[provider]_types_/typeId`; recursive instance configuration does not reliably
+materialize inherited alarm definitions.
+
+Perspective binding transforms may receive a qualified value in Designer and a
+plain Unicode string in a browser session. When converting the Utility
+`baseTagPath` into the shared view's `scopePaths` list, support both:
+
+```python
+return [value.value if hasattr(value, "value") else value]
+```
+
+Validate this work in both Designer and a browser with an active alarm. A clean
+Flint scan alone cannot catch binding quality overlays.
+
 Utility, MSG, and PDU headers use embedded SVG one-line style page icons. Source
 assets are kept in:
 
