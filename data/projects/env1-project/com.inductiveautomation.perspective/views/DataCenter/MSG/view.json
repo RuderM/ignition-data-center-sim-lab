@@ -26,7 +26,7 @@
                 },
                 "props": {
                   "style": {
-                    "classes": "sg/heading",
+                    "classes": "sg-simple/heroTitle",
                     "fontSize": "3.2rem",
                     "overflow": "hidden",
                     "overflowWrap": "break-word",
@@ -96,7 +96,7 @@
                 },
                 "props": {
                   "style": {
-                    "classes": "sg/muted",
+                    "classes": "sg-simple/heroMuted",
                     "fontSize": "0.9rem",
                     "fontWeight": "700",
                     "overflow": "hidden",
@@ -173,7 +173,7 @@
         "props": {
           "direction": "column",
           "style": {
-            "classes": "sg/hero",
+            "classes": "sg-simple/hero",
             "gap": "18px",
             "overflow": "visible"
           }
@@ -192,7 +192,7 @@
             },
             "props": {
               "style": {
-                "classes": "sg/eyebrow"
+                "classes": "sg-simple/eyebrow"
               },
               "text": "SWITCHGEAR SUMMARY"
             },
@@ -228,7 +228,7 @@
             },
             "props": {
               "style": {
-                "classes": "sg/muted",
+                "classes": "sg-simple/muted",
                 "fontSize": "0.95rem",
                 "fontWeight": "700",
                 "overflow": "hidden",
@@ -251,7 +251,7 @@
           "alignItems": "center",
           "justify": "space-between",
           "style": {
-            "classes": "sg/panel",
+            "classes": "sg-simple/panel",
             "gap": "18px",
             "overflow": "hidden"
           },
@@ -268,7 +268,7 @@
         },
         "props": {
           "style": {
-            "classes": "sg/eyebrow"
+            "classes": "sg-simple/eyebrow"
           },
           "text": "Live Electrical Metrics"
         },
@@ -326,7 +326,7 @@
                 "trendUnit": "V",
                 "unit": " V"
               },
-              "path": "Shared/MetricCard",
+              "path": "Shared/SimpleMetricCard",
               "style": {
                 "height": "190px"
               }
@@ -376,7 +376,7 @@
                 "trendUnit": "A",
                 "unit": " A"
               },
-              "path": "Shared/MetricCard",
+              "path": "Shared/SimpleMetricCard",
               "style": {
                 "height": "190px"
               }
@@ -433,7 +433,7 @@
                 "trendUnit": "Hz",
                 "unit": " Hz"
               },
-              "path": "Shared/MetricCard",
+              "path": "Shared/SimpleMetricCard",
               "style": {
                 "height": "190px"
               }
@@ -483,7 +483,7 @@
                 "trendUnit": "kW",
                 "unit": " kW"
               },
-              "path": "Shared/MetricCard",
+              "path": "Shared/SimpleMetricCard",
               "style": {
                 "height": "190px"
               }
@@ -533,7 +533,7 @@
                 "trendUnit": "kVA",
                 "unit": " kVA"
               },
-              "path": "Shared/MetricCard",
+              "path": "Shared/SimpleMetricCard",
               "style": {
                 "height": "190px"
               }
@@ -590,7 +590,7 @@
                 "trendUnit": "",
                 "unit": ""
               },
-              "path": "Shared/MetricCard",
+              "path": "Shared/SimpleMetricCard",
               "style": {
                 "height": "190px"
               }
@@ -633,7 +633,7 @@
                 "trendUnit": "kWh",
                 "unit": " kWh"
               },
-              "path": "Shared/MetricCard",
+              "path": "Shared/SimpleMetricCard",
               "style": {
                 "height": "190px"
               }
@@ -666,7 +666,7 @@
                 "status": "Good",
                 "unit": " A"
               },
-              "path": "Shared/MetricCard",
+              "path": "Shared/SimpleMetricCard",
               "style": {
                 "height": "190px"
               }
@@ -723,7 +723,7 @@
                 "trendUnit": "%",
                 "unit": "%"
               },
-              "path": "Shared/MetricCard",
+              "path": "Shared/SimpleMetricCard",
               "style": {
                 "height": "190px"
               }
@@ -755,7 +755,7 @@
             },
             "props": {
               "style": {
-                "classes": "sg/heading",
+                "classes": "sg-simple/heading",
                 "fontSize": "1.35rem"
               },
               "text": "Switchgear Load"
@@ -771,7 +771,7 @@
             },
             "props": {
               "style": {
-                "classes": "sg/muted",
+                "classes": "sg-simple/muted",
                 "fontSize": "0.95rem"
               },
               "text": "Current demand and bus utilization from live UDT values."
@@ -845,7 +845,7 @@
         "props": {
           "direction": "column",
           "style": {
-            "classes": "sg/panel",
+            "classes": "sg-simple/panel",
             "gap": "14px",
             "overflow": "hidden"
           }
@@ -859,7 +859,7 @@
     "props": {
       "direction": "column",
       "style": {
-        "classes": "sg/page",
+        "classes": "sg-simple/page",
         "gap": "24px",
         "minHeight": "100vh"
       }

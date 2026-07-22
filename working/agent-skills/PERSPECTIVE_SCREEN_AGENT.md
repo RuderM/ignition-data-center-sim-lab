@@ -166,9 +166,10 @@ The card accepts:
 }
 ```
 
-Bind card params rather than duplicating the card layout. Use `status` values of `Good`, `Warning`, or `Danger` so the shared component maps them to the existing status style classes.
-
-Use `progress` for percent-like values or for normalized values where the range is obvious from the UDT. If a metric does not have a meaningful 0-100 scale, set `progress` to `0` or omit the visual emphasis by using a custom panel only when necessary.
+`status` (`Good`, `Warning`, `Danger`) and `progress` are inputs of legacy
+`Shared/MetricCard`; use them only where that card is deliberately retained.
+`Shared/SimpleMetricCard` accepts them for migration compatibility but keeps its
+cards neutral, so do not use either as a visual-emphasis mechanism.
 
 ### `Shared/SimpleMetricCard`
 
@@ -181,6 +182,8 @@ duplicating card component trees. Its inputs are:
   "value": "Unavailable",
   "unit": "",
   "helperText": "",
+  "status": "Good",
+  "progress": 0,
   "trendTagPath": "",
   "trendLabel": "",
   "trendUnit": ""

@@ -26,7 +26,7 @@
                 },
                 "props": {
                   "style": {
-                    "classes": "sg/heading",
+                    "classes": "sg-simple/heroTitle",
                     "fontSize": "3.2rem",
                     "overflow": "hidden",
                     "overflowWrap": "break-word",
@@ -96,7 +96,7 @@
                 },
                 "props": {
                   "style": {
-                    "classes": "sg/muted",
+                    "classes": "sg-simple/heroMuted",
                     "fontSize": "0.9rem",
                     "fontWeight": "700",
                     "overflow": "hidden",
@@ -173,7 +173,7 @@
         "props": {
           "direction": "column",
           "style": {
-            "classes": "sg/hero",
+            "classes": "sg-simple/hero",
             "gap": "18px",
             "overflow": "visible"
           }
@@ -192,7 +192,7 @@
             },
             "props": {
               "style": {
-                "classes": "sg/eyebrow"
+                "classes": "sg-simple/eyebrow"
               },
               "text": "TRANSFORMER SUMMARY"
             },
@@ -228,7 +228,7 @@
             },
             "props": {
               "style": {
-                "classes": "sg/muted",
+                "classes": "sg-simple/muted",
                 "fontSize": "0.95rem",
                 "fontWeight": "700",
                 "overflow": "hidden",
@@ -251,7 +251,7 @@
           "alignItems": "center",
           "justify": "space-between",
           "style": {
-            "classes": "sg/panel",
+            "classes": "sg-simple/panel",
             "gap": "18px",
             "overflow": "hidden"
           },
@@ -268,7 +268,7 @@
         },
         "props": {
           "style": {
-            "classes": "sg/eyebrow"
+            "classes": "sg-simple/eyebrow"
           },
           "text": "Live Electrical Metrics"
         },
@@ -319,7 +319,7 @@
                 "trendLabel": "Primary Voltage",
                 "trendUnit": "V"
               },
-              "path": "Shared/MetricCard",
+              "path": "Shared/SimpleMetricCard",
               "style": {
                 "height": "190px"
               }
@@ -377,7 +377,7 @@
                 "trendLabel": "Secondary Voltage",
                 "trendUnit": "V"
               },
-              "path": "Shared/MetricCard",
+              "path": "Shared/SimpleMetricCard",
               "style": {
                 "height": "190px"
               }
@@ -427,7 +427,7 @@
                 "trendLabel": "Secondary Current",
                 "trendUnit": "A"
               },
-              "path": "Shared/MetricCard",
+              "path": "Shared/SimpleMetricCard",
               "style": {
                 "height": "190px"
               }
@@ -485,7 +485,7 @@
                 "trendLabel": "Enclosure Temp",
                 "trendUnit": "degC"
               },
-              "path": "Shared/MetricCard",
+              "path": "Shared/SimpleMetricCard",
               "style": {
                 "height": "190px"
               }
@@ -543,7 +543,7 @@
                 "trendLabel": "Winding Temp",
                 "trendUnit": "degC"
               },
-              "path": "Shared/MetricCard",
+              "path": "Shared/SimpleMetricCard",
               "style": {
                 "height": "190px"
               }
@@ -593,7 +593,7 @@
                 "trendLabel": "Real Power",
                 "trendUnit": "kW"
               },
-              "path": "Shared/MetricCard",
+              "path": "Shared/SimpleMetricCard",
               "style": {
                 "height": "190px"
               }
@@ -643,7 +643,7 @@
                 "trendLabel": "Apparent Power",
                 "trendUnit": "kVA"
               },
-              "path": "Shared/MetricCard",
+              "path": "Shared/SimpleMetricCard",
               "style": {
                 "height": "190px"
               }
@@ -701,7 +701,7 @@
                 "trendLabel": "Efficiency",
                 "trendUnit": "%"
               },
-              "path": "Shared/MetricCard",
+              "path": "Shared/SimpleMetricCard",
               "style": {
                 "height": "190px"
               }
@@ -733,7 +733,7 @@
                 "status": "Good",
                 "unit": " kVA"
               },
-              "path": "Shared/MetricCard",
+              "path": "Shared/SimpleMetricCard",
               "style": {
                 "height": "190px"
               }
@@ -791,7 +791,7 @@
                 "trendLabel": "Transformer Load",
                 "trendUnit": "%"
               },
-              "path": "Shared/MetricCard",
+              "path": "Shared/SimpleMetricCard",
               "style": {
                 "height": "190px"
               }
@@ -823,7 +823,7 @@
             },
             "props": {
               "style": {
-                "classes": "sg/heading",
+                "classes": "sg-simple/heading",
                 "fontSize": "1.35rem"
               },
               "text": "Transformer Load"
@@ -839,7 +839,7 @@
             },
             "props": {
               "style": {
-                "classes": "sg/muted",
+                "classes": "sg-simple/muted",
                 "fontSize": "0.95rem"
               },
               "text": "Current apparent power and utilization from live transformer UDT values."
@@ -913,7 +913,7 @@
         "props": {
           "direction": "column",
           "style": {
-            "classes": "sg/panel",
+            "classes": "sg-simple/panel",
             "gap": "14px",
             "overflow": "hidden"
           }
@@ -927,7 +927,7 @@
     "props": {
       "direction": "column",
       "style": {
-        "classes": "sg/page",
+        "classes": "sg-simple/page",
         "gap": "24px",
         "minHeight": "100vh"
       }

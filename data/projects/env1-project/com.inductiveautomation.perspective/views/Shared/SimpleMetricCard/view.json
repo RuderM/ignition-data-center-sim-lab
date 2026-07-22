@@ -3,6 +3,8 @@
   "params": {
     "helperText": "",
     "label": "Metric",
+    "progress": 0,
+    "status": "Good",
     "unit": "",
     "value": "Unavailable",
     "trendTagPath": "",
@@ -14,6 +16,8 @@
     "params.label": {"paramDirection": "input"},
     "params.unit": {"paramDirection": "input"},
     "params.value": {"paramDirection": "input"},
+    "params.progress": {"paramDirection": "input"},
+    "params.status": {"paramDirection": "input"},
     "params.trendTagPath": {"paramDirection": "input"},
     "params.trendLabel": {"paramDirection": "input"},
     "params.trendUnit": {"paramDirection": "input"}
@@ -44,7 +48,7 @@
               "dom": {
                 "onClick": {
                   "config": {
-                    "script": "\ttag_path = self.view.params.trendTagPath\n\tif not tag_path:\n\t\treturn\n\n\tlabel = self.view.params.trendLabel or self.view.params.label\n\tunit = (self.view.params.trendUnit or self.view.params.unit or \"\").strip()\n\tpopup_id = \"simpleMetricTrend_\" + tag_path.replace(\"[\", \"\").replace(\"]\", \"\").replace(\"/\", \"_\").replace(\" \", \"_\")\n\n\tsystem.perspective.openPopup(\n\t\tpopup_id,\n\t\t\"Shared/MetricTrendPopup\",\n\t\tparams={\"tagPath\": tag_path, \"label\": label, \"unit\": unit},\n\t\ttitle=label,\n\t\tposition={\"right\": 24, \"top\": 120},\n\t\tshowCloseIcon=True,\n\t\tdraggable=True,\n\t\tresizable=True,\n\t\tmodal=False,\n\t\toverlayDismiss=True,\n\t\tviewportBound=True\n\t)"
+                    "script": "\ttag_path = self.view.params.trendTagPath\n\tif not tag_path:\n\t\treturn\n\n\tlabel = self.view.params.trendLabel or self.view.params.label\n\tunit = (self.view.params.trendUnit or self.view.params.unit or \"\").strip()\n\n\tsystem.perspective.openPopup(\n\t\t\"simpleMetricTrend_\" + tag_path.replace(\"[\", \"\").replace(\"]\", \"\").replace(\"/\", \"_\").replace(\" \", \"_\"),\n\t\t\"Shared/MetricTrendPopup\",\n\t\tparams={\"tagPath\": tag_path, \"label\": label, \"unit\": unit},\n\t\ttitle=label,\n\t\tposition={\"right\": 24, \"top\": 120},\n\t\tshowCloseIcon=True,\n\t\tdraggable=True,\n\t\tresizable=True,\n\t\tmodal=False,\n\t\toverlayDismiss=True,\n\t\tviewportBound=True\n\t)"
                   },
                   "scope": "G",
                   "type": "script"
