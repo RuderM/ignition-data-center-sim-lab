@@ -98,9 +98,32 @@ Reuse these existing style classes first:
 - `sg/statusWarning`
 - `sg/statusDanger`
 
-Use inline styles for layout, sizing, spacing, overflow control, and one-off component tuning. Add a new Perspective style class only when the visual pattern is likely to be reused across multiple screens.
 
-Keep the current palette and density:
+### Design-system screens (`sg-simple`)
+
+For new SCADA screens based on the exported design system in `working/ds/`,
+prefer `sg-simple` over the legacy `sg` family:
+
+- Surface and layout: `sg-simple/page`, `sg-simple/hero`, `sg-simple/panel`
+- Typography: `sg-simple/heroTitle`, `sg-simple/heroEyebrow`,
+  `sg-simple/heading`, `sg-simple/eyebrow`, `sg-simple/muted`,
+  `sg-simple/metricValue`, `sg-simple/accentValue`
+- Reusable controls: `sg-simple/metricCard`, `sg-simple/statusPill`,
+  `sg-simple/trendIcon`
+
+`sg-simple` implements the current Inter-based system: `#F5F7FA` page
+surface, white panels, `#0053AD` primary blue, `#0671E0` action/progress blue,
+`#212121` ink, `#717171`/`#89939E` supporting text, `#DBEDFF` borders, and
+8px card radii.
+
+Apply static typography, color, borders, radius, shadows, and padding through
+these style classes. Inline styles are reserved for flex layout/sizing, overflow
+control, data-bound state colors, and component properties that Perspective
+does not emit from a style class (for example, the metric trend icon's 24px
+dimensions).
+For legacy screens, use inline styles only for layout, sizing, spacing, overflow control, and one-off component tuning. Add a new Perspective style class only when the visual pattern is likely to be reused across multiple screens.
+
+Keep the legacy `sg` palette and density for legacy screens:
 
 - Page background: light gray surface.
 - Panels/cards: white with light border.
@@ -117,10 +140,10 @@ Use the existing `Gateway/Status` screen as the structural reference.
 
 Typical equipment screen structure:
 
-- Root `ia.container.flex`, column direction, `sg/page`, full-height scrolling.
+- Root `ia.container.flex`, column direction, `sg/page` or `sg-simple/page`, full-height scrolling.
 - Header or hero panel with equipment name, area/path, status pills, and short context.
 - Summary panel for device role, manufacturer/model, upstream/downstream relation, or other descriptive metadata.
-- KPI grid using `ia.display.view` instances of `Shared/MetricCard` for simple numeric values.
+- KPI grid using `Shared/MetricCard` on legacy screens or `Shared/SimpleMetricCard` on `sg-simple` screens.
 - Trend or chart panel when the UDT includes historical measurement points.
 - Action buttons or links only when requested or clearly present in the wireframe.
 
@@ -146,6 +169,27 @@ The card accepts:
 Bind card params rather than duplicating the card layout. Use `status` values of `Good`, `Warning`, or `Danger` so the shared component maps them to the existing status style classes.
 
 Use `progress` for percent-like values or for normalized values where the range is obvious from the UDT. If a metric does not have a meaningful 0-100 scale, set `progress` to `0` or omit the visual emphasis by using a custom panel only when necessary.
+
+### `Shared/SimpleMetricCard`
+
+Use `Shared/SimpleMetricCard` for `sg-simple` metric grids instead of
+duplicating card component trees. Its inputs are:
+
+```json
+{
+  "label": "Metric",
+  "value": "Unavailable",
+  "unit": "",
+  "helperText": "",
+  "trendTagPath": "",
+  "trendLabel": "",
+  "trendUnit": ""
+}
+```
+
+Bind `trendTagPath` to the historized tag. A non-empty value displays the chart
+icon and opens `Shared/MetricTrendPopup`; use `trendLabel` and `trendUnit` to
+label that popup correctly.
 
 ## Routes
 

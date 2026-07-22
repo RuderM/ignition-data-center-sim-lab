@@ -1,0 +1,11 @@
+{
+  "base": {
+    "style": {
+      "color": "#0663C7",
+      "cursor": "pointer",
+      "opacity": 0.72,
+      "padding": "2px",
+      "width": "24px"
+    }
+  }
+}

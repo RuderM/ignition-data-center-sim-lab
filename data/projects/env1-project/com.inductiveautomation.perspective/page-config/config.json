@@ -36,6 +36,10 @@
       "title": "",
       "viewPath": "DataCenter/Utility"
     },
+    "/Utility-DS": {
+      "title": "",
+      "viewPath": "DataCenter/UtilityDesignSystem"
+    },
     "/nav-section-repeater/nav-link-1": {
       "title": "",
       "viewPath": "Exchange/Responsive Nav/Overview"

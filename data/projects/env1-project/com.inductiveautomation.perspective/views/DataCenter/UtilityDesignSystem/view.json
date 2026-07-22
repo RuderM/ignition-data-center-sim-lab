@@ -1,0 +1,272 @@
+{
+  "custom": {},
+  "params": {
+    "baseTagPath": "[T1]MBT1/Utility1/UtilitySource"
+  },
+  "propConfig": {
+    "params.baseTagPath": {
+      "paramDirection": "input"
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 1120,
+      "width": 1600
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "children": [
+          {
+            "meta": {"name": "breadcrumb"},
+            "props": {"style": {"classes": "sg-simple/heroEyebrow"}, "text": "MBT1  /  ELECTRICAL DISTRIBUTION  /  SOURCE"},
+            "type": "ia.display.label"
+          },
+          {
+            "children": [
+              {
+                "meta": {"name": "screenTitle"},
+                "position": {"grow": 1},
+                "props": {"style": {"classes": "sg-simple/heroTitle"}, "text": "Utility Source"},
+                "type": "ia.display.label"
+              },
+              {
+                "meta": {"name": "availableStatus"},
+                "propConfig": {
+                  "props.style.background": {"binding": {"config": {"expression": "if(tag({view.params.baseTagPath} + \"/Status/Available\"), \"#F1FBF8\", \"#FFF1F0\")"}, "type": "expr"}},
+                  "props.style.color": {"binding": {"config": {"expression": "if(tag({view.params.baseTagPath} + \"/Status/Available\"), \"#115B43\", \"#C33025\")"}, "type": "expr"}},
+                  "props.text": {"binding": {"config": {"expression": "if(tag({view.params.baseTagPath} + \"/Status/Available\"), \"Available\", \"Unavailable\")"}, "type": "expr"}}
+                },
+                "props": {"style": {"classes": "sg-simple/statusPill"}, "text": "Available"},
+                "type": "ia.display.label"
+              },
+              {
+                "meta": {"name": "communicationStatus"},
+                "propConfig": {
+                  "props.style.background": {"binding": {"config": {"expression": "if(tag({view.params.baseTagPath} + \"/Status/CommGood\"), \"#EEF5FC\", \"#FFF8EC\")"}, "type": "expr"}},
+                  "props.style.color": {"binding": {"config": {"expression": "if(tag({view.params.baseTagPath} + \"/Status/CommGood\"), \"#0053AD\", \"#E48900\")"}, "type": "expr"}},
+                  "props.text": {"binding": {"config": {"expression": "if(tag({view.params.baseTagPath} + \"/Status/CommGood\"), \"Communications normal\", \"Communications lost\")"}, "type": "expr"}}
+                },
+                "props": {"style": {"classes": "sg-simple/statusPill"}, "text": "Communications normal"},
+                "type": "ia.display.label"
+              }
+            ],
+            "meta": {"name": "titleRow"},
+            "props": {"alignItems": "center", "style": {"gap": "8px"}, "wrap": "wrap"},
+            "type": "ia.container.flex"
+          },
+          {
+            "meta": {"name": "headerDescription"},
+            "propConfig": {
+              "props.text": {"binding": {"config": {"expression": "\"Live source telemetry for \" + {view.params.baseTagPath}"}, "type": "expr"}}
+            },
+            "props": {"style": {"color": "#DBEDFF", "fontSize": "1rem"}, "text": "Live source telemetry"},
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {"name": "alarmRollup"},
+            "propConfig": {
+              "props.params.scopePaths": {
+                "binding": {
+                  "config": {"expression": "{view.params.baseTagPath}"},
+                  "transforms": [{"code": "\treturn [value.value if hasattr(value, \"value\") else value]", "type": "script"}],
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "params": {"scopePaths": ["[T1]MBT1/Utility1/UtilitySource"]},
+              "path": "Shared/AlarmRollup",
+              "style": {"height": "42px", "width": "100%"}
+            },
+            "type": "ia.display.view"
+          }
+        ],
+        "meta": {"name": "utilityHeader"},
+        "props": {"direction": "column", "style": {"classes": "sg-simple/hero", "gap": "12px"}},
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "children": [
+              {"meta": {"name": "label"}, "props": {"style": {"classes": "sg-simple/eyebrow"}, "text": "SUPPLY PATH"}, "type": "ia.display.label"},
+              {"meta": {"name": "value"}, "props": {"style": {"fontWeight": "600"}, "text": "Utility_1 supplies MBT1 through downstream main switchgear MSG_1."}, "type": "ia.display.label"}
+            ],
+            "meta": {"name": "supplyPath"},
+            "position": {"basis": "420px", "grow": 1},
+            "props": {"direction": "column", "style": {"gap": "8px"}},
+            "type": "ia.container.flex"
+          },
+          {
+            "children": [
+              {"meta": {"name": "label"}, "props": {"style": {"classes": "sg-simple/eyebrow"}, "text": "EQUIPMENT"}, "type": "ia.display.label"},
+              {"meta": {"name": "value"}, "props": {"style": {"classes": "sg-simple/muted"}, "text": "GridSim Industries  ·  GS-13K8-01-SIM"}, "type": "ia.display.label"}
+            ],
+            "meta": {"name": "equipmentIdentity"},
+            "position": {"basis": "320px", "grow": 1},
+            "props": {"direction": "column", "style": {"gap": "8px"}},
+            "type": "ia.container.flex"
+          },
+          {
+            "children": [
+              {"meta": {"name": "label"}, "props": {"style": {"classes": "sg-simple/eyebrow"}, "text": "CURRENT LOAD"}, "type": "ia.display.label"},
+              {
+                "meta": {"name": "value"},
+                "propConfig": {"props.text": {"binding": {"config": {"expression": "numberFormat(tag({view.params.baseTagPath} + \"/Capacity/LoadPct\"), \"0\") + \"% of rated capacity\""}, "type": "expr"}}},
+                "props": {"style": {"classes": "sg-simple/accentValue"}, "text": "0% of rated capacity"},
+                "type": "ia.display.label"
+              }
+            ],
+            "meta": {"name": "currentLoad"},
+            "position": {"basis": "260px", "grow": 1},
+            "props": {"direction": "column", "style": {"gap": "8px"}},
+            "type": "ia.container.flex"
+          }
+        ],
+        "meta": {"name": "utilitySummary"},
+        "props": {"alignItems": "center", "style": {"classes": "sg-simple/panel", "gap": "24px"}, "wrap": "wrap"},
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {"meta": {"name": "title"}, "props": {"style": {"classes": "sg-simple/heading"}, "text": "Live measurements"}, "type": "ia.display.label"},
+          {"meta": {"name": "description"}, "props": {"style": {"classes": "sg-simple/muted"}, "text": "Select the chart icon on a metric card to open its one-hour or eight-hour history."}, "type": "ia.display.label"}
+        ],
+        "meta": {"name": "measurementsHeading"},
+        "props": {"direction": "column", "style": {"gap": "4px"}},
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "meta": {"name": "voltageCard"},
+            "position": {"basis": "250px", "grow": 1},
+            "propConfig": {
+              "props.params.trendTagPath": {"binding": {"config": {"expression": "{view.params.baseTagPath} + \"/Electrical/VoltageLLAvg\""}, "type": "expr"}},
+              "props.params.value": {"binding": {"config": {"expression": "numberFormat(tag({view.params.baseTagPath} + \"/Electrical/VoltageLLAvg\") / 1000, \"0.0\")"}, "type": "expr"}}
+            },
+            "props": {"params": {"helperText": "Average line-to-line voltage", "label": "Voltage", "trendLabel": "Voltage", "trendUnit": "kV", "unit": " kV"}, "path": "Shared/SimpleMetricCard", "style": {"height": "156px"}},
+            "type": "ia.display.view"
+          },
+          {
+            "meta": {"name": "currentCard"},
+            "position": {"basis": "250px", "grow": 1},
+            "propConfig": {
+              "props.params.trendTagPath": {"binding": {"config": {"expression": "{view.params.baseTagPath} + \"/Electrical/CurrentAvg\""}, "type": "expr"}},
+              "props.params.value": {"binding": {"config": {"expression": "numberFormat(tag({view.params.baseTagPath} + \"/Electrical/CurrentAvg\"), \"0.0\")"}, "type": "expr"}}
+            },
+            "props": {"params": {"helperText": "Average utility current", "label": "Current", "trendLabel": "Current", "trendUnit": "A", "unit": " A"}, "path": "Shared/SimpleMetricCard", "style": {"height": "156px"}},
+            "type": "ia.display.view"
+          },
+          {
+            "meta": {"name": "frequencyCard"},
+            "position": {"basis": "250px", "grow": 1},
+            "propConfig": {
+              "props.params.trendTagPath": {"binding": {"config": {"expression": "{view.params.baseTagPath} + \"/Electrical/Frequency\""}, "type": "expr"}},
+              "props.params.value": {"binding": {"config": {"expression": "numberFormat(tag({view.params.baseTagPath} + \"/Electrical/Frequency\"), \"0.0\")"}, "type": "expr"}}
+            },
+            "props": {"params": {"helperText": "Incoming utility frequency", "label": "Frequency", "trendLabel": "Frequency", "trendUnit": "Hz", "unit": " Hz"}, "path": "Shared/SimpleMetricCard", "style": {"height": "156px"}},
+            "type": "ia.display.view"
+          },
+          {
+            "meta": {"name": "powerFactorCard"},
+            "position": {"basis": "250px", "grow": 1},
+            "propConfig": {
+              "props.params.trendTagPath": {"binding": {"config": {"expression": "{view.params.baseTagPath} + \"/Power/PowerFactor\""}, "type": "expr"}},
+              "props.params.value": {"binding": {"config": {"expression": "numberFormat(tag({view.params.baseTagPath} + \"/Power/PowerFactor\"), \"0.00\")"}, "type": "expr"}}
+            },
+            "props": {"params": {"helperText": "Delivered power quality", "label": "Power Factor", "trendLabel": "Power Factor", "trendUnit": "", "unit": ""}, "path": "Shared/SimpleMetricCard", "style": {"height": "156px"}},
+            "type": "ia.display.view"
+          },
+          {
+            "meta": {"name": "realPowerCard"},
+            "position": {"basis": "250px", "grow": 1},
+            "propConfig": {
+              "props.params.trendTagPath": {"binding": {"config": {"expression": "{view.params.baseTagPath} + \"/Power/RealPower\""}, "type": "expr"}},
+              "props.params.value": {"binding": {"config": {"expression": "numberFormat(tag({view.params.baseTagPath} + \"/Power/RealPower\"), \"#,##0\")"}, "type": "expr"}}
+            },
+            "props": {"params": {"helperText": "Active site demand", "label": "Real Power", "trendLabel": "Real Power", "trendUnit": "kW", "unit": " kW"}, "path": "Shared/SimpleMetricCard", "style": {"height": "156px"}},
+            "type": "ia.display.view"
+          },
+          {
+            "meta": {"name": "apparentPowerCard"},
+            "position": {"basis": "250px", "grow": 1},
+            "propConfig": {
+              "props.params.trendTagPath": {"binding": {"config": {"expression": "{view.params.baseTagPath} + \"/Power/ApparentPower\""}, "type": "expr"}},
+              "props.params.value": {"binding": {"config": {"expression": "numberFormat(tag({view.params.baseTagPath} + \"/Power/ApparentPower\"), \"#,##0\")"}, "type": "expr"}}
+            },
+            "props": {"params": {"helperText": "Utility apparent power", "label": "Apparent Power", "trendLabel": "Apparent Power", "trendUnit": "kVA", "unit": " kVA"}, "path": "Shared/SimpleMetricCard", "style": {"height": "156px"}},
+            "type": "ia.display.view"
+          },
+          {
+            "meta": {"name": "energyCard"},
+            "position": {"basis": "250px", "grow": 1},
+            "propConfig": {
+              "props.params.trendTagPath": {"binding": {"config": {"expression": "{view.params.baseTagPath} + \"/Energy/TotalEnergy\""}, "type": "expr"}},
+              "props.params.value": {"binding": {"config": {"expression": "numberFormat(tag({view.params.baseTagPath} + \"/Energy/TotalEnergy\"), \"#,##0\")"}, "type": "expr"}}
+            },
+            "props": {"params": {"helperText": "Accumulated consumption", "label": "Total Energy", "trendLabel": "Total Energy", "trendUnit": "kWh", "unit": " kWh"}, "path": "Shared/SimpleMetricCard", "style": {"height": "156px"}},
+            "type": "ia.display.view"
+          },
+          {
+            "meta": {"name": "loadCard"},
+            "position": {"basis": "250px", "grow": 1},
+            "propConfig": {
+              "props.params.trendTagPath": {"binding": {"config": {"expression": "{view.params.baseTagPath} + \"/Capacity/LoadPct\""}, "type": "expr"}},
+              "props.params.value": {"binding": {"config": {"expression": "numberFormat(tag({view.params.baseTagPath} + \"/Capacity/LoadPct\"), \"0\")"}, "type": "expr"}}
+            },
+            "props": {"params": {"helperText": "Share of rated capacity", "label": "Utility Load", "trendLabel": "Utility Load", "trendUnit": "%", "unit": "%"}, "path": "Shared/SimpleMetricCard", "style": {"height": "156px"}},
+            "type": "ia.display.view"
+          }
+        ],
+        "meta": {"name": "measurementGrid"},
+        "props": {"style": {"gap": "16px"}, "wrap": "wrap"},
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "children": [
+              {"meta": {"name": "label"}, "props": {"style": {"classes": "sg-simple/eyebrow"}, "text": "REAL POWER DEMAND"}, "type": "ia.display.label"},
+              {
+                "meta": {"name": "value"},
+                "propConfig": {"props.text": {"binding": {"config": {"expression": "numberFormat(tag({view.params.baseTagPath} + \"/Power/RealPower\"), \"#,##0\") + \" kW\""}, "type": "expr"}}},
+                "props": {"style": {"classes": "sg-simple/metricValue"}, "text": "0 kW"},
+                "type": "ia.display.label"
+              },
+              {"meta": {"name": "description"}, "props": {"style": {"classes": "sg-simple/muted"}, "text": "Current real power against the 2,000 kW utility service range."}, "type": "ia.display.label"}
+            ],
+            "meta": {"name": "demandSummary"},
+            "position": {"basis": "320px", "grow": 1},
+            "props": {"direction": "column", "style": {"gap": "8px"}},
+            "type": "ia.container.flex"
+          },
+          {
+            "children": [
+              {
+                "meta": {"name": "capacityProgress"},
+                "position": {"basis": "14px", "shrink": 0},
+                "propConfig": {"props.value": {"binding": {"config": {"expression": "tag({view.params.baseTagPath} + \"/Capacity/LoadPct\")"}, "type": "expr"}}},
+                "props": {"bar": {"color": "#0671E0"}, "style": {"height": "14px"}, "track": {"color": "#DBEDFF"}},
+                "type": "ia.display.progress"
+              },
+              {"meta": {"name": "caption"}, "props": {"style": {"classes": "sg-simple/muted"}, "text": "Rated utility capacity: 2,000 kW"}, "type": "ia.display.label"}
+            ],
+            "meta": {"name": "capacityMeter"},
+            "position": {"basis": "420px", "grow": 1},
+            "props": {"direction": "column", "justify": "center", "style": {"gap": "10px"}},
+            "type": "ia.container.flex"
+          }
+        ],
+        "meta": {"name": "powerDemandPanel"},
+        "props": {"alignItems": "center", "style": {"classes": "sg-simple/panel", "gap": "28px"}, "wrap": "wrap"},
+        "type": "ia.container.flex"
+      }
+    ],
+    "meta": {"name": "utilityDesignSystemPage"},
+    "props": {"direction": "column", "style": {"classes": "sg-simple/page", "gap": "24px", "minHeight": "100vh"}},
+    "type": "ia.container.flex"
+  }
+}

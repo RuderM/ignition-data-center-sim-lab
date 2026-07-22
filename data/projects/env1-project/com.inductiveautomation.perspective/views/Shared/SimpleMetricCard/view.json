@@ -1,0 +1,111 @@
+{
+  "custom": {},
+  "params": {
+    "helperText": "",
+    "label": "Metric",
+    "unit": "",
+    "value": "Unavailable",
+    "trendTagPath": "",
+    "trendLabel": "",
+    "trendUnit": ""
+  },
+  "propConfig": {
+    "params.helperText": {"paramDirection": "input"},
+    "params.label": {"paramDirection": "input"},
+    "params.unit": {"paramDirection": "input"},
+    "params.value": {"paramDirection": "input"},
+    "params.trendTagPath": {"paramDirection": "input"},
+    "params.trendLabel": {"paramDirection": "input"},
+    "params.trendUnit": {"paramDirection": "input"}
+  },
+  "props": {
+    "defaultSize": {"height": 156, "width": 250}
+  },
+  "root": {
+    "children": [
+      {
+        "children": [
+          {
+            "meta": {"name": "label"},
+            "position": {"grow": 1},
+            "propConfig": {
+              "props.text": {
+                "binding": {"config": {"expression": "{view.params.label}"}, "type": "expr"}
+              }
+            },
+            "props": {
+              "style": {"classes": "sg-simple/eyebrow", "overflow": "hidden", "textOverflow": "ellipsis", "whiteSpace": "nowrap"},
+              "text": "METRIC"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "events": {
+              "dom": {
+                "onClick": {
+                  "config": {
+                    "script": "\ttag_path = self.view.params.trendTagPath\n\tif not tag_path:\n\t\treturn\n\n\tlabel = self.view.params.trendLabel or self.view.params.label\n\tunit = (self.view.params.trendUnit or self.view.params.unit or \"\").strip()\n\tpopup_id = \"simpleMetricTrend_\" + tag_path.replace(\"[\", \"\").replace(\"]\", \"\").replace(\"/\", \"_\").replace(\" \", \"_\")\n\n\tsystem.perspective.openPopup(\n\t\tpopup_id,\n\t\t\"Shared/MetricTrendPopup\",\n\t\tparams={\"tagPath\": tag_path, \"label\": label, \"unit\": unit},\n\t\ttitle=label,\n\t\tposition={\"right\": 24, \"top\": 120},\n\t\tshowCloseIcon=True,\n\t\tdraggable=True,\n\t\tresizable=True,\n\t\tmodal=False,\n\t\toverlayDismiss=True,\n\t\tviewportBound=True\n\t)"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                }
+              }
+            },
+            "meta": {"name": "trendIcon"},
+            "position": {"shrink": 0},
+            "propConfig": {
+              "position.display": {
+                "binding": {"config": {"expression": "{view.params.trendTagPath} != \"\""}, "type": "expr"}
+              }
+            },
+            "props": {
+              "path": "material/insert_chart_outlined",
+              "style": {"classes": "sg-simple/trendIcon", "height": "24px", "width": "24px"},
+              "tooltip": {"enabled": true, "text": "Open trend"}
+            },
+            "type": "ia.display.icon"
+          }
+        ],
+        "meta": {"name": "cardHeader"},
+        "position": {"shrink": 0},
+        "props": {"alignItems": "center", "style": {"gap": "8px"}},
+        "type": "ia.container.flex"
+      },
+      {
+        "meta": {"name": "value"},
+        "position": {"shrink": 0},
+        "propConfig": {
+          "props.text": {
+            "binding": {"config": {"expression": "toStr({view.params.value}) + toStr({view.params.unit})"}, "type": "expr"}
+          }
+        },
+        "props": {
+          "style": {"classes": "sg-simple/metricValue", "overflow": "hidden", "textOverflow": "ellipsis", "whiteSpace": "nowrap"},
+          "text": "Unavailable"
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {"name": "helperText"},
+        "position": {"shrink": 0},
+        "propConfig": {
+          "props.text": {
+            "binding": {"config": {"expression": "{view.params.helperText}"}, "type": "expr"}
+          }
+        },
+        "props": {
+          "style": {"classes": "sg-simple/muted", "overflow": "hidden", "textOverflow": "ellipsis", "whiteSpace": "nowrap"},
+          "text": ""
+        },
+        "type": "ia.display.label"
+      }
+    ],
+    "meta": {"name": "simpleMetricCard"},
+    "props": {
+      "direction": "column",
+      "justify": "space-between",
+      "style": {"classes": "sg-simple/metricCard", "gap": "8px", "height": "100%", "overflow": "hidden"}
+    },
+    "type": "ia.container.flex"
+  }
+}
