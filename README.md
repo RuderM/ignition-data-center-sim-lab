@@ -71,6 +71,17 @@ Remove containers and persistent volumes:
 docker compose down -v
 ```
 
+## Gateway Backup
+
+Generate or replace the Git LFS-tracked gateway backup:
+
+```sh
+./scripts/create-gateway-backup.sh
+```
+
+The script writes `backups/gateway/ignition-env1.gwbk` without a date suffix.
+It validates the temporary archive before replacing the previous backup.
+
 ## Current EPMS Model
 
 The active modeled electrical hierarchy is:
