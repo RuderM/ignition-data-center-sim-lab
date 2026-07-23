@@ -82,6 +82,40 @@ Generate or replace the Git LFS-tracked gateway backup:
 The script writes `backups/gateway/ignition-env1.gwbk` without a date suffix.
 It validates the temporary archive before replacing the previous backup.
 
+## PostgreSQL Backup
+
+Generate or replace the Git LFS-tracked PostgreSQL recovery artifacts:
+
+```sh
+./scripts/create-postgres-backup.sh
+```
+
+The script writes these stable names without date suffixes:
+
+```text
+backups/postgres/ignition.dump
+backups/postgres/globals.sql
+```
+
+`ignition.dump` is a custom-format database archive with database creation
+metadata. `globals.sql` preserves cluster-wide roles and tablespaces. Run the
+script before transferring the environment; both files are required to recover
+the Ignition database with its roles.
+
+### PostgreSQL Restore
+
+The restore permanently replaces the target Ignition database. Stop the
+Gateway, restore the database and globals, then start the Gateway:
+
+```sh
+docker compose stop ignition
+./scripts/restore-postgres-backup.sh --replace
+docker compose start ignition
+```
+
+The restore helper refuses to run while the Gateway container is running and
+requires the explicit `--replace` acknowledgement.
+
 ## Current EPMS Model
 
 The active modeled electrical hierarchy is:
