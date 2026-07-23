@@ -9,11 +9,13 @@ services:
     volumes:
       - ignition-data:/usr/local/bin/ignition/data
       - ./data/projects:/usr/local/bin/ignition/data/projects
+      - ./backups/gateway/ignition-env1.gwbk:/restore/ignition-env1.gwbk:ro
     environment:
       ACCEPT_IGNITION_EULA: "Y"
       GATEWAY_ADMIN_PASSWORD: "${GATEWAY_ADMIN_PASSWORD:-password}"
       IGNITION_EDITION: "${IGNITION_EDITION:-standard}"
       TZ: "${TZ:-Etc/UTC}"
+      GATEWAY_RESTORE_PATH: "/restore/ignition-env1.gwbk"
     command:
       - -n
       - "${IGNITION_GATEWAY_NAME:-ignition-env1}"
