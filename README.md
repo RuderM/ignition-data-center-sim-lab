@@ -29,13 +29,44 @@ Project files are also exposed through a host bind mount:
 This lets the Ignition project be edited and source-controlled from the host
 while the rest of gateway data remains in the named volume.
 
+
 ## Start and Stop
 
-Start the stack:
+After a fresh clone, configure the bind-mounted project tree before starting
+the stack. Git does not preserve filesystem ACLs, so each checkout needs this
+one-time bootstrap:
+
+```sh
+./scripts/bootstrap-permissions.sh
+docker compose up -d
+```
+
+The script requires `setfacl`, which is supplied by the `acl` package on common
+Linux distributions. It detects the checkout owner's UID and grants that UID
+and Ignition UID `2003` access to existing resources plus default inheritance
+for resources created later.
+If the checkout already contains resources owned by another UID, rerun the
+script with `sudo`.
+
+For later starts:
 
 ```sh
 docker compose up -d
 ```
+
+On its first start, the Gateway restores
+`backups/gateway/ignition-env1.gwbk` into the `ignition-data` volume. Ignition
+only performs that restore while the volume has no `db/config.idb`. If an
+earlier startup initialized the volume without restoring, reset this
+development environment and start it again:
+
+```sh
+docker compose down -v
+docker compose up -d
+```
+
+`docker compose down -v` permanently removes both the Gateway and PostgreSQL
+development volumes; do not use it after creating local state you need to keep.
 
 Open Ignition:
 
@@ -308,10 +339,37 @@ working/styleguide/
 working/agent-skills/
 ```
 
+## External References
+
+The public repositories under [`thirdgen88`](https://github.com/thirdgen88) are
+useful implementation references for Ignition container deployments. In
+particular:
+
+- [`thirdgen88/ignition-docker`](https://github.com/thirdgen88/ignition-docker)
+  contains Docker entrypoint and supplemental-module registration examples.
+- [`thirdgen88/ignition-examples`](https://github.com/thirdgen88/ignition-examples)
+  includes Compose environments and an IIoT custom-image example that registers
+  third-party module certificates and EULAs in a gateway backup.
+
+Use these as patterns rather than version-independent specifications. Confirm
+paths, database behavior, and entrypoint options against the pinned Ignition
+`8.3.6` image before applying an older example.
+
 ## Permissions
 
-Ignition runs project resources as UID/GID `2003:2003`. Host edits are commonly
-made as the `ubuntu` user.
+Ignition runs project resources as UID/GID `2003:2003`. A fresh clone is
+normally owned by the local Linux user, whose numeric UID may differ.
+
+Before the first startup after cloning, run:
+
+```sh
+./scripts/bootstrap-permissions.sh
+```
+
+The script applies access ACLs recursively to `data/projects` for the checkout
+owner and UID `2003`, then applies default ACLs to every directory so both users
+can write resources created later. It detects the checkout owner automatically;
+`HOST_UID` and `IGNITION_UID` may be supplied to override either value.
 
 Before editing, inspect the worktree:
 
@@ -321,6 +379,9 @@ git status --short
 
 Do not revert unrelated Designer-generated or user-generated changes unless
 explicitly asked.
+
+Do not replace the access and default ACLs with a shared group alone: Ignition
+may create resources with mode `0644`, which denies group writes.
 
 After creating or editing Ignition project resources under
 `data/projects/env1-project`, preserve ACLs and hand touched or new Ignition

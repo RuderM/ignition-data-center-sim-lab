@@ -15,8 +15,9 @@ services:
       GATEWAY_ADMIN_PASSWORD: "${GATEWAY_ADMIN_PASSWORD:-password}"
       IGNITION_EDITION: "${IGNITION_EDITION:-standard}"
       TZ: "${TZ:-Etc/UTC}"
-      GATEWAY_RESTORE_PATH: "/restore/ignition-env1.gwbk"
     command:
+      - -r
+      - /restore/ignition-env1.gwbk
       - -n
       - "${IGNITION_GATEWAY_NAME:-ignition-env1}"
       - -a
