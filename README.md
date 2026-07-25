@@ -337,7 +337,14 @@ working/Logo/
 working/PageIcons/
 working/styleguide/
 working/agent-skills/
+working/change-reports/
 ```
+
+After completing and verifying any repository change, preserve the user-facing
+completion report under `working/change-reports/` before ending the turn. Follow
+the naming and evidence format in `working/change-reports/README.md`, choose the
+next unused sequence number for the date, and never rewrite an earlier report
+to hide a later correction.
 
 ## External References
 
