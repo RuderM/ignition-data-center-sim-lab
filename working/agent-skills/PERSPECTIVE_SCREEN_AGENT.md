@@ -84,7 +84,12 @@ Use UDT names, point documentation, engineering units, alarm setpoints, and fold
 
 Screens must look like part of the same SCADA application, not one-off mockups.
 
-Reuse these existing style classes first:
+New screens and substantial redesigns of existing screens **must use the
+`sg-simple` Perspective style-class family**. A wireframe or conceptual image
+does not justify recreating the visual system with inline styles.
+
+The legacy `sg` family is only for small, targeted changes to screens that
+already use it:
 
 - `sg/page`
 - `sg/hero`
@@ -98,11 +103,9 @@ Reuse these existing style classes first:
 - `sg/statusWarning`
 - `sg/statusDanger`
 
-
 ### Design-system screens (`sg-simple`)
 
-For new SCADA screens based on the exported design system in `working/ds/`,
-prefer `sg-simple` over the legacy `sg` family:
+Use `sg-simple` for every new screen and substantial screen redesign:
 
 - Surface and layout: `sg-simple/page`, `sg-simple/hero`, `sg-simple/panel`
 - Typography: `sg-simple/heroTitle`, `sg-simple/heroEyebrow`,
@@ -116,12 +119,23 @@ surface, white panels, `#0053AD` primary blue, `#0671E0` action/progress blue,
 `#212121` ink, `#717171`/`#89939E` supporting text, `#DBEDFF` borders, and
 8px card radii.
 
-Apply static typography, color, borders, radius, shadows, and padding through
-these style classes. Inline styles are reserved for flex layout/sizing, overflow
-control, data-bound state colors, and component properties that Perspective
-does not emit from a style class (for example, the metric trend icon's 24px
+Apply static typography, colors, backgrounds, borders, radii, shadows, and
+padding through `sg-simple` classes. Do not duplicate those declarations in
+component `props.style` objects. Inline styles are reserved for layout, sizing,
+spacing, overflow control, data-bound state colors, and properties that
+Perspective cannot emit from a style class (for example, a trend icon's 24px
 dimensions).
-For legacy screens, use inline styles only for layout, sizing, spacing, overflow control, and one-off component tuning. Add a new Perspective style class only when the visual pattern is likely to be reused across multiple screens.
+
+Before delivery, audit every edited component's `props.style`. Any static visual
+declaration that duplicates the design system must be removed in favor of an
+existing `sg-simple` class. If a genuinely reusable visual pattern is missing,
+create one new Perspective style class and reuse it; do not distribute repeated
+inline declarations across the view.
+
+For small edits to legacy screens, preserve their existing `sg` family rather
+than mixing `sg` and `sg-simple` within the same visual region. A substantial
+redesign is a clean migration to `sg-simple`, not an expansion of legacy inline
+styling.
 
 Keep the legacy `sg` palette and density for legacy screens:
 
@@ -228,6 +242,11 @@ Required checks:
 - Confirm each new `view.json` has `custom`, `params`, `props`, and `root`.
 - Confirm each new view resource has `resource.json` with `scope`, `version`, `restricted`, `overridable`, and `files`.
 - Confirm all referenced style classes exist, unless the task also created them.
+- For every new or substantially redesigned screen, confirm static visual
+  properties come from `sg-simple` classes rather than repeated inline styles.
+- Inspect edited `props.style` objects and justify each remaining property as
+  layout, sizing, spacing, overflow, data-bound state, or a Perspective
+  limitation.
 - Confirm each route `viewPath` exactly matches the generated view folder path.
 - Confirm bindings use Perspective binding shapes already present in the project.
 - Confirm the screen uses `baseTagPath` instead of hard-coding one UDT instance path, unless the user explicitly requested a fixed instance screen.
@@ -239,6 +258,42 @@ If the gateway is running and accessible, run:
 ```
 
 If the scan cannot be run, report why.
+
+## Lessons from Perspective Screen Work
+
+- Treat conceptual wireframes as layout and visual-hierarchy references only.
+  Point names, engineering units, equipment relationships, ratings, and
+  electrical topology must come from the current UDT definitions, instance
+  hierarchy, point list, and working equipment screens.
+- Do not invent wireframe-only telemetry. If the model has no THD, bus
+  temperature, spare feeder breaker, or similar point, replace it with useful
+  modeled data rather than binding to a plausible-looking nonexistent tag.
+- Before writing bindings, map every displayed device to its exact live instance
+  root. Afterward, extract every `tag()` path from the completed view and compare
+  its relative member path with the authoritative point list.
+- A site-specific one-line overview may intentionally use fixed instance paths.
+  Reusable equipment views still require `baseTagPath`; do not generalize this
+  overview exception to device screens.
+- Verify the configured Perspective route in `page-config/config.json`, then
+  load that route in a real browser. A thumbnail, wireframe PNG, or Designer
+  preview is not proof that the deployed page is correct.
+- Test with the application's shared docks visible. Coordinate-view
+  `defaultSize` and `minWidth` must account for the navigation dock; otherwise a
+  layout that looks correct in isolation can clip the final branch card or force
+  unnecessary horizontal scrolling.
+- Browser verification must show live tag values, status colors, the complete
+  equipment hierarchy, and the lowest visible row. Exercise at least one
+  navigation target when cards or controls are clickable.
+- Bind-mounted file changes are not always hot-reloaded into an existing Gateway
+  session. If the container sees the new file but the browser still shows the
+  old resource, use `docker compose restart ignition`; never use
+  `docker compose down -v` merely to reload a project.
+- Flint scanning and Gateway project loading are separate concerns. A `404` from
+  `/data/flint/health` or `/data/flint/rpc` means the Flint Designer Bridge is
+  unavailable, but it does not prevent the Gateway from loading valid project
+  files after a safe restart.
+- Preserve UID/GID `2003:2003` and the project ACLs on every touched Perspective
+  resource. Verify ownership after external edits.
 
 ## Current Utility Screen References
 

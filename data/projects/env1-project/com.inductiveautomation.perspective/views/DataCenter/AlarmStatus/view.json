@@ -27,8 +27,7 @@
             },
             "props": {
               "style": {
-                "classes": "sg/heading",
-                "fontSize": "2rem"
+                "classes": "sg-simple/heroTitle"
               },
               "text": "Alarm Status"
             },
@@ -53,11 +52,8 @@
             },
             "props": {
               "style": {
-                "classes": "sg/muted",
-                "fontSize": "0.9rem",
-                "fontWeight": "700"
-              },
-              "text": "Equipment scope: All equipment"
+                "classes": "sg-simple/heroMuted"
+              }
             },
             "type": "ia.display.label"
           },
@@ -66,7 +62,7 @@
               "dom": {
                 "onClick": {
                   "config": {
-                    "script": "\tsystem.perspective.navigate(page=\"/Alarms\")"
+                    "script": "\tsystem.perspective.navigate(page\u003d\"/Alarms\")"
                   },
                   "scope": "G",
                   "type": "script"
@@ -83,7 +79,7 @@
               "position.display": {
                 "binding": {
                   "config": {
-                    "expression": "{view.params.scopeKey} != \"\""
+                    "expression": "{view.params.scopeKey} !\u003d \"\""
                   },
                   "type": "expr"
                 }
@@ -112,7 +108,7 @@
         "props": {
           "alignItems": "center",
           "style": {
-            "classes": "sg/hero",
+            "classes": "sg-simple/hero",
             "gap": "16px"
           },
           "wrap": "wrap"
@@ -137,8 +133,12 @@
           }
         },
         "props": {
-          "filters": {
-            "source": ""
+          "columns": {
+            "active": {
+              "source": {
+                "enabled": false
+              }
+            }
           }
         },
         "type": "ia.display.alarmstatustable"
@@ -150,7 +150,7 @@
     "props": {
       "direction": "column",
       "style": {
-        "classes": "sg/page",
+        "classes": "sg-simple/page",
         "gap": "18px"
       }
     },

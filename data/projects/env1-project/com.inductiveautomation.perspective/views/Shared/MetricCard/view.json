@@ -69,7 +69,7 @@
             },
             "props": {
               "style": {
-                "classes": "sg/eyebrow",
+                "classes": "sg-simple/eyebrow",
                 "overflow": "hidden",
                 "textOverflow": "ellipsis",
                 "whiteSpace": "nowrap"
@@ -86,14 +86,6 @@
               "shrink": 0
             },
             "propConfig": {
-              "props.style.classes": {
-                "binding": {
-                  "config": {
-                    "expression": "if({view.params.status} = \"Danger\", \"sg/statusDanger\", if({view.params.status} = \"Warning\", \"sg/statusWarning\", \"sg/statusGood\"))"
-                  },
-                  "type": "expr"
-                }
-              },
               "props.text": {
                 "binding": {
                   "config": {
@@ -105,6 +97,7 @@
             },
             "props": {
               "style": {
+                "classes": "sg-simple/statusPill",
                 "whiteSpace": "nowrap"
               }
             },
@@ -141,11 +134,7 @@
             "props": {
               "path": "material/insert_chart_outlined",
               "style": {
-                "color": "#6f7d8c",
-                "cursor": "pointer",
-                "opacity": 0.42,
-                "padding": "2px",
-                "width": "24px"
+                "classes": "sg-simple/trendIcon"
               },
               "tooltip": {
                 "enabled": true,
@@ -190,7 +179,7 @@
         },
         "props": {
           "style": {
-            "classes": "sg/metricValue",
+            "classes": "sg-simple/metricValue",
             "overflow": "hidden",
             "textOverflow": "ellipsis",
             "whiteSpace": "nowrap"
@@ -218,13 +207,13 @@
         },
         "props": {
           "bar": {
-            "color": "#2f80ed"
+            "color": "#0671E0"
           },
           "style": {
             "height": "10px"
           },
           "track": {
-            "color": "#d9e2ef"
+            "color": "#DBEDFF"
           }
         },
         "type": "ia.display.progress"
@@ -248,8 +237,7 @@
         },
         "props": {
           "style": {
-            "classes": "sg/muted",
-            "fontSize": "0.9rem",
+            "classes": "sg-simple/muted",
             "overflow": "hidden",
             "textOverflow": "ellipsis",
             "whiteSpace": "nowrap"
@@ -265,7 +253,7 @@
       "direction": "column",
       "justify": "space-between",
       "style": {
-        "classes": "sg/metricCard",
+        "classes": "sg-simple/metricCard",
         "gap": "14px",
         "height": "100%",
         "overflow": "hidden"

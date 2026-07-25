@@ -49,8 +49,7 @@
                 },
                 "props": {
                   "style": {
-                    "classes": "sg/heading",
-                    "fontSize": "1.05rem",
+                    "classes": "sg-simple/heading",
                     "overflow": "hidden",
                     "textOverflow": "ellipsis",
                     "whiteSpace": "nowrap"
@@ -77,8 +76,7 @@
                 },
                 "props": {
                   "style": {
-                    "classes": "sg/muted",
-                    "fontSize": "0.82rem",
+                    "classes": "sg-simple/muted",
                     "overflow": "hidden",
                     "textOverflow": "ellipsis",
                     "whiteSpace": "nowrap"
@@ -338,7 +336,7 @@
     "props": {
       "direction": "column",
       "style": {
-        "classes": "sg/panel",
+        "classes": "sg-simple/panel",
         "gap": "14px",
         "height": "100%",
         "overflow": "hidden"

@@ -417,3 +417,77 @@ Run the Flint scan after project edits:
 ```sh
 ./scripts/flint-project-scan.sh
 ```
+
+### Browser verification prerequisites
+
+Perspective screen changes should be exercised at:
+
+```text
+http://localhost:8088/data/perspective/client/env1-project/
+```
+
+The automated browser uses a managed Chromium build. On a minimal Ubuntu
+workstation, Chromium installation and startup require an archive extractor and
+its shared libraries:
+
+```sh
+sudo apt-get update
+sudo apt-get install -y \
+  unzip \
+  libatk1.0-0t64 \
+  libatk-bridge2.0-0t64 \
+  libcups2t64 \
+  libasound2t64 \
+  libgbm1 \
+  libcairo2 \
+  libpango-1.0-0 \
+  libxcomposite1 \
+  libxdamage1 \
+  libxfixes3 \
+  libxrandr2 \
+  libatspi2.0-0t64
+```
+
+Ubuntu releases before the `t64` transition may use package names without the
+`t64` suffix. If Chromium still fails to start, run `ldd` against its reported
+executable path and install only the libraries shown as `not found`.
+
+If the browser installer reports that its version directory exists but the
+Chromium executable is missing, check that the directory is empty, remove only
+that empty version directory, and retry. An incomplete empty cache directory can
+prevent a clean reinstall.
+
+The Perspective root page is configured in
+`com.inductiveautomation.perspective/page-config/config.json`; verify the route
+and `viewPath` before assuming a PNG or other static artifact is the page under
+test. Screenshots are verification output only and are not Perspective
+resources.
+
+Direct bind-mounted project edits may not appear in an already-running Gateway
+session immediately. A development Gateway container restart reloads the
+project without removing its volumes:
+
+```sh
+docker compose restart ignition
+```
+
+Do not use `docker compose down -v` for this purpose.
+
+### Flint scan prerequisite
+
+`./scripts/flint-project-scan.sh` requires the Flint Designer Bridge module to
+be installed and running on the Gateway. For Ignition 8.3, install the signed
+`Flint-Designer-Bridge-<version>-8.3.modl` artifact from:
+
+```text
+https://github.com/bw-design-group/flint-designer-bridge-ignition-module/releases
+```
+
+Verify the module before running a scan:
+
+```sh
+curl http://localhost:8088/data/flint/health
+```
+
+A `404` from `/data/flint/health` or `/data/flint/rpc` means the bridge module
+is not installed or its Gateway scope is not running.

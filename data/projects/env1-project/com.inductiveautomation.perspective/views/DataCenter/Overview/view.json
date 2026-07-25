@@ -14,19 +14,19 @@
           "name": "pageEyebrow"
         },
         "position": {
-          "x": 38,
-          "y": 18,
+          "height": 20,
           "width": 520,
-          "height": 20
+          "x": 38,
+          "y": 18
         },
         "props": {
-          "text": "MBT1 \u00b7 ELECTRICAL POWER MONITORING",
           "style": {
             "color": "#168a70",
             "fontSize": "0.72rem",
             "fontWeight": "800",
             "letterSpacing": "0.08em"
-          }
+          },
+          "text": "MBT1 · ELECTRICAL POWER MONITORING"
         },
         "type": "ia.display.label"
       },
@@ -35,63 +35,18 @@
           "name": "pageTitle"
         },
         "position": {
-          "x": 36,
-          "y": 38,
+          "height": 43,
           "width": 780,
-          "height": 43
+          "x": 38,
+          "y": 50
         },
         "props": {
-          "text": "Power Distribution Overview",
           "style": {
             "color": "#16213e",
             "fontSize": "2.25rem",
             "fontWeight": "800"
-          }
-        },
-        "type": "ia.display.label"
-      },
-      {
-        "meta": {
-          "name": "pageSubtitle"
-        },
-        "position": {
-          "x": 38,
-          "y": 79,
-          "width": 780,
-          "height": 24
-        },
-        "props": {
-          "text": "Live utility-to-branch one-line with modeled health, loading and metering",
-          "style": {
-            "color": "#66748d",
-            "fontSize": "0.9rem"
-          }
-        },
-        "type": "ia.display.label"
-      },
-      {
-        "meta": {
-          "name": "liveBadge"
-        },
-        "position": {
-          "x": 820,
-          "y": 38,
-          "width": 260,
-          "height": 34
-        },
-        "props": {
-          "text": "\u25cf  LIVE SIMULATION \u00b7 10 S",
-          "style": {
-            "backgroundColor": "#e9f7f2",
-            "borderColor": "#b9e4d5",
-            "borderRadius": "17px",
-            "borderStyle": "solid",
-            "borderWidth": "1px",
-            "color": "#168a70",
-            "fontSize": "0.75rem",
-            "fontWeight": "800",
-            "textAlign": "center"
-          }
+          },
+          "text": "Power Distribution Overview"
         },
         "type": "ia.display.label"
       },
@@ -102,13 +57,10 @@
               "name": "accent"
             },
             "position": {
-              "x": 0,
-              "y": 0,
-              "width": 5,
-              "height": 158
+              "height": 158,
+              "width": 5
             },
             "props": {
-              "text": "",
               "style": {
                 "backgroundColor": "#2f80ed",
                 "borderRadius": "2px"
@@ -121,19 +73,19 @@
               "name": "eyebrow"
             },
             "position": {
-              "x": 24,
-              "y": 17,
+              "height": 18,
               "width": 180,
-              "height": 18
+              "x": 24,
+              "y": 17
             },
             "props": {
-              "text": "UTILITY INTAKE",
               "style": {
                 "color": "#2f80ed",
                 "fontSize": "0.67rem",
                 "fontWeight": "800",
                 "letterSpacing": "0.08em"
-              }
+              },
+              "text": "UTILITY INTAKE"
             },
             "type": "ia.display.label"
           },
@@ -142,18 +94,18 @@
               "name": "title"
             },
             "position": {
-              "x": 24,
-              "y": 39,
+              "height": 28,
               "width": 380,
-              "height": 28
+              "x": 24,
+              "y": 39
             },
             "props": {
-              "text": "Utility1 Primary Supply \u00b7 13.8 kV",
               "style": {
                 "color": "#16213e",
                 "fontSize": "1.05rem",
                 "fontWeight": "800"
-              }
+              },
+              "text": "Utility1 Primary Supply · 13.8 kV"
             },
             "type": "ia.display.label"
           },
@@ -162,10 +114,36 @@
               "name": "status"
             },
             "position": {
-              "x": 420,
-              "y": 22,
+              "height": 28,
               "width": 168,
-              "height": 28
+              "x": 420,
+              "y": 22
+            },
+            "propConfig": {
+              "props.style.backgroundColor": {
+                "binding": {
+                  "config": {
+                    "expression": "if(tag(\"[T1]MBT1/Utility1/UtilitySource/Status/Faulted\") || !tag(\"[T1]MBT1/Utility1/UtilitySource/Status/CommGood\") || !tag(\"[T1]MBT1/Utility1/UtilitySource/Status/Available\"), \"#fdecef\", \"#e9f7f2\")"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.style.color": {
+                "binding": {
+                  "config": {
+                    "expression": "if(tag(\"[T1]MBT1/Utility1/UtilitySource/Status/Faulted\") || !tag(\"[T1]MBT1/Utility1/UtilitySource/Status/CommGood\") || !tag(\"[T1]MBT1/Utility1/UtilitySource/Status/Available\"), \"#d64550\", \"#168a70\")"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "if(tag(\"[T1]MBT1/Utility1/UtilitySource/Status/Faulted\"), \"FAULT\", if(!tag(\"[T1]MBT1/Utility1/UtilitySource/Status/CommGood\"), \"COMM LOSS\", if(tag(\"[T1]MBT1/Utility1/UtilitySource/Status/Available\"), \"ACTIVE / NORMAL\", \"UNAVAILABLE\")))"
+                  },
+                  "type": "expr"
+                }
+              }
             },
             "props": {
               "style": {
@@ -175,46 +153,19 @@
                 "textAlign": "center"
               }
             },
-            "type": "ia.display.label",
-            "propConfig": {
-              "props.text": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "if(tag(\"[T1]MBT1/Utility1/UtilitySource/Status/Faulted\"), \"FAULT\", if(!tag(\"[T1]MBT1/Utility1/UtilitySource/Status/CommGood\"), \"COMM LOSS\", if(tag(\"[T1]MBT1/Utility1/UtilitySource/Status/Available\"), \"ACTIVE / NORMAL\", \"UNAVAILABLE\")))"
-                  }
-                }
-              },
-              "props.style.color": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "if(tag(\"[T1]MBT1/Utility1/UtilitySource/Status/Faulted\") || !tag(\"[T1]MBT1/Utility1/UtilitySource/Status/CommGood\") || !tag(\"[T1]MBT1/Utility1/UtilitySource/Status/Available\"), \"#d64550\", \"#168a70\")"
-                  }
-                }
-              },
-              "props.style.backgroundColor": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "if(tag(\"[T1]MBT1/Utility1/UtilitySource/Status/Faulted\") || !tag(\"[T1]MBT1/Utility1/UtilitySource/Status/CommGood\") || !tag(\"[T1]MBT1/Utility1/UtilitySource/Status/Available\"), \"#fdecef\", \"#e9f7f2\")"
-                  }
-                }
-              }
-            }
+            "type": "ia.display.label"
           },
           {
             "meta": {
               "name": "divider"
             },
             "position": {
-              "x": 24,
-              "y": 74,
+              "height": 1,
               "width": 564,
-              "height": 1
+              "x": 24,
+              "y": 74
             },
             "props": {
-              "text": "",
               "style": {
                 "backgroundColor": "#d8e2ef",
                 "borderRadius": "2px"
@@ -227,17 +178,17 @@
               "name": "voltageLabel"
             },
             "position": {
-              "x": 24,
-              "y": 91,
+              "height": 22,
               "width": 145,
-              "height": 22
+              "x": 24,
+              "y": 91
             },
             "props": {
-              "text": "LINE VOLTAGE (L-L)",
               "style": {
                 "color": "#66748d",
                 "fontSize": "0.78rem"
-              }
+              },
+              "text": "LINE VOLTAGE (L-L)"
             },
             "type": "ia.display.label"
           },
@@ -246,10 +197,20 @@
               "name": "voltageValue"
             },
             "position": {
-              "x": 169,
-              "y": 91,
+              "height": 22,
               "width": 120,
-              "height": 22
+              "x": 169,
+              "y": 91
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/UtilitySource/Electrical/VoltageLLAvg\"), \"#,##0\") + \" V\""
+                  },
+                  "type": "expr"
+                }
+              }
             },
             "props": {
               "style": {
@@ -258,34 +219,24 @@
                 "fontWeight": "700"
               }
             },
-            "type": "ia.display.label",
-            "propConfig": {
-              "props.text": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/UtilitySource/Electrical/VoltageLLAvg\"), \"#,##0\") + \" V\""
-                  }
-                }
-              }
-            }
+            "type": "ia.display.label"
           },
           {
             "meta": {
               "name": "frequencyLabel"
             },
             "position": {
-              "x": 310,
-              "y": 91,
+              "height": 22,
               "width": 145,
-              "height": 22
+              "x": 310,
+              "y": 91
             },
             "props": {
-              "text": "SYSTEM FREQUENCY",
               "style": {
                 "color": "#66748d",
                 "fontSize": "0.78rem"
-              }
+              },
+              "text": "SYSTEM FREQUENCY"
             },
             "type": "ia.display.label"
           },
@@ -294,10 +245,20 @@
               "name": "frequencyValue"
             },
             "position": {
-              "x": 455,
-              "y": 91,
+              "height": 22,
               "width": 110,
-              "height": 22
+              "x": 455,
+              "y": 91
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/UtilitySource/Electrical/Frequency\"), \"0.00\") + \" Hz\""
+                  },
+                  "type": "expr"
+                }
+              }
             },
             "props": {
               "style": {
@@ -306,34 +267,24 @@
                 "fontWeight": "700"
               }
             },
-            "type": "ia.display.label",
-            "propConfig": {
-              "props.text": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/UtilitySource/Electrical/Frequency\"), \"0.00\") + \" Hz\""
-                  }
-                }
-              }
-            }
+            "type": "ia.display.label"
           },
           {
             "meta": {
               "name": "powerLabel"
             },
             "position": {
-              "x": 24,
-              "y": 119,
+              "height": 22,
               "width": 145,
-              "height": 22
+              "x": 24,
+              "y": 119
             },
             "props": {
-              "text": "TOTAL ACTIVE POWER",
               "style": {
                 "color": "#66748d",
                 "fontSize": "0.78rem"
-              }
+              },
+              "text": "TOTAL ACTIVE POWER"
             },
             "type": "ia.display.label"
           },
@@ -342,10 +293,20 @@
               "name": "powerValue"
             },
             "position": {
-              "x": 169,
-              "y": 119,
+              "height": 22,
               "width": 120,
-              "height": 22
+              "x": 169,
+              "y": 119
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/UtilitySource/Power/RealPower\"), \"#,##0.0\") + \" kW\""
+                  },
+                  "type": "expr"
+                }
+              }
             },
             "props": {
               "style": {
@@ -354,34 +315,24 @@
                 "fontWeight": "700"
               }
             },
-            "type": "ia.display.label",
-            "propConfig": {
-              "props.text": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/UtilitySource/Power/RealPower\"), \"#,##0.0\") + \" kW\""
-                  }
-                }
-              }
-            }
+            "type": "ia.display.label"
           },
           {
             "meta": {
               "name": "loadLabel"
             },
             "position": {
-              "x": 310,
-              "y": 119,
+              "height": 22,
               "width": 145,
-              "height": 22
+              "x": 310,
+              "y": 119
             },
             "props": {
-              "text": "SERVICE LOAD",
               "style": {
                 "color": "#66748d",
                 "fontSize": "0.78rem"
-              }
+              },
+              "text": "SERVICE LOAD"
             },
             "type": "ia.display.label"
           },
@@ -390,10 +341,20 @@
               "name": "loadValue"
             },
             "position": {
-              "x": 455,
-              "y": 119,
+              "height": 22,
               "width": 110,
-              "height": 22
+              "x": 455,
+              "y": 119
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/UtilitySource/Capacity/LoadPct\"), \"0.0\") + \" %\""
+                  },
+                  "type": "expr"
+                }
+              }
             },
             "props": {
               "style": {
@@ -402,27 +363,28 @@
                 "fontWeight": "700"
               }
             },
-            "type": "ia.display.label",
-            "propConfig": {
-              "props.text": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/UtilitySource/Capacity/LoadPct\"), \"0.0\") + \" %\""
-                  }
-                }
-              }
-            }
+            "type": "ia.display.label"
           }
         ],
+        "events": {
+          "dom": {
+            "onClick": {
+              "config": {
+                "script": "\tsystem.perspective.navigate(page\u003d\"/Utility\")"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
         "meta": {
           "name": "utilitySource"
         },
         "position": {
-          "x": 38,
-          "y": 118,
+          "height": 158,
           "width": 620,
-          "height": 158
+          "x": 38,
+          "y": 118
         },
         "props": {
           "style": {
@@ -432,35 +394,23 @@
             "borderStyle": "solid",
             "borderWidth": "1px",
             "boxShadow": "0 10px 26px rgba(22, 33, 62, 0.08)",
-            "overflow": "hidden",
-            "cursor": "pointer"
+            "cursor": "pointer",
+            "overflow": "hidden"
           }
         },
-        "type": "ia.container.coord",
-        "events": {
-          "dom": {
-            "onClick": {
-              "config": {
-                "script": "\tsystem.perspective.navigate(page=\"/Utility\")"
-              },
-              "scope": "G",
-              "type": "script"
-            }
-          }
-        }
+        "type": "ia.container.coord"
       },
       {
         "meta": {
           "name": "utilityDrop"
         },
         "position": {
-          "x": 310,
-          "y": 276,
+          "height": 34,
           "width": 4,
-          "height": 34
+          "x": 310,
+          "y": 276
         },
         "props": {
-          "text": "",
           "style": {
             "backgroundColor": "#2f80ed",
             "borderRadius": "2px"
@@ -473,18 +423,18 @@
           "name": "utilityFeedLabel"
         },
         "position": {
-          "x": 329,
-          "y": 283,
+          "height": 18,
           "width": 120,
-          "height": 18
+          "x": 329,
+          "y": 283
         },
         "props": {
-          "text": "13.8 kV FEED",
           "style": {
             "color": "#66748d",
             "fontSize": "0.65rem",
             "fontWeight": "700"
-          }
+          },
+          "text": "13.8 kV FEED"
         },
         "type": "ia.display.label"
       },
@@ -495,13 +445,10 @@
               "name": "accent"
             },
             "position": {
-              "x": 0,
-              "y": 0,
-              "width": 5,
-              "height": 172
+              "height": 172,
+              "width": 5
             },
             "props": {
-              "text": "",
               "style": {
                 "backgroundColor": "#2f80ed",
                 "borderRadius": "2px"
@@ -514,19 +461,19 @@
               "name": "eyebrow"
             },
             "position": {
-              "x": 24,
-              "y": 16,
+              "height": 18,
               "width": 250,
-              "height": 18
+              "x": 24,
+              "y": 16
             },
             "props": {
-              "text": "480 V MAIN DISTRIBUTION",
               "style": {
                 "color": "#2f80ed",
                 "fontSize": "0.67rem",
                 "fontWeight": "800",
                 "letterSpacing": "0.08em"
-              }
+              },
+              "text": "480 V MAIN DISTRIBUTION"
             },
             "type": "ia.display.label"
           },
@@ -535,18 +482,18 @@
               "name": "title"
             },
             "position": {
-              "x": 24,
-              "y": 38,
+              "height": 28,
               "width": 470,
-              "height": 28
+              "x": 24,
+              "y": 38
             },
             "props": {
-              "text": "MSG1 Main Switchgear",
               "style": {
                 "color": "#16213e",
                 "fontSize": "1.08rem",
                 "fontWeight": "800"
-              }
+              },
+              "text": "MSG1 Main Switchgear"
             },
             "type": "ia.display.label"
           },
@@ -555,10 +502,36 @@
               "name": "status"
             },
             "position": {
-              "x": 645,
-              "y": 20,
+              "height": 28,
               "width": 165,
-              "height": 28
+              "x": 645,
+              "y": 20
+            },
+            "propConfig": {
+              "props.style.backgroundColor": {
+                "binding": {
+                  "config": {
+                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/MainSwitchgear/Status/Faulted\") || !tag(\"[T1]MBT1/Utility1/MSG1/MainSwitchgear/Status/CommGood\") || !tag(\"[T1]MBT1/Utility1/MSG1/MainSwitchgear/Status/Available\"), \"#fdecef\", \"#e9f7f2\")"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.style.color": {
+                "binding": {
+                  "config": {
+                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/MainSwitchgear/Status/Faulted\") || !tag(\"[T1]MBT1/Utility1/MSG1/MainSwitchgear/Status/CommGood\") || !tag(\"[T1]MBT1/Utility1/MSG1/MainSwitchgear/Status/Available\"), \"#d64550\", \"#168a70\")"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/MainSwitchgear/Status/Faulted\"), \"FAULT\", if(!tag(\"[T1]MBT1/Utility1/MSG1/MainSwitchgear/Status/CommGood\"), \"COMM LOSS\", if(tag(\"[T1]MBT1/Utility1/MSG1/MainSwitchgear/Status/Available\"), \"AVAILABLE\", \"UNAVAILABLE\")))"
+                  },
+                  "type": "expr"
+                }
+              }
             },
             "props": {
               "style": {
@@ -568,46 +541,19 @@
                 "textAlign": "center"
               }
             },
-            "type": "ia.display.label",
-            "propConfig": {
-              "props.text": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/MainSwitchgear/Status/Faulted\"), \"FAULT\", if(!tag(\"[T1]MBT1/Utility1/MSG1/MainSwitchgear/Status/CommGood\"), \"COMM LOSS\", if(tag(\"[T1]MBT1/Utility1/MSG1/MainSwitchgear/Status/Available\"), \"AVAILABLE\", \"UNAVAILABLE\")))"
-                  }
-                }
-              },
-              "props.style.color": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/MainSwitchgear/Status/Faulted\") || !tag(\"[T1]MBT1/Utility1/MSG1/MainSwitchgear/Status/CommGood\") || !tag(\"[T1]MBT1/Utility1/MSG1/MainSwitchgear/Status/Available\"), \"#d64550\", \"#168a70\")"
-                  }
-                }
-              },
-              "props.style.backgroundColor": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/MainSwitchgear/Status/Faulted\") || !tag(\"[T1]MBT1/Utility1/MSG1/MainSwitchgear/Status/CommGood\") || !tag(\"[T1]MBT1/Utility1/MSG1/MainSwitchgear/Status/Available\"), \"#fdecef\", \"#e9f7f2\")"
-                  }
-                }
-              }
-            }
+            "type": "ia.display.label"
           },
           {
             "meta": {
               "name": "divider"
             },
             "position": {
-              "x": 24,
-              "y": 74,
+              "height": 1,
               "width": 786,
-              "height": 1
+              "x": 24,
+              "y": 74
             },
             "props": {
-              "text": "",
               "style": {
                 "backgroundColor": "#d8e2ef",
                 "borderRadius": "2px"
@@ -620,17 +566,17 @@
               "name": "voltageLabel"
             },
             "position": {
-              "x": 24,
-              "y": 87,
+              "height": 22,
               "width": 135,
-              "height": 22
+              "x": 24,
+              "y": 87
             },
             "props": {
-              "text": "BUS VOLTAGE (L-L)",
               "style": {
                 "color": "#66748d",
                 "fontSize": "0.78rem"
-              }
+              },
+              "text": "BUS VOLTAGE (L-L)"
             },
             "type": "ia.display.label"
           },
@@ -639,10 +585,20 @@
               "name": "voltageValue"
             },
             "position": {
-              "x": 159,
-              "y": 87,
+              "height": 22,
               "width": 115,
-              "height": 22
+              "x": 159,
+              "y": 87
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/MainSwitchgear/Electrical/BusVoltageLLAvg\"), \"#,##0.0\") + \" V\""
+                  },
+                  "type": "expr"
+                }
+              }
             },
             "props": {
               "style": {
@@ -651,34 +607,24 @@
                 "fontWeight": "700"
               }
             },
-            "type": "ia.display.label",
-            "propConfig": {
-              "props.text": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/MainSwitchgear/Electrical/BusVoltageLLAvg\"), \"#,##0.0\") + \" V\""
-                  }
-                }
-              }
-            }
+            "type": "ia.display.label"
           },
           {
             "meta": {
               "name": "currentLabel"
             },
             "position": {
-              "x": 286,
-              "y": 87,
+              "height": 22,
               "width": 110,
-              "height": 22
+              "x": 286,
+              "y": 87
             },
             "props": {
-              "text": "BUS CURRENT",
               "style": {
                 "color": "#66748d",
                 "fontSize": "0.78rem"
-              }
+              },
+              "text": "BUS CURRENT"
             },
             "type": "ia.display.label"
           },
@@ -687,10 +633,20 @@
               "name": "currentValue"
             },
             "position": {
-              "x": 396,
-              "y": 87,
+              "height": 22,
               "width": 105,
-              "height": 22
+              "x": 396,
+              "y": 87
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/MainSwitchgear/Electrical/BusCurrentAvg\"), \"#,##0.0\") + \" A\""
+                  },
+                  "type": "expr"
+                }
+              }
             },
             "props": {
               "style": {
@@ -699,34 +655,24 @@
                 "fontWeight": "700"
               }
             },
-            "type": "ia.display.label",
-            "propConfig": {
-              "props.text": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/MainSwitchgear/Electrical/BusCurrentAvg\"), \"#,##0.0\") + \" A\""
-                  }
-                }
-              }
-            }
+            "type": "ia.display.label"
           },
           {
             "meta": {
               "name": "powerLabel"
             },
             "position": {
-              "x": 520,
-              "y": 87,
+              "height": 22,
               "width": 110,
-              "height": 22
+              "x": 520,
+              "y": 87
             },
             "props": {
-              "text": "ACTIVE POWER",
               "style": {
                 "color": "#66748d",
                 "fontSize": "0.78rem"
-              }
+              },
+              "text": "ACTIVE POWER"
             },
             "type": "ia.display.label"
           },
@@ -735,10 +681,20 @@
               "name": "powerValue"
             },
             "position": {
-              "x": 630,
-              "y": 87,
+              "height": 22,
               "width": 115,
-              "height": 22
+              "x": 630,
+              "y": 87
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/MainSwitchgear/Power/RealPower\"), \"#,##0.0\") + \" kW\""
+                  },
+                  "type": "expr"
+                }
+              }
             },
             "props": {
               "style": {
@@ -747,27 +703,35 @@
                 "fontWeight": "700"
               }
             },
-            "type": "ia.display.label",
-            "propConfig": {
-              "props.text": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/MainSwitchgear/Power/RealPower\"), \"#,##0.0\") + \" kW\""
-                  }
-                }
-              }
-            }
+            "type": "ia.display.label"
           },
           {
             "meta": {
               "name": "mainBreakerState"
             },
             "position": {
-              "x": 30,
-              "y": 116,
+              "height": 34,
               "width": 220,
-              "height": 34
+              "x": 30,
+              "y": 116
+            },
+            "propConfig": {
+              "props.style.color": {
+                "binding": {
+                  "config": {
+                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/MainSwitchgear/Breaker/MainTripped\"), \"#d64550\", if(tag(\"[T1]MBT1/Utility1/MSG1/MainSwitchgear/Breaker/MainClosed\"), \"#2f80ed\", \"#d98618\"))"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/MainSwitchgear/Breaker/MainTripped\"), \"MAIN BREAKER · TRIPPED\", if(tag(\"[T1]MBT1/Utility1/MSG1/MainSwitchgear/Breaker/MainClosed\"), \"MAIN BREAKER · CLOSED\", \"MAIN BREAKER · OPEN\"))"
+                  },
+                  "type": "expr"
+                }
+              }
             },
             "props": {
               "style": {
@@ -781,42 +745,24 @@
                 "textAlign": "center"
               }
             },
-            "type": "ia.display.label",
-            "propConfig": {
-              "props.text": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/MainSwitchgear/Breaker/MainTripped\"), \"MAIN BREAKER \u00b7 TRIPPED\", if(tag(\"[T1]MBT1/Utility1/MSG1/MainSwitchgear/Breaker/MainClosed\"), \"MAIN BREAKER \u00b7 CLOSED\", \"MAIN BREAKER \u00b7 OPEN\"))"
-                  }
-                }
-              },
-              "props.style.color": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/MainSwitchgear/Breaker/MainTripped\"), \"#d64550\", if(tag(\"[T1]MBT1/Utility1/MSG1/MainSwitchgear/Breaker/MainClosed\"), \"#2f80ed\", \"#d98618\"))"
-                  }
-                }
-              }
-            }
+            "type": "ia.display.label"
           },
           {
             "meta": {
               "name": "loadLabel"
             },
             "position": {
-              "x": 286,
-              "y": 122,
+              "height": 22,
               "width": 120,
-              "height": 22
+              "x": 286,
+              "y": 122
             },
             "props": {
-              "text": "SWITCHGEAR LOAD",
               "style": {
                 "color": "#66748d",
                 "fontSize": "0.78rem"
-              }
+              },
+              "text": "SWITCHGEAR LOAD"
             },
             "type": "ia.display.label"
           },
@@ -825,10 +771,20 @@
               "name": "loadValue"
             },
             "position": {
-              "x": 406,
-              "y": 122,
+              "height": 22,
               "width": 100,
-              "height": 22
+              "x": 406,
+              "y": 122
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/MainSwitchgear/Capacity/LoadPct\"), \"0.0\") + \" %\""
+                  },
+                  "type": "expr"
+                }
+              }
             },
             "props": {
               "style": {
@@ -837,34 +793,24 @@
                 "fontWeight": "700"
               }
             },
-            "type": "ia.display.label",
-            "propConfig": {
-              "props.text": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/MainSwitchgear/Capacity/LoadPct\"), \"0.0\") + \" %\""
-                  }
-                }
-              }
-            }
+            "type": "ia.display.label"
           },
           {
             "meta": {
               "name": "frequencyLabel"
             },
             "position": {
-              "x": 520,
-              "y": 122,
+              "height": 22,
               "width": 110,
-              "height": 22
+              "x": 520,
+              "y": 122
             },
             "props": {
-              "text": "FREQUENCY",
               "style": {
                 "color": "#66748d",
                 "fontSize": "0.78rem"
-              }
+              },
+              "text": "FREQUENCY"
             },
             "type": "ia.display.label"
           },
@@ -873,10 +819,20 @@
               "name": "frequencyValue"
             },
             "position": {
-              "x": 630,
-              "y": 122,
+              "height": 22,
               "width": 110,
-              "height": 22
+              "x": 630,
+              "y": 122
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/MainSwitchgear/Electrical/Frequency\"), \"0.00\") + \" Hz\""
+                  },
+                  "type": "expr"
+                }
+              }
             },
             "props": {
               "style": {
@@ -885,27 +841,28 @@
                 "fontWeight": "700"
               }
             },
-            "type": "ia.display.label",
-            "propConfig": {
-              "props.text": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/MainSwitchgear/Electrical/Frequency\"), \"0.00\") + \" Hz\""
-                  }
-                }
-              }
-            }
+            "type": "ia.display.label"
           }
         ],
+        "events": {
+          "dom": {
+            "onClick": {
+              "config": {
+                "script": "\tsystem.perspective.navigate(page\u003d\"/MSG\")"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
         "meta": {
           "name": "mainSwitchgear"
         },
         "position": {
-          "x": 38,
-          "y": 310,
+          "height": 172,
           "width": 840,
-          "height": 172
+          "x": 38,
+          "y": 310
         },
         "props": {
           "style": {
@@ -915,35 +872,23 @@
             "borderStyle": "solid",
             "borderWidth": "1px",
             "boxShadow": "0 10px 26px rgba(22, 33, 62, 0.08)",
-            "overflow": "hidden",
-            "cursor": "pointer"
+            "cursor": "pointer",
+            "overflow": "hidden"
           }
         },
-        "type": "ia.container.coord",
-        "events": {
-          "dom": {
-            "onClick": {
-              "config": {
-                "script": "\tsystem.perspective.navigate(page=\"/MSG\")"
-              },
-              "scope": "G",
-              "type": "script"
-            }
-          }
-        }
+        "type": "ia.container.coord"
       },
       {
         "meta": {
           "name": "msgDrop"
         },
         "position": {
-          "x": 102,
-          "y": 482,
+          "height": 34,
           "width": 4,
-          "height": 34
+          "x": 102,
+          "y": 482
         },
         "props": {
-          "text": "",
           "style": {
             "backgroundColor": "#2f80ed",
             "borderRadius": "2px"
@@ -956,13 +901,12 @@
           "name": "msgFeeder"
         },
         "position": {
-          "x": 102,
-          "y": 512,
+          "height": 4,
           "width": 310,
-          "height": 4
+          "x": 102,
+          "y": 512
         },
         "props": {
-          "text": "",
           "style": {
             "backgroundColor": "#2f80ed",
             "borderRadius": "2px"
@@ -975,13 +919,12 @@
           "name": "pduDrop"
         },
         "position": {
-          "x": 408,
-          "y": 512,
+          "height": 28,
           "width": 4,
-          "height": 28
+          "x": 408,
+          "y": 512
         },
         "props": {
-          "text": "",
           "style": {
             "backgroundColor": "#2f80ed",
             "borderRadius": "2px"
@@ -994,18 +937,18 @@
           "name": "msgFeedLabel"
         },
         "position": {
-          "x": 120,
-          "y": 490,
+          "height": 18,
           "width": 140,
-          "height": 18
+          "x": 120,
+          "y": 490
         },
         "props": {
-          "text": "480 V PDU FEED",
           "style": {
             "color": "#66748d",
             "fontSize": "0.65rem",
             "fontWeight": "700"
-          }
+          },
+          "text": "480 V PDU FEED"
         },
         "type": "ia.display.label"
       },
@@ -1016,13 +959,10 @@
               "name": "accent"
             },
             "position": {
-              "x": 0,
-              "y": 0,
-              "width": 5,
-              "height": 158
+              "height": 158,
+              "width": 5
             },
             "props": {
-              "text": "",
               "style": {
                 "backgroundColor": "#2f80ed",
                 "borderRadius": "2px"
@@ -1035,19 +975,19 @@
               "name": "eyebrow"
             },
             "position": {
-              "x": 24,
-              "y": 15,
+              "height": 18,
               "width": 260,
-              "height": 18
+              "x": 24,
+              "y": 15
             },
             "props": {
-              "text": "PDU1 \u00b7 STEP-DOWN ASSEMBLY",
               "style": {
                 "color": "#2f80ed",
                 "fontSize": "0.67rem",
                 "fontWeight": "800",
                 "letterSpacing": "0.08em"
-              }
+              },
+              "text": "PDU1 · STEP-DOWN ASSEMBLY"
             },
             "type": "ia.display.label"
           },
@@ -1056,18 +996,18 @@
               "name": "title"
             },
             "position": {
-              "x": 24,
-              "y": 37,
+              "height": 28,
               "width": 420,
-              "height": 28
+              "x": 24,
+              "y": 37
             },
             "props": {
-              "text": "PDU1 / Transformer1",
               "style": {
                 "color": "#16213e",
                 "fontSize": "1.08rem",
                 "fontWeight": "800"
-              }
+              },
+              "text": "PDU1 / Transformer1"
             },
             "type": "ia.display.label"
           },
@@ -1076,10 +1016,36 @@
               "name": "status"
             },
             "position": {
-              "x": 668,
-              "y": 19,
+              "height": 28,
               "width": 160,
-              "height": 28
+              "x": 668,
+              "y": 19
+            },
+            "propConfig": {
+              "props.style.backgroundColor": {
+                "binding": {
+                  "config": {
+                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDU/Status/Faulted\") || tag(\"[T1]MBT1/Utility1/MSG1/PDU1/Transformer1/Transformer/Status/Faulted\") || !tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDU/Status/CommGood\") || !tag(\"[T1]MBT1/Utility1/MSG1/PDU1/Transformer1/Transformer/Status/CommGood\"), \"#fdecef\", \"#e9f7f2\")"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.style.color": {
+                "binding": {
+                  "config": {
+                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDU/Status/Faulted\") || tag(\"[T1]MBT1/Utility1/MSG1/PDU1/Transformer1/Transformer/Status/Faulted\") || !tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDU/Status/CommGood\") || !tag(\"[T1]MBT1/Utility1/MSG1/PDU1/Transformer1/Transformer/Status/CommGood\"), \"#d64550\", \"#168a70\")"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDU/Status/Faulted\") || tag(\"[T1]MBT1/Utility1/MSG1/PDU1/Transformer1/Transformer/Status/Faulted\"), \"FAULT\", if(!tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDU/Status/CommGood\") || !tag(\"[T1]MBT1/Utility1/MSG1/PDU1/Transformer1/Transformer/Status/CommGood\"), \"COMM LOSS\", \"NORMAL\"))"
+                  },
+                  "type": "expr"
+                }
+              }
             },
             "props": {
               "style": {
@@ -1089,46 +1055,19 @@
                 "textAlign": "center"
               }
             },
-            "type": "ia.display.label",
-            "propConfig": {
-              "props.text": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDU/Status/Faulted\") || tag(\"[T1]MBT1/Utility1/MSG1/PDU1/Transformer1/Transformer/Status/Faulted\"), \"FAULT\", if(!tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDU/Status/CommGood\") || !tag(\"[T1]MBT1/Utility1/MSG1/PDU1/Transformer1/Transformer/Status/CommGood\"), \"COMM LOSS\", \"NORMAL\"))"
-                  }
-                }
-              },
-              "props.style.color": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDU/Status/Faulted\") || tag(\"[T1]MBT1/Utility1/MSG1/PDU1/Transformer1/Transformer/Status/Faulted\") || !tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDU/Status/CommGood\") || !tag(\"[T1]MBT1/Utility1/MSG1/PDU1/Transformer1/Transformer/Status/CommGood\"), \"#d64550\", \"#168a70\")"
-                  }
-                }
-              },
-              "props.style.backgroundColor": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDU/Status/Faulted\") || tag(\"[T1]MBT1/Utility1/MSG1/PDU1/Transformer1/Transformer/Status/Faulted\") || !tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDU/Status/CommGood\") || !tag(\"[T1]MBT1/Utility1/MSG1/PDU1/Transformer1/Transformer/Status/CommGood\"), \"#fdecef\", \"#e9f7f2\")"
-                  }
-                }
-              }
-            }
+            "type": "ia.display.label"
           },
           {
             "meta": {
               "name": "divider"
             },
             "position": {
-              "x": 24,
-              "y": 72,
+              "height": 1,
               "width": 804,
-              "height": 1
+              "x": 24,
+              "y": 72
             },
             "props": {
-              "text": "",
               "style": {
                 "backgroundColor": "#d8e2ef",
                 "borderRadius": "2px"
@@ -1141,17 +1080,17 @@
               "name": "inputVoltageLabel"
             },
             "position": {
-              "x": 24,
-              "y": 86,
+              "height": 22,
               "width": 92,
-              "height": 22
+              "x": 24,
+              "y": 86
             },
             "props": {
-              "text": "PDU INPUT",
               "style": {
                 "color": "#66748d",
                 "fontSize": "0.78rem"
-              }
+              },
+              "text": "PDU INPUT"
             },
             "type": "ia.display.label"
           },
@@ -1160,10 +1099,20 @@
               "name": "inputVoltageValue"
             },
             "position": {
-              "x": 116,
-              "y": 86,
+              "height": 22,
               "width": 105,
-              "height": 22
+              "x": 116,
+              "y": 86
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDU/Electrical/InputVoltageLLAvg\"), \"#,##0.0\") + \" V\""
+                  },
+                  "type": "expr"
+                }
+              }
             },
             "props": {
               "style": {
@@ -1172,34 +1121,24 @@
                 "fontWeight": "700"
               }
             },
-            "type": "ia.display.label",
-            "propConfig": {
-              "props.text": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDU/Electrical/InputVoltageLLAvg\"), \"#,##0.0\") + \" V\""
-                  }
-                }
-              }
-            }
+            "type": "ia.display.label"
           },
           {
             "meta": {
               "name": "primaryLabel"
             },
             "position": {
-              "x": 235,
-              "y": 86,
+              "height": 22,
               "width": 92,
-              "height": 22
+              "x": 235,
+              "y": 86
             },
             "props": {
-              "text": "TX PRIMARY",
               "style": {
                 "color": "#66748d",
                 "fontSize": "0.78rem"
-              }
+              },
+              "text": "TX PRIMARY"
             },
             "type": "ia.display.label"
           },
@@ -1208,10 +1147,20 @@
               "name": "primaryValue"
             },
             "position": {
-              "x": 327,
-              "y": 86,
+              "height": 22,
               "width": 105,
-              "height": 22
+              "x": 327,
+              "y": 86
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/Transformer1/Transformer/Electrical/PrimaryVoltageLLAvg\"), \"#,##0.0\") + \" V\""
+                  },
+                  "type": "expr"
+                }
+              }
             },
             "props": {
               "style": {
@@ -1220,34 +1169,24 @@
                 "fontWeight": "700"
               }
             },
-            "type": "ia.display.label",
-            "propConfig": {
-              "props.text": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/Transformer1/Transformer/Electrical/PrimaryVoltageLLAvg\"), \"#,##0.0\") + \" V\""
-                  }
-                }
-              }
-            }
+            "type": "ia.display.label"
           },
           {
             "meta": {
               "name": "secondaryLabel"
             },
             "position": {
-              "x": 450,
-              "y": 86,
+              "height": 22,
               "width": 110,
-              "height": 22
+              "x": 450,
+              "y": 86
             },
             "props": {
-              "text": "TX SECONDARY",
               "style": {
                 "color": "#66748d",
                 "fontSize": "0.78rem"
-              }
+              },
+              "text": "TX SECONDARY"
             },
             "type": "ia.display.label"
           },
@@ -1256,10 +1195,20 @@
               "name": "secondaryValue"
             },
             "position": {
-              "x": 560,
-              "y": 86,
+              "height": 22,
               "width": 105,
-              "height": 22
+              "x": 560,
+              "y": 86
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/Transformer1/Transformer/Electrical/SecondaryVoltageLLAvg\"), \"#,##0.0\") + \" V\""
+                  },
+                  "type": "expr"
+                }
+              }
             },
             "props": {
               "style": {
@@ -1268,34 +1217,24 @@
                 "fontWeight": "700"
               }
             },
-            "type": "ia.display.label",
-            "propConfig": {
-              "props.text": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/Transformer1/Transformer/Electrical/SecondaryVoltageLLAvg\"), \"#,##0.0\") + \" V\""
-                  }
-                }
-              }
-            }
+            "type": "ia.display.label"
           },
           {
             "meta": {
               "name": "efficiencyLabel"
             },
             "position": {
-              "x": 681,
-              "y": 86,
+              "height": 22,
               "width": 78,
-              "height": 22
+              "x": 681,
+              "y": 86
             },
             "props": {
-              "text": "EFFICIENCY",
               "style": {
                 "color": "#66748d",
                 "fontSize": "0.78rem"
-              }
+              },
+              "text": "EFFICIENCY"
             },
             "type": "ia.display.label"
           },
@@ -1304,10 +1243,20 @@
               "name": "efficiencyValue"
             },
             "position": {
-              "x": 759,
-              "y": 86,
+              "height": 22,
               "width": 85,
-              "height": 22
+              "x": 759,
+              "y": 86
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/Transformer1/Transformer/Efficiency/Pct\"), \"0.0\") + \" %\""
+                  },
+                  "type": "expr"
+                }
+              }
             },
             "props": {
               "style": {
@@ -1316,34 +1265,24 @@
                 "fontWeight": "700"
               }
             },
-            "type": "ia.display.label",
-            "propConfig": {
-              "props.text": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/Transformer1/Transformer/Efficiency/Pct\"), \"0.0\") + \" %\""
-                  }
-                }
-              }
-            }
+            "type": "ia.display.label"
           },
           {
             "meta": {
               "name": "powerLabel"
             },
             "position": {
-              "x": 24,
-              "y": 116,
+              "height": 22,
               "width": 92,
-              "height": 22
+              "x": 24,
+              "y": 116
             },
             "props": {
-              "text": "OUTPUT POWER",
               "style": {
                 "color": "#66748d",
                 "fontSize": "0.78rem"
-              }
+              },
+              "text": "OUTPUT POWER"
             },
             "type": "ia.display.label"
           },
@@ -1352,10 +1291,20 @@
               "name": "powerValue"
             },
             "position": {
-              "x": 116,
-              "y": 116,
+              "height": 22,
               "width": 105,
-              "height": 22
+              "x": 116,
+              "y": 116
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDU/Power/RealPower\"), \"#,##0.0\") + \" kW\""
+                  },
+                  "type": "expr"
+                }
+              }
             },
             "props": {
               "style": {
@@ -1364,34 +1313,24 @@
                 "fontWeight": "700"
               }
             },
-            "type": "ia.display.label",
-            "propConfig": {
-              "props.text": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDU/Power/RealPower\"), \"#,##0.0\") + \" kW\""
-                  }
-                }
-              }
-            }
+            "type": "ia.display.label"
           },
           {
             "meta": {
               "name": "outputCurrentLabel"
             },
             "position": {
-              "x": 235,
-              "y": 116,
+              "height": 22,
               "width": 110,
-              "height": 22
+              "x": 235,
+              "y": 116
             },
             "props": {
-              "text": "OUTPUT CURRENT",
               "style": {
                 "color": "#66748d",
                 "fontSize": "0.78rem"
-              }
+              },
+              "text": "OUTPUT CURRENT"
             },
             "type": "ia.display.label"
           },
@@ -1400,10 +1339,20 @@
               "name": "outputCurrentValue"
             },
             "position": {
-              "x": 345,
-              "y": 116,
+              "height": 22,
               "width": 105,
-              "height": 22
+              "x": 345,
+              "y": 116
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDU/Electrical/OutputCurrentAvg\"), \"#,##0.0\") + \" A\""
+                  },
+                  "type": "expr"
+                }
+              }
             },
             "props": {
               "style": {
@@ -1412,34 +1361,24 @@
                 "fontWeight": "700"
               }
             },
-            "type": "ia.display.label",
-            "propConfig": {
-              "props.text": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDU/Electrical/OutputCurrentAvg\"), \"#,##0.0\") + \" A\""
-                  }
-                }
-              }
-            }
+            "type": "ia.display.label"
           },
           {
             "meta": {
               "name": "windingLabel"
             },
             "position": {
-              "x": 450,
-              "y": 116,
+              "height": 22,
               "width": 110,
-              "height": 22
+              "x": 450,
+              "y": 116
             },
             "props": {
-              "text": "WINDING TEMP",
               "style": {
                 "color": "#66748d",
                 "fontSize": "0.78rem"
-              }
+              },
+              "text": "WINDING TEMP"
             },
             "type": "ia.display.label"
           },
@@ -1448,10 +1387,20 @@
               "name": "windingValue"
             },
             "position": {
-              "x": 560,
-              "y": 116,
+              "height": 22,
               "width": 100,
-              "height": 22
+              "x": 560,
+              "y": 116
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/Transformer1/Transformer/Temperature/WindingTemp\"), \"0.0\") + \" °C\""
+                  },
+                  "type": "expr"
+                }
+              }
             },
             "props": {
               "style": {
@@ -1460,34 +1409,24 @@
                 "fontWeight": "700"
               }
             },
-            "type": "ia.display.label",
-            "propConfig": {
-              "props.text": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/Transformer1/Transformer/Temperature/WindingTemp\"), \"0.0\") + \" \u00b0C\""
-                  }
-                }
-              }
-            }
+            "type": "ia.display.label"
           },
           {
             "meta": {
               "name": "loadLabel"
             },
             "position": {
-              "x": 681,
-              "y": 116,
+              "height": 22,
               "width": 78,
-              "height": 22
+              "x": 681,
+              "y": 116
             },
             "props": {
-              "text": "TX LOAD",
               "style": {
                 "color": "#66748d",
                 "fontSize": "0.78rem"
-              }
+              },
+              "text": "TX LOAD"
             },
             "type": "ia.display.label"
           },
@@ -1496,10 +1435,20 @@
               "name": "loadValue"
             },
             "position": {
-              "x": 759,
-              "y": 116,
+              "height": 22,
               "width": 85,
-              "height": 22
+              "x": 759,
+              "y": 116
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/Transformer1/Transformer/Capacity/LoadPct\"), \"0.0\") + \" %\""
+                  },
+                  "type": "expr"
+                }
+              }
             },
             "props": {
               "style": {
@@ -1508,27 +1457,28 @@
                 "fontWeight": "700"
               }
             },
-            "type": "ia.display.label",
-            "propConfig": {
-              "props.text": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/Transformer1/Transformer/Capacity/LoadPct\"), \"0.0\") + \" %\""
-                  }
-                }
-              }
-            }
+            "type": "ia.display.label"
           }
         ],
+        "events": {
+          "dom": {
+            "onClick": {
+              "config": {
+                "script": "\tsystem.perspective.navigate(page\u003d\"/PDU\")"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
         "meta": {
           "name": "pduTransformer"
         },
         "position": {
-          "x": 38,
-          "y": 540,
+          "height": 158,
           "width": 860,
-          "height": 158
+          "x": 38,
+          "y": 540
         },
         "props": {
           "style": {
@@ -1538,35 +1488,23 @@
             "borderStyle": "solid",
             "borderWidth": "1px",
             "boxShadow": "0 10px 26px rgba(22, 33, 62, 0.08)",
-            "overflow": "hidden",
-            "cursor": "pointer"
+            "cursor": "pointer",
+            "overflow": "hidden"
           }
         },
-        "type": "ia.container.coord",
-        "events": {
-          "dom": {
-            "onClick": {
-              "config": {
-                "script": "\tsystem.perspective.navigate(page=\"/PDU\")"
-              },
-              "scope": "G",
-              "type": "script"
-            }
-          }
-        }
+        "type": "ia.container.coord"
       },
       {
         "meta": {
           "name": "transformerDrop"
         },
         "position": {
-          "x": 410,
-          "y": 698,
+          "height": 42,
           "width": 4,
-          "height": 42
+          "x": 410,
+          "y": 698
         },
         "props": {
-          "text": "",
           "style": {
             "backgroundColor": "#2f80ed",
             "borderRadius": "2px"
@@ -1579,19 +1517,19 @@
           "name": "busLabel"
         },
         "position": {
-          "x": 38,
-          "y": 710,
+          "height": 20,
           "width": 245,
-          "height": 20
+          "x": 38,
+          "y": 710
         },
         "props": {
-          "text": "PDU OUTPUT BUS \u00b7 208 V",
           "style": {
             "color": "#66748d",
             "fontSize": "0.68rem",
             "fontWeight": "800",
             "letterSpacing": "0.04em"
-          }
+          },
+          "text": "PDU OUTPUT BUS · 208 V"
         },
         "type": "ia.display.label"
       },
@@ -1600,13 +1538,12 @@
           "name": "outputBus"
         },
         "position": {
-          "x": 38,
-          "y": 738,
+          "height": 5,
           "width": 1048,
-          "height": 5
+          "x": 38,
+          "y": 738
         },
         "props": {
-          "text": "",
           "style": {
             "backgroundColor": "#2f80ed",
             "borderRadius": "2px"
@@ -1619,13 +1556,12 @@
           "name": "way1Drop"
         },
         "position": {
-          "x": 162,
-          "y": 743,
+          "height": 37,
           "width": 3,
-          "height": 37
+          "x": 162,
+          "y": 743
         },
         "props": {
-          "text": "",
           "style": {
             "backgroundColor": "#2f80ed",
             "borderRadius": "2px"
@@ -1640,13 +1576,10 @@
               "name": "accent"
             },
             "position": {
-              "x": 0,
-              "y": 0,
-              "width": 5,
-              "height": 280
+              "height": 280,
+              "width": 5
             },
             "props": {
-              "text": "",
               "style": {
                 "backgroundColor": "#2f80ed",
                 "borderRadius": "2px"
@@ -1659,19 +1592,19 @@
               "name": "eyebrow"
             },
             "position": {
-              "x": 22,
-              "y": 13,
+              "height": 18,
               "width": 160,
-              "height": 18
+              "x": 22,
+              "y": 13
             },
             "props": {
-              "text": "OUTGOING WAY 1",
               "style": {
                 "color": "#2f80ed",
                 "fontSize": "0.64rem",
                 "fontWeight": "800",
                 "letterSpacing": "0.08em"
-              }
+              },
+              "text": "OUTGOING WAY 1"
             },
             "type": "ia.display.label"
           },
@@ -1680,18 +1613,18 @@
               "name": "title"
             },
             "position": {
-              "x": 22,
-              "y": 34,
+              "height": 25,
               "width": 184,
-              "height": 25
+              "x": 22,
+              "y": 34
             },
             "props": {
-              "text": "Way1 / PowerMeter1",
               "style": {
                 "color": "#16213e",
                 "fontSize": "0.94rem",
                 "fontWeight": "800"
-              }
+              },
+              "text": "Way1 / PowerMeter1"
             },
             "type": "ia.display.label"
           },
@@ -1700,47 +1633,47 @@
               "name": "healthDot"
             },
             "position": {
-              "x": 210,
-              "y": 17,
+              "height": 20,
               "width": 18,
-              "height": 20
+              "x": 210,
+              "y": 17
             },
-            "props": {
-              "text": "\u25cf",
-              "style": {
-                "fontSize": "0.85rem",
-                "textAlign": "center"
-              }
-            },
-            "type": "ia.display.label",
             "propConfig": {
               "props.style.color": {
                 "binding": {
-                  "type": "expr",
                   "config": {
                     "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way1/Way/Status/Faulted\") || tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way1/Way/Breaker/Tripped\") || !tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way1/PowerMeter1/PowerMeter/Status/CommGood\"), \"#d64550\", if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way1/Way/Breaker/Closed\"), \"#2f80ed\", \"#d98618\"))"
-                  }
+                  },
+                  "type": "expr"
                 }
               }
-            }
+            },
+            "props": {
+              "style": {
+                "fontSize": "0.85rem",
+                "textAlign": "center"
+              },
+              "text": "●"
+            },
+            "type": "ia.display.label"
           },
           {
             "meta": {
               "name": "breakerLabel"
             },
             "position": {
-              "x": 22,
-              "y": 61,
+              "height": 20,
               "width": 80,
-              "height": 20
+              "x": 22,
+              "y": 61
             },
             "props": {
-              "text": "STATUS",
               "style": {
                 "color": "#66748d",
                 "fontSize": "0.68rem",
                 "fontWeight": "700"
-              }
+              },
+              "text": "STATUS"
             },
             "type": "ia.display.label"
           },
@@ -1749,10 +1682,36 @@
               "name": "breakerState"
             },
             "position": {
-              "x": 116,
-              "y": 58,
+              "height": 25,
               "width": 112,
-              "height": 25
+              "x": 116,
+              "y": 58
+            },
+            "propConfig": {
+              "props.style.backgroundColor": {
+                "binding": {
+                  "config": {
+                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way1/Way/Breaker/Tripped\"), \"#fdecef\", if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way1/Way/Breaker/Closed\"), \"#edf5ff\", \"#fff5e6\"))"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.style.color": {
+                "binding": {
+                  "config": {
+                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way1/Way/Breaker/Tripped\"), \"#d64550\", if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way1/Way/Breaker/Closed\"), \"#2f80ed\", \"#d98618\"))"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way1/Way/Breaker/Tripped\"), \"TRIPPED\", if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way1/Way/Breaker/Closed\"), \"BREAKER CLOSED\", \"BREAKER OPEN\"))"
+                  },
+                  "type": "expr"
+                }
+              }
             },
             "props": {
               "style": {
@@ -1762,46 +1721,19 @@
                 "textAlign": "center"
               }
             },
-            "type": "ia.display.label",
-            "propConfig": {
-              "props.text": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way1/Way/Breaker/Tripped\"), \"TRIPPED\", if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way1/Way/Breaker/Closed\"), \"BREAKER CLOSED\", \"BREAKER OPEN\"))"
-                  }
-                }
-              },
-              "props.style.color": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way1/Way/Breaker/Tripped\"), \"#d64550\", if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way1/Way/Breaker/Closed\"), \"#2f80ed\", \"#d98618\"))"
-                  }
-                }
-              },
-              "props.style.backgroundColor": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way1/Way/Breaker/Tripped\"), \"#fdecef\", if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way1/Way/Breaker/Closed\"), \"#edf5ff\", \"#fff5e6\"))"
-                  }
-                }
-              }
-            }
+            "type": "ia.display.label"
           },
           {
             "meta": {
               "name": "divider"
             },
             "position": {
-              "x": 22,
-              "y": 92,
+              "height": 1,
               "width": 206,
-              "height": 1
+              "x": 22,
+              "y": 92
             },
             "props": {
-              "text": "",
               "style": {
                 "backgroundColor": "#d8e2ef",
                 "borderRadius": "2px"
@@ -1814,17 +1746,17 @@
               "name": "currentLabel"
             },
             "position": {
-              "x": 22,
-              "y": 105,
+              "height": 21,
               "width": 105,
-              "height": 21
+              "x": 22,
+              "y": 105
             },
             "props": {
-              "text": "CURRENT",
               "style": {
                 "color": "#66748d",
                 "fontSize": "0.7rem"
-              }
+              },
+              "text": "CURRENT"
             },
             "type": "ia.display.label"
           },
@@ -1833,10 +1765,20 @@
               "name": "currentValue"
             },
             "position": {
-              "x": 127,
-              "y": 105,
+              "height": 21,
               "width": 101,
-              "height": 21
+              "x": 127,
+              "y": 105
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way1/PowerMeter1/PowerMeter/Current/Avg\"), \"#,##0.0\") + \" A\""
+                  },
+                  "type": "expr"
+                }
+              }
             },
             "props": {
               "style": {
@@ -1846,34 +1788,24 @@
                 "textAlign": "right"
               }
             },
-            "type": "ia.display.label",
-            "propConfig": {
-              "props.text": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way1/PowerMeter1/PowerMeter/Current/Avg\"), \"#,##0.0\") + \" A\""
-                  }
-                }
-              }
-            }
+            "type": "ia.display.label"
           },
           {
             "meta": {
               "name": "voltageLabel"
             },
             "position": {
-              "x": 22,
-              "y": 132,
+              "height": 21,
               "width": 105,
-              "height": 21
+              "x": 22,
+              "y": 132
             },
             "props": {
-              "text": "VOLTAGE (L-L)",
               "style": {
                 "color": "#66748d",
                 "fontSize": "0.7rem"
-              }
+              },
+              "text": "VOLTAGE (L-L)"
             },
             "type": "ia.display.label"
           },
@@ -1882,10 +1814,20 @@
               "name": "voltageValue"
             },
             "position": {
-              "x": 127,
-              "y": 132,
+              "height": 21,
               "width": 101,
-              "height": 21
+              "x": 127,
+              "y": 132
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way1/PowerMeter1/PowerMeter/Voltage/LLAvg\"), \"#,##0.0\") + \" V\""
+                  },
+                  "type": "expr"
+                }
+              }
             },
             "props": {
               "style": {
@@ -1895,34 +1837,24 @@
                 "textAlign": "right"
               }
             },
-            "type": "ia.display.label",
-            "propConfig": {
-              "props.text": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way1/PowerMeter1/PowerMeter/Voltage/LLAvg\"), \"#,##0.0\") + \" V\""
-                  }
-                }
-              }
-            }
+            "type": "ia.display.label"
           },
           {
             "meta": {
               "name": "realPowerLabel"
             },
             "position": {
-              "x": 22,
-              "y": 159,
+              "height": 21,
               "width": 105,
-              "height": 21
+              "x": 22,
+              "y": 159
             },
             "props": {
-              "text": "ACTIVE POWER",
               "style": {
                 "color": "#66748d",
                 "fontSize": "0.7rem"
-              }
+              },
+              "text": "ACTIVE POWER"
             },
             "type": "ia.display.label"
           },
@@ -1931,10 +1863,20 @@
               "name": "realPowerValue"
             },
             "position": {
-              "x": 127,
-              "y": 159,
+              "height": 21,
               "width": 101,
-              "height": 21
+              "x": 127,
+              "y": 159
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way1/PowerMeter1/PowerMeter/Power/RealPower\"), \"#,##0.0\") + \" kW\""
+                  },
+                  "type": "expr"
+                }
+              }
             },
             "props": {
               "style": {
@@ -1944,34 +1886,24 @@
                 "textAlign": "right"
               }
             },
-            "type": "ia.display.label",
-            "propConfig": {
-              "props.text": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way1/PowerMeter1/PowerMeter/Power/RealPower\"), \"#,##0.0\") + \" kW\""
-                  }
-                }
-              }
-            }
+            "type": "ia.display.label"
           },
           {
             "meta": {
               "name": "apparentPowerLabel"
             },
             "position": {
-              "x": 22,
-              "y": 186,
+              "height": 21,
               "width": 105,
-              "height": 21
+              "x": 22,
+              "y": 186
             },
             "props": {
-              "text": "APPARENT POWER",
               "style": {
                 "color": "#66748d",
                 "fontSize": "0.7rem"
-              }
+              },
+              "text": "APPARENT POWER"
             },
             "type": "ia.display.label"
           },
@@ -1980,10 +1912,20 @@
               "name": "apparentPowerValue"
             },
             "position": {
-              "x": 127,
-              "y": 186,
+              "height": 21,
               "width": 101,
-              "height": 21
+              "x": 127,
+              "y": 186
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way1/PowerMeter1/PowerMeter/Power/ApparentPower\"), \"#,##0.0\") + \" kVA\""
+                  },
+                  "type": "expr"
+                }
+              }
             },
             "props": {
               "style": {
@@ -1993,34 +1935,24 @@
                 "textAlign": "right"
               }
             },
-            "type": "ia.display.label",
-            "propConfig": {
-              "props.text": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way1/PowerMeter1/PowerMeter/Power/ApparentPower\"), \"#,##0.0\") + \" kVA\""
-                  }
-                }
-              }
-            }
+            "type": "ia.display.label"
           },
           {
             "meta": {
               "name": "powerFactorLabel"
             },
             "position": {
-              "x": 22,
-              "y": 213,
+              "height": 21,
               "width": 105,
-              "height": 21
+              "x": 22,
+              "y": 213
             },
             "props": {
-              "text": "POWER FACTOR",
               "style": {
                 "color": "#66748d",
                 "fontSize": "0.7rem"
-              }
+              },
+              "text": "POWER FACTOR"
             },
             "type": "ia.display.label"
           },
@@ -2029,10 +1961,20 @@
               "name": "powerFactorValue"
             },
             "position": {
-              "x": 127,
-              "y": 213,
+              "height": 21,
               "width": 101,
-              "height": 21
+              "x": 127,
+              "y": 213
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way1/PowerMeter1/PowerMeter/Power/PowerFactor\"), \"0.00\") + \" \""
+                  },
+                  "type": "expr"
+                }
+              }
             },
             "props": {
               "style": {
@@ -2042,34 +1984,24 @@
                 "textAlign": "right"
               }
             },
-            "type": "ia.display.label",
-            "propConfig": {
-              "props.text": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way1/PowerMeter1/PowerMeter/Power/PowerFactor\"), \"0.00\") + \" \""
-                  }
-                }
-              }
-            }
+            "type": "ia.display.label"
           },
           {
             "meta": {
               "name": "loadLabel"
             },
             "position": {
-              "x": 22,
-              "y": 240,
+              "height": 21,
               "width": 105,
-              "height": 21
+              "x": 22,
+              "y": 240
             },
             "props": {
-              "text": "BREAKER LOAD",
               "style": {
                 "color": "#66748d",
                 "fontSize": "0.7rem"
-              }
+              },
+              "text": "BREAKER LOAD"
             },
             "type": "ia.display.label"
           },
@@ -2078,10 +2010,20 @@
               "name": "loadValue"
             },
             "position": {
-              "x": 127,
-              "y": 240,
+              "height": 21,
               "width": 101,
-              "height": 21
+              "x": 127,
+              "y": 240
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way1/Way/Capacity/LoadPct\"), \"0.0\") + \" %\""
+                  },
+                  "type": "expr"
+                }
+              }
             },
             "props": {
               "style": {
@@ -2091,27 +2033,28 @@
                 "textAlign": "right"
               }
             },
-            "type": "ia.display.label",
-            "propConfig": {
-              "props.text": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way1/Way/Capacity/LoadPct\"), \"0.0\") + \" %\""
-                  }
-                }
-              }
-            }
+            "type": "ia.display.label"
           }
         ],
+        "events": {
+          "dom": {
+            "onClick": {
+              "config": {
+                "script": "\tsystem.perspective.navigate(page\u003d\"/ways/way1\")"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
         "meta": {
           "name": "way1"
         },
         "position": {
-          "x": 38,
-          "y": 780,
+          "height": 280,
           "width": 250,
-          "height": 280
+          "x": 38,
+          "y": 780
         },
         "props": {
           "style": {
@@ -2121,35 +2064,23 @@
             "borderStyle": "solid",
             "borderWidth": "1px",
             "boxShadow": "0 10px 26px rgba(22, 33, 62, 0.08)",
-            "overflow": "hidden",
-            "cursor": "pointer"
+            "cursor": "pointer",
+            "overflow": "hidden"
           }
         },
-        "type": "ia.container.coord",
-        "events": {
-          "dom": {
-            "onClick": {
-              "config": {
-                "script": "\tsystem.perspective.navigate(page=\"/ways/way1\")"
-              },
-              "scope": "G",
-              "type": "script"
-            }
-          }
-        }
+        "type": "ia.container.coord"
       },
       {
         "meta": {
           "name": "way2Drop"
         },
         "position": {
-          "x": 428,
-          "y": 743,
+          "height": 37,
           "width": 3,
-          "height": 37
+          "x": 428,
+          "y": 743
         },
         "props": {
-          "text": "",
           "style": {
             "backgroundColor": "#2f80ed",
             "borderRadius": "2px"
@@ -2164,13 +2095,10 @@
               "name": "accent"
             },
             "position": {
-              "x": 0,
-              "y": 0,
-              "width": 5,
-              "height": 280
+              "height": 280,
+              "width": 5
             },
             "props": {
-              "text": "",
               "style": {
                 "backgroundColor": "#2f80ed",
                 "borderRadius": "2px"
@@ -2183,19 +2111,19 @@
               "name": "eyebrow"
             },
             "position": {
-              "x": 22,
-              "y": 13,
+              "height": 18,
               "width": 160,
-              "height": 18
+              "x": 22,
+              "y": 13
             },
             "props": {
-              "text": "OUTGOING WAY 2",
               "style": {
                 "color": "#2f80ed",
                 "fontSize": "0.64rem",
                 "fontWeight": "800",
                 "letterSpacing": "0.08em"
-              }
+              },
+              "text": "OUTGOING WAY 2"
             },
             "type": "ia.display.label"
           },
@@ -2204,18 +2132,18 @@
               "name": "title"
             },
             "position": {
-              "x": 22,
-              "y": 34,
+              "height": 25,
               "width": 184,
-              "height": 25
+              "x": 22,
+              "y": 34
             },
             "props": {
-              "text": "Way2 / PowerMeter2",
               "style": {
                 "color": "#16213e",
                 "fontSize": "0.94rem",
                 "fontWeight": "800"
-              }
+              },
+              "text": "Way2 / PowerMeter2"
             },
             "type": "ia.display.label"
           },
@@ -2224,47 +2152,47 @@
               "name": "healthDot"
             },
             "position": {
-              "x": 210,
-              "y": 17,
+              "height": 20,
               "width": 18,
-              "height": 20
+              "x": 210,
+              "y": 17
             },
-            "props": {
-              "text": "\u25cf",
-              "style": {
-                "fontSize": "0.85rem",
-                "textAlign": "center"
-              }
-            },
-            "type": "ia.display.label",
             "propConfig": {
               "props.style.color": {
                 "binding": {
-                  "type": "expr",
                   "config": {
                     "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way2/Way/Status/Faulted\") || tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way2/Way/Breaker/Tripped\") || !tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way2/PowerMeter2/PowerMeter/Status/CommGood\"), \"#d64550\", if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way2/Way/Breaker/Closed\"), \"#2f80ed\", \"#d98618\"))"
-                  }
+                  },
+                  "type": "expr"
                 }
               }
-            }
+            },
+            "props": {
+              "style": {
+                "fontSize": "0.85rem",
+                "textAlign": "center"
+              },
+              "text": "●"
+            },
+            "type": "ia.display.label"
           },
           {
             "meta": {
               "name": "breakerLabel"
             },
             "position": {
-              "x": 22,
-              "y": 61,
+              "height": 20,
               "width": 80,
-              "height": 20
+              "x": 22,
+              "y": 61
             },
             "props": {
-              "text": "STATUS",
               "style": {
                 "color": "#66748d",
                 "fontSize": "0.68rem",
                 "fontWeight": "700"
-              }
+              },
+              "text": "STATUS"
             },
             "type": "ia.display.label"
           },
@@ -2273,10 +2201,36 @@
               "name": "breakerState"
             },
             "position": {
-              "x": 116,
-              "y": 58,
+              "height": 25,
               "width": 112,
-              "height": 25
+              "x": 116,
+              "y": 58
+            },
+            "propConfig": {
+              "props.style.backgroundColor": {
+                "binding": {
+                  "config": {
+                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way2/Way/Breaker/Tripped\"), \"#fdecef\", if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way2/Way/Breaker/Closed\"), \"#edf5ff\", \"#fff5e6\"))"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.style.color": {
+                "binding": {
+                  "config": {
+                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way2/Way/Breaker/Tripped\"), \"#d64550\", if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way2/Way/Breaker/Closed\"), \"#2f80ed\", \"#d98618\"))"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way2/Way/Breaker/Tripped\"), \"TRIPPED\", if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way2/Way/Breaker/Closed\"), \"BREAKER CLOSED\", \"BREAKER OPEN\"))"
+                  },
+                  "type": "expr"
+                }
+              }
             },
             "props": {
               "style": {
@@ -2286,46 +2240,19 @@
                 "textAlign": "center"
               }
             },
-            "type": "ia.display.label",
-            "propConfig": {
-              "props.text": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way2/Way/Breaker/Tripped\"), \"TRIPPED\", if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way2/Way/Breaker/Closed\"), \"BREAKER CLOSED\", \"BREAKER OPEN\"))"
-                  }
-                }
-              },
-              "props.style.color": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way2/Way/Breaker/Tripped\"), \"#d64550\", if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way2/Way/Breaker/Closed\"), \"#2f80ed\", \"#d98618\"))"
-                  }
-                }
-              },
-              "props.style.backgroundColor": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way2/Way/Breaker/Tripped\"), \"#fdecef\", if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way2/Way/Breaker/Closed\"), \"#edf5ff\", \"#fff5e6\"))"
-                  }
-                }
-              }
-            }
+            "type": "ia.display.label"
           },
           {
             "meta": {
               "name": "divider"
             },
             "position": {
-              "x": 22,
-              "y": 92,
+              "height": 1,
               "width": 206,
-              "height": 1
+              "x": 22,
+              "y": 92
             },
             "props": {
-              "text": "",
               "style": {
                 "backgroundColor": "#d8e2ef",
                 "borderRadius": "2px"
@@ -2338,17 +2265,17 @@
               "name": "currentLabel"
             },
             "position": {
-              "x": 22,
-              "y": 105,
+              "height": 21,
               "width": 105,
-              "height": 21
+              "x": 22,
+              "y": 105
             },
             "props": {
-              "text": "CURRENT",
               "style": {
                 "color": "#66748d",
                 "fontSize": "0.7rem"
-              }
+              },
+              "text": "CURRENT"
             },
             "type": "ia.display.label"
           },
@@ -2357,10 +2284,20 @@
               "name": "currentValue"
             },
             "position": {
-              "x": 127,
-              "y": 105,
+              "height": 21,
               "width": 101,
-              "height": 21
+              "x": 127,
+              "y": 105
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way2/PowerMeter2/PowerMeter/Current/Avg\"), \"#,##0.0\") + \" A\""
+                  },
+                  "type": "expr"
+                }
+              }
             },
             "props": {
               "style": {
@@ -2370,34 +2307,24 @@
                 "textAlign": "right"
               }
             },
-            "type": "ia.display.label",
-            "propConfig": {
-              "props.text": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way2/PowerMeter2/PowerMeter/Current/Avg\"), \"#,##0.0\") + \" A\""
-                  }
-                }
-              }
-            }
+            "type": "ia.display.label"
           },
           {
             "meta": {
               "name": "voltageLabel"
             },
             "position": {
-              "x": 22,
-              "y": 132,
+              "height": 21,
               "width": 105,
-              "height": 21
+              "x": 22,
+              "y": 132
             },
             "props": {
-              "text": "VOLTAGE (L-L)",
               "style": {
                 "color": "#66748d",
                 "fontSize": "0.7rem"
-              }
+              },
+              "text": "VOLTAGE (L-L)"
             },
             "type": "ia.display.label"
           },
@@ -2406,10 +2333,20 @@
               "name": "voltageValue"
             },
             "position": {
-              "x": 127,
-              "y": 132,
+              "height": 21,
               "width": 101,
-              "height": 21
+              "x": 127,
+              "y": 132
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way2/PowerMeter2/PowerMeter/Voltage/LLAvg\"), \"#,##0.0\") + \" V\""
+                  },
+                  "type": "expr"
+                }
+              }
             },
             "props": {
               "style": {
@@ -2419,34 +2356,24 @@
                 "textAlign": "right"
               }
             },
-            "type": "ia.display.label",
-            "propConfig": {
-              "props.text": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way2/PowerMeter2/PowerMeter/Voltage/LLAvg\"), \"#,##0.0\") + \" V\""
-                  }
-                }
-              }
-            }
+            "type": "ia.display.label"
           },
           {
             "meta": {
               "name": "realPowerLabel"
             },
             "position": {
-              "x": 22,
-              "y": 159,
+              "height": 21,
               "width": 105,
-              "height": 21
+              "x": 22,
+              "y": 159
             },
             "props": {
-              "text": "ACTIVE POWER",
               "style": {
                 "color": "#66748d",
                 "fontSize": "0.7rem"
-              }
+              },
+              "text": "ACTIVE POWER"
             },
             "type": "ia.display.label"
           },
@@ -2455,10 +2382,20 @@
               "name": "realPowerValue"
             },
             "position": {
-              "x": 127,
-              "y": 159,
+              "height": 21,
               "width": 101,
-              "height": 21
+              "x": 127,
+              "y": 159
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way2/PowerMeter2/PowerMeter/Power/RealPower\"), \"#,##0.0\") + \" kW\""
+                  },
+                  "type": "expr"
+                }
+              }
             },
             "props": {
               "style": {
@@ -2468,34 +2405,24 @@
                 "textAlign": "right"
               }
             },
-            "type": "ia.display.label",
-            "propConfig": {
-              "props.text": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way2/PowerMeter2/PowerMeter/Power/RealPower\"), \"#,##0.0\") + \" kW\""
-                  }
-                }
-              }
-            }
+            "type": "ia.display.label"
           },
           {
             "meta": {
               "name": "apparentPowerLabel"
             },
             "position": {
-              "x": 22,
-              "y": 186,
+              "height": 21,
               "width": 105,
-              "height": 21
+              "x": 22,
+              "y": 186
             },
             "props": {
-              "text": "APPARENT POWER",
               "style": {
                 "color": "#66748d",
                 "fontSize": "0.7rem"
-              }
+              },
+              "text": "APPARENT POWER"
             },
             "type": "ia.display.label"
           },
@@ -2504,10 +2431,20 @@
               "name": "apparentPowerValue"
             },
             "position": {
-              "x": 127,
-              "y": 186,
+              "height": 21,
               "width": 101,
-              "height": 21
+              "x": 127,
+              "y": 186
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way2/PowerMeter2/PowerMeter/Power/ApparentPower\"), \"#,##0.0\") + \" kVA\""
+                  },
+                  "type": "expr"
+                }
+              }
             },
             "props": {
               "style": {
@@ -2517,34 +2454,24 @@
                 "textAlign": "right"
               }
             },
-            "type": "ia.display.label",
-            "propConfig": {
-              "props.text": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way2/PowerMeter2/PowerMeter/Power/ApparentPower\"), \"#,##0.0\") + \" kVA\""
-                  }
-                }
-              }
-            }
+            "type": "ia.display.label"
           },
           {
             "meta": {
               "name": "powerFactorLabel"
             },
             "position": {
-              "x": 22,
-              "y": 213,
+              "height": 21,
               "width": 105,
-              "height": 21
+              "x": 22,
+              "y": 213
             },
             "props": {
-              "text": "POWER FACTOR",
               "style": {
                 "color": "#66748d",
                 "fontSize": "0.7rem"
-              }
+              },
+              "text": "POWER FACTOR"
             },
             "type": "ia.display.label"
           },
@@ -2553,10 +2480,20 @@
               "name": "powerFactorValue"
             },
             "position": {
-              "x": 127,
-              "y": 213,
+              "height": 21,
               "width": 101,
-              "height": 21
+              "x": 127,
+              "y": 213
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way2/PowerMeter2/PowerMeter/Power/PowerFactor\"), \"0.00\") + \" \""
+                  },
+                  "type": "expr"
+                }
+              }
             },
             "props": {
               "style": {
@@ -2566,34 +2503,24 @@
                 "textAlign": "right"
               }
             },
-            "type": "ia.display.label",
-            "propConfig": {
-              "props.text": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way2/PowerMeter2/PowerMeter/Power/PowerFactor\"), \"0.00\") + \" \""
-                  }
-                }
-              }
-            }
+            "type": "ia.display.label"
           },
           {
             "meta": {
               "name": "loadLabel"
             },
             "position": {
-              "x": 22,
-              "y": 240,
+              "height": 21,
               "width": 105,
-              "height": 21
+              "x": 22,
+              "y": 240
             },
             "props": {
-              "text": "BREAKER LOAD",
               "style": {
                 "color": "#66748d",
                 "fontSize": "0.7rem"
-              }
+              },
+              "text": "BREAKER LOAD"
             },
             "type": "ia.display.label"
           },
@@ -2602,10 +2529,20 @@
               "name": "loadValue"
             },
             "position": {
-              "x": 127,
-              "y": 240,
+              "height": 21,
               "width": 101,
-              "height": 21
+              "x": 127,
+              "y": 240
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way2/Way/Capacity/LoadPct\"), \"0.0\") + \" %\""
+                  },
+                  "type": "expr"
+                }
+              }
             },
             "props": {
               "style": {
@@ -2615,27 +2552,28 @@
                 "textAlign": "right"
               }
             },
-            "type": "ia.display.label",
-            "propConfig": {
-              "props.text": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way2/Way/Capacity/LoadPct\"), \"0.0\") + \" %\""
-                  }
-                }
-              }
-            }
+            "type": "ia.display.label"
           }
         ],
+        "events": {
+          "dom": {
+            "onClick": {
+              "config": {
+                "script": "\tsystem.perspective.navigate(page\u003d\"/ways/way2\")"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
         "meta": {
           "name": "way2"
         },
         "position": {
-          "x": 304,
-          "y": 780,
+          "height": 280,
           "width": 250,
-          "height": 280
+          "x": 304,
+          "y": 780
         },
         "props": {
           "style": {
@@ -2645,35 +2583,23 @@
             "borderStyle": "solid",
             "borderWidth": "1px",
             "boxShadow": "0 10px 26px rgba(22, 33, 62, 0.08)",
-            "overflow": "hidden",
-            "cursor": "pointer"
+            "cursor": "pointer",
+            "overflow": "hidden"
           }
         },
-        "type": "ia.container.coord",
-        "events": {
-          "dom": {
-            "onClick": {
-              "config": {
-                "script": "\tsystem.perspective.navigate(page=\"/ways/way2\")"
-              },
-              "scope": "G",
-              "type": "script"
-            }
-          }
-        }
+        "type": "ia.container.coord"
       },
       {
         "meta": {
           "name": "way3Drop"
         },
         "position": {
-          "x": 694,
-          "y": 743,
+          "height": 37,
           "width": 3,
-          "height": 37
+          "x": 694,
+          "y": 743
         },
         "props": {
-          "text": "",
           "style": {
             "backgroundColor": "#2f80ed",
             "borderRadius": "2px"
@@ -2688,13 +2614,10 @@
               "name": "accent"
             },
             "position": {
-              "x": 0,
-              "y": 0,
-              "width": 5,
-              "height": 280
+              "height": 280,
+              "width": 5
             },
             "props": {
-              "text": "",
               "style": {
                 "backgroundColor": "#2f80ed",
                 "borderRadius": "2px"
@@ -2707,19 +2630,19 @@
               "name": "eyebrow"
             },
             "position": {
-              "x": 22,
-              "y": 13,
+              "height": 18,
               "width": 160,
-              "height": 18
+              "x": 22,
+              "y": 13
             },
             "props": {
-              "text": "OUTGOING WAY 3",
               "style": {
                 "color": "#2f80ed",
                 "fontSize": "0.64rem",
                 "fontWeight": "800",
                 "letterSpacing": "0.08em"
-              }
+              },
+              "text": "OUTGOING WAY 3"
             },
             "type": "ia.display.label"
           },
@@ -2728,18 +2651,18 @@
               "name": "title"
             },
             "position": {
-              "x": 22,
-              "y": 34,
+              "height": 25,
               "width": 184,
-              "height": 25
+              "x": 22,
+              "y": 34
             },
             "props": {
-              "text": "Way3 / PowerMeter3",
               "style": {
                 "color": "#16213e",
                 "fontSize": "0.94rem",
                 "fontWeight": "800"
-              }
+              },
+              "text": "Way3 / PowerMeter3"
             },
             "type": "ia.display.label"
           },
@@ -2748,47 +2671,47 @@
               "name": "healthDot"
             },
             "position": {
-              "x": 210,
-              "y": 17,
+              "height": 20,
               "width": 18,
-              "height": 20
+              "x": 210,
+              "y": 17
             },
-            "props": {
-              "text": "\u25cf",
-              "style": {
-                "fontSize": "0.85rem",
-                "textAlign": "center"
-              }
-            },
-            "type": "ia.display.label",
             "propConfig": {
               "props.style.color": {
                 "binding": {
-                  "type": "expr",
                   "config": {
                     "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way3/Way/Status/Faulted\") || tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way3/Way/Breaker/Tripped\") || !tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way3/PowerMeter3/PowerMeter/Status/CommGood\"), \"#d64550\", if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way3/Way/Breaker/Closed\"), \"#2f80ed\", \"#d98618\"))"
-                  }
+                  },
+                  "type": "expr"
                 }
               }
-            }
+            },
+            "props": {
+              "style": {
+                "fontSize": "0.85rem",
+                "textAlign": "center"
+              },
+              "text": "●"
+            },
+            "type": "ia.display.label"
           },
           {
             "meta": {
               "name": "breakerLabel"
             },
             "position": {
-              "x": 22,
-              "y": 61,
+              "height": 20,
               "width": 80,
-              "height": 20
+              "x": 22,
+              "y": 61
             },
             "props": {
-              "text": "STATUS",
               "style": {
                 "color": "#66748d",
                 "fontSize": "0.68rem",
                 "fontWeight": "700"
-              }
+              },
+              "text": "STATUS"
             },
             "type": "ia.display.label"
           },
@@ -2797,10 +2720,36 @@
               "name": "breakerState"
             },
             "position": {
-              "x": 116,
-              "y": 58,
+              "height": 25,
               "width": 112,
-              "height": 25
+              "x": 116,
+              "y": 58
+            },
+            "propConfig": {
+              "props.style.backgroundColor": {
+                "binding": {
+                  "config": {
+                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way3/Way/Breaker/Tripped\"), \"#fdecef\", if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way3/Way/Breaker/Closed\"), \"#edf5ff\", \"#fff5e6\"))"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.style.color": {
+                "binding": {
+                  "config": {
+                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way3/Way/Breaker/Tripped\"), \"#d64550\", if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way3/Way/Breaker/Closed\"), \"#2f80ed\", \"#d98618\"))"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way3/Way/Breaker/Tripped\"), \"TRIPPED\", if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way3/Way/Breaker/Closed\"), \"BREAKER CLOSED\", \"BREAKER OPEN\"))"
+                  },
+                  "type": "expr"
+                }
+              }
             },
             "props": {
               "style": {
@@ -2810,46 +2759,19 @@
                 "textAlign": "center"
               }
             },
-            "type": "ia.display.label",
-            "propConfig": {
-              "props.text": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way3/Way/Breaker/Tripped\"), \"TRIPPED\", if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way3/Way/Breaker/Closed\"), \"BREAKER CLOSED\", \"BREAKER OPEN\"))"
-                  }
-                }
-              },
-              "props.style.color": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way3/Way/Breaker/Tripped\"), \"#d64550\", if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way3/Way/Breaker/Closed\"), \"#2f80ed\", \"#d98618\"))"
-                  }
-                }
-              },
-              "props.style.backgroundColor": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way3/Way/Breaker/Tripped\"), \"#fdecef\", if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way3/Way/Breaker/Closed\"), \"#edf5ff\", \"#fff5e6\"))"
-                  }
-                }
-              }
-            }
+            "type": "ia.display.label"
           },
           {
             "meta": {
               "name": "divider"
             },
             "position": {
-              "x": 22,
-              "y": 92,
+              "height": 1,
               "width": 206,
-              "height": 1
+              "x": 22,
+              "y": 92
             },
             "props": {
-              "text": "",
               "style": {
                 "backgroundColor": "#d8e2ef",
                 "borderRadius": "2px"
@@ -2862,17 +2784,17 @@
               "name": "currentLabel"
             },
             "position": {
-              "x": 22,
-              "y": 105,
+              "height": 21,
               "width": 105,
-              "height": 21
+              "x": 22,
+              "y": 105
             },
             "props": {
-              "text": "CURRENT",
               "style": {
                 "color": "#66748d",
                 "fontSize": "0.7rem"
-              }
+              },
+              "text": "CURRENT"
             },
             "type": "ia.display.label"
           },
@@ -2881,10 +2803,20 @@
               "name": "currentValue"
             },
             "position": {
-              "x": 127,
-              "y": 105,
+              "height": 21,
               "width": 101,
-              "height": 21
+              "x": 127,
+              "y": 105
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way3/PowerMeter3/PowerMeter/Current/Avg\"), \"#,##0.0\") + \" A\""
+                  },
+                  "type": "expr"
+                }
+              }
             },
             "props": {
               "style": {
@@ -2894,34 +2826,24 @@
                 "textAlign": "right"
               }
             },
-            "type": "ia.display.label",
-            "propConfig": {
-              "props.text": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way3/PowerMeter3/PowerMeter/Current/Avg\"), \"#,##0.0\") + \" A\""
-                  }
-                }
-              }
-            }
+            "type": "ia.display.label"
           },
           {
             "meta": {
               "name": "voltageLabel"
             },
             "position": {
-              "x": 22,
-              "y": 132,
+              "height": 21,
               "width": 105,
-              "height": 21
+              "x": 22,
+              "y": 132
             },
             "props": {
-              "text": "VOLTAGE (L-L)",
               "style": {
                 "color": "#66748d",
                 "fontSize": "0.7rem"
-              }
+              },
+              "text": "VOLTAGE (L-L)"
             },
             "type": "ia.display.label"
           },
@@ -2930,10 +2852,20 @@
               "name": "voltageValue"
             },
             "position": {
-              "x": 127,
-              "y": 132,
+              "height": 21,
               "width": 101,
-              "height": 21
+              "x": 127,
+              "y": 132
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way3/PowerMeter3/PowerMeter/Voltage/LLAvg\"), \"#,##0.0\") + \" V\""
+                  },
+                  "type": "expr"
+                }
+              }
             },
             "props": {
               "style": {
@@ -2943,34 +2875,24 @@
                 "textAlign": "right"
               }
             },
-            "type": "ia.display.label",
-            "propConfig": {
-              "props.text": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way3/PowerMeter3/PowerMeter/Voltage/LLAvg\"), \"#,##0.0\") + \" V\""
-                  }
-                }
-              }
-            }
+            "type": "ia.display.label"
           },
           {
             "meta": {
               "name": "realPowerLabel"
             },
             "position": {
-              "x": 22,
-              "y": 159,
+              "height": 21,
               "width": 105,
-              "height": 21
+              "x": 22,
+              "y": 159
             },
             "props": {
-              "text": "ACTIVE POWER",
               "style": {
                 "color": "#66748d",
                 "fontSize": "0.7rem"
-              }
+              },
+              "text": "ACTIVE POWER"
             },
             "type": "ia.display.label"
           },
@@ -2979,10 +2901,20 @@
               "name": "realPowerValue"
             },
             "position": {
-              "x": 127,
-              "y": 159,
+              "height": 21,
               "width": 101,
-              "height": 21
+              "x": 127,
+              "y": 159
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way3/PowerMeter3/PowerMeter/Power/RealPower\"), \"#,##0.0\") + \" kW\""
+                  },
+                  "type": "expr"
+                }
+              }
             },
             "props": {
               "style": {
@@ -2992,34 +2924,24 @@
                 "textAlign": "right"
               }
             },
-            "type": "ia.display.label",
-            "propConfig": {
-              "props.text": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way3/PowerMeter3/PowerMeter/Power/RealPower\"), \"#,##0.0\") + \" kW\""
-                  }
-                }
-              }
-            }
+            "type": "ia.display.label"
           },
           {
             "meta": {
               "name": "apparentPowerLabel"
             },
             "position": {
-              "x": 22,
-              "y": 186,
+              "height": 21,
               "width": 105,
-              "height": 21
+              "x": 22,
+              "y": 186
             },
             "props": {
-              "text": "APPARENT POWER",
               "style": {
                 "color": "#66748d",
                 "fontSize": "0.7rem"
-              }
+              },
+              "text": "APPARENT POWER"
             },
             "type": "ia.display.label"
           },
@@ -3028,10 +2950,20 @@
               "name": "apparentPowerValue"
             },
             "position": {
-              "x": 127,
-              "y": 186,
+              "height": 21,
               "width": 101,
-              "height": 21
+              "x": 127,
+              "y": 186
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way3/PowerMeter3/PowerMeter/Power/ApparentPower\"), \"#,##0.0\") + \" kVA\""
+                  },
+                  "type": "expr"
+                }
+              }
             },
             "props": {
               "style": {
@@ -3041,34 +2973,24 @@
                 "textAlign": "right"
               }
             },
-            "type": "ia.display.label",
-            "propConfig": {
-              "props.text": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way3/PowerMeter3/PowerMeter/Power/ApparentPower\"), \"#,##0.0\") + \" kVA\""
-                  }
-                }
-              }
-            }
+            "type": "ia.display.label"
           },
           {
             "meta": {
               "name": "powerFactorLabel"
             },
             "position": {
-              "x": 22,
-              "y": 213,
+              "height": 21,
               "width": 105,
-              "height": 21
+              "x": 22,
+              "y": 213
             },
             "props": {
-              "text": "POWER FACTOR",
               "style": {
                 "color": "#66748d",
                 "fontSize": "0.7rem"
-              }
+              },
+              "text": "POWER FACTOR"
             },
             "type": "ia.display.label"
           },
@@ -3077,10 +2999,20 @@
               "name": "powerFactorValue"
             },
             "position": {
-              "x": 127,
-              "y": 213,
+              "height": 21,
               "width": 101,
-              "height": 21
+              "x": 127,
+              "y": 213
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way3/PowerMeter3/PowerMeter/Power/PowerFactor\"), \"0.00\") + \" \""
+                  },
+                  "type": "expr"
+                }
+              }
             },
             "props": {
               "style": {
@@ -3090,34 +3022,24 @@
                 "textAlign": "right"
               }
             },
-            "type": "ia.display.label",
-            "propConfig": {
-              "props.text": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way3/PowerMeter3/PowerMeter/Power/PowerFactor\"), \"0.00\") + \" \""
-                  }
-                }
-              }
-            }
+            "type": "ia.display.label"
           },
           {
             "meta": {
               "name": "loadLabel"
             },
             "position": {
-              "x": 22,
-              "y": 240,
+              "height": 21,
               "width": 105,
-              "height": 21
+              "x": 22,
+              "y": 240
             },
             "props": {
-              "text": "BREAKER LOAD",
               "style": {
                 "color": "#66748d",
                 "fontSize": "0.7rem"
-              }
+              },
+              "text": "BREAKER LOAD"
             },
             "type": "ia.display.label"
           },
@@ -3126,10 +3048,20 @@
               "name": "loadValue"
             },
             "position": {
-              "x": 127,
-              "y": 240,
+              "height": 21,
               "width": 101,
-              "height": 21
+              "x": 127,
+              "y": 240
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way3/Way/Capacity/LoadPct\"), \"0.0\") + \" %\""
+                  },
+                  "type": "expr"
+                }
+              }
             },
             "props": {
               "style": {
@@ -3139,27 +3071,28 @@
                 "textAlign": "right"
               }
             },
-            "type": "ia.display.label",
-            "propConfig": {
-              "props.text": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way3/Way/Capacity/LoadPct\"), \"0.0\") + \" %\""
-                  }
-                }
-              }
-            }
+            "type": "ia.display.label"
           }
         ],
+        "events": {
+          "dom": {
+            "onClick": {
+              "config": {
+                "script": "\tsystem.perspective.navigate(page\u003d\"/ways/way3\")"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
         "meta": {
           "name": "way3"
         },
         "position": {
-          "x": 570,
-          "y": 780,
+          "height": 280,
           "width": 250,
-          "height": 280
+          "x": 570,
+          "y": 780
         },
         "props": {
           "style": {
@@ -3169,35 +3102,23 @@
             "borderStyle": "solid",
             "borderWidth": "1px",
             "boxShadow": "0 10px 26px rgba(22, 33, 62, 0.08)",
-            "overflow": "hidden",
-            "cursor": "pointer"
+            "cursor": "pointer",
+            "overflow": "hidden"
           }
         },
-        "type": "ia.container.coord",
-        "events": {
-          "dom": {
-            "onClick": {
-              "config": {
-                "script": "\tsystem.perspective.navigate(page=\"/ways/way3\")"
-              },
-              "scope": "G",
-              "type": "script"
-            }
-          }
-        }
+        "type": "ia.container.coord"
       },
       {
         "meta": {
           "name": "way4Drop"
         },
         "position": {
-          "x": 960,
-          "y": 743,
+          "height": 37,
           "width": 3,
-          "height": 37
+          "x": 960,
+          "y": 743
         },
         "props": {
-          "text": "",
           "style": {
             "backgroundColor": "#2f80ed",
             "borderRadius": "2px"
@@ -3212,13 +3133,10 @@
               "name": "accent"
             },
             "position": {
-              "x": 0,
-              "y": 0,
-              "width": 5,
-              "height": 280
+              "height": 280,
+              "width": 5
             },
             "props": {
-              "text": "",
               "style": {
                 "backgroundColor": "#2f80ed",
                 "borderRadius": "2px"
@@ -3231,19 +3149,19 @@
               "name": "eyebrow"
             },
             "position": {
-              "x": 22,
-              "y": 13,
+              "height": 18,
               "width": 160,
-              "height": 18
+              "x": 22,
+              "y": 13
             },
             "props": {
-              "text": "OUTGOING WAY 4",
               "style": {
                 "color": "#2f80ed",
                 "fontSize": "0.64rem",
                 "fontWeight": "800",
                 "letterSpacing": "0.08em"
-              }
+              },
+              "text": "OUTGOING WAY 4"
             },
             "type": "ia.display.label"
           },
@@ -3252,18 +3170,18 @@
               "name": "title"
             },
             "position": {
-              "x": 22,
-              "y": 34,
+              "height": 25,
               "width": 184,
-              "height": 25
+              "x": 22,
+              "y": 34
             },
             "props": {
-              "text": "Way4 / PowerMeter4",
               "style": {
                 "color": "#16213e",
                 "fontSize": "0.94rem",
                 "fontWeight": "800"
-              }
+              },
+              "text": "Way4 / PowerMeter4"
             },
             "type": "ia.display.label"
           },
@@ -3272,47 +3190,47 @@
               "name": "healthDot"
             },
             "position": {
-              "x": 210,
-              "y": 17,
+              "height": 20,
               "width": 18,
-              "height": 20
+              "x": 210,
+              "y": 17
             },
-            "props": {
-              "text": "\u25cf",
-              "style": {
-                "fontSize": "0.85rem",
-                "textAlign": "center"
-              }
-            },
-            "type": "ia.display.label",
             "propConfig": {
               "props.style.color": {
                 "binding": {
-                  "type": "expr",
                   "config": {
                     "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way4/Way/Status/Faulted\") || tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way4/Way/Breaker/Tripped\") || !tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way4/PowerMeter4/PowerMeter/Status/CommGood\"), \"#d64550\", if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way4/Way/Breaker/Closed\"), \"#2f80ed\", \"#d98618\"))"
-                  }
+                  },
+                  "type": "expr"
                 }
               }
-            }
+            },
+            "props": {
+              "style": {
+                "fontSize": "0.85rem",
+                "textAlign": "center"
+              },
+              "text": "●"
+            },
+            "type": "ia.display.label"
           },
           {
             "meta": {
               "name": "breakerLabel"
             },
             "position": {
-              "x": 22,
-              "y": 61,
+              "height": 20,
               "width": 80,
-              "height": 20
+              "x": 22,
+              "y": 61
             },
             "props": {
-              "text": "STATUS",
               "style": {
                 "color": "#66748d",
                 "fontSize": "0.68rem",
                 "fontWeight": "700"
-              }
+              },
+              "text": "STATUS"
             },
             "type": "ia.display.label"
           },
@@ -3321,10 +3239,36 @@
               "name": "breakerState"
             },
             "position": {
-              "x": 116,
-              "y": 58,
+              "height": 25,
               "width": 112,
-              "height": 25
+              "x": 116,
+              "y": 58
+            },
+            "propConfig": {
+              "props.style.backgroundColor": {
+                "binding": {
+                  "config": {
+                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way4/Way/Breaker/Tripped\"), \"#fdecef\", if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way4/Way/Breaker/Closed\"), \"#edf5ff\", \"#fff5e6\"))"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.style.color": {
+                "binding": {
+                  "config": {
+                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way4/Way/Breaker/Tripped\"), \"#d64550\", if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way4/Way/Breaker/Closed\"), \"#2f80ed\", \"#d98618\"))"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way4/Way/Breaker/Tripped\"), \"TRIPPED\", if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way4/Way/Breaker/Closed\"), \"BREAKER CLOSED\", \"BREAKER OPEN\"))"
+                  },
+                  "type": "expr"
+                }
+              }
             },
             "props": {
               "style": {
@@ -3334,46 +3278,19 @@
                 "textAlign": "center"
               }
             },
-            "type": "ia.display.label",
-            "propConfig": {
-              "props.text": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way4/Way/Breaker/Tripped\"), \"TRIPPED\", if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way4/Way/Breaker/Closed\"), \"BREAKER CLOSED\", \"BREAKER OPEN\"))"
-                  }
-                }
-              },
-              "props.style.color": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way4/Way/Breaker/Tripped\"), \"#d64550\", if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way4/Way/Breaker/Closed\"), \"#2f80ed\", \"#d98618\"))"
-                  }
-                }
-              },
-              "props.style.backgroundColor": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way4/Way/Breaker/Tripped\"), \"#fdecef\", if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way4/Way/Breaker/Closed\"), \"#edf5ff\", \"#fff5e6\"))"
-                  }
-                }
-              }
-            }
+            "type": "ia.display.label"
           },
           {
             "meta": {
               "name": "divider"
             },
             "position": {
-              "x": 22,
-              "y": 92,
+              "height": 1,
               "width": 206,
-              "height": 1
+              "x": 22,
+              "y": 92
             },
             "props": {
-              "text": "",
               "style": {
                 "backgroundColor": "#d8e2ef",
                 "borderRadius": "2px"
@@ -3386,17 +3303,17 @@
               "name": "currentLabel"
             },
             "position": {
-              "x": 22,
-              "y": 105,
+              "height": 21,
               "width": 105,
-              "height": 21
+              "x": 22,
+              "y": 105
             },
             "props": {
-              "text": "CURRENT",
               "style": {
                 "color": "#66748d",
                 "fontSize": "0.7rem"
-              }
+              },
+              "text": "CURRENT"
             },
             "type": "ia.display.label"
           },
@@ -3405,10 +3322,20 @@
               "name": "currentValue"
             },
             "position": {
-              "x": 127,
-              "y": 105,
+              "height": 21,
               "width": 101,
-              "height": 21
+              "x": 127,
+              "y": 105
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way4/PowerMeter4/PowerMeter/Current/Avg\"), \"#,##0.0\") + \" A\""
+                  },
+                  "type": "expr"
+                }
+              }
             },
             "props": {
               "style": {
@@ -3418,34 +3345,24 @@
                 "textAlign": "right"
               }
             },
-            "type": "ia.display.label",
-            "propConfig": {
-              "props.text": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way4/PowerMeter4/PowerMeter/Current/Avg\"), \"#,##0.0\") + \" A\""
-                  }
-                }
-              }
-            }
+            "type": "ia.display.label"
           },
           {
             "meta": {
               "name": "voltageLabel"
             },
             "position": {
-              "x": 22,
-              "y": 132,
+              "height": 21,
               "width": 105,
-              "height": 21
+              "x": 22,
+              "y": 132
             },
             "props": {
-              "text": "VOLTAGE (L-L)",
               "style": {
                 "color": "#66748d",
                 "fontSize": "0.7rem"
-              }
+              },
+              "text": "VOLTAGE (L-L)"
             },
             "type": "ia.display.label"
           },
@@ -3454,10 +3371,20 @@
               "name": "voltageValue"
             },
             "position": {
-              "x": 127,
-              "y": 132,
+              "height": 21,
               "width": 101,
-              "height": 21
+              "x": 127,
+              "y": 132
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way4/PowerMeter4/PowerMeter/Voltage/LLAvg\"), \"#,##0.0\") + \" V\""
+                  },
+                  "type": "expr"
+                }
+              }
             },
             "props": {
               "style": {
@@ -3467,34 +3394,24 @@
                 "textAlign": "right"
               }
             },
-            "type": "ia.display.label",
-            "propConfig": {
-              "props.text": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way4/PowerMeter4/PowerMeter/Voltage/LLAvg\"), \"#,##0.0\") + \" V\""
-                  }
-                }
-              }
-            }
+            "type": "ia.display.label"
           },
           {
             "meta": {
               "name": "realPowerLabel"
             },
             "position": {
-              "x": 22,
-              "y": 159,
+              "height": 21,
               "width": 105,
-              "height": 21
+              "x": 22,
+              "y": 159
             },
             "props": {
-              "text": "ACTIVE POWER",
               "style": {
                 "color": "#66748d",
                 "fontSize": "0.7rem"
-              }
+              },
+              "text": "ACTIVE POWER"
             },
             "type": "ia.display.label"
           },
@@ -3503,10 +3420,20 @@
               "name": "realPowerValue"
             },
             "position": {
-              "x": 127,
-              "y": 159,
+              "height": 21,
               "width": 101,
-              "height": 21
+              "x": 127,
+              "y": 159
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way4/PowerMeter4/PowerMeter/Power/RealPower\"), \"#,##0.0\") + \" kW\""
+                  },
+                  "type": "expr"
+                }
+              }
             },
             "props": {
               "style": {
@@ -3516,34 +3443,24 @@
                 "textAlign": "right"
               }
             },
-            "type": "ia.display.label",
-            "propConfig": {
-              "props.text": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way4/PowerMeter4/PowerMeter/Power/RealPower\"), \"#,##0.0\") + \" kW\""
-                  }
-                }
-              }
-            }
+            "type": "ia.display.label"
           },
           {
             "meta": {
               "name": "apparentPowerLabel"
             },
             "position": {
-              "x": 22,
-              "y": 186,
+              "height": 21,
               "width": 105,
-              "height": 21
+              "x": 22,
+              "y": 186
             },
             "props": {
-              "text": "APPARENT POWER",
               "style": {
                 "color": "#66748d",
                 "fontSize": "0.7rem"
-              }
+              },
+              "text": "APPARENT POWER"
             },
             "type": "ia.display.label"
           },
@@ -3552,10 +3469,20 @@
               "name": "apparentPowerValue"
             },
             "position": {
-              "x": 127,
-              "y": 186,
+              "height": 21,
               "width": 101,
-              "height": 21
+              "x": 127,
+              "y": 186
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way4/PowerMeter4/PowerMeter/Power/ApparentPower\"), \"#,##0.0\") + \" kVA\""
+                  },
+                  "type": "expr"
+                }
+              }
             },
             "props": {
               "style": {
@@ -3565,34 +3492,24 @@
                 "textAlign": "right"
               }
             },
-            "type": "ia.display.label",
-            "propConfig": {
-              "props.text": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way4/PowerMeter4/PowerMeter/Power/ApparentPower\"), \"#,##0.0\") + \" kVA\""
-                  }
-                }
-              }
-            }
+            "type": "ia.display.label"
           },
           {
             "meta": {
               "name": "powerFactorLabel"
             },
             "position": {
-              "x": 22,
-              "y": 213,
+              "height": 21,
               "width": 105,
-              "height": 21
+              "x": 22,
+              "y": 213
             },
             "props": {
-              "text": "POWER FACTOR",
               "style": {
                 "color": "#66748d",
                 "fontSize": "0.7rem"
-              }
+              },
+              "text": "POWER FACTOR"
             },
             "type": "ia.display.label"
           },
@@ -3601,10 +3518,20 @@
               "name": "powerFactorValue"
             },
             "position": {
-              "x": 127,
-              "y": 213,
+              "height": 21,
               "width": 101,
-              "height": 21
+              "x": 127,
+              "y": 213
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way4/PowerMeter4/PowerMeter/Power/PowerFactor\"), \"0.00\") + \" \""
+                  },
+                  "type": "expr"
+                }
+              }
             },
             "props": {
               "style": {
@@ -3614,34 +3541,24 @@
                 "textAlign": "right"
               }
             },
-            "type": "ia.display.label",
-            "propConfig": {
-              "props.text": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way4/PowerMeter4/PowerMeter/Power/PowerFactor\"), \"0.00\") + \" \""
-                  }
-                }
-              }
-            }
+            "type": "ia.display.label"
           },
           {
             "meta": {
               "name": "loadLabel"
             },
             "position": {
-              "x": 22,
-              "y": 240,
+              "height": 21,
               "width": 105,
-              "height": 21
+              "x": 22,
+              "y": 240
             },
             "props": {
-              "text": "BREAKER LOAD",
               "style": {
                 "color": "#66748d",
                 "fontSize": "0.7rem"
-              }
+              },
+              "text": "BREAKER LOAD"
             },
             "type": "ia.display.label"
           },
@@ -3650,10 +3567,20 @@
               "name": "loadValue"
             },
             "position": {
-              "x": 127,
-              "y": 240,
+              "height": 21,
               "width": 101,
-              "height": 21
+              "x": 127,
+              "y": 240
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way4/Way/Capacity/LoadPct\"), \"0.0\") + \" %\""
+                  },
+                  "type": "expr"
+                }
+              }
             },
             "props": {
               "style": {
@@ -3663,27 +3590,28 @@
                 "textAlign": "right"
               }
             },
-            "type": "ia.display.label",
-            "propConfig": {
-              "props.text": {
-                "binding": {
-                  "type": "expr",
-                  "config": {
-                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way4/Way/Capacity/LoadPct\"), \"0.0\") + \" %\""
-                  }
-                }
-              }
-            }
+            "type": "ia.display.label"
           }
         ],
+        "events": {
+          "dom": {
+            "onClick": {
+              "config": {
+                "script": "\tsystem.perspective.navigate(page\u003d\"/ways/way4\")"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
         "meta": {
           "name": "way4"
         },
         "position": {
-          "x": 836,
-          "y": 780,
+          "height": 280,
           "width": 250,
-          "height": 280
+          "x": 836,
+          "y": 780
         },
         "props": {
           "style": {
@@ -3693,22 +3621,11 @@
             "borderStyle": "solid",
             "borderWidth": "1px",
             "boxShadow": "0 10px 26px rgba(22, 33, 62, 0.08)",
-            "overflow": "hidden",
-            "cursor": "pointer"
+            "cursor": "pointer",
+            "overflow": "hidden"
           }
         },
-        "type": "ia.container.coord",
-        "events": {
-          "dom": {
-            "onClick": {
-              "config": {
-                "script": "\tsystem.perspective.navigate(page=\"/ways/way4\")"
-              },
-              "scope": "G",
-              "type": "script"
-            }
-          }
-        }
+        "type": "ia.container.coord"
       }
     ],
     "meta": {

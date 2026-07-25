@@ -20,7 +20,7 @@
             },
             "props": {
               "style": {
-                "classes": "sg/eyebrow"
+                "classes": "sg-simple/heroEyebrow"
               },
               "text": "Gateway status"
             },
@@ -45,8 +45,7 @@
             },
             "props": {
               "style": {
-                "classes": "sg/heading",
-                "fontSize": "3.2rem",
+                "classes": "sg-simple/heroTitle",
                 "overflow": "hidden",
                 "overflowWrap": "break-word",
                 "whiteSpace": "normal"
@@ -75,7 +74,7 @@
                 },
                 "props": {
                   "style": {
-                    "classes": "sg/statusGood"
+                    "classes": "sg-simple/statusPill"
                   }
                 },
                 "type": "ia.display.label"
@@ -99,7 +98,7 @@
                 },
                 "props": {
                   "style": {
-                    "classes": "sg/statusGood"
+                    "classes": "sg-simple/statusPill"
                   }
                 },
                 "type": "ia.display.label"
@@ -123,7 +122,7 @@
                 },
                 "props": {
                   "style": {
-                    "classes": "sg/statusGood"
+                    "classes": "sg-simple/statusPill"
                   }
                 },
                 "type": "ia.display.label"
@@ -155,7 +154,7 @@
         "props": {
           "direction": "column",
           "style": {
-            "classes": "sg/hero",
+            "classes": "sg-simple/hero",
             "gap": "22px",
             "overflow": "visible"
           }
@@ -204,7 +203,7 @@
                 "label": "CPU usage",
                 "unit": "%"
               },
-              "path": "Shared/MetricCard",
+              "path": "Shared/SimpleMetricCard",
               "style": {
                 "height": "190px"
               }
@@ -251,7 +250,7 @@
                 "label": "Memory utilization",
                 "unit": "%"
               },
-              "path": "Shared/MetricCard",
+              "path": "Shared/SimpleMetricCard",
               "style": {
                 "height": "190px"
               }
@@ -291,7 +290,7 @@
                 "status": "Good",
                 "unit": " MB"
               },
-              "path": "Shared/MetricCard",
+              "path": "Shared/SimpleMetricCard",
               "style": {
                 "height": "190px"
               }
@@ -324,7 +323,7 @@
                 "status": "Good",
                 "unit": " MB"
               },
-              "path": "Shared/MetricCard",
+              "path": "Shared/SimpleMetricCard",
               "style": {
                 "height": "190px"
               }
@@ -371,7 +370,7 @@
                 "label": "Disk utilization",
                 "unit": "%"
               },
-              "path": "Shared/MetricCard",
+              "path": "Shared/SimpleMetricCard",
               "style": {
                 "height": "190px"
               }
@@ -407,7 +406,7 @@
                 "status": "Good",
                 "unit": ""
               },
-              "path": "Shared/MetricCard",
+              "path": "Shared/SimpleMetricCard",
               "style": {
                 "height": "190px"
               }
@@ -438,7 +437,7 @@
     "props": {
       "direction": "column",
       "style": {
-        "classes": "sg/page",
+        "classes": "sg-simple/page",
         "gap": "24px",
         "minHeight": "100vh"
       }
