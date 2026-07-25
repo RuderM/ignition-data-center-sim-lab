@@ -3,28 +3,50 @@
   "params": {},
   "props": {
     "defaultSize": {
-      "height": 1150,
-      "width": 1400
+      "height": 1095,
+      "width": 1120
     }
   },
   "root": {
     "children": [
       {
         "meta": {
+          "name": "pageEyebrow"
+        },
+        "position": {
+          "x": 38,
+          "y": 18,
+          "width": 520,
+          "height": 20
+        },
+        "props": {
+          "text": "MBT1 \u00b7 ELECTRICAL POWER MONITORING",
+          "style": {
+            "color": "#168a70",
+            "fontSize": "0.72rem",
+            "fontWeight": "800",
+            "letterSpacing": "0.08em"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
           "name": "pageTitle"
         },
         "position": {
-          "height": 48,
-          "width": 800,
-          "x": 48,
-          "y": 24
+          "x": 36,
+          "y": 38,
+          "width": 780,
+          "height": 43
         },
         "props": {
+          "text": "Power Distribution Overview",
           "style": {
-            "classes": "sg/heading",
-            "fontSize": "2.5rem"
-          },
-          "text": "MBT1 Electrical Overview"
+            "color": "#16213e",
+            "fontSize": "2.25rem",
+            "fontWeight": "800"
+          }
         },
         "type": "ia.display.label"
       },
@@ -33,17 +55,43 @@
           "name": "pageSubtitle"
         },
         "position": {
-          "height": 24,
-          "width": 900,
-          "x": 50,
-          "y": 72
+          "x": 38,
+          "y": 79,
+          "width": 780,
+          "height": 24
         },
         "props": {
+          "text": "Live utility-to-branch one-line with modeled health, loading and metering",
           "style": {
-            "classes": "sg/muted",
-            "fontWeight": "700"
-          },
-          "text": "Live power flow from utility source through branch ways"
+            "color": "#66748d",
+            "fontSize": "0.9rem"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "liveBadge"
+        },
+        "position": {
+          "x": 820,
+          "y": 38,
+          "width": 260,
+          "height": 34
+        },
+        "props": {
+          "text": "\u25cf  LIVE SIMULATION \u00b7 10 S",
+          "style": {
+            "backgroundColor": "#e9f7f2",
+            "borderColor": "#b9e4d5",
+            "borderRadius": "17px",
+            "borderStyle": "solid",
+            "borderWidth": "1px",
+            "color": "#168a70",
+            "fontSize": "0.75rem",
+            "fontWeight": "800",
+            "textAlign": "center"
+          }
         },
         "type": "ia.display.label"
       },
@@ -51,102 +99,391 @@
         "children": [
           {
             "meta": {
-              "name": "title"
+              "name": "accent"
+            },
+            "position": {
+              "x": 0,
+              "y": 0,
+              "width": 5,
+              "height": 158
             },
             "props": {
+              "text": "",
               "style": {
-                "classes": "sg/eyebrow"
-              },
-              "text": "UTILITY SOURCE"
+                "backgroundColor": "#2f80ed",
+                "borderRadius": "2px"
+              }
             },
             "type": "ia.display.label"
           },
           {
             "meta": {
-              "name": "voltage"
+              "name": "eyebrow"
             },
-            "propConfig": {
-              "props.text": {
-                "binding": {
-                  "config": {
-                    "expression": "\"Voltage  \" + numberFormat(tag(\"[T1]MBT1/Utility1/UtilitySource/Electrical/VoltageLLAvg\") / 1000, \"0.0\") + \" kV\""
-                  },
-                  "type": "expr"
-                }
+            "position": {
+              "x": 24,
+              "y": 17,
+              "width": 180,
+              "height": 18
+            },
+            "props": {
+              "text": "UTILITY INTAKE",
+              "style": {
+                "color": "#2f80ed",
+                "fontSize": "0.67rem",
+                "fontWeight": "800",
+                "letterSpacing": "0.08em"
               }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "title"
+            },
+            "position": {
+              "x": 24,
+              "y": 39,
+              "width": 380,
+              "height": 28
+            },
+            "props": {
+              "text": "Utility1 Primary Supply \u00b7 13.8 kV",
+              "style": {
+                "color": "#16213e",
+                "fontSize": "1.05rem",
+                "fontWeight": "800"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "status"
+            },
+            "position": {
+              "x": 420,
+              "y": 22,
+              "width": 168,
+              "height": 28
             },
             "props": {
               "style": {
+                "borderRadius": "14px",
+                "fontSize": "0.7rem",
+                "fontWeight": "800",
+                "textAlign": "center"
+              }
+            },
+            "type": "ia.display.label",
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "if(tag(\"[T1]MBT1/Utility1/UtilitySource/Status/Faulted\"), \"FAULT\", if(!tag(\"[T1]MBT1/Utility1/UtilitySource/Status/CommGood\"), \"COMM LOSS\", if(tag(\"[T1]MBT1/Utility1/UtilitySource/Status/Available\"), \"ACTIVE / NORMAL\", \"UNAVAILABLE\")))"
+                  }
+                }
+              },
+              "props.style.color": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "if(tag(\"[T1]MBT1/Utility1/UtilitySource/Status/Faulted\") || !tag(\"[T1]MBT1/Utility1/UtilitySource/Status/CommGood\") || !tag(\"[T1]MBT1/Utility1/UtilitySource/Status/Available\"), \"#d64550\", \"#168a70\")"
+                  }
+                }
+              },
+              "props.style.backgroundColor": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "if(tag(\"[T1]MBT1/Utility1/UtilitySource/Status/Faulted\") || !tag(\"[T1]MBT1/Utility1/UtilitySource/Status/CommGood\") || !tag(\"[T1]MBT1/Utility1/UtilitySource/Status/Available\"), \"#fdecef\", \"#e9f7f2\")"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "meta": {
+              "name": "divider"
+            },
+            "position": {
+              "x": 24,
+              "y": 74,
+              "width": 564,
+              "height": 1
+            },
+            "props": {
+              "text": "",
+              "style": {
+                "backgroundColor": "#d8e2ef",
+                "borderRadius": "2px"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "voltageLabel"
+            },
+            "position": {
+              "x": 24,
+              "y": 91,
+              "width": 145,
+              "height": 22
+            },
+            "props": {
+              "text": "LINE VOLTAGE (L-L)",
+              "style": {
+                "color": "#66748d",
+                "fontSize": "0.78rem"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "voltageValue"
+            },
+            "position": {
+              "x": 169,
+              "y": 91,
+              "width": 120,
+              "height": 22
+            },
+            "props": {
+              "style": {
+                "color": "#16213e",
+                "fontSize": "0.9rem",
                 "fontWeight": "700"
               }
             },
-            "type": "ia.display.label"
-          },
-          {
-            "meta": {
-              "name": "power"
-            },
+            "type": "ia.display.label",
             "propConfig": {
               "props.text": {
                 "binding": {
+                  "type": "expr",
                   "config": {
-                    "expression": "\"Real Power  \" + numberFormat(tag(\"[T1]MBT1/Utility1/UtilitySource/Power/RealPower\"), \"#,##0\") + \" kW\""
-                  },
-                  "type": "expr"
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/UtilitySource/Electrical/VoltageLLAvg\"), \"#,##0\") + \" V\""
+                  }
                 }
+              }
+            }
+          },
+          {
+            "meta": {
+              "name": "frequencyLabel"
+            },
+            "position": {
+              "x": 310,
+              "y": 91,
+              "width": 145,
+              "height": 22
+            },
+            "props": {
+              "text": "SYSTEM FREQUENCY",
+              "style": {
+                "color": "#66748d",
+                "fontSize": "0.78rem"
               }
             },
             "type": "ia.display.label"
           },
           {
             "meta": {
-              "name": "frequency"
+              "name": "frequencyValue"
             },
+            "position": {
+              "x": 455,
+              "y": 91,
+              "width": 110,
+              "height": 22
+            },
+            "props": {
+              "style": {
+                "color": "#16213e",
+                "fontSize": "0.9rem",
+                "fontWeight": "700"
+              }
+            },
+            "type": "ia.display.label",
             "propConfig": {
               "props.text": {
                 "binding": {
+                  "type": "expr",
                   "config": {
-                    "expression": "\"Frequency  \" + numberFormat(tag(\"[T1]MBT1/Utility1/UtilitySource/Electrical/Frequency\"), \"0.0\") + \" Hz\""
-                  },
-                  "type": "expr"
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/UtilitySource/Electrical/Frequency\"), \"0.00\") + \" Hz\""
+                  }
                 }
+              }
+            }
+          },
+          {
+            "meta": {
+              "name": "powerLabel"
+            },
+            "position": {
+              "x": 24,
+              "y": 119,
+              "width": 145,
+              "height": 22
+            },
+            "props": {
+              "text": "TOTAL ACTIVE POWER",
+              "style": {
+                "color": "#66748d",
+                "fontSize": "0.78rem"
               }
             },
             "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "powerValue"
+            },
+            "position": {
+              "x": 169,
+              "y": 119,
+              "width": 120,
+              "height": 22
+            },
+            "props": {
+              "style": {
+                "color": "#16213e",
+                "fontSize": "0.9rem",
+                "fontWeight": "700"
+              }
+            },
+            "type": "ia.display.label",
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/UtilitySource/Power/RealPower\"), \"#,##0.0\") + \" kW\""
+                  }
+                }
+              }
+            }
+          },
+          {
+            "meta": {
+              "name": "loadLabel"
+            },
+            "position": {
+              "x": 310,
+              "y": 119,
+              "width": 145,
+              "height": 22
+            },
+            "props": {
+              "text": "SERVICE LOAD",
+              "style": {
+                "color": "#66748d",
+                "fontSize": "0.78rem"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "loadValue"
+            },
+            "position": {
+              "x": 455,
+              "y": 119,
+              "width": 110,
+              "height": 22
+            },
+            "props": {
+              "style": {
+                "color": "#16213e",
+                "fontSize": "0.9rem",
+                "fontWeight": "700"
+              }
+            },
+            "type": "ia.display.label",
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/UtilitySource/Capacity/LoadPct\"), \"0.0\") + \" %\""
+                  }
+                }
+              }
+            }
           }
         ],
         "meta": {
           "name": "utilitySource"
         },
         "position": {
-          "height": 145,
-          "width": 360,
-          "x": 520,
-          "y": 125
+          "x": 38,
+          "y": 118,
+          "width": 620,
+          "height": 158
         },
         "props": {
-          "direction": "column",
           "style": {
-            "border": "2px solid #2f80ed",
-            "classes": "sg/panel",
-            "gap": "9px"
+            "backgroundColor": "#ffffff",
+            "borderColor": "#d8e2ef",
+            "borderRadius": "10px",
+            "borderStyle": "solid",
+            "borderWidth": "1px",
+            "boxShadow": "0 10px 26px rgba(22, 33, 62, 0.08)",
+            "overflow": "hidden",
+            "cursor": "pointer"
           }
         },
-        "type": "ia.container.flex"
+        "type": "ia.container.coord",
+        "events": {
+          "dom": {
+            "onClick": {
+              "config": {
+                "script": "\tsystem.perspective.navigate(page=\"/Utility\")"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        }
       },
       {
         "meta": {
-          "name": "utilityToMsg"
+          "name": "utilityDrop"
         },
         "position": {
-          "height": 75,
-          "width": 3,
-          "x": 699,
-          "y": 270
+          "x": 310,
+          "y": 276,
+          "width": 4,
+          "height": 34
         },
         "props": {
+          "text": "",
           "style": {
-            "background": "#2f80ed"
+            "backgroundColor": "#2f80ed",
+            "borderRadius": "2px"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "utilityFeedLabel"
+        },
+        "position": {
+          "x": 329,
+          "y": 283,
+          "width": 120,
+          "height": 18
+        },
+        "props": {
+          "text": "13.8 kV FEED",
+          "style": {
+            "color": "#66748d",
+            "fontSize": "0.65rem",
+            "fontWeight": "700"
           }
         },
         "type": "ia.display.label"
@@ -155,102 +492,519 @@
         "children": [
           {
             "meta": {
-              "name": "title"
+              "name": "accent"
+            },
+            "position": {
+              "x": 0,
+              "y": 0,
+              "width": 5,
+              "height": 172
             },
             "props": {
+              "text": "",
               "style": {
-                "classes": "sg/eyebrow"
-              },
-              "text": "MAIN SWITCHGEAR"
+                "backgroundColor": "#2f80ed",
+                "borderRadius": "2px"
+              }
             },
             "type": "ia.display.label"
           },
           {
             "meta": {
-              "name": "voltage"
+              "name": "eyebrow"
             },
-            "propConfig": {
-              "props.text": {
-                "binding": {
-                  "config": {
-                    "expression": "\"Bus Voltage  \" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/MainSwitchgear/Electrical/BusVoltageLLAvg\"), \"#,##0\") + \" V\""
-                  },
-                  "type": "expr"
-                }
+            "position": {
+              "x": 24,
+              "y": 16,
+              "width": 250,
+              "height": 18
+            },
+            "props": {
+              "text": "480 V MAIN DISTRIBUTION",
+              "style": {
+                "color": "#2f80ed",
+                "fontSize": "0.67rem",
+                "fontWeight": "800",
+                "letterSpacing": "0.08em"
               }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "title"
+            },
+            "position": {
+              "x": 24,
+              "y": 38,
+              "width": 470,
+              "height": 28
+            },
+            "props": {
+              "text": "MSG1 Main Switchgear",
+              "style": {
+                "color": "#16213e",
+                "fontSize": "1.08rem",
+                "fontWeight": "800"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "status"
+            },
+            "position": {
+              "x": 645,
+              "y": 20,
+              "width": 165,
+              "height": 28
             },
             "props": {
               "style": {
+                "borderRadius": "14px",
+                "fontSize": "0.7rem",
+                "fontWeight": "800",
+                "textAlign": "center"
+              }
+            },
+            "type": "ia.display.label",
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/MainSwitchgear/Status/Faulted\"), \"FAULT\", if(!tag(\"[T1]MBT1/Utility1/MSG1/MainSwitchgear/Status/CommGood\"), \"COMM LOSS\", if(tag(\"[T1]MBT1/Utility1/MSG1/MainSwitchgear/Status/Available\"), \"AVAILABLE\", \"UNAVAILABLE\")))"
+                  }
+                }
+              },
+              "props.style.color": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/MainSwitchgear/Status/Faulted\") || !tag(\"[T1]MBT1/Utility1/MSG1/MainSwitchgear/Status/CommGood\") || !tag(\"[T1]MBT1/Utility1/MSG1/MainSwitchgear/Status/Available\"), \"#d64550\", \"#168a70\")"
+                  }
+                }
+              },
+              "props.style.backgroundColor": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/MainSwitchgear/Status/Faulted\") || !tag(\"[T1]MBT1/Utility1/MSG1/MainSwitchgear/Status/CommGood\") || !tag(\"[T1]MBT1/Utility1/MSG1/MainSwitchgear/Status/Available\"), \"#fdecef\", \"#e9f7f2\")"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "meta": {
+              "name": "divider"
+            },
+            "position": {
+              "x": 24,
+              "y": 74,
+              "width": 786,
+              "height": 1
+            },
+            "props": {
+              "text": "",
+              "style": {
+                "backgroundColor": "#d8e2ef",
+                "borderRadius": "2px"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "voltageLabel"
+            },
+            "position": {
+              "x": 24,
+              "y": 87,
+              "width": 135,
+              "height": 22
+            },
+            "props": {
+              "text": "BUS VOLTAGE (L-L)",
+              "style": {
+                "color": "#66748d",
+                "fontSize": "0.78rem"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "voltageValue"
+            },
+            "position": {
+              "x": 159,
+              "y": 87,
+              "width": 115,
+              "height": 22
+            },
+            "props": {
+              "style": {
+                "color": "#16213e",
+                "fontSize": "0.9rem",
                 "fontWeight": "700"
               }
             },
-            "type": "ia.display.label"
-          },
-          {
-            "meta": {
-              "name": "current"
-            },
+            "type": "ia.display.label",
             "propConfig": {
               "props.text": {
                 "binding": {
+                  "type": "expr",
                   "config": {
-                    "expression": "\"Bus Current  \" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/MainSwitchgear/Electrical/BusCurrentAvg\"), \"#,##0\") + \" A\""
-                  },
-                  "type": "expr"
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/MainSwitchgear/Electrical/BusVoltageLLAvg\"), \"#,##0.0\") + \" V\""
+                  }
                 }
+              }
+            }
+          },
+          {
+            "meta": {
+              "name": "currentLabel"
+            },
+            "position": {
+              "x": 286,
+              "y": 87,
+              "width": 110,
+              "height": 22
+            },
+            "props": {
+              "text": "BUS CURRENT",
+              "style": {
+                "color": "#66748d",
+                "fontSize": "0.78rem"
               }
             },
             "type": "ia.display.label"
           },
           {
             "meta": {
-              "name": "power"
+              "name": "currentValue"
             },
+            "position": {
+              "x": 396,
+              "y": 87,
+              "width": 105,
+              "height": 22
+            },
+            "props": {
+              "style": {
+                "color": "#16213e",
+                "fontSize": "0.9rem",
+                "fontWeight": "700"
+              }
+            },
+            "type": "ia.display.label",
             "propConfig": {
               "props.text": {
                 "binding": {
+                  "type": "expr",
                   "config": {
-                    "expression": "\"Real Power  \" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/MainSwitchgear/Power/RealPower\"), \"#,##0\") + \" kW\""
-                  },
-                  "type": "expr"
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/MainSwitchgear/Electrical/BusCurrentAvg\"), \"#,##0.0\") + \" A\""
+                  }
                 }
+              }
+            }
+          },
+          {
+            "meta": {
+              "name": "powerLabel"
+            },
+            "position": {
+              "x": 520,
+              "y": 87,
+              "width": 110,
+              "height": 22
+            },
+            "props": {
+              "text": "ACTIVE POWER",
+              "style": {
+                "color": "#66748d",
+                "fontSize": "0.78rem"
               }
             },
             "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "powerValue"
+            },
+            "position": {
+              "x": 630,
+              "y": 87,
+              "width": 115,
+              "height": 22
+            },
+            "props": {
+              "style": {
+                "color": "#16213e",
+                "fontSize": "0.9rem",
+                "fontWeight": "700"
+              }
+            },
+            "type": "ia.display.label",
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/MainSwitchgear/Power/RealPower\"), \"#,##0.0\") + \" kW\""
+                  }
+                }
+              }
+            }
+          },
+          {
+            "meta": {
+              "name": "mainBreakerState"
+            },
+            "position": {
+              "x": 30,
+              "y": 116,
+              "width": 220,
+              "height": 34
+            },
+            "props": {
+              "style": {
+                "backgroundColor": "#edf5ff",
+                "borderColor": "#bdd5f5",
+                "borderRadius": "6px",
+                "borderStyle": "solid",
+                "borderWidth": "1px",
+                "fontSize": "0.78rem",
+                "fontWeight": "800",
+                "textAlign": "center"
+              }
+            },
+            "type": "ia.display.label",
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/MainSwitchgear/Breaker/MainTripped\"), \"MAIN BREAKER \u00b7 TRIPPED\", if(tag(\"[T1]MBT1/Utility1/MSG1/MainSwitchgear/Breaker/MainClosed\"), \"MAIN BREAKER \u00b7 CLOSED\", \"MAIN BREAKER \u00b7 OPEN\"))"
+                  }
+                }
+              },
+              "props.style.color": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/MainSwitchgear/Breaker/MainTripped\"), \"#d64550\", if(tag(\"[T1]MBT1/Utility1/MSG1/MainSwitchgear/Breaker/MainClosed\"), \"#2f80ed\", \"#d98618\"))"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "meta": {
+              "name": "loadLabel"
+            },
+            "position": {
+              "x": 286,
+              "y": 122,
+              "width": 120,
+              "height": 22
+            },
+            "props": {
+              "text": "SWITCHGEAR LOAD",
+              "style": {
+                "color": "#66748d",
+                "fontSize": "0.78rem"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "loadValue"
+            },
+            "position": {
+              "x": 406,
+              "y": 122,
+              "width": 100,
+              "height": 22
+            },
+            "props": {
+              "style": {
+                "color": "#16213e",
+                "fontSize": "0.9rem",
+                "fontWeight": "700"
+              }
+            },
+            "type": "ia.display.label",
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/MainSwitchgear/Capacity/LoadPct\"), \"0.0\") + \" %\""
+                  }
+                }
+              }
+            }
+          },
+          {
+            "meta": {
+              "name": "frequencyLabel"
+            },
+            "position": {
+              "x": 520,
+              "y": 122,
+              "width": 110,
+              "height": 22
+            },
+            "props": {
+              "text": "FREQUENCY",
+              "style": {
+                "color": "#66748d",
+                "fontSize": "0.78rem"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "frequencyValue"
+            },
+            "position": {
+              "x": 630,
+              "y": 122,
+              "width": 110,
+              "height": 22
+            },
+            "props": {
+              "style": {
+                "color": "#16213e",
+                "fontSize": "0.9rem",
+                "fontWeight": "700"
+              }
+            },
+            "type": "ia.display.label",
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/MainSwitchgear/Electrical/Frequency\"), \"0.00\") + \" Hz\""
+                  }
+                }
+              }
+            }
           }
         ],
         "meta": {
           "name": "mainSwitchgear"
         },
         "position": {
-          "height": 145,
-          "width": 360,
-          "x": 520,
-          "y": 345
+          "x": 38,
+          "y": 310,
+          "width": 840,
+          "height": 172
         },
         "props": {
-          "direction": "column",
           "style": {
-            "border": "2px solid #2f80ed",
-            "classes": "sg/panel",
-            "gap": "9px"
+            "backgroundColor": "#ffffff",
+            "borderColor": "#d8e2ef",
+            "borderRadius": "10px",
+            "borderStyle": "solid",
+            "borderWidth": "1px",
+            "boxShadow": "0 10px 26px rgba(22, 33, 62, 0.08)",
+            "overflow": "hidden",
+            "cursor": "pointer"
           }
         },
-        "type": "ia.container.flex"
+        "type": "ia.container.coord",
+        "events": {
+          "dom": {
+            "onClick": {
+              "config": {
+                "script": "\tsystem.perspective.navigate(page=\"/MSG\")"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        }
       },
       {
         "meta": {
-          "name": "msgToPdu"
+          "name": "msgDrop"
         },
         "position": {
-          "height": 75,
-          "width": 3,
-          "x": 699,
-          "y": 490
+          "x": 102,
+          "y": 482,
+          "width": 4,
+          "height": 34
         },
         "props": {
+          "text": "",
           "style": {
-            "background": "#2f80ed"
+            "backgroundColor": "#2f80ed",
+            "borderRadius": "2px"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "msgFeeder"
+        },
+        "position": {
+          "x": 102,
+          "y": 512,
+          "width": 310,
+          "height": 4
+        },
+        "props": {
+          "text": "",
+          "style": {
+            "backgroundColor": "#2f80ed",
+            "borderRadius": "2px"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "pduDrop"
+        },
+        "position": {
+          "x": 408,
+          "y": 512,
+          "width": 4,
+          "height": 28
+        },
+        "props": {
+          "text": "",
+          "style": {
+            "backgroundColor": "#2f80ed",
+            "borderRadius": "2px"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "msgFeedLabel"
+        },
+        "position": {
+          "x": 120,
+          "y": 490,
+          "width": 140,
+          "height": 18
+        },
+        "props": {
+          "text": "480 V PDU FEED",
+          "style": {
+            "color": "#66748d",
+            "fontSize": "0.65rem",
+            "fontWeight": "700"
           }
         },
         "type": "ia.display.label"
@@ -259,102 +1013,622 @@
         "children": [
           {
             "meta": {
-              "name": "title"
+              "name": "accent"
+            },
+            "position": {
+              "x": 0,
+              "y": 0,
+              "width": 5,
+              "height": 158
             },
             "props": {
+              "text": "",
               "style": {
-                "classes": "sg/eyebrow"
-              },
-              "text": "POWER DISTRIBUTION UNIT"
+                "backgroundColor": "#2f80ed",
+                "borderRadius": "2px"
+              }
             },
             "type": "ia.display.label"
           },
           {
             "meta": {
-              "name": "inputVoltage"
+              "name": "eyebrow"
             },
-            "propConfig": {
-              "props.text": {
-                "binding": {
-                  "config": {
-                    "expression": "\"Input  \" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDU/Electrical/InputVoltageLLAvg\"), \"#,##0\") + \" V\""
-                  },
-                  "type": "expr"
-                }
+            "position": {
+              "x": 24,
+              "y": 15,
+              "width": 260,
+              "height": 18
+            },
+            "props": {
+              "text": "PDU1 \u00b7 STEP-DOWN ASSEMBLY",
+              "style": {
+                "color": "#2f80ed",
+                "fontSize": "0.67rem",
+                "fontWeight": "800",
+                "letterSpacing": "0.08em"
               }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "title"
+            },
+            "position": {
+              "x": 24,
+              "y": 37,
+              "width": 420,
+              "height": 28
+            },
+            "props": {
+              "text": "PDU1 / Transformer1",
+              "style": {
+                "color": "#16213e",
+                "fontSize": "1.08rem",
+                "fontWeight": "800"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "status"
+            },
+            "position": {
+              "x": 668,
+              "y": 19,
+              "width": 160,
+              "height": 28
             },
             "props": {
               "style": {
+                "borderRadius": "14px",
+                "fontSize": "0.7rem",
+                "fontWeight": "800",
+                "textAlign": "center"
+              }
+            },
+            "type": "ia.display.label",
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDU/Status/Faulted\") || tag(\"[T1]MBT1/Utility1/MSG1/PDU1/Transformer1/Transformer/Status/Faulted\"), \"FAULT\", if(!tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDU/Status/CommGood\") || !tag(\"[T1]MBT1/Utility1/MSG1/PDU1/Transformer1/Transformer/Status/CommGood\"), \"COMM LOSS\", \"NORMAL\"))"
+                  }
+                }
+              },
+              "props.style.color": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDU/Status/Faulted\") || tag(\"[T1]MBT1/Utility1/MSG1/PDU1/Transformer1/Transformer/Status/Faulted\") || !tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDU/Status/CommGood\") || !tag(\"[T1]MBT1/Utility1/MSG1/PDU1/Transformer1/Transformer/Status/CommGood\"), \"#d64550\", \"#168a70\")"
+                  }
+                }
+              },
+              "props.style.backgroundColor": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDU/Status/Faulted\") || tag(\"[T1]MBT1/Utility1/MSG1/PDU1/Transformer1/Transformer/Status/Faulted\") || !tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDU/Status/CommGood\") || !tag(\"[T1]MBT1/Utility1/MSG1/PDU1/Transformer1/Transformer/Status/CommGood\"), \"#fdecef\", \"#e9f7f2\")"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "meta": {
+              "name": "divider"
+            },
+            "position": {
+              "x": 24,
+              "y": 72,
+              "width": 804,
+              "height": 1
+            },
+            "props": {
+              "text": "",
+              "style": {
+                "backgroundColor": "#d8e2ef",
+                "borderRadius": "2px"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "inputVoltageLabel"
+            },
+            "position": {
+              "x": 24,
+              "y": 86,
+              "width": 92,
+              "height": 22
+            },
+            "props": {
+              "text": "PDU INPUT",
+              "style": {
+                "color": "#66748d",
+                "fontSize": "0.78rem"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "inputVoltageValue"
+            },
+            "position": {
+              "x": 116,
+              "y": 86,
+              "width": 105,
+              "height": 22
+            },
+            "props": {
+              "style": {
+                "color": "#16213e",
+                "fontSize": "0.9rem",
                 "fontWeight": "700"
               }
             },
-            "type": "ia.display.label"
-          },
-          {
-            "meta": {
-              "name": "outputVoltage"
-            },
+            "type": "ia.display.label",
             "propConfig": {
               "props.text": {
                 "binding": {
+                  "type": "expr",
                   "config": {
-                    "expression": "\"Output  \" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDU/Electrical/OutputVoltageLLAvg\"), \"#,##0\") + \" V\""
-                  },
-                  "type": "expr"
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDU/Electrical/InputVoltageLLAvg\"), \"#,##0.0\") + \" V\""
+                  }
                 }
+              }
+            }
+          },
+          {
+            "meta": {
+              "name": "primaryLabel"
+            },
+            "position": {
+              "x": 235,
+              "y": 86,
+              "width": 92,
+              "height": 22
+            },
+            "props": {
+              "text": "TX PRIMARY",
+              "style": {
+                "color": "#66748d",
+                "fontSize": "0.78rem"
               }
             },
             "type": "ia.display.label"
           },
           {
             "meta": {
-              "name": "power"
+              "name": "primaryValue"
             },
+            "position": {
+              "x": 327,
+              "y": 86,
+              "width": 105,
+              "height": 22
+            },
+            "props": {
+              "style": {
+                "color": "#16213e",
+                "fontSize": "0.9rem",
+                "fontWeight": "700"
+              }
+            },
+            "type": "ia.display.label",
             "propConfig": {
               "props.text": {
                 "binding": {
+                  "type": "expr",
                   "config": {
-                    "expression": "\"Real Power  \" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDU/Power/RealPower\"), \"#,##0\") + \" kW\""
-                  },
-                  "type": "expr"
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/Transformer1/Transformer/Electrical/PrimaryVoltageLLAvg\"), \"#,##0.0\") + \" V\""
+                  }
                 }
+              }
+            }
+          },
+          {
+            "meta": {
+              "name": "secondaryLabel"
+            },
+            "position": {
+              "x": 450,
+              "y": 86,
+              "width": 110,
+              "height": 22
+            },
+            "props": {
+              "text": "TX SECONDARY",
+              "style": {
+                "color": "#66748d",
+                "fontSize": "0.78rem"
               }
             },
             "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "secondaryValue"
+            },
+            "position": {
+              "x": 560,
+              "y": 86,
+              "width": 105,
+              "height": 22
+            },
+            "props": {
+              "style": {
+                "color": "#16213e",
+                "fontSize": "0.9rem",
+                "fontWeight": "700"
+              }
+            },
+            "type": "ia.display.label",
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/Transformer1/Transformer/Electrical/SecondaryVoltageLLAvg\"), \"#,##0.0\") + \" V\""
+                  }
+                }
+              }
+            }
+          },
+          {
+            "meta": {
+              "name": "efficiencyLabel"
+            },
+            "position": {
+              "x": 681,
+              "y": 86,
+              "width": 78,
+              "height": 22
+            },
+            "props": {
+              "text": "EFFICIENCY",
+              "style": {
+                "color": "#66748d",
+                "fontSize": "0.78rem"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "efficiencyValue"
+            },
+            "position": {
+              "x": 759,
+              "y": 86,
+              "width": 85,
+              "height": 22
+            },
+            "props": {
+              "style": {
+                "color": "#16213e",
+                "fontSize": "0.9rem",
+                "fontWeight": "700"
+              }
+            },
+            "type": "ia.display.label",
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/Transformer1/Transformer/Efficiency/Pct\"), \"0.0\") + \" %\""
+                  }
+                }
+              }
+            }
+          },
+          {
+            "meta": {
+              "name": "powerLabel"
+            },
+            "position": {
+              "x": 24,
+              "y": 116,
+              "width": 92,
+              "height": 22
+            },
+            "props": {
+              "text": "OUTPUT POWER",
+              "style": {
+                "color": "#66748d",
+                "fontSize": "0.78rem"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "powerValue"
+            },
+            "position": {
+              "x": 116,
+              "y": 116,
+              "width": 105,
+              "height": 22
+            },
+            "props": {
+              "style": {
+                "color": "#16213e",
+                "fontSize": "0.9rem",
+                "fontWeight": "700"
+              }
+            },
+            "type": "ia.display.label",
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDU/Power/RealPower\"), \"#,##0.0\") + \" kW\""
+                  }
+                }
+              }
+            }
+          },
+          {
+            "meta": {
+              "name": "outputCurrentLabel"
+            },
+            "position": {
+              "x": 235,
+              "y": 116,
+              "width": 110,
+              "height": 22
+            },
+            "props": {
+              "text": "OUTPUT CURRENT",
+              "style": {
+                "color": "#66748d",
+                "fontSize": "0.78rem"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "outputCurrentValue"
+            },
+            "position": {
+              "x": 345,
+              "y": 116,
+              "width": 105,
+              "height": 22
+            },
+            "props": {
+              "style": {
+                "color": "#16213e",
+                "fontSize": "0.9rem",
+                "fontWeight": "700"
+              }
+            },
+            "type": "ia.display.label",
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDU/Electrical/OutputCurrentAvg\"), \"#,##0.0\") + \" A\""
+                  }
+                }
+              }
+            }
+          },
+          {
+            "meta": {
+              "name": "windingLabel"
+            },
+            "position": {
+              "x": 450,
+              "y": 116,
+              "width": 110,
+              "height": 22
+            },
+            "props": {
+              "text": "WINDING TEMP",
+              "style": {
+                "color": "#66748d",
+                "fontSize": "0.78rem"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "windingValue"
+            },
+            "position": {
+              "x": 560,
+              "y": 116,
+              "width": 100,
+              "height": 22
+            },
+            "props": {
+              "style": {
+                "color": "#16213e",
+                "fontSize": "0.9rem",
+                "fontWeight": "700"
+              }
+            },
+            "type": "ia.display.label",
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/Transformer1/Transformer/Temperature/WindingTemp\"), \"0.0\") + \" \u00b0C\""
+                  }
+                }
+              }
+            }
+          },
+          {
+            "meta": {
+              "name": "loadLabel"
+            },
+            "position": {
+              "x": 681,
+              "y": 116,
+              "width": 78,
+              "height": 22
+            },
+            "props": {
+              "text": "TX LOAD",
+              "style": {
+                "color": "#66748d",
+                "fontSize": "0.78rem"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "loadValue"
+            },
+            "position": {
+              "x": 759,
+              "y": 116,
+              "width": 85,
+              "height": 22
+            },
+            "props": {
+              "style": {
+                "color": "#16213e",
+                "fontSize": "0.9rem",
+                "fontWeight": "700"
+              }
+            },
+            "type": "ia.display.label",
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/Transformer1/Transformer/Capacity/LoadPct\"), \"0.0\") + \" %\""
+                  }
+                }
+              }
+            }
           }
         ],
         "meta": {
-          "name": "powerDistributionUnit"
+          "name": "pduTransformer"
         },
         "position": {
-          "height": 145,
-          "width": 360,
-          "x": 520,
-          "y": 565
+          "x": 38,
+          "y": 540,
+          "width": 860,
+          "height": 158
         },
         "props": {
-          "direction": "column",
           "style": {
-            "border": "2px solid #2f80ed",
-            "classes": "sg/panel",
-            "gap": "9px"
+            "backgroundColor": "#ffffff",
+            "borderColor": "#d8e2ef",
+            "borderRadius": "10px",
+            "borderStyle": "solid",
+            "borderWidth": "1px",
+            "boxShadow": "0 10px 26px rgba(22, 33, 62, 0.08)",
+            "overflow": "hidden",
+            "cursor": "pointer"
           }
         },
-        "type": "ia.container.flex"
+        "type": "ia.container.coord",
+        "events": {
+          "dom": {
+            "onClick": {
+              "config": {
+                "script": "\tsystem.perspective.navigate(page=\"/PDU\")"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        }
       },
       {
         "meta": {
-          "name": "pduToTransformer"
+          "name": "transformerDrop"
         },
         "position": {
-          "height": 75,
-          "width": 3,
-          "x": 699,
-          "y": 710
+          "x": 410,
+          "y": 698,
+          "width": 4,
+          "height": 42
         },
         "props": {
+          "text": "",
           "style": {
-            "background": "#2f80ed"
+            "backgroundColor": "#2f80ed",
+            "borderRadius": "2px"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "busLabel"
+        },
+        "position": {
+          "x": 38,
+          "y": 710,
+          "width": 245,
+          "height": 20
+        },
+        "props": {
+          "text": "PDU OUTPUT BUS \u00b7 208 V",
+          "style": {
+            "color": "#66748d",
+            "fontSize": "0.68rem",
+            "fontWeight": "800",
+            "letterSpacing": "0.04em"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "outputBus"
+        },
+        "position": {
+          "x": 38,
+          "y": 738,
+          "width": 1048,
+          "height": 5
+        },
+        "props": {
+          "text": "",
+          "style": {
+            "backgroundColor": "#2f80ed",
+            "borderRadius": "2px"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "way1Drop"
+        },
+        "position": {
+          "x": 162,
+          "y": 743,
+          "width": 3,
+          "height": 37
+        },
+        "props": {
+          "text": "",
+          "style": {
+            "backgroundColor": "#2f80ed",
+            "borderRadius": "2px"
           }
         },
         "type": "ia.display.label"
@@ -363,32 +1637,108 @@
         "children": [
           {
             "meta": {
-              "name": "title"
+              "name": "accent"
+            },
+            "position": {
+              "x": 0,
+              "y": 0,
+              "width": 5,
+              "height": 280
             },
             "props": {
+              "text": "",
               "style": {
-                "classes": "sg/eyebrow"
-              },
-              "text": "PDU TRANSFORMER"
+                "backgroundColor": "#2f80ed",
+                "borderRadius": "2px"
+              }
             },
             "type": "ia.display.label"
           },
           {
             "meta": {
-              "name": "primaryVoltage"
+              "name": "eyebrow"
             },
-            "propConfig": {
-              "props.text": {
-                "binding": {
-                  "config": {
-                    "expression": "\"Primary  \" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/Transformer1/Transformer/Electrical/PrimaryVoltageLLAvg\"), \"#,##0\") + \" V\""
-                  },
-                  "type": "expr"
-                }
-              }
+            "position": {
+              "x": 22,
+              "y": 13,
+              "width": 160,
+              "height": 18
             },
             "props": {
+              "text": "OUTGOING WAY 1",
               "style": {
+                "color": "#2f80ed",
+                "fontSize": "0.64rem",
+                "fontWeight": "800",
+                "letterSpacing": "0.08em"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "title"
+            },
+            "position": {
+              "x": 22,
+              "y": 34,
+              "width": 184,
+              "height": 25
+            },
+            "props": {
+              "text": "Way1 / PowerMeter1",
+              "style": {
+                "color": "#16213e",
+                "fontSize": "0.94rem",
+                "fontWeight": "800"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "healthDot"
+            },
+            "position": {
+              "x": 210,
+              "y": 17,
+              "width": 18,
+              "height": 20
+            },
+            "props": {
+              "text": "\u25cf",
+              "style": {
+                "fontSize": "0.85rem",
+                "textAlign": "center"
+              }
+            },
+            "type": "ia.display.label",
+            "propConfig": {
+              "props.style.color": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way1/Way/Status/Faulted\") || tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way1/Way/Breaker/Tripped\") || !tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way1/PowerMeter1/PowerMeter/Status/CommGood\"), \"#d64550\", if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way1/Way/Breaker/Closed\"), \"#2f80ed\", \"#d98618\"))"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "meta": {
+              "name": "breakerLabel"
+            },
+            "position": {
+              "x": 22,
+              "y": 61,
+              "width": 80,
+              "height": 20
+            },
+            "props": {
+              "text": "STATUS",
+              "style": {
+                "color": "#66748d",
+                "fontSize": "0.68rem",
                 "fontWeight": "700"
               }
             },
@@ -396,259 +1746,523 @@
           },
           {
             "meta": {
-              "name": "secondaryVoltage"
+              "name": "breakerState"
             },
-            "propConfig": {
-              "props.text": {
-                "binding": {
-                  "config": {
-                    "expression": "\"Secondary  \" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/Transformer1/Transformer/Electrical/SecondaryVoltageLLAvg\"), \"#,##0\") + \" V\""
-                  },
-                  "type": "expr"
-                }
-              }
-            },
-            "type": "ia.display.label"
-          },
-          {
-            "meta": {
-              "name": "load"
-            },
-            "propConfig": {
-              "props.text": {
-                "binding": {
-                  "config": {
-                    "expression": "\"Load  \" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/Transformer1/Transformer/Capacity/LoadPct\"), \"0\") + \" %\""
-                  },
-                  "type": "expr"
-                }
-              }
-            },
-            "type": "ia.display.label"
-          }
-        ],
-        "meta": {
-          "name": "transformer"
-        },
-        "position": {
-          "height": 145,
-          "width": 360,
-          "x": 520,
-          "y": 785
-        },
-        "props": {
-          "direction": "column",
-          "style": {
-            "border": "2px solid #2f80ed",
-            "classes": "sg/panel",
-            "gap": "9px"
-          }
-        },
-        "type": "ia.container.flex"
-      },
-      {
-        "meta": {
-          "name": "branchBus"
-        },
-        "position": {
-          "height": 3,
-          "width": 945,
-          "x": 190,
-          "y": 955
-        },
-        "props": {
-          "style": {
-            "background": "#2f80ed"
-          }
-        },
-        "type": "ia.display.label"
-      },
-      {
-        "meta": {
-          "name": "transformerToWays"
-        },
-        "position": {
-          "height": 25,
-          "width": 3,
-          "x": 699,
-          "y": 930
-        },
-        "props": {
-          "style": {
-            "background": "#2f80ed"
-          }
-        },
-        "type": "ia.display.label"
-      },
-      {
-        "meta": {
-          "name": "way1Branch"
-        },
-        "position": {
-          "height": 35,
-          "width": 3,
-          "x": 189,
-          "y": 955
-        },
-        "props": {
-          "style": {
-            "background": "#2f80ed"
-          }
-        },
-        "type": "ia.display.label"
-      },
-      {
-        "meta": {
-          "name": "way2Branch"
-        },
-        "position": {
-          "height": 35,
-          "width": 3,
-          "x": 504,
-          "y": 955
-        },
-        "props": {
-          "style": {
-            "background": "#2f80ed"
-          }
-        },
-        "type": "ia.display.label"
-      },
-      {
-        "meta": {
-          "name": "way3Branch"
-        },
-        "position": {
-          "height": 35,
-          "width": 3,
-          "x": 819,
-          "y": 955
-        },
-        "props": {
-          "style": {
-            "background": "#2f80ed"
-          }
-        },
-        "type": "ia.display.label"
-      },
-      {
-        "meta": {
-          "name": "way4Branch"
-        },
-        "position": {
-          "height": 35,
-          "width": 3,
-          "x": 1134,
-          "y": 955
-        },
-        "props": {
-          "style": {
-            "background": "#2f80ed"
-          }
-        },
-        "type": "ia.display.label"
-      },
-      {
-        "children": [
-          {
-            "meta": {
-              "name": "title"
+            "position": {
+              "x": 116,
+              "y": 58,
+              "width": 112,
+              "height": 25
             },
             "props": {
               "style": {
-                "classes": "sg/eyebrow"
+                "borderRadius": "13px",
+                "fontSize": "0.67rem",
+                "fontWeight": "800",
+                "textAlign": "center"
+              }
+            },
+            "type": "ia.display.label",
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way1/Way/Breaker/Tripped\"), \"TRIPPED\", if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way1/Way/Breaker/Closed\"), \"BREAKER CLOSED\", \"BREAKER OPEN\"))"
+                  }
+                }
               },
-              "text": "WAY 1"
+              "props.style.color": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way1/Way/Breaker/Tripped\"), \"#d64550\", if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way1/Way/Breaker/Closed\"), \"#2f80ed\", \"#d98618\"))"
+                  }
+                }
+              },
+              "props.style.backgroundColor": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way1/Way/Breaker/Tripped\"), \"#fdecef\", if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way1/Way/Breaker/Closed\"), \"#edf5ff\", \"#fff5e6\"))"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "meta": {
+              "name": "divider"
+            },
+            "position": {
+              "x": 22,
+              "y": 92,
+              "width": 206,
+              "height": 1
+            },
+            "props": {
+              "text": "",
+              "style": {
+                "backgroundColor": "#d8e2ef",
+                "borderRadius": "2px"
+              }
             },
             "type": "ia.display.label"
           },
           {
             "meta": {
-              "name": "power"
+              "name": "currentLabel"
             },
-            "propConfig": {
-              "props.text": {
-                "binding": {
-                  "config": {
-                    "expression": "numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way1/Way/Power/RealPower\"), \"#,##0.0\") + \" kW\""
-                  },
-                  "type": "expr"
-                }
+            "position": {
+              "x": 22,
+              "y": 105,
+              "width": 105,
+              "height": 21
+            },
+            "props": {
+              "text": "CURRENT",
+              "style": {
+                "color": "#66748d",
+                "fontSize": "0.7rem"
               }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "currentValue"
+            },
+            "position": {
+              "x": 127,
+              "y": 105,
+              "width": 101,
+              "height": 21
             },
             "props": {
               "style": {
-                "fontWeight": "700"
+                "color": "#16213e",
+                "fontSize": "0.8rem",
+                "fontWeight": "800",
+                "textAlign": "right"
+              }
+            },
+            "type": "ia.display.label",
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way1/PowerMeter1/PowerMeter/Current/Avg\"), \"#,##0.0\") + \" A\""
+                  }
+                }
+              }
+            }
+          },
+          {
+            "meta": {
+              "name": "voltageLabel"
+            },
+            "position": {
+              "x": 22,
+              "y": 132,
+              "width": 105,
+              "height": 21
+            },
+            "props": {
+              "text": "VOLTAGE (L-L)",
+              "style": {
+                "color": "#66748d",
+                "fontSize": "0.7rem"
               }
             },
             "type": "ia.display.label"
           },
           {
             "meta": {
-              "name": "load"
+              "name": "voltageValue"
             },
+            "position": {
+              "x": 127,
+              "y": 132,
+              "width": 101,
+              "height": 21
+            },
+            "props": {
+              "style": {
+                "color": "#16213e",
+                "fontSize": "0.8rem",
+                "fontWeight": "800",
+                "textAlign": "right"
+              }
+            },
+            "type": "ia.display.label",
             "propConfig": {
               "props.text": {
                 "binding": {
+                  "type": "expr",
                   "config": {
-                    "expression": "\"Load  \" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way1/Way/Capacity/LoadPct\"), \"0\") + \" %\""
-                  },
-                  "type": "expr"
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way1/PowerMeter1/PowerMeter/Voltage/LLAvg\"), \"#,##0.0\") + \" V\""
+                  }
                 }
+              }
+            }
+          },
+          {
+            "meta": {
+              "name": "realPowerLabel"
+            },
+            "position": {
+              "x": 22,
+              "y": 159,
+              "width": 105,
+              "height": 21
+            },
+            "props": {
+              "text": "ACTIVE POWER",
+              "style": {
+                "color": "#66748d",
+                "fontSize": "0.7rem"
               }
             },
             "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "realPowerValue"
+            },
+            "position": {
+              "x": 127,
+              "y": 159,
+              "width": 101,
+              "height": 21
+            },
+            "props": {
+              "style": {
+                "color": "#16213e",
+                "fontSize": "0.8rem",
+                "fontWeight": "800",
+                "textAlign": "right"
+              }
+            },
+            "type": "ia.display.label",
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way1/PowerMeter1/PowerMeter/Power/RealPower\"), \"#,##0.0\") + \" kW\""
+                  }
+                }
+              }
+            }
+          },
+          {
+            "meta": {
+              "name": "apparentPowerLabel"
+            },
+            "position": {
+              "x": 22,
+              "y": 186,
+              "width": 105,
+              "height": 21
+            },
+            "props": {
+              "text": "APPARENT POWER",
+              "style": {
+                "color": "#66748d",
+                "fontSize": "0.7rem"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "apparentPowerValue"
+            },
+            "position": {
+              "x": 127,
+              "y": 186,
+              "width": 101,
+              "height": 21
+            },
+            "props": {
+              "style": {
+                "color": "#16213e",
+                "fontSize": "0.8rem",
+                "fontWeight": "800",
+                "textAlign": "right"
+              }
+            },
+            "type": "ia.display.label",
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way1/PowerMeter1/PowerMeter/Power/ApparentPower\"), \"#,##0.0\") + \" kVA\""
+                  }
+                }
+              }
+            }
+          },
+          {
+            "meta": {
+              "name": "powerFactorLabel"
+            },
+            "position": {
+              "x": 22,
+              "y": 213,
+              "width": 105,
+              "height": 21
+            },
+            "props": {
+              "text": "POWER FACTOR",
+              "style": {
+                "color": "#66748d",
+                "fontSize": "0.7rem"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "powerFactorValue"
+            },
+            "position": {
+              "x": 127,
+              "y": 213,
+              "width": 101,
+              "height": 21
+            },
+            "props": {
+              "style": {
+                "color": "#16213e",
+                "fontSize": "0.8rem",
+                "fontWeight": "800",
+                "textAlign": "right"
+              }
+            },
+            "type": "ia.display.label",
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way1/PowerMeter1/PowerMeter/Power/PowerFactor\"), \"0.00\") + \" \""
+                  }
+                }
+              }
+            }
+          },
+          {
+            "meta": {
+              "name": "loadLabel"
+            },
+            "position": {
+              "x": 22,
+              "y": 240,
+              "width": 105,
+              "height": 21
+            },
+            "props": {
+              "text": "BREAKER LOAD",
+              "style": {
+                "color": "#66748d",
+                "fontSize": "0.7rem"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "loadValue"
+            },
+            "position": {
+              "x": 127,
+              "y": 240,
+              "width": 101,
+              "height": 21
+            },
+            "props": {
+              "style": {
+                "color": "#16213e",
+                "fontSize": "0.8rem",
+                "fontWeight": "800",
+                "textAlign": "right"
+              }
+            },
+            "type": "ia.display.label",
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way1/Way/Capacity/LoadPct\"), \"0.0\") + \" %\""
+                  }
+                }
+              }
+            }
           }
         ],
         "meta": {
           "name": "way1"
         },
         "position": {
-          "height": 120,
-          "width": 280,
-          "x": 50,
-          "y": 990
+          "x": 38,
+          "y": 780,
+          "width": 250,
+          "height": 280
         },
         "props": {
-          "direction": "column",
           "style": {
-            "border": "2px solid #2f80ed",
-            "classes": "sg/panel",
-            "gap": "8px"
+            "backgroundColor": "#ffffff",
+            "borderColor": "#d8e2ef",
+            "borderRadius": "10px",
+            "borderStyle": "solid",
+            "borderWidth": "1px",
+            "boxShadow": "0 10px 26px rgba(22, 33, 62, 0.08)",
+            "overflow": "hidden",
+            "cursor": "pointer"
           }
         },
-        "type": "ia.container.flex"
+        "type": "ia.container.coord",
+        "events": {
+          "dom": {
+            "onClick": {
+              "config": {
+                "script": "\tsystem.perspective.navigate(page=\"/ways/way1\")"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        }
+      },
+      {
+        "meta": {
+          "name": "way2Drop"
+        },
+        "position": {
+          "x": 428,
+          "y": 743,
+          "width": 3,
+          "height": 37
+        },
+        "props": {
+          "text": "",
+          "style": {
+            "backgroundColor": "#2f80ed",
+            "borderRadius": "2px"
+          }
+        },
+        "type": "ia.display.label"
       },
       {
         "children": [
           {
             "meta": {
-              "name": "title"
+              "name": "accent"
+            },
+            "position": {
+              "x": 0,
+              "y": 0,
+              "width": 5,
+              "height": 280
             },
             "props": {
+              "text": "",
               "style": {
-                "classes": "sg/eyebrow"
-              },
-              "text": "WAY 2"
+                "backgroundColor": "#2f80ed",
+                "borderRadius": "2px"
+              }
             },
             "type": "ia.display.label"
           },
           {
             "meta": {
-              "name": "power"
+              "name": "eyebrow"
             },
-            "propConfig": {
-              "props.text": {
-                "binding": {
-                  "config": {
-                    "expression": "numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way2/Way/Power/RealPower\"), \"#,##0.0\") + \" kW\""
-                  },
-                  "type": "expr"
-                }
-              }
+            "position": {
+              "x": 22,
+              "y": 13,
+              "width": 160,
+              "height": 18
             },
             "props": {
+              "text": "OUTGOING WAY 2",
               "style": {
+                "color": "#2f80ed",
+                "fontSize": "0.64rem",
+                "fontWeight": "800",
+                "letterSpacing": "0.08em"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "title"
+            },
+            "position": {
+              "x": 22,
+              "y": 34,
+              "width": 184,
+              "height": 25
+            },
+            "props": {
+              "text": "Way2 / PowerMeter2",
+              "style": {
+                "color": "#16213e",
+                "fontSize": "0.94rem",
+                "fontWeight": "800"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "healthDot"
+            },
+            "position": {
+              "x": 210,
+              "y": 17,
+              "width": 18,
+              "height": 20
+            },
+            "props": {
+              "text": "\u25cf",
+              "style": {
+                "fontSize": "0.85rem",
+                "textAlign": "center"
+              }
+            },
+            "type": "ia.display.label",
+            "propConfig": {
+              "props.style.color": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way2/Way/Status/Faulted\") || tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way2/Way/Breaker/Tripped\") || !tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way2/PowerMeter2/PowerMeter/Status/CommGood\"), \"#d64550\", if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way2/Way/Breaker/Closed\"), \"#2f80ed\", \"#d98618\"))"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "meta": {
+              "name": "breakerLabel"
+            },
+            "position": {
+              "x": 22,
+              "y": 61,
+              "width": 80,
+              "height": 20
+            },
+            "props": {
+              "text": "STATUS",
+              "style": {
+                "color": "#66748d",
+                "fontSize": "0.68rem",
                 "fontWeight": "700"
               }
             },
@@ -656,70 +2270,523 @@
           },
           {
             "meta": {
-              "name": "load"
+              "name": "breakerState"
             },
+            "position": {
+              "x": 116,
+              "y": 58,
+              "width": 112,
+              "height": 25
+            },
+            "props": {
+              "style": {
+                "borderRadius": "13px",
+                "fontSize": "0.67rem",
+                "fontWeight": "800",
+                "textAlign": "center"
+              }
+            },
+            "type": "ia.display.label",
             "propConfig": {
               "props.text": {
                 "binding": {
+                  "type": "expr",
                   "config": {
-                    "expression": "\"Load  \" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way2/Way/Capacity/LoadPct\"), \"0\") + \" %\""
-                  },
-                  "type": "expr"
+                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way2/Way/Breaker/Tripped\"), \"TRIPPED\", if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way2/Way/Breaker/Closed\"), \"BREAKER CLOSED\", \"BREAKER OPEN\"))"
+                  }
                 }
+              },
+              "props.style.color": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way2/Way/Breaker/Tripped\"), \"#d64550\", if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way2/Way/Breaker/Closed\"), \"#2f80ed\", \"#d98618\"))"
+                  }
+                }
+              },
+              "props.style.backgroundColor": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way2/Way/Breaker/Tripped\"), \"#fdecef\", if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way2/Way/Breaker/Closed\"), \"#edf5ff\", \"#fff5e6\"))"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "meta": {
+              "name": "divider"
+            },
+            "position": {
+              "x": 22,
+              "y": 92,
+              "width": 206,
+              "height": 1
+            },
+            "props": {
+              "text": "",
+              "style": {
+                "backgroundColor": "#d8e2ef",
+                "borderRadius": "2px"
               }
             },
             "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "currentLabel"
+            },
+            "position": {
+              "x": 22,
+              "y": 105,
+              "width": 105,
+              "height": 21
+            },
+            "props": {
+              "text": "CURRENT",
+              "style": {
+                "color": "#66748d",
+                "fontSize": "0.7rem"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "currentValue"
+            },
+            "position": {
+              "x": 127,
+              "y": 105,
+              "width": 101,
+              "height": 21
+            },
+            "props": {
+              "style": {
+                "color": "#16213e",
+                "fontSize": "0.8rem",
+                "fontWeight": "800",
+                "textAlign": "right"
+              }
+            },
+            "type": "ia.display.label",
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way2/PowerMeter2/PowerMeter/Current/Avg\"), \"#,##0.0\") + \" A\""
+                  }
+                }
+              }
+            }
+          },
+          {
+            "meta": {
+              "name": "voltageLabel"
+            },
+            "position": {
+              "x": 22,
+              "y": 132,
+              "width": 105,
+              "height": 21
+            },
+            "props": {
+              "text": "VOLTAGE (L-L)",
+              "style": {
+                "color": "#66748d",
+                "fontSize": "0.7rem"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "voltageValue"
+            },
+            "position": {
+              "x": 127,
+              "y": 132,
+              "width": 101,
+              "height": 21
+            },
+            "props": {
+              "style": {
+                "color": "#16213e",
+                "fontSize": "0.8rem",
+                "fontWeight": "800",
+                "textAlign": "right"
+              }
+            },
+            "type": "ia.display.label",
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way2/PowerMeter2/PowerMeter/Voltage/LLAvg\"), \"#,##0.0\") + \" V\""
+                  }
+                }
+              }
+            }
+          },
+          {
+            "meta": {
+              "name": "realPowerLabel"
+            },
+            "position": {
+              "x": 22,
+              "y": 159,
+              "width": 105,
+              "height": 21
+            },
+            "props": {
+              "text": "ACTIVE POWER",
+              "style": {
+                "color": "#66748d",
+                "fontSize": "0.7rem"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "realPowerValue"
+            },
+            "position": {
+              "x": 127,
+              "y": 159,
+              "width": 101,
+              "height": 21
+            },
+            "props": {
+              "style": {
+                "color": "#16213e",
+                "fontSize": "0.8rem",
+                "fontWeight": "800",
+                "textAlign": "right"
+              }
+            },
+            "type": "ia.display.label",
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way2/PowerMeter2/PowerMeter/Power/RealPower\"), \"#,##0.0\") + \" kW\""
+                  }
+                }
+              }
+            }
+          },
+          {
+            "meta": {
+              "name": "apparentPowerLabel"
+            },
+            "position": {
+              "x": 22,
+              "y": 186,
+              "width": 105,
+              "height": 21
+            },
+            "props": {
+              "text": "APPARENT POWER",
+              "style": {
+                "color": "#66748d",
+                "fontSize": "0.7rem"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "apparentPowerValue"
+            },
+            "position": {
+              "x": 127,
+              "y": 186,
+              "width": 101,
+              "height": 21
+            },
+            "props": {
+              "style": {
+                "color": "#16213e",
+                "fontSize": "0.8rem",
+                "fontWeight": "800",
+                "textAlign": "right"
+              }
+            },
+            "type": "ia.display.label",
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way2/PowerMeter2/PowerMeter/Power/ApparentPower\"), \"#,##0.0\") + \" kVA\""
+                  }
+                }
+              }
+            }
+          },
+          {
+            "meta": {
+              "name": "powerFactorLabel"
+            },
+            "position": {
+              "x": 22,
+              "y": 213,
+              "width": 105,
+              "height": 21
+            },
+            "props": {
+              "text": "POWER FACTOR",
+              "style": {
+                "color": "#66748d",
+                "fontSize": "0.7rem"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "powerFactorValue"
+            },
+            "position": {
+              "x": 127,
+              "y": 213,
+              "width": 101,
+              "height": 21
+            },
+            "props": {
+              "style": {
+                "color": "#16213e",
+                "fontSize": "0.8rem",
+                "fontWeight": "800",
+                "textAlign": "right"
+              }
+            },
+            "type": "ia.display.label",
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way2/PowerMeter2/PowerMeter/Power/PowerFactor\"), \"0.00\") + \" \""
+                  }
+                }
+              }
+            }
+          },
+          {
+            "meta": {
+              "name": "loadLabel"
+            },
+            "position": {
+              "x": 22,
+              "y": 240,
+              "width": 105,
+              "height": 21
+            },
+            "props": {
+              "text": "BREAKER LOAD",
+              "style": {
+                "color": "#66748d",
+                "fontSize": "0.7rem"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "loadValue"
+            },
+            "position": {
+              "x": 127,
+              "y": 240,
+              "width": 101,
+              "height": 21
+            },
+            "props": {
+              "style": {
+                "color": "#16213e",
+                "fontSize": "0.8rem",
+                "fontWeight": "800",
+                "textAlign": "right"
+              }
+            },
+            "type": "ia.display.label",
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way2/Way/Capacity/LoadPct\"), \"0.0\") + \" %\""
+                  }
+                }
+              }
+            }
           }
         ],
         "meta": {
           "name": "way2"
         },
         "position": {
-          "height": 120,
-          "width": 280,
-          "x": 365,
-          "y": 990
+          "x": 304,
+          "y": 780,
+          "width": 250,
+          "height": 280
         },
         "props": {
-          "direction": "column",
           "style": {
-            "border": "2px solid #2f80ed",
-            "classes": "sg/panel",
-            "gap": "8px"
+            "backgroundColor": "#ffffff",
+            "borderColor": "#d8e2ef",
+            "borderRadius": "10px",
+            "borderStyle": "solid",
+            "borderWidth": "1px",
+            "boxShadow": "0 10px 26px rgba(22, 33, 62, 0.08)",
+            "overflow": "hidden",
+            "cursor": "pointer"
           }
         },
-        "type": "ia.container.flex"
+        "type": "ia.container.coord",
+        "events": {
+          "dom": {
+            "onClick": {
+              "config": {
+                "script": "\tsystem.perspective.navigate(page=\"/ways/way2\")"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        }
+      },
+      {
+        "meta": {
+          "name": "way3Drop"
+        },
+        "position": {
+          "x": 694,
+          "y": 743,
+          "width": 3,
+          "height": 37
+        },
+        "props": {
+          "text": "",
+          "style": {
+            "backgroundColor": "#2f80ed",
+            "borderRadius": "2px"
+          }
+        },
+        "type": "ia.display.label"
       },
       {
         "children": [
           {
             "meta": {
-              "name": "title"
+              "name": "accent"
+            },
+            "position": {
+              "x": 0,
+              "y": 0,
+              "width": 5,
+              "height": 280
             },
             "props": {
+              "text": "",
               "style": {
-                "classes": "sg/eyebrow"
-              },
-              "text": "WAY 3"
+                "backgroundColor": "#2f80ed",
+                "borderRadius": "2px"
+              }
             },
             "type": "ia.display.label"
           },
           {
             "meta": {
-              "name": "power"
+              "name": "eyebrow"
             },
-            "propConfig": {
-              "props.text": {
-                "binding": {
-                  "config": {
-                    "expression": "numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way3/Way/Power/RealPower\"), \"#,##0.0\") + \" kW\""
-                  },
-                  "type": "expr"
-                }
-              }
+            "position": {
+              "x": 22,
+              "y": 13,
+              "width": 160,
+              "height": 18
             },
             "props": {
+              "text": "OUTGOING WAY 3",
               "style": {
+                "color": "#2f80ed",
+                "fontSize": "0.64rem",
+                "fontWeight": "800",
+                "letterSpacing": "0.08em"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "title"
+            },
+            "position": {
+              "x": 22,
+              "y": 34,
+              "width": 184,
+              "height": 25
+            },
+            "props": {
+              "text": "Way3 / PowerMeter3",
+              "style": {
+                "color": "#16213e",
+                "fontSize": "0.94rem",
+                "fontWeight": "800"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "healthDot"
+            },
+            "position": {
+              "x": 210,
+              "y": 17,
+              "width": 18,
+              "height": 20
+            },
+            "props": {
+              "text": "\u25cf",
+              "style": {
+                "fontSize": "0.85rem",
+                "textAlign": "center"
+              }
+            },
+            "type": "ia.display.label",
+            "propConfig": {
+              "props.style.color": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way3/Way/Status/Faulted\") || tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way3/Way/Breaker/Tripped\") || !tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way3/PowerMeter3/PowerMeter/Status/CommGood\"), \"#d64550\", if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way3/Way/Breaker/Closed\"), \"#2f80ed\", \"#d98618\"))"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "meta": {
+              "name": "breakerLabel"
+            },
+            "position": {
+              "x": 22,
+              "y": 61,
+              "width": 80,
+              "height": 20
+            },
+            "props": {
+              "text": "STATUS",
+              "style": {
+                "color": "#66748d",
+                "fontSize": "0.68rem",
                 "fontWeight": "700"
               }
             },
@@ -727,70 +2794,523 @@
           },
           {
             "meta": {
-              "name": "load"
+              "name": "breakerState"
             },
+            "position": {
+              "x": 116,
+              "y": 58,
+              "width": 112,
+              "height": 25
+            },
+            "props": {
+              "style": {
+                "borderRadius": "13px",
+                "fontSize": "0.67rem",
+                "fontWeight": "800",
+                "textAlign": "center"
+              }
+            },
+            "type": "ia.display.label",
             "propConfig": {
               "props.text": {
                 "binding": {
+                  "type": "expr",
                   "config": {
-                    "expression": "\"Load  \" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way3/Way/Capacity/LoadPct\"), \"0\") + \" %\""
-                  },
-                  "type": "expr"
+                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way3/Way/Breaker/Tripped\"), \"TRIPPED\", if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way3/Way/Breaker/Closed\"), \"BREAKER CLOSED\", \"BREAKER OPEN\"))"
+                  }
                 }
+              },
+              "props.style.color": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way3/Way/Breaker/Tripped\"), \"#d64550\", if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way3/Way/Breaker/Closed\"), \"#2f80ed\", \"#d98618\"))"
+                  }
+                }
+              },
+              "props.style.backgroundColor": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way3/Way/Breaker/Tripped\"), \"#fdecef\", if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way3/Way/Breaker/Closed\"), \"#edf5ff\", \"#fff5e6\"))"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "meta": {
+              "name": "divider"
+            },
+            "position": {
+              "x": 22,
+              "y": 92,
+              "width": 206,
+              "height": 1
+            },
+            "props": {
+              "text": "",
+              "style": {
+                "backgroundColor": "#d8e2ef",
+                "borderRadius": "2px"
               }
             },
             "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "currentLabel"
+            },
+            "position": {
+              "x": 22,
+              "y": 105,
+              "width": 105,
+              "height": 21
+            },
+            "props": {
+              "text": "CURRENT",
+              "style": {
+                "color": "#66748d",
+                "fontSize": "0.7rem"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "currentValue"
+            },
+            "position": {
+              "x": 127,
+              "y": 105,
+              "width": 101,
+              "height": 21
+            },
+            "props": {
+              "style": {
+                "color": "#16213e",
+                "fontSize": "0.8rem",
+                "fontWeight": "800",
+                "textAlign": "right"
+              }
+            },
+            "type": "ia.display.label",
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way3/PowerMeter3/PowerMeter/Current/Avg\"), \"#,##0.0\") + \" A\""
+                  }
+                }
+              }
+            }
+          },
+          {
+            "meta": {
+              "name": "voltageLabel"
+            },
+            "position": {
+              "x": 22,
+              "y": 132,
+              "width": 105,
+              "height": 21
+            },
+            "props": {
+              "text": "VOLTAGE (L-L)",
+              "style": {
+                "color": "#66748d",
+                "fontSize": "0.7rem"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "voltageValue"
+            },
+            "position": {
+              "x": 127,
+              "y": 132,
+              "width": 101,
+              "height": 21
+            },
+            "props": {
+              "style": {
+                "color": "#16213e",
+                "fontSize": "0.8rem",
+                "fontWeight": "800",
+                "textAlign": "right"
+              }
+            },
+            "type": "ia.display.label",
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way3/PowerMeter3/PowerMeter/Voltage/LLAvg\"), \"#,##0.0\") + \" V\""
+                  }
+                }
+              }
+            }
+          },
+          {
+            "meta": {
+              "name": "realPowerLabel"
+            },
+            "position": {
+              "x": 22,
+              "y": 159,
+              "width": 105,
+              "height": 21
+            },
+            "props": {
+              "text": "ACTIVE POWER",
+              "style": {
+                "color": "#66748d",
+                "fontSize": "0.7rem"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "realPowerValue"
+            },
+            "position": {
+              "x": 127,
+              "y": 159,
+              "width": 101,
+              "height": 21
+            },
+            "props": {
+              "style": {
+                "color": "#16213e",
+                "fontSize": "0.8rem",
+                "fontWeight": "800",
+                "textAlign": "right"
+              }
+            },
+            "type": "ia.display.label",
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way3/PowerMeter3/PowerMeter/Power/RealPower\"), \"#,##0.0\") + \" kW\""
+                  }
+                }
+              }
+            }
+          },
+          {
+            "meta": {
+              "name": "apparentPowerLabel"
+            },
+            "position": {
+              "x": 22,
+              "y": 186,
+              "width": 105,
+              "height": 21
+            },
+            "props": {
+              "text": "APPARENT POWER",
+              "style": {
+                "color": "#66748d",
+                "fontSize": "0.7rem"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "apparentPowerValue"
+            },
+            "position": {
+              "x": 127,
+              "y": 186,
+              "width": 101,
+              "height": 21
+            },
+            "props": {
+              "style": {
+                "color": "#16213e",
+                "fontSize": "0.8rem",
+                "fontWeight": "800",
+                "textAlign": "right"
+              }
+            },
+            "type": "ia.display.label",
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way3/PowerMeter3/PowerMeter/Power/ApparentPower\"), \"#,##0.0\") + \" kVA\""
+                  }
+                }
+              }
+            }
+          },
+          {
+            "meta": {
+              "name": "powerFactorLabel"
+            },
+            "position": {
+              "x": 22,
+              "y": 213,
+              "width": 105,
+              "height": 21
+            },
+            "props": {
+              "text": "POWER FACTOR",
+              "style": {
+                "color": "#66748d",
+                "fontSize": "0.7rem"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "powerFactorValue"
+            },
+            "position": {
+              "x": 127,
+              "y": 213,
+              "width": 101,
+              "height": 21
+            },
+            "props": {
+              "style": {
+                "color": "#16213e",
+                "fontSize": "0.8rem",
+                "fontWeight": "800",
+                "textAlign": "right"
+              }
+            },
+            "type": "ia.display.label",
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way3/PowerMeter3/PowerMeter/Power/PowerFactor\"), \"0.00\") + \" \""
+                  }
+                }
+              }
+            }
+          },
+          {
+            "meta": {
+              "name": "loadLabel"
+            },
+            "position": {
+              "x": 22,
+              "y": 240,
+              "width": 105,
+              "height": 21
+            },
+            "props": {
+              "text": "BREAKER LOAD",
+              "style": {
+                "color": "#66748d",
+                "fontSize": "0.7rem"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "loadValue"
+            },
+            "position": {
+              "x": 127,
+              "y": 240,
+              "width": 101,
+              "height": 21
+            },
+            "props": {
+              "style": {
+                "color": "#16213e",
+                "fontSize": "0.8rem",
+                "fontWeight": "800",
+                "textAlign": "right"
+              }
+            },
+            "type": "ia.display.label",
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way3/Way/Capacity/LoadPct\"), \"0.0\") + \" %\""
+                  }
+                }
+              }
+            }
           }
         ],
         "meta": {
           "name": "way3"
         },
         "position": {
-          "height": 120,
-          "width": 280,
-          "x": 680,
-          "y": 990
+          "x": 570,
+          "y": 780,
+          "width": 250,
+          "height": 280
         },
         "props": {
-          "direction": "column",
           "style": {
-            "border": "2px solid #2f80ed",
-            "classes": "sg/panel",
-            "gap": "8px"
+            "backgroundColor": "#ffffff",
+            "borderColor": "#d8e2ef",
+            "borderRadius": "10px",
+            "borderStyle": "solid",
+            "borderWidth": "1px",
+            "boxShadow": "0 10px 26px rgba(22, 33, 62, 0.08)",
+            "overflow": "hidden",
+            "cursor": "pointer"
           }
         },
-        "type": "ia.container.flex"
+        "type": "ia.container.coord",
+        "events": {
+          "dom": {
+            "onClick": {
+              "config": {
+                "script": "\tsystem.perspective.navigate(page=\"/ways/way3\")"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        }
+      },
+      {
+        "meta": {
+          "name": "way4Drop"
+        },
+        "position": {
+          "x": 960,
+          "y": 743,
+          "width": 3,
+          "height": 37
+        },
+        "props": {
+          "text": "",
+          "style": {
+            "backgroundColor": "#2f80ed",
+            "borderRadius": "2px"
+          }
+        },
+        "type": "ia.display.label"
       },
       {
         "children": [
           {
             "meta": {
-              "name": "title"
+              "name": "accent"
+            },
+            "position": {
+              "x": 0,
+              "y": 0,
+              "width": 5,
+              "height": 280
             },
             "props": {
+              "text": "",
               "style": {
-                "classes": "sg/eyebrow"
-              },
-              "text": "WAY 4"
+                "backgroundColor": "#2f80ed",
+                "borderRadius": "2px"
+              }
             },
             "type": "ia.display.label"
           },
           {
             "meta": {
-              "name": "power"
+              "name": "eyebrow"
             },
-            "propConfig": {
-              "props.text": {
-                "binding": {
-                  "config": {
-                    "expression": "numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way4/Way/Power/RealPower\"), \"#,##0.0\") + \" kW\""
-                  },
-                  "type": "expr"
-                }
-              }
+            "position": {
+              "x": 22,
+              "y": 13,
+              "width": 160,
+              "height": 18
             },
             "props": {
+              "text": "OUTGOING WAY 4",
               "style": {
+                "color": "#2f80ed",
+                "fontSize": "0.64rem",
+                "fontWeight": "800",
+                "letterSpacing": "0.08em"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "title"
+            },
+            "position": {
+              "x": 22,
+              "y": 34,
+              "width": 184,
+              "height": 25
+            },
+            "props": {
+              "text": "Way4 / PowerMeter4",
+              "style": {
+                "color": "#16213e",
+                "fontSize": "0.94rem",
+                "fontWeight": "800"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "healthDot"
+            },
+            "position": {
+              "x": 210,
+              "y": 17,
+              "width": 18,
+              "height": 20
+            },
+            "props": {
+              "text": "\u25cf",
+              "style": {
+                "fontSize": "0.85rem",
+                "textAlign": "center"
+              }
+            },
+            "type": "ia.display.label",
+            "propConfig": {
+              "props.style.color": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way4/Way/Status/Faulted\") || tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way4/Way/Breaker/Tripped\") || !tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way4/PowerMeter4/PowerMeter/Status/CommGood\"), \"#d64550\", if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way4/Way/Breaker/Closed\"), \"#2f80ed\", \"#d98618\"))"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "meta": {
+              "name": "breakerLabel"
+            },
+            "position": {
+              "x": 22,
+              "y": 61,
+              "width": 80,
+              "height": 20
+            },
+            "props": {
+              "text": "STATUS",
+              "style": {
+                "color": "#66748d",
+                "fontSize": "0.68rem",
                 "fontWeight": "700"
               }
             },
@@ -798,39 +3318,397 @@
           },
           {
             "meta": {
-              "name": "load"
+              "name": "breakerState"
             },
+            "position": {
+              "x": 116,
+              "y": 58,
+              "width": 112,
+              "height": 25
+            },
+            "props": {
+              "style": {
+                "borderRadius": "13px",
+                "fontSize": "0.67rem",
+                "fontWeight": "800",
+                "textAlign": "center"
+              }
+            },
+            "type": "ia.display.label",
             "propConfig": {
               "props.text": {
                 "binding": {
+                  "type": "expr",
                   "config": {
-                    "expression": "\"Load  \" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way4/Way/Capacity/LoadPct\"), \"0\") + \" %\""
-                  },
-                  "type": "expr"
+                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way4/Way/Breaker/Tripped\"), \"TRIPPED\", if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way4/Way/Breaker/Closed\"), \"BREAKER CLOSED\", \"BREAKER OPEN\"))"
+                  }
                 }
+              },
+              "props.style.color": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way4/Way/Breaker/Tripped\"), \"#d64550\", if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way4/Way/Breaker/Closed\"), \"#2f80ed\", \"#d98618\"))"
+                  }
+                }
+              },
+              "props.style.backgroundColor": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way4/Way/Breaker/Tripped\"), \"#fdecef\", if(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way4/Way/Breaker/Closed\"), \"#edf5ff\", \"#fff5e6\"))"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "meta": {
+              "name": "divider"
+            },
+            "position": {
+              "x": 22,
+              "y": 92,
+              "width": 206,
+              "height": 1
+            },
+            "props": {
+              "text": "",
+              "style": {
+                "backgroundColor": "#d8e2ef",
+                "borderRadius": "2px"
               }
             },
             "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "currentLabel"
+            },
+            "position": {
+              "x": 22,
+              "y": 105,
+              "width": 105,
+              "height": 21
+            },
+            "props": {
+              "text": "CURRENT",
+              "style": {
+                "color": "#66748d",
+                "fontSize": "0.7rem"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "currentValue"
+            },
+            "position": {
+              "x": 127,
+              "y": 105,
+              "width": 101,
+              "height": 21
+            },
+            "props": {
+              "style": {
+                "color": "#16213e",
+                "fontSize": "0.8rem",
+                "fontWeight": "800",
+                "textAlign": "right"
+              }
+            },
+            "type": "ia.display.label",
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way4/PowerMeter4/PowerMeter/Current/Avg\"), \"#,##0.0\") + \" A\""
+                  }
+                }
+              }
+            }
+          },
+          {
+            "meta": {
+              "name": "voltageLabel"
+            },
+            "position": {
+              "x": 22,
+              "y": 132,
+              "width": 105,
+              "height": 21
+            },
+            "props": {
+              "text": "VOLTAGE (L-L)",
+              "style": {
+                "color": "#66748d",
+                "fontSize": "0.7rem"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "voltageValue"
+            },
+            "position": {
+              "x": 127,
+              "y": 132,
+              "width": 101,
+              "height": 21
+            },
+            "props": {
+              "style": {
+                "color": "#16213e",
+                "fontSize": "0.8rem",
+                "fontWeight": "800",
+                "textAlign": "right"
+              }
+            },
+            "type": "ia.display.label",
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way4/PowerMeter4/PowerMeter/Voltage/LLAvg\"), \"#,##0.0\") + \" V\""
+                  }
+                }
+              }
+            }
+          },
+          {
+            "meta": {
+              "name": "realPowerLabel"
+            },
+            "position": {
+              "x": 22,
+              "y": 159,
+              "width": 105,
+              "height": 21
+            },
+            "props": {
+              "text": "ACTIVE POWER",
+              "style": {
+                "color": "#66748d",
+                "fontSize": "0.7rem"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "realPowerValue"
+            },
+            "position": {
+              "x": 127,
+              "y": 159,
+              "width": 101,
+              "height": 21
+            },
+            "props": {
+              "style": {
+                "color": "#16213e",
+                "fontSize": "0.8rem",
+                "fontWeight": "800",
+                "textAlign": "right"
+              }
+            },
+            "type": "ia.display.label",
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way4/PowerMeter4/PowerMeter/Power/RealPower\"), \"#,##0.0\") + \" kW\""
+                  }
+                }
+              }
+            }
+          },
+          {
+            "meta": {
+              "name": "apparentPowerLabel"
+            },
+            "position": {
+              "x": 22,
+              "y": 186,
+              "width": 105,
+              "height": 21
+            },
+            "props": {
+              "text": "APPARENT POWER",
+              "style": {
+                "color": "#66748d",
+                "fontSize": "0.7rem"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "apparentPowerValue"
+            },
+            "position": {
+              "x": 127,
+              "y": 186,
+              "width": 101,
+              "height": 21
+            },
+            "props": {
+              "style": {
+                "color": "#16213e",
+                "fontSize": "0.8rem",
+                "fontWeight": "800",
+                "textAlign": "right"
+              }
+            },
+            "type": "ia.display.label",
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way4/PowerMeter4/PowerMeter/Power/ApparentPower\"), \"#,##0.0\") + \" kVA\""
+                  }
+                }
+              }
+            }
+          },
+          {
+            "meta": {
+              "name": "powerFactorLabel"
+            },
+            "position": {
+              "x": 22,
+              "y": 213,
+              "width": 105,
+              "height": 21
+            },
+            "props": {
+              "text": "POWER FACTOR",
+              "style": {
+                "color": "#66748d",
+                "fontSize": "0.7rem"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "powerFactorValue"
+            },
+            "position": {
+              "x": 127,
+              "y": 213,
+              "width": 101,
+              "height": 21
+            },
+            "props": {
+              "style": {
+                "color": "#16213e",
+                "fontSize": "0.8rem",
+                "fontWeight": "800",
+                "textAlign": "right"
+              }
+            },
+            "type": "ia.display.label",
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way4/PowerMeter4/PowerMeter/Power/PowerFactor\"), \"0.00\") + \" \""
+                  }
+                }
+              }
+            }
+          },
+          {
+            "meta": {
+              "name": "loadLabel"
+            },
+            "position": {
+              "x": 22,
+              "y": 240,
+              "width": 105,
+              "height": 21
+            },
+            "props": {
+              "text": "BREAKER LOAD",
+              "style": {
+                "color": "#66748d",
+                "fontSize": "0.7rem"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "loadValue"
+            },
+            "position": {
+              "x": 127,
+              "y": 240,
+              "width": 101,
+              "height": 21
+            },
+            "props": {
+              "style": {
+                "color": "#16213e",
+                "fontSize": "0.8rem",
+                "fontWeight": "800",
+                "textAlign": "right"
+              }
+            },
+            "type": "ia.display.label",
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "type": "expr",
+                  "config": {
+                    "expression": "\"\" + numberFormat(tag(\"[T1]MBT1/Utility1/MSG1/PDU1/PDUOutputBus/Way4/Way/Capacity/LoadPct\"), \"0.0\") + \" %\""
+                  }
+                }
+              }
+            }
           }
         ],
         "meta": {
           "name": "way4"
         },
         "position": {
-          "height": 120,
-          "width": 280,
-          "x": 995,
-          "y": 990
+          "x": 836,
+          "y": 780,
+          "width": 250,
+          "height": 280
         },
         "props": {
-          "direction": "column",
           "style": {
-            "border": "2px solid #2f80ed",
-            "classes": "sg/panel",
-            "gap": "8px"
+            "backgroundColor": "#ffffff",
+            "borderColor": "#d8e2ef",
+            "borderRadius": "10px",
+            "borderStyle": "solid",
+            "borderWidth": "1px",
+            "boxShadow": "0 10px 26px rgba(22, 33, 62, 0.08)",
+            "overflow": "hidden",
+            "cursor": "pointer"
           }
         },
-        "type": "ia.container.flex"
+        "type": "ia.container.coord",
+        "events": {
+          "dom": {
+            "onClick": {
+              "config": {
+                "script": "\tsystem.perspective.navigate(page=\"/ways/way4\")"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        }
       }
     ],
     "meta": {
@@ -838,9 +3716,12 @@
     },
     "props": {
       "style": {
-        "classes": "sg/page",
-        "minHeight": "1150px",
-        "minWidth": "1325px",
+        "backgroundColor": "#f4f7fb",
+        "backgroundImage": "linear-gradient(180deg, #f8fbff 0%, #f4f7fb 45%, #eef3f9 100%)",
+        "color": "#16213e",
+        "fontFamily": "Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif",
+        "minHeight": "1095px",
+        "minWidth": "1120px",
         "overflow": "auto"
       }
     },
